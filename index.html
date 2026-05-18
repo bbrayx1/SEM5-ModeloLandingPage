@@ -5,17 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universidad Nacional del Santa</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Estilos generales para la sección */
+        #facultades {
+            padding: 60px 20px;
+            background-color: #f8f9fa; /* Fondo gris muy suave */
+            text-align: center;
+        }
+
+        #facultades h2 {
+            color: #b30000; /* Rojo oscuro similar al de la UNS */
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        #facultades > p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Contenedor Grid para las 3 tarjetas */
+        .grid-facultades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Estilo individual de cada tarjeta */
+        .card-facultad {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08); /* Sombra suave */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border-top: 5px solid #b30000; /* Línea roja superior */
+        }
+
+        .card-facultad:hover {
+            transform: translateY(-8px); /* Efecto de flotar al pasar el mouse */
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .icono-facultad {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .card-facultad h3 {
+            color: #333;
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-facultad ul {
+            list-style-type: none; /* Quitamos los puntos por defecto */
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-facultad ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Viñeta personalizada con color rojo */
+        .card-facultad ul li::before {
+            content: '•';
+            color: #b30000;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ==========================================
-         CABECERA Y NAVEGACIÓN
-         Fondo sugerido: Fotografía panorámica del 
-         Pórtico Principal de la UNS o vista aérea.
-    =========================================== -->
     <header id="inicio">
         <div class="logo-institucional">
-            <!-- Espacio para el logo de la UNS -->
             <img src="images/logo-uns.png" alt="Logo de la Universidad Nacional del Santa">
             <h1>Universidad Nacional del Santa</h1>
         </div>
@@ -29,23 +112,15 @@
         </nav>
     </header>
 
-    <!-- ==========================================
-         SECCIÓN: NOTICIAS
-         Fondo sugerido: Color sólido (ej. blanco o 
-         gris muy claro) para no quitar legibilidad 
-         al texto de las noticias.
-    =========================================== -->
     <section id="noticias">
         <h2>Últimas Noticias</h2>
         <div class="grid-noticias">
-            <!-- Tarjeta de Noticia 1 -->
             <article class="card-noticia">
                 <img src="images/noticia1.jpg" alt="Imagen representativa de la noticia">
                 <h3>Título de la Noticia 1</h3>
                 <p>Resumen breve del acontecimiento o aviso institucional...</p>
                 <a href="#">Leer más</a>
             </article>
-            <!-- Tarjeta de Noticia 2 -->
             <article class="card-noticia">
                 <img src="images/noticia2.jpg" alt="Imagen representativa de la noticia">
                 <h3>Título de la Noticia 2</h3>
@@ -55,17 +130,11 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         SECCIÓN: FACULTADES
-         Agregada con la información real de la UNS
-    =========================================== -->
     <section id="facultades" class="contenido">
         <h2>Nuestras Facultades</h2>
         <p>La Universidad Nacional del Santa forma profesionales líderes en diversas áreas del conocimiento a través de sus tres facultades.</p>
-        <hr class="style-three">
         
         <div class="grid-facultades">
-            <!-- Facultad de Ciencias -->
             <article class="card-facultad">
                 <div class="icono-facultad">🔬</div>
                 <h3>Facultad de Ciencias</h3>
@@ -77,7 +146,6 @@
                 </ul>
             </article>
 
-            <!-- Facultad de Ingeniería -->
             <article class="card-facultad">
                 <div class="icono-facultad">⚙️</div>
                 <h3>Facultad de Ingeniería</h3>
@@ -91,7 +159,6 @@
                 </ul>
             </article>
 
-            <!-- Facultad de Educación y Humanidades -->
             <article class="card-facultad">
                 <div class="icono-facultad">📚</div>
                 <h3>Facultad de Educación y Humanidades</h3>
@@ -106,18 +173,11 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         SECCIÓN: LOGROS INSTITUCIONALES
-         Fondo sugerido: Textura geométrica sutil 
-         o una foto oscurecida de estudiantes en 
-         laboratorios/biblioteca (con overlay).
-    =========================================== -->
     <section id="logros" class="contenido">
         <h2>LOGROS</h2>
         <hr class="style-three">
         
         <div class="grid-logros">
-            <!-- Logro 1 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/acreditacion">
                     <img src="images/school.png" alt="Icono de acreditación">
@@ -125,8 +185,6 @@
                     <span>CARRERAS ACREDITADAS</span>
                 </a>
             </div>
-
-            <!-- Logro 2 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/becados">
                     <img src="images/signs.png" alt="Icono de becarios">
@@ -134,8 +192,6 @@
                     <span>ALUMNOS BECARIOS</span>
                 </a>
             </div>
-
-            <!-- Logro 3 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/convenios">
                     <img src="images/convenio.png" alt="Icono de convenios">
@@ -143,8 +199,6 @@
                     <span>CONVENIOS FIRMADOS</span>
                 </a>
             </div>
-
-            <!-- Logro 4 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/investigacion">
                     <img src="images/book.png" alt="Icono de investigación">
@@ -152,8 +206,6 @@
                     <span>INVESTIGACIONES PUBLICADAS</span>
                 </a>
             </div>
-
-            <!-- Logro 5 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/fondos">
                     <img src="images/graphic.png" alt="Icono de fondos">
@@ -161,8 +213,6 @@
                     <span>FONDOS CONCURSABLES</span>
                 </a>
             </div>
-
-            <!-- Logro 6 -->
             <div class="logro item-logro">
                 <a class="link-plomo" href="#/logros/proyectos">
                     <img src="images/people.png" alt="Icono de proyectos">
@@ -173,11 +223,6 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         SECCIÓN: CENTROS DE PRODUCCIÓN Y OTROS
-         Fondo sugerido: Color sólido corporativo 
-         (ej. azul oscuro UNS).
-    =========================================== -->
     <section id="centros-produccion">
         <h2>Centros de Producción y Servicios</h2>
         <div class="grid-centros">
@@ -196,18 +241,10 @@
         </div>
     </section>
 
-    <!-- ==========================================
-         FOOTER / PIE DE PÁGINA
-         Fondo sugerido: Gris oscuro o negro con 
-         textura minimalista.
-    =========================================== -->
     <footer id="contacto">
         <div class="footer-contenedor">
-            
-            <!-- Bloque 1: Entidades y FAQ -->
             <div class="footer-institucional">
                 <div class="logos-estado">
-                    <!-- Espacios para los logos requeridos -->
                     <img src="images/logo-pcm.png" alt="Presidencia del Consejo de Ministros">
                     <img src="images/logo-sunedu.png" alt="SUNEDU">
                 </div>
@@ -215,8 +252,6 @@
                     <a href="#faq">FAQ - Preguntas Frecuentes</a>
                 </div>
             </div>
-
-            <!-- Bloque 2: Contacto -->
             <div class="footer-contacto">
                 <h3>Contacto</h3>
                 <ul>
@@ -225,21 +260,16 @@
                     <li>✉️ Email: informes@uns.edu.pe</li>
                 </ul>
             </div>
-
-            <!-- Bloque 3: Redes Sociales -->
             <div class="footer-redes">
                 <h3>Síguenos</h3>
                 <div class="iconos-redes">
-                    <!-- Puedes usar iconos SVG o de librerías como FontAwesome luego -->
                     <a href="#" target="_blank" rel="noopener">Facebook</a>
                     <a href="#" target="_blank" rel="noopener">Instagram</a>
                     <a href="#" target="_blank" rel="noopener">LinkedIn</a>
                     <a href="#" target="_blank" rel="noopener">YouTube</a>
                 </div>
             </div>
-
         </div>
-        
         <div class="footer-legal">
             <p>&copy; 2026 Universidad Nacional del Santa. Todos los derechos reservados.</p>
         </div>
