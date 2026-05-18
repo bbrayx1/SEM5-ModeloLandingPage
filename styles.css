@@ -2,8 +2,8 @@
    1. VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-    --azul-uns: #0b3b60; /* Azul representativo */
-    --celeste-uns: #1a75b8;
+    --rojo-uns: #b30000; /* Rojo representativo */
+    --rojo-claro-uns: #e60000; /* Rojo más claro para acentos */
     --gris-claro: #f4f4f9;
     --texto-oscuro: #333333;
     --blanco: #ffffff;
@@ -35,8 +35,8 @@ a {
 ========================================== */
 header#inicio {
     /* FONDO 1: Reemplaza "tu-fondo-header.jpg" con tu imagen. 
-       El linear-gradient es un overlay oscuro para que el texto resalte */
-    background: linear-gradient(rgba(11, 59, 96, 0.8), rgba(11, 59, 96, 0.8)), 
+       El linear-gradient es un overlay rojo oscuro para que el texto resalte */
+    background: linear-gradient(rgba(102, 0, 0, 0.8), rgba(102, 0, 0, 0.8)), 
                 url('tu-fondo-header.jpg') center/cover no-repeat;
     color: var(--blanco);
     min-height: 60vh;
@@ -85,7 +85,7 @@ header#inicio {
 }
 
 .menu-principal a:hover {
-    color: #ffd700; /* Toque dorado/amarillo al pasar el mouse */
+    color: #ffd700; /* Toque dorado/amarillo al pasar el mouse (combina bien con rojo) */
 }
 
 /* ==========================================
@@ -99,7 +99,7 @@ section h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
-    color: var(--azul-uns);
+    color: var(--rojo-uns);
 }
 
 /* ==========================================
@@ -138,7 +138,7 @@ section h2 {
 .card-noticia h3 {
     padding: 20px 20px 10px;
     font-size: 1.2rem;
-    color: var(--azul-uns);
+    color: var(--rojo-uns);
 }
 
 .card-noticia p {
@@ -150,7 +150,7 @@ section h2 {
 .card-noticia a {
     display: inline-block;
     margin: 0 20px 20px;
-    color: var(--celeste-uns);
+    color: var(--rojo-claro-uns);
     font-weight: bold;
 }
 
@@ -158,40 +158,63 @@ section h2 {
    5. LOGROS (Cifras destacadas)
 ========================================== */
 #logros {
-    /* FONDO 3: Reemplaza "tu-fondo-logros.jpg" con tu imagen de estudiantes/laboratorio */
-    background: linear-gradient(rgba(11, 59, 96, 0.9), rgba(11, 59, 96, 0.9)), 
-                url('tu-fondo-logros.jpg') center/cover fixed; /* 'fixed' da un efecto parallax sutil */
-    color: var(--blanco);
+    background-color: var(--blanco); /* Fondo claro para que resalten los iconos */
+    color: var(--texto-oscuro);
+    text-align: center;
 }
 
 #logros h2 {
-    color: var(--blanco);
+    color: var(--rojo-uns);
+    margin-bottom: 10px;
+}
+
+hr.style-three {
+    border: 0;
+    height: 2px;
+    background: var(--rojo-claro-uns);
+    width: 80px;
+    margin: 0 auto 40px auto;
 }
 
 .grid-logros {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    text-align: center;
+    /* Imita el comportamiento col-md-2 (6 columnas en desktop) y col-xs-6 (2 en móviles) */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
 }
 
 .item-logro {
-    padding: 20px;
+    padding: 15px;
+    transition: var(--transicion);
 }
 
-.cifra-destacada {
+.item-logro:hover {
+    transform: translateY(-5px);
+}
+
+.link-plomo {
     display: block;
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #ffd700; /* Color contraste para los números */
-    margin-bottom: 10px;
+    color: #555555;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transicion);
 }
 
-.item-logro h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
+.link-plomo:hover {
+    color: var(--rojo-claro-uns);
 }
 
+.link-plomo img {
+    max-width: 60px; /* Ajusta el tamaño de tus iconos (png) */
+    height: auto;
+    margin-bottom: 15px;
+    transition: var(--transicion);
+}
+
+.link-plomo:hover img {
+    transform: scale(1.1); /* Pequeño efecto de zoom al pasar el mouse */
+}
 /* ==========================================
    6. CENTROS DE PRODUCCIÓN
 ========================================== */
@@ -206,13 +229,13 @@ section h2 {
 }
 
 .card-centro {
-    background-color: var(--azul-uns);
+    background-color: var(--rojo-uns);
     color: var(--blanco);
     padding: 40px 20px;
     text-align: center;
     border-radius: 8px;
     box-shadow: var(--sombra);
-    border-bottom: 5px solid var(--celeste-uns);
+    border-bottom: 5px solid var(--rojo-claro-uns);
 }
 
 .card-centro h3 {
@@ -224,8 +247,8 @@ section h2 {
    7. FOOTER / PIE DE PÁGINA
 ========================================== */
 footer#contacto {
-    /* FONDO 4: Color oscuro institucional para el footer */
-    background-color: #051c2d; 
+    /* FONDO 4: Color granate/rojo muy oscuro para el footer */
+    background-color: #2b0505; 
     color: #cccccc;
     padding: 50px 5% 20px;
 }
@@ -251,7 +274,7 @@ footer#contacto {
 }
 
 .enlaces-ayuda a {
-    color: var(--celeste-uns);
+    color: var(--rojo-claro-uns);
     text-decoration: underline;
 }
 
