@@ -3,195 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universidad Nacional del Santa</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Universidad Nacional del Santa | UNS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                              url('https://images.unsplash.com/photo-1591115765373-520f3b5a2a5e?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
-<body>
+<body class="font-sans">
 
-    <!-- ==========================================
-         CABECERA Y NAVEGACIÓN
-         Fondo sugerido: Fotografía panorámica del 
-         Pórtico Principal de la UNS o vista aérea.
-    =========================================== -->
-    <header id="inicio">
-        <div class="logo-institucional">
-            <!-- Espacio para el logo de la UNS -->
-            <img src="images/logo-uns.png" alt="Logo de la Universidad Nacional del Santa">
-            <h1>Universidad Nacional del Santa</h1>
+    <!-- HEADER -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="images/logo-uns.png" alt="Logo UNS" class="h-16">
+                <div>
+                    <h1 class="text-2xl font-bold text-blue-900 leading-tight">Universidad Nacional<br>del Santa</h1>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex gap-8 text-lg font-medium">
+                <a href="#admision" class="hover:text-blue-700">Admisión</a>
+                <a href="#facultades" class="hover:text-blue-700">Facultades</a>
+                <a href="#posgrado" class="hover:text-blue-700">Posgrado</a>
+                <a href="#investigacion" class="hover:text-blue-700">Investigación</a>
+                <a href="#noticias" class="hover:text-blue-700">Noticias</a>
+            </nav>
+
+            <a href="#admision" class="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-semibold">
+                Postula 2026-I
+            </a>
         </div>
-        <nav class="menu-principal">
-            <ul>
-                <li><a href="#admision">Admisión</a></li>
-                <li><a href="#facultades">Facultades</a></li>
-                <li><a href="#posgrado">Posgrado</a></li>
-                <li><a href="#centros-produccion">C. Producción</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <!-- ==========================================
-         SECCIÓN: NOTICIAS
-         Fondo sugerido: Color sólido (ej. blanco o 
-         gris muy claro) para no quitar legibilidad 
-         al texto de las noticias.
-    =========================================== -->
-    <section id="noticias">
-        <h2>Últimas Noticias</h2>
-        <div class="grid-noticias">
-            <!-- Tarjeta de Noticia 1 -->
-            <article class="card-noticia">
-                <img src="images/noticia1.jpg" alt="Imagen representativa de la noticia">
-                <h3>Título de la Noticia 1</h3>
-                <p>Resumen breve del acontecimiento o aviso institucional...</p>
-                <a href="#">Leer más</a>
-            </article>
-            <!-- Tarjeta de Noticia 2 -->
-            <article class="card-noticia">
-                <img src="images/noticia2.jpg" alt="Imagen representativa de la noticia">
-                <h3>Título de la Noticia 2</h3>
-                <p>Resumen breve del acontecimiento o aviso institucional...</p>
-                <a href="#">Leer más</a>
-            </article>
-            <!-- Puedes agregar más artículos aquí -->
-        </div>
-    </section>
-
-    <!-- ==========================================
-         SECCIÓN: LOGROS INSTITUCIONALES
-         Fondo sugerido: Textura geométrica sutil 
-         o una foto oscurecida de estudiantes en 
-         laboratorios/biblioteca (con overlay).
-    =========================================== -->
-    <section id="logros" class="contenido">
-        <h2>LOGROS</h2>
-        <hr class="style-three">
-        
-        <div class="grid-logros">
-            <!-- Logro 1 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/acreditacion">
-                    <img src="images/school.png" alt="Icono de acreditación">
-                    <br>
-                    <span>CARRERAS ACREDITADAS</span>
+    <!-- HERO -->
+    <section class="hero-bg h-screen flex items-center text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6">Excelencia con Identidad Regional</h2>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+                Formando profesionales de alto nivel para el desarrollo de Áncash y el Perú
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#" class="bg-white text-blue-900 px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition">
+                    Ver Carreras
                 </a>
-            </div>
-
-            <!-- Logro 2 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/becados">
-                    <img src="images/signs.png" alt="Icono de becarios">
-                    <br>
-                    <span>ALUMNOS BECARIOS</span>
-                </a>
-            </div>
-
-            <!-- Logro 3 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/convenios">
-                    <img src="images/convenio.png" alt="Icono de convenios">
-                    <br>
-                    <span>CONVENIOS FIRMADOS</span>
-                </a>
-            </div>
-
-            <!-- Logro 4 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/investigacion">
-                    <img src="images/book.png" alt="Icono de investigación">
-                    <br>
-                    <span>INVESTIGACIONES PUBLICADAS</span>
-                </a>
-            </div>
-
-            <!-- Logro 5 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/fondos">
-                    <img src="images/graphic.png" alt="Icono de fondos">
-                    <br>
-                    <span>FONDOS CONCURSABLES</span>
-                </a>
-            </div>
-
-            <!-- Logro 6 -->
-            <div class="logro item-logro">
-                <a class="link-plomo" href="#/logros/proyectos">
-                    <img src="images/people.png" alt="Icono de proyectos">
-                    <br>
-                    <span>PROYECTOS DE EMPRENDIMIENTO</span>
+                <a href="#" class="border-2 border-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:text-blue-900 transition">
+                    Proceso de Admisión
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ==========================================
-         SECCIÓN: CENTROS DE PRODUCCIÓN Y OTROS
-         Fondo sugerido: Color sólido corporativo 
-         (ej. azul oscuro UNS).
-    =========================================== -->
-    <section id="centros-produccion">
-        <h2>Centros de Producción y Servicios</h2>
-        <div class="grid-centros">
-            <div class="card-centro">
-                <h3>CEPUNS</h3>
-                <p>Centro Preuniversitario</p>
+    <!-- ESTADÍSTICAS -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-6">
+            <div>
+                <h3 class="text-5xl font-bold text-blue-700">4</h3>
+                <p class="text-gray-600 mt-2">Facultades</p>
             </div>
-            <div class="card-centro">
-                <h3>CEIDUNS</h3>
-                <p>Centro de Idiomas</p>
+            <div>
+                <h3 class="text-5xl font-bold text-blue-700">15+</h3>
+                <p class="text-gray-600 mt-2">Carreras Profesionales</p>
             </div>
-            <div class="card-centro">
-                <h3>Centro de Cómputo</h3>
-                <p>Servicios informáticos y cursos de especialización</p>
+            <div>
+                <h3 class="text-5xl font-bold text-blue-700">5000+</h3>
+                <p class="text-gray-600 mt-2">Estudiantes</p>
+            </div>
+            <div>
+                <h3 class="text-5xl font-bold text-blue-700">39</h3>
+                <p class="text-gray-600 mt-2">Años de creación</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- FACULTADES -->
+    <section id="facultades" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Nuestras Facultades</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
+                    <h3 class="font-bold text-xl mb-3">Ingeniería</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Ingeniería de Sistemas e Informática</li>
+                        <li>• Ingeniería Civil</li>
+                        <li>• Ingeniería Agroindustrial</li>
+                        <li>• Ingeniería en Energía</li>
+                        <li>• Ingeniería Agrónoma</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
+                    <h3 class="font-bold text-xl mb-3">Ciencias</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Biología en Acuicultura</li>
+                        <li>• Medicina Humana</li>
+                        <li>• Enfermería</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
+                    <h3 class="font-bold text-xl mb-3">Educación y Humanidades</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Educación Inicial</li>
+                        <li>• Educación Secundaria (varias especialidades)</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
+                    <h3 class="font-bold text-xl mb-3">Derecho y Ciencias Políticas</h3>
+                    <ul class="text-gray-600 space-y-2 text-sm">
+                        <li>• Derecho</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- LOGROS -->
+    <section class="py-16 bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Nuestros Logros</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+                    <i class="fa-solid fa-medal text-4xl mb-4"></i>
+                    <p class="font-semibold">Carreras Acreditadas</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+                    <i class="fa-solid fa-users text-4xl mb-4"></i>
+                    <p class="font-semibold">Alumnos Becarios</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
+                    <i class="fa-solid fa-handshake text-4xl mb-4"></i>
+                    <p class="font-semibold">Convenios Firmados</p>
+                </div>
+                <!-- Agrega más -->
             </div>
         </div>
     </section>
 
-    <!-- ==========================================
-         FOOTER / PIE DE PÁGINA
-         Fondo sugerido: Gris oscuro o negro con 
-         textura minimalista.
-    =========================================== -->
-    <footer id="contacto">
-        <div class="footer-contenedor">
+    <!-- NOTICIAS -->
+    <section id="noticias" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Últimas Noticias</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Agrega aquí tus noticias reales -->
+                <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
+                    <img src="images/noticia1.jpg" class="w-full h-52 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl mb-3">Título destacado de la noticia</h3>
+                        <p class="text-gray-600 mb-4">Resumen breve de la noticia institucional...</p>
+                        <a href="#" class="text-blue-600 font-medium">Leer más →</a>
+                    </div>
+                </article>
+                <!-- Repite para más noticias -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CENTROS DE PRODUCCIÓN -->
+    <section id="centros" class="py-16 bg-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Centros de Producción y Servicios</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
+                    <h3 class="text-2xl font-semibold mb-2">CEPUNS</h3>
+                    <p>Centro Preuniversitario</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
+                    <h3 class="text-2xl font-semibold mb-2">CEIDUNS</h3>
+                    <p>Centro de Idiomas</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
+                    <h3 class="text-2xl font-semibold mb-2">CECOMP</h3>
+                    <p>Centro de Cómputo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
+            <div>
+                <h3 class="text-white text-xl font-bold mb-4">Universidad Nacional del Santa</h3>
+                <p class="text-sm">Av. Universitaria S/N - Campus I<br>Nuevo Chimbote, Áncash - Perú</p>
+                <p class="mt-4">Central Telefónica: (043) 604451</p>
+            </div>
             
-            <!-- Bloque 1: Entidades y FAQ -->
-            <div class="footer-institucional">
-                <div class="logos-estado">
-                    <!-- Espacios para los logos requeridos -->
-                    <img src="images/logo-pcm.png" alt="Presidencia del Consejo de Ministros">
-                    <img src="images/logo-sunedu.png" alt="SUNEDU">
-                </div>
-                <div class="enlaces-ayuda">
-                    <a href="#faq">FAQ - Preguntas Frecuentes</a>
-                </div>
-            </div>
-
-            <!-- Bloque 2: Contacto -->
-            <div class="footer-contacto">
-                <h3>Contacto</h3>
-                <ul>
-                    <li>📍 Av. Universitaria s/n, Urb. Bellamar, Nuevo Chimbote</li>
-                    <li>📞 Teléfono: (043) 310445</li>
-                    <li>✉️ Email: informes@uns.edu.pe</li>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Enlaces Rápidos</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Admisión</a></li>
+                    <li><a href="#" class="hover:text-white">Campus Virtual</a></li>
+                    <li><a href="#" class="hover:text-white">Repositorio Institucional</a></li>
+                    <li><a href="#" class="hover:text-white">Transparencia</a></li>
                 </ul>
             </div>
-
-            <!-- Bloque 3: Redes Sociales -->
-            <div class="footer-redes">
-                <h3>Síguenos</h3>
-                <div class="iconos-redes">
-                    <!-- Puedes usar iconos SVG o de librerías como FontAwesome luego -->
-                    <a href="#" target="_blank" rel="noopener">Facebook</a>
-                    <a href="#" target="_blank" rel="noopener">Instagram</a>
-                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-                    <a href="#" target="_blank" rel="noopener">YouTube</a>
+            
+            <div>
+                <h4 class="text-white font-semibold mb-4">Contacto</h4>
+                <p class="text-sm">informes@uns.edu.pe</p>
+                <p class="text-sm">transparencia@uns.edu.pe</p>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-semibold mb-4">Síguenos</h4>
+                <div class="flex gap-5 text-3xl">
+                    <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer"></i>
+                    <i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer"></i>
+                    <i class="fa-brands fa-youtube hover:text-red-500 cursor-pointer"></i>
                 </div>
             </div>
-
         </div>
         
-        <div class="footer-legal">
-            <p>&copy; 2026 Universidad Nacional del Santa. Todos los derechos reservados.</p>
+        <div class="border-t border-gray-800 py-6 text-center text-xs">
+            <p>&copy; 2026 Universidad Nacional del Santa - Todos los derechos reservados</p>
         </div>
     </footer>
 
