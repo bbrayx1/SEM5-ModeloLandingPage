@@ -28,7 +28,7 @@
         .hero-bg {
             /* Fondo de la portada principal */
             background-image: linear-gradient(rgba(138, 0, 0, 0.7), rgba(10, 10, 10, 0.8)), 
-                              url('https://images.unsplash.com/photo-1591115765373-520f3b5a2a5e?q=80&w=2070');
+                              url('https://media.licdn.com/dms/image/v2/C4D1BAQFK1JBaUGnjxA/company-background_10000/company-background_10000/0/1613748941108/universidad_nacional_del_santa_cover?e=2147483647&v=beta&t=-U1F3jK23SkW4DyCTHgNfnY1LJsIieM45hDebmGGIV4');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -38,7 +38,7 @@
 <body class="font-sans bg-gray-50 text-gray-800">
 
     <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-8xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <img src="images/logo-uns.png" alt="Logo UNS" class="h-16 object-contain">
                 <div>
@@ -60,7 +60,7 @@
         </div>
     </header>
 
-    <section id="admision" class="hero-bg h-[70vh] flex items-center justify-center text-center px-6">
+    <section id="admision" class="hero-bg h-[90vh] flex items-center justify-center text-center px-6">
         <div class="text-white max-w-4xl">
             <span class="bg-uns-light text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-widest mb-6 inline-block">Admisión 2026-I</span>
             <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Formando líderes para el desarrollo del país</h2>
@@ -133,8 +133,8 @@
         </div>
     </section>
 
-    /* Sección de Facultades y Carreras * /
-<section id="facultades" class="py-20 bg-white">
+
+    <section id="facultades" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Nuestras Facultades</h2>
@@ -142,46 +142,52 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
-                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
-                        <i class="fa-solid fa-laptop-code"></i>
+                <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group flex flex-col">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/ingenieria.jpg" alt="Facultad de Ingeniería" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Ingeniería</h3>
-                    <ul class="text-gray-600 space-y-2 text-sm">
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería en Energía</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Agroindustrial</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Civil</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería de Sistemas e Informática</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Agrónoma</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Mecánica</li>
-                    </ul>
+                    <div class="p-6 flex-1">
+                        <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Ingeniería</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería en Energía</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Agroindustrial</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Civil</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería de Sistemas e Informática</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Agrónoma</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Mecánica</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
-                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
-                        <i class="fa-solid fa-flask"></i>
+                <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group flex flex-col">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/ciencias.jpg" alt="Facultad de Ciencias" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Ciencias</h3>
-                    <ul class="text-gray-600 space-y-2 text-sm">
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Biología en Acuicultura</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Enfermería</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Biotecnología</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Medicina Humana</li>
-                    </ul>
+                    <div class="p-6 flex-1">
+                        <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Ciencias</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Biología en Acuicultura</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Enfermería</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Biotecnología</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Medicina Humana</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
-                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
-                        <i class="fa-solid fa-chalkboard-user"></i>
+                <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group flex flex-col">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/educacion.jpg" alt="Facultad de Educación y Humanidades" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     </div>
-                    <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Educación y Humanidades</h3>
-                    <ul class="text-gray-600 space-y-2 text-sm">
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Inicial</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Primaria</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Secundaria</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Comunicación Social</li>
-                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Derecho y Ciencias Políticas</li>
-                    </ul>
+                    <div class="p-6 flex-1">
+                        <h3 class="font-bold text-xl mb-4 text-gray-800">Facultad de Educación y Humanidades</h3>
+                        <ul class="text-gray-600 space-y-2 text-sm">
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Inicial</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Primaria</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Secundaria</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Comunicación Social</li>
+                            <li><i class="fa-solid fa-check text-uns mr-2"></i>Derecho y Ciencias Políticas</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
