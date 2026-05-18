@@ -158,19 +158,23 @@ section h2 {
    5. LOGROS (Cifras destacadas)
 ========================================== */
 #logros {
-    background-color: var(--blanco); /* Fondo claro para que resalten los iconos */
+    background-color: var(--gris-claro); /* Cambiamos el fondo a gris claro */
     color: var(--texto-oscuro);
     text-align: center;
+    /* Agregamos bordes sutiles para enmarcar la sección */
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 #logros h2 {
     color: var(--rojo-uns);
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 hr.style-three {
     border: 0;
-    height: 2px;
+    height: 3px; /* Un poco más grueso para que resalte más */
     background: var(--rojo-claro-uns);
     width: 80px;
     margin: 0 auto 40px auto;
@@ -178,18 +182,21 @@ hr.style-three {
 
 .grid-logros {
     display: grid;
-    /* Imita el comportamiento col-md-2 (6 columnas en desktop) y col-xs-6 (2 en móviles) */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
 }
 
 .item-logro {
-    padding: 15px;
+    background-color: var(--rojo-uns); /* Las cajitas de cada logro serán blancas */
+    padding: 25px 15px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: var(--sombra); /* Sombreado para que parezcan tarjetas */
     transition: var(--transicion);
 }
 
 .item-logro:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15); /* Sombra más fuerte al pasar el mouse */
 }
 
 .link-plomo {
@@ -206,15 +213,16 @@ hr.style-three {
 }
 
 .link-plomo img {
-    max-width: 60px; /* Ajusta el tamaño de tus iconos (png) */
+    max-width: 60px;
     height: auto;
     margin-bottom: 15px;
     transition: var(--transicion);
 }
 
 .link-plomo:hover img {
-    transform: scale(1.1); /* Pequeño efecto de zoom al pasar el mouse */
+    transform: scale(1.1);
 }
+
 /* ==========================================
    6. CENTROS DE PRODUCCIÓN
 ========================================== */
