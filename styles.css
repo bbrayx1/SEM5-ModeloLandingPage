@@ -2,8 +2,8 @@
    1. VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-    --rojo-uns: #b30000; /* Rojo representativo */
-    --rojo-claro-uns: #e60000; /* Rojo más claro para acentos */
+    --rojo-uns: #fbfbfb; /* Rojo representativo */
+    --rojo-claro-uns: #a82626; /* Rojo más claro para acentos */
     --gris-claro: #f4f4f9;
     --texto-oscuro: #333333;
     --blanco: #ffffff;
@@ -344,4 +344,19 @@ footer#contacto {
     .cifra-destacada {
         font-size: 2.5rem;
     }
+}
+
+/* ==========================================
+   9. ESTILOS TRASLADADOS DESDE INDEX.HTML
+========================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+.hero-bg {
+    background-image: linear-gradient(rgba(127, 17, 17, 0.577), rgb(10, 10, 10)), 
+                      url('https://media.licdn.com/dms/image/v2/C4D1BAQFK1JBaUGnjxA/company-background_10000/company-background_10000/0/1613748941108/universidad_nacional_del_santa_cover?e=2147483647&v=beta&t=-U1F3jK23SkW4DyCTHgNfnY1LJsIieM45hDebmGGIV4');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }

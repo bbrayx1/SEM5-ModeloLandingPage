@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universidad Nacional del Santa | UNS</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,20 +21,11 @@
             }
         }
     </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        .hero-bg {
-            /* Fondo de la portada principal */
-            background-image: linear-gradient(rgba(138, 0, 0, 0.7), rgba(10, 10, 10, 0.8)), 
-                              url('https://media.licdn.com/dms/image/v2/C4D1BAQFK1JBaUGnjxA/company-background_10000/company-background_10000/0/1613748941108/universidad_nacional_del_santa_cover?e=2147483647&v=beta&t=-U1F3jK23SkW4DyCTHgNfnY1LJsIieM45hDebmGGIV4');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800">
 
@@ -93,46 +85,37 @@
         </div>
     </section>
 
-
     <section class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Nuestros Logros</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-                
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-award text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Carreras Acreditadas</p>
                 </div>
-                
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-user-graduate text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Alumnos Becarios</p>
                 </div>
-                
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-handshake text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Convenios Firmados</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-book-open text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Investigaciones Publicadas</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-sack-dollar text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Fondos Concursables</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
                     <i class="fa-solid fa-lightbulb text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
                     <p class="font-bold text-sm text-gray-700">Proyectos de Emprendimiento</p>
                 </div>
-
             </div>
         </div>
     </section>
-
 
     <section id="facultades" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -193,14 +176,165 @@
         </div>
     </section>
 
-    <section id="posgrado" class="py-16 bg-uns text-white">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="md:w-2/3">
-                <h2 class="text-3xl font-bold mb-4">Escuela de Posgrado UNS</h2>
-                <p class="text-uns-light text-white opacity-90 text-lg">Especialízate y alcanza el siguiente nivel profesional con nuestras Maestrías y Doctorados diseñados para la excelencia y la investigación.</p>
+    <section id="posgrado" class="py-24 bg-gradient-to-br from-uns-dark to-uns text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse duration-1000"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16 border-b border-white/20 pb-8">
+                <div class="max-w-2xl">
+                    <span class="bg-white/10 backdrop-blur border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block shadow-sm">
+                        <i class="fa-solid fa-star text-yellow-400 mr-1"></i> Escuela de Posgrado
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">Potencia tu Perfil Profesional</h2>
+                    <p class="text-gray-100 mt-4 text-lg opacity-90 font-light">Especialízate y alcanza el siguiente nivel profesional con nuestras Maestrías y Doctorados diseñados para la excelencia y la investigación.</p>
+                </div>
+                <div>
+                    <a href="#" class="inline-flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-uns hover:scale-105 transition-all duration-300 shadow-xl whitespace-nowrap group">
+                        <i class="fa-solid fa-file-pdf mr-2 group-hover:-translate-y-1 transition-transform"></i> Descargar Catálogo
+                    </a>
+                </div>
             </div>
-            <div class="md:w-1/3 text-center md:text-right">
-                <a href="#" class="inline-block bg-white text-uns px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">Ver Programas</a>
+
+            <div class="grid lg:grid-cols-12 gap-10 items-stretch">
+                
+                <div class="lg:col-span-7 bg-white text-gray-800 rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 flex flex-col group transition-shadow duration-500">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://i0.wp.com/educacionalfuturo.com/wp-content/uploads/2018/11/FOTO_36857751_xl-2015-1-1-compressed-2.jpg?w=2000&ssl=1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-2xl font-extrabold flex items-center gap-3 drop-shadow-md">
+                                <div class="bg-uns text-white p-2.5 rounded-xl shadow-lg backdrop-blur-sm">
+                                    <i class="fa-solid fa-graduation-cap text-xl w-6 text-center"></i>
+                                </div>
+                                Programas de Maestría
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 flex-1 bg-gray-50/50">
+                        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm font-semibold text-gray-700">
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Ciencias de Enfermería</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Ciencias de la Educación</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Ciencias Energéticas</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Gerencia de Industrias Agropecuarias</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Gestión Ambiental</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Ingeniería Sistemas e Informática</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Comunicación y Marketing Digital</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Gestión Pedagógica de Idiomas Extranjeros</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Gestión Pública</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight">Derecho Penal</span>
+                            </li>
+                            <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item sm:col-span-2 mt-2 bg-gray-100 border border-gray-200">
+                                <i class="fa-solid fa-scale-balanced text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
+                                <span class="leading-tight text-gray-800">Derecho Constitucional</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-white text-gray-800 rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 flex flex-col group transition-shadow duration-500">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://eido.uvigo.gal/images/encabezados/programas.jpg" alt="Doctorados UNS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-2xl font-extrabold flex items-center gap-3 drop-shadow-md">
+                                <div class="bg-gray-800 text-white p-2.5 rounded-xl shadow-lg backdrop-blur-sm">
+                                    <i class="fa-solid fa-bookmark text-xl w-6 text-center text-yellow-400"></i>
+                                </div>
+                                Doctorados y Procesos
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex-1 flex flex-col justify-between gap-8 bg-gray-50/50">
+                        <div class="space-y-4">
+                            <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
+                                        <i class="fa-solid fa-lightbulb text-gray-400 group-hover/link:text-uns text-xl w-6 text-center"></i>
+                                    </div>
+                                    <span>Concepción del Doctorado</span>
+                                </div>
+                                <div class="bg-gray-100 group-hover/link:bg-red-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
+                                        <i class="fa-solid fa-id-card text-gray-400 group-hover/link:text-uns text-xl w-6 text-center"></i>
+                                    </div>
+                                    <span>Perfil del Doctor</span>
+                                </div>
+                                <div class="bg-gray-100 group-hover/link:bg-red-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
+                                        <i class="fa-solid fa-file-signature text-gray-400 group-hover/link:text-uns text-xl w-6 text-center"></i>
+                                    </div>
+                                    <span>Matrícula</span>
+                                </div>
+                                <div class="bg-gray-100 group-hover/link:bg-red-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
+                                </div>
+                            </a>
+                            
+                            <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
+                                <div class="flex items-center gap-4">
+                                    <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
+                                        <i class="fa-solid fa-wallet text-gray-400 group-hover/link:text-uns text-xl w-6 text-center"></i>
+                                    </div>
+                                    <span>Inversión</span>
+                                </div>
+                                <div class="bg-gray-100 group-hover/link:bg-red-100 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <a href="#" class="w-full bg-uns hover:bg-uns-dark text-white text-center font-extrabold py-4.5 rounded-2xl shadow-[0_10px_20px_rgba(179,0,0,0.3)] hover:shadow-[0_15px_30px_rgba(179,0,0,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group tracking-wider uppercase text-sm mt-2">
+                            <i class="fa-solid fa-paper-plane text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            Informes e Inscripciones
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -208,22 +342,72 @@
     <section id="centros" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Centros de Producción y Servicios</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
-                    <i class="fa-solid fa-building-columns text-5xl text-uns mb-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CEPUNS</h3>
-                    <p class="text-gray-500">Centro Preuniversitario. Prepárate con los mejores para tu ingreso.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
-                    <i class="fa-solid fa-language text-5xl text-uns mb-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CEIDUNS</h3>
-                    <p class="text-gray-500">Centro de Idiomas. Domina nuevos idiomas y certifica tu nivel.</p>
-                </div>
-                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
-                    <i class="fa-solid fa-computer text-5xl text-uns mb-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CECOMP</h3>
-                    <p class="text-gray-500">Centro de Cómputo. Cursos de ofimática, diseño y programación.</p>
-                </div>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+                
+                <a href="#" class="block bg-uns rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-56 overflow-hidden bg-gray-300">
+                        <img src="images/cepuns.png" alt="CEPUNS" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    
+                    <div class="flex flex-col relative pb-6">
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
+                            CEPUNS
+                        </div>
+                        
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
+                            Centro Preuniversitario. Prepárate con los mejores para tu ingreso.
+                        </p>
+
+                        <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
+                            <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
+                            <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="block bg-uns rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-56 overflow-hidden bg-gray-300">
+                        <img src="https://www.uns.edu.pe/vistas/ceiduns/img/1.jpg" alt="CEIDUNS" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="flex flex-col relative pb-6">
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
+                            CEIDUNS
+                        </div>
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
+                            Centro de Idiomas. Domina nuevos idiomas y certifica tu nivel.
+                        </p>
+                        <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
+                            <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
+                            <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="block bg-uns rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="h-56 overflow-hidden bg-gray-300">
+                        <img src="images/cecomp.png" alt="CECOMP" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="flex flex-col relative pb-6">
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
+                            CECOMP
+                        </div>
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
+                            Centro de Cómputo. Cursos de ofimática, diseño y programación.
+                        </p>
+                        <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
+                            <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
+                            <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
@@ -289,11 +473,6 @@
                     <img src="images/logo-sunedu.png" alt="SUNEDU" class="h-10 object-contain">
                 </div>
             </div>
-
-              <div class="bg-white px-4 py-2 rounded">
-                    <img src="images/libro-reclamaciones.png" alt="Libro de Reclamaciones" class="w-full h-full object-cover object-left">             
-            </div>
-
 
             <div class="grid md:grid-cols-4 gap-10">
                 <div>
