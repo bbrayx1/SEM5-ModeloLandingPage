@@ -34,8 +34,6 @@ a {
    2. CABECERA Y NAVEGACIÓN
 ========================================== */
 header#inicio {
-    /* FONDO 1: Reemplaza "tu-fondo-header.jpg" con tu imagen. 
-       El linear-gradient es un overlay rojo oscuro para que el texto resalte */
     background: linear-gradient(rgba(102, 0, 0, 0.8), rgba(102, 0, 0, 0.8)), 
                 url('tu-fondo-header.jpg') center/cover no-repeat;
     color: var(--blanco);
@@ -52,7 +50,7 @@ header#inicio {
 }
 
 .logo-institucional img {
-    height: 60px; /* Ajusta según el tamaño de tu logo */
+    height: 60px;
 }
 
 .logo-institucional h1 {
@@ -85,7 +83,7 @@ header#inicio {
 }
 
 .menu-principal a:hover {
-    color: #ffd700; /* Toque dorado/amarillo al pasar el mouse (combina bien con rojo) */
+    color: #ffd700; 
 }
 
 /* ==========================================
@@ -107,7 +105,6 @@ section h2 {
 ========================================== */
 #noticias {
     background-color: var(--gris-claro);
-    /* FONDO 2: Opcional. Si quieres fondo de imagen aquí, usa la misma sintaxis del header */
 }
 
 .grid-noticias {
@@ -158,10 +155,9 @@ section h2 {
    5. LOGROS (Cifras destacadas)
 ========================================== */
 #logros {
-    background-color: var(--gris-claro); /* Cambiamos el fondo a gris claro */
+    background-color: var(--gris-claro); 
     color: var(--texto-oscuro);
     text-align: center;
-    /* Agregamos bordes sutiles para enmarcar la sección */
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
 }
@@ -174,7 +170,7 @@ section h2 {
 
 hr.style-three {
     border: 0;
-    height: 3px; /* Un poco más grueso para que resalte más */
+    height: 3px;
     background: var(--rojo-claro-uns);
     width: 80px;
     margin: 0 auto 40px auto;
@@ -255,7 +251,6 @@ hr.style-three {
    7. FOOTER / PIE DE PÁGINA
 ========================================== */
 footer#contacto {
-    /* FONDO 4: Color granate/rojo muy oscuro para el footer */
     background-color: #2b0505; 
     color: #cccccc;
     padding: 50px 5% 20px;
@@ -312,7 +307,7 @@ footer#contacto {
 
 .iconos-redes a:hover {
     color: var(--blanco);
-    padding-left: 5px; /* Pequeño efecto al hacer hover */
+    padding-left: 5px;
 }
 
 .footer-legal {
