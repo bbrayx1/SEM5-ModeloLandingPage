@@ -5,221 +5,328 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universidad Nacional del Santa | UNS</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        uns: {
+                            DEFAULT: '#b30000', // Rojo UNS
+                            dark: '#8a0000',
+                            light: '#e60000'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+            /* Fondo de la portada principal */
+            background-image: linear-gradient(rgba(138, 0, 0, 0.7), rgba(10, 10, 10, 0.8)), 
                               url('https://images.unsplash.com/photo-1591115765373-520f3b5a2a5e?q=80&w=2070');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
     </style>
 </head>
-<body class="font-sans">
+<body class="font-sans bg-gray-50 text-gray-800">
 
-    <!-- HEADER -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <img src="images/logo-uns.png" alt="Logo UNS" class="h-16">
+                <img src="images/logo-uns.png" alt="Logo UNS" class="h-16 object-contain">
                 <div>
-                    <h1 class="text-2xl font-bold text-blue-900 leading-tight">Universidad Nacional<br>del Santa</h1>
+                    <h1 class="text-2xl font-bold text-uns leading-tight">Universidad Nacional<br>del Santa</h1>
                 </div>
             </div>
             
-            <nav class="hidden md:flex gap-8 text-lg font-medium">
-                <a href="#admision" class="hover:text-blue-700">Admisión</a>
-                <a href="#facultades" class="hover:text-blue-700">Facultades</a>
-                <a href="#posgrado" class="hover:text-blue-700">Posgrado</a>
-                <a href="#investigacion" class="hover:text-blue-700">Investigación</a>
-                <a href="#noticias" class="hover:text-blue-700">Noticias</a>
+            <nav class="hidden lg:flex gap-8 text-sm uppercase tracking-wide font-bold text-gray-600">
+                <a href="#admision" class="hover:text-uns transition">Admisión</a>
+                <a href="#facultades" class="hover:text-uns transition">Facultades</a>
+                <a href="#posgrado" class="hover:text-uns transition">Posgrado</a>
+                <a href="#centros" class="hover:text-uns transition">C. Producción</a>
+                <a href="#noticias" class="hover:text-uns transition">Noticias</a>
             </nav>
 
-            <a href="#admision" class="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-xl font-semibold">
-                Postula 2026-I
+            <a href="#admision" class="hidden md:inline-block bg-uns hover:bg-uns-light text-white px-6 py-2.5 rounded-xl font-semibold transition shadow-lg">
+                Postula 2026
             </a>
         </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero-bg h-screen flex items-center text-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-5xl md:text-6xl font-bold mb-6">Excelencia con Identidad Regional</h2>
-            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
-                Formando profesionales de alto nivel para el desarrollo de Áncash y el Perú
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="#" class="bg-white text-blue-900 px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition">
-                    Ver Carreras
-                </a>
-                <a href="#" class="border-2 border-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:text-blue-900 transition">
-                    Proceso de Admisión
-                </a>
+    <section id="admision" class="hero-bg h-[70vh] flex items-center justify-center text-center px-6">
+        <div class="text-white max-w-4xl">
+            <span class="bg-uns-light text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-widest mb-6 inline-block">Admisión 2026-I</span>
+            <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Formando líderes para el desarrollo del país</h2>
+            <p class="text-xl md:text-2xl mb-10 text-gray-200">Únete a la excelencia académica y sé parte de la familia UNS.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="bg-uns hover:bg-uns-light text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-xl">Inscríbete Ahora</a>
+                <a href="#facultades" class="bg-white/20 hover:bg-white/30 backdrop-blur border border-white/50 text-white px-8 py-4 rounded-xl font-bold text-lg transition">Ver Carreras</a>
             </div>
         </div>
     </section>
 
-    <!-- ESTADÍSTICAS -->
-    <section class="py-12 bg-white">
+    <section class="py-12 bg-white border-b border-gray-200">
         <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-6">
             <div>
-                <h3 class="text-5xl font-bold text-blue-700">4</h3>
-                <p class="text-gray-600 mt-2">Facultades</p>
+                <h3 class="text-5xl font-extrabold text-uns">4</h3>
+                <p class="text-gray-500 font-medium uppercase tracking-wide mt-2 text-sm">Facultades</p>
             </div>
             <div>
-                <h3 class="text-5xl font-bold text-blue-700">15+</h3>
-                <p class="text-gray-600 mt-2">Carreras Profesionales</p>
+                <h3 class="text-5xl font-extrabold text-uns">15+</h3>
+                <p class="text-gray-500 font-medium uppercase tracking-wide mt-2 text-sm">Carreras Profesionales</p>
             </div>
             <div>
-                <h3 class="text-5xl font-bold text-blue-700">5000+</h3>
-                <p class="text-gray-600 mt-2">Estudiantes</p>
+                <h3 class="text-5xl font-extrabold text-uns">5000+</h3>
+                <p class="text-gray-500 font-medium uppercase tracking-wide mt-2 text-sm">Estudiantes</p>
             </div>
             <div>
-                <h3 class="text-5xl font-bold text-blue-700">39</h3>
-                <p class="text-gray-600 mt-2">Años de creación</p>
+                <h3 class="text-5xl font-extrabold text-uns">39</h3>
+                <p class="text-gray-500 font-medium uppercase tracking-wide mt-2 text-sm">Años de creación</p>
             </div>
         </div>
     </section>
-    
 
-    <!-- FACULTADES -->
-    <section id="facultades" class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-100">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Nuestras Facultades</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Nuestros Logros</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
+                
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-award text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Carreras Acreditadas</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-user-graduate text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Alumnos Becarios</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-handshake text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Convenios Firmados</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-book-open text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Investigaciones Publicadas</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-sack-dollar text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Fondos Concursables</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-b-4 border-uns group">
+                    <i class="fa-solid fa-lightbulb text-4xl mb-4 text-uns group-hover:scale-110 transition"></i>
+                    <p class="font-bold text-sm text-gray-700">Proyectos de Emprendimiento</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="facultades" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Nuestras Facultades</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Conoce nuestra oferta académica diseñada para formar profesionales altamente capacitados y listos para los retos del mercado.</p>
+            </div>
+            
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl mb-3">Ingeniería</h3>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
+                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-gray-800">Ingeniería</h3>
                     <ul class="text-gray-600 space-y-2 text-sm">
-                        <li>• Ingeniería de Sistemas e Informática</li>
-                        <li>• Ingeniería Civil</li>
-                        <li>• Ingeniería Agroindustrial</li>
-                        <li>• Ingeniería en Energía</li>
-                        <li>• Ingeniería Agrónoma</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Sistemas e Informática</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Ingeniería Civil</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Agroindustrial</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Energía</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Agrónoma</li>
                     </ul>
                 </div>
-                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl mb-3">Ciencias</h3>
+
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
+                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-gray-800">Ciencias</h3>
                     <ul class="text-gray-600 space-y-2 text-sm">
-                        <li>• Biología en Acuicultura</li>
-                        <li>• Medicina Humana</li>
-                        <li>• Enfermería</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Biología en Acuicultura</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Medicina Humana</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Enfermería</li>
                     </ul>
                 </div>
-                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl mb-3">Educación y Humanidades</h3>
+
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
+                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-gray-800">Educación y Humanidades</h3>
                     <ul class="text-gray-600 space-y-2 text-sm">
-                        <li>• Educación Inicial</li>
-                        <li>• Educación Secundaria (varias especialidades)</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Inicial</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Educación Secundaria</li>
                     </ul>
                 </div>
-                <div class="bg-white p-8 rounded-3xl shadow hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl mb-3">Derecho y Ciencias Políticas</h3>
+
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:border-uns hover:shadow-xl transition group">
+                    <div class="bg-uns text-white w-12 h-12 rounded-full flex items-center justify-center mb-6 text-xl">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-gray-800">Derecho y C. Políticas</h3>
                     <ul class="text-gray-600 space-y-2 text-sm">
-                        <li>• Derecho</li>
+                        <li><i class="fa-solid fa-check text-uns mr-2"></i>Derecho</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- LOGROS -->
-    <section class="py-16 bg-blue-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Nuestros Logros</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
-                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
-                    <i class="fa-solid fa-medal text-4xl mb-4"></i>
-                    <p class="font-semibold">Carreras Acreditadas</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
-                    <i class="fa-solid fa-users text-4xl mb-4"></i>
-                    <p class="font-semibold">Alumnos Becarios</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur p-6 rounded-2xl">
-                    <i class="fa-solid fa-handshake text-4xl mb-4"></i>
-                    <p class="font-semibold">Convenios Firmados</p>
-                </div>
-                <!-- Agrega más -->
             </div>
         </div>
     </section>
 
-    <!-- NOTICIAS -->
-    <section id="noticias" class="py-16 bg-gray-50">
+    <section id="posgrado" class="py-16 bg-uns text-white">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:w-2/3">
+                <h2 class="text-3xl font-bold mb-4">Escuela de Posgrado UNS</h2>
+                <p class="text-uns-light text-white opacity-90 text-lg">Especialízate y alcanza el siguiente nivel profesional con nuestras Maestrías y Doctorados diseñados para la excelencia y la investigación.</p>
+            </div>
+            <div class="md:w-1/3 text-center md:text-right">
+                <a href="#" class="inline-block bg-white text-uns px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">Ver Programas</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="centros" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Últimas Noticias</h2>
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Centros de Producción y Servicios</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Agrega aquí tus noticias reales -->
-                <article class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-xl transition">
-                    <img src="images/noticia1.jpg" class="w-full h-52 object-cover">
+                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-building-columns text-5xl text-uns mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CEPUNS</h3>
+                    <p class="text-gray-500">Centro Preuniversitario. Prepárate con los mejores para tu ingreso.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-language text-5xl text-uns mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CEIDUNS</h3>
+                    <p class="text-gray-500">Centro de Idiomas. Domina nuevos idiomas y certifica tu nivel.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl text-center shadow hover:-translate-y-2 transition duration-300">
+                    <i class="fa-solid fa-computer text-5xl text-uns mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">CECOMP</h3>
+                    <p class="text-gray-500">Centro de Cómputo. Cursos de ofimática, diseño y programación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="noticias" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="text-4xl font-bold text-gray-800">Últimas Noticias</h2>
+                <a href="#" class="text-uns font-bold hover:underline hidden sm:block">Ver todas las noticias &rarr;</a>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/noticia1.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Noticia">
+                    </div>
                     <div class="p-6">
-                        <h3 class="font-semibold text-xl mb-3">Título destacado de la noticia</h3>
-                        <p class="text-gray-600 mb-4">Resumen breve de la noticia institucional...</p>
-                        <a href="#" class="text-blue-600 font-medium">Leer más →</a>
+                        <span class="text-xs font-bold text-uns uppercase tracking-wide">Académico</span>
+                        <h3 class="font-bold text-xl mt-2 mb-3 text-gray-800 line-clamp-2">UNS destaca en investigación científica a nivel regional</h3>
+                        <p class="text-gray-600 mb-4 text-sm line-clamp-3">Nuevos proyectos financiados por el canon minero impulsan el desarrollo agroindustrial en la región Áncash...</p>
+                        <a href="#" class="text-uns font-semibold text-sm hover:text-uns-dark">Leer nota completa →</a>
                     </div>
                 </article>
-                <!-- Repite para más noticias -->
+                
+                <article class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/noticia2.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Noticia">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-uns uppercase tracking-wide">Institucional</span>
+                        <h3 class="font-bold text-xl mt-2 mb-3 text-gray-800 line-clamp-2">Convenio firmado con prestigiosa universidad europea</h3>
+                        <p class="text-gray-600 mb-4 text-sm line-clamp-3">Estudiantes y docentes podrán realizar pasantías internacionales gracias a la nueva alianza estratégica firmada hoy...</p>
+                        <a href="#" class="text-uns font-semibold text-sm hover:text-uns-dark">Leer nota completa →</a>
+                    </div>
+                </article>
+
+                <article class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition group">
+                    <div class="h-52 bg-gray-300 overflow-hidden">
+                        <img src="images/noticia3.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Noticia">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-uns uppercase tracking-wide">Deportes</span>
+                        <h3 class="font-bold text-xl mt-2 mb-3 text-gray-800 line-clamp-2">Estudiantes de la UNS logran medallas en juegos universitarios</h3>
+                        <p class="text-gray-600 mb-4 text-sm line-clamp-3">El equipo de atletismo y natación trajo a casa 5 medallas de oro en la última competencia nacional...</p>
+                        <a href="#" class="text-uns font-semibold text-sm hover:text-uns-dark">Leer nota completa →</a>
+                    </div>
+                </article>
+            </div>
+            <div class="mt-8 text-center sm:hidden">
+                <a href="#" class="text-uns font-bold hover:underline">Ver todas las noticias &rarr;</a>
             </div>
         </div>
     </section>
 
-    <!-- CENTROS DE PRODUCCIÓN -->
-    <section id="centros" class="py-16 bg-blue-900 text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12">Centros de Producción y Servicios</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
-                    <h3 class="text-2xl font-semibold mb-2">CEPUNS</h3>
-                    <p>Centro Preuniversitario</p>
+    <footer class="bg-[#1a1a1a] text-gray-400">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            
+            <div class="flex flex-wrap justify-center md:justify-start gap-6 mb-12 border-b border-gray-800 pb-8">
+                <div class="bg-white px-4 py-2 rounded">
+                    <img src="images/logo-pcm.png" alt="Presidencia del Consejo de Ministros" class="h-10 object-contain">
                 </div>
-                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
-                    <h3 class="text-2xl font-semibold mb-2">CEIDUNS</h3>
-                    <p>Centro de Idiomas</p>
-                </div>
-                <div class="bg-white/10 backdrop-blur p-8 rounded-3xl text-center">
-                    <h3 class="text-2xl font-semibold mb-2">CECOMP</h3>
-                    <p>Centro de Cómputo</p>
+                <div class="bg-white px-4 py-2 rounded">
+                    <img src="images/logo-sunedu.png" alt="SUNEDU" class="h-10 object-contain">
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-gray-400">
-        <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-            <div>
-                <h3 class="text-white text-xl font-bold mb-4">Universidad Nacional del Santa</h3>
-                <p class="text-sm">Av. Universitaria S/N - Campus I<br>Nuevo Chimbote, Áncash - Perú</p>
-                <p class="mt-4">Central Telefónica: (043) 604451</p>
-            </div>
-            
-            <div>
-                <h4 class="text-white font-semibold mb-4">Enlaces Rápidos</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white">Admisión</a></li>
-                    <li><a href="#" class="hover:text-white">Campus Virtual</a></li>
-                    <li><a href="#" class="hover:text-white">Repositorio Institucional</a></li>
-                    <li><a href="#" class="hover:text-white">Transparencia</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-white font-semibold mb-4">Contacto</h4>
-                <p class="text-sm">informes@uns.edu.pe</p>
-                <p class="text-sm">transparencia@uns.edu.pe</p>
-            </div>
-            
-            <div>
-                <h4 class="text-white font-semibold mb-4">Síguenos</h4>
-                <div class="flex gap-5 text-3xl">
-                    <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer"></i>
-                    <i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer"></i>
-                    <i class="fa-brands fa-youtube hover:text-red-500 cursor-pointer"></i>
+            <div class="grid md:grid-cols-4 gap-10">
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-4">Universidad Nacional del Santa</h3>
+                    <p class="text-sm leading-relaxed mb-4">📍 Av. Universitaria S/N - Campus I<br>Urb. Bellamar, Nuevo Chimbote<br>Áncash - Perú</p>
+                    <p class="text-sm">📞 Central: (043) 310445</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide uppercase text-sm">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-uns-light transition">Admisión</a></li>
+                        <li><a href="#" class="hover:text-uns-light transition">Campus Virtual / SGA</a></li>
+                        <li><a href="#" class="hover:text-uns-light transition">Repositorio Institucional</a></li>
+                        <li><a href="#" class="hover:text-uns-light transition">Transparencia Universitaria</a></li>
+                        <li><a href="#faq" class="hover:text-uns-light transition">FAQ - Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide uppercase text-sm">Contacto</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>✉️ <a href="mailto:informes@uns.edu.pe" class="hover:text-white">informes@uns.edu.pe</a></li>
+                        <li>✉️ <a href="mailto:admision@uns.edu.pe" class="hover:text-white">admision@uns.edu.pe</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide uppercase text-sm">Síguenos</h4>
+                    <div class="flex gap-4 text-2xl">
+                        <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="border-t border-gray-800 py-6 text-center text-xs">
-            <p>&copy; 2026 Universidad Nacional del Santa - Todos los derechos reservados</p>
+        <div class="bg-black py-6 text-center text-xs text-gray-500">
+            <p>&copy; 2026 Universidad Nacional del Santa</p>
         </div>
     </footer>
 
