@@ -1,9 +1,9 @@
 /* ==========================================
-   1. VARIABLES GLOBALES Y RESET
+   VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-    --rojo-uns: #fbfbfb; /* Rojo representativo */
-    --rojo-claro-uns: #a82626; /* Rojo más claro para acentos */
+    --rojo-uns: #b30000;
+    --rojo-claro-uns: #a82626;
     --gris-claro: #f4f4f9;
     --texto-oscuro: #333333;
     --blanco: #ffffff;
@@ -31,61 +31,8 @@ a {
 }
 
 /* ==========================================
-   2. CABECERA Y NAVEGACIÓN
+   EFECTOS EN ENLACES (Navbar)
 ========================================== */
-header#inicio {
-    background: linear-gradient(rgba(102, 0, 0, 0.8), rgba(102, 0, 0, 0.8)), 
-                url('tu-fondo-header.jpg') center/cover no-repeat;
-    color: var(--blanco);
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-institucional {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px 5%;
-}
-
-.logo-institucional img {
-    height: 60px;
-}
-
-.logo-institucional h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.menu-principal {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    padding: 15px 5%;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.menu-principal ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.menu-principal a {
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: var(--transicion);
-}
-
-.menu-principal a:hover {
-    color: #ffd700; 
-}
-
 .nav-link {
     position: relative;
     color: #374151;
@@ -93,7 +40,7 @@ header#inicio {
 }
 
 .nav-link:hover {
-    color: #761212;
+    color: #b30000;
     transform: translateY(-2px);
 }
 
@@ -101,11 +48,12 @@ header#inicio {
     content: '';
     position: absolute;
     width: 0;
-    height: 2px;
-    bottom: -4px;
+    height: 3px;
+    bottom: -6px;
     left: 0;
-    background-color: #761212;
+    background-color: #b30000;
     transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
 .nav-link:hover:after {
@@ -113,267 +61,8 @@ header#inicio {
 }
 
 /* ==========================================
-   3. SECCIONES GENERALES
+   IMAGEN DE PORTADA (Hero Section Fixed)
 ========================================== */
-section {
-    padding: 80px 5%;
-}
-
-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: var(--rojo-uns);
-}
-
-/* ==========================================
-   4. NOTICIAS (Grid de tarjetas)
-========================================== */
-#noticias {
-    background-color: var(--gris-claro);
-}
-
-.grid-noticias {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.card-noticia {
-    background: var(--blanco);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--sombra);
-    transition: var(--transicion);
-}
-
-.card-noticia:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
-.card-noticia img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-noticia h3 {
-    padding: 20px 20px 10px;
-    font-size: 1.2rem;
-    color: var(--rojo-uns);
-}
-
-.card-noticia p {
-    padding: 0 20px 20px;
-    color: #666;
-    font-size: 0.95rem;
-}
-
-.card-noticia a {
-    display: inline-block;
-    margin: 0 20px 20px;
-    color: var(--rojo-claro-uns);
-    font-weight: bold;
-}
-
-/* ==========================================
-   5. LOGROS (Cifras destacadas)
-========================================== */
-#logros {
-    background-color: var(--gris-claro); 
-    color: var(--texto-oscuro);
-    text-align: center;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-#logros h2 {
-    color: var(--rojo-uns);
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-hr.style-three {
-    border: 0;
-    height: 3px;
-    background: var(--rojo-claro-uns);
-    width: 80px;
-    margin: 0 auto 40px auto;
-}
-
-.grid-logros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-}
-
-.item-logro {
-    background-color: var(--rojo-uns); /* Las cajitas de cada logro serán blancas */
-    padding: 25px 15px;
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: var(--sombra); /* Sombreado para que parezcan tarjetas */
-    transition: var(--transicion);
-}
-
-.item-logro:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15); /* Sombra más fuerte al pasar el mouse */
-}
-
-.link-plomo {
-    display: block;
-    color: #555555;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: var(--transicion);
-}
-
-.link-plomo:hover {
-    color: var(--rojo-claro-uns);
-}
-
-.link-plomo img {
-    max-width: 60px;
-    height: auto;
-    margin-bottom: 15px;
-    transition: var(--transicion);
-}
-
-.link-plomo:hover img {
-    transform: scale(1.1);
-}
-
-/* ==========================================
-   6. CENTROS DE PRODUCCIÓN
-========================================== */
-#centros-produccion {
-    background-color: var(--blanco);
-}
-
-.grid-centros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.card-centro {
-    background-color: var(--rojo-uns);
-    color: var(--blanco);
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: var(--sombra);
-    border-bottom: 5px solid var(--rojo-claro-uns);
-}
-
-.card-centro h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-/* ==========================================
-   7. FOOTER / PIE DE PÁGINA
-========================================== */
-footer#contacto {
-    background-color: #2b0505; 
-    color: #cccccc;
-    padding: 50px 5% 20px;
-}
-
-.footer-contenedor {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-institucional .logos-estado {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.footer-institucional img {
-    height: 50px;
-    background: var(--blanco); /* Fondo blanco por si los logos tienen transparencias oscuras */
-    padding: 5px;
-    border-radius: 4px;
-}
-
-.enlaces-ayuda a {
-    color: var(--rojo-claro-uns);
-    text-decoration: underline;
-}
-
-.footer-contacto h3, .footer-redes h3 {
-    color: var(--blanco);
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.footer-contacto ul {
-    list-style: none;
-}
-
-.footer-contacto li {
-    margin-bottom: 10px;
-}
-
-.iconos-redes {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.iconos-redes a {
-    transition: var(--transicion);
-}
-
-.iconos-redes a:hover {
-    color: var(--blanco);
-    padding-left: 5px;
-}
-
-.footer-legal {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.9rem;
-}
-
-/* ==========================================
-   8. MEDIA QUERIES (Responsividad para móviles)
-========================================== */
-@media (max-width: 768px) {
-    .logo-institucional {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .menu-principal ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    section h2 {
-        font-size: 2rem;
-    }
-    
-    .cifra-destacada {
-        font-size: 2.5rem;
-    }
-}
-
-/* ==========================================
-   9. ESTILOS TRASLADADOS DESDE INDEX.HTML
-========================================== */
-html {
-    scroll-behavior: smooth;
-}
-
 .hero-bg {
     background-image: linear-gradient(rgba(127, 17, 17, 0.577), rgb(10, 10, 10)), 
                       url('https://media.licdn.com/dms/image/v2/C4D1BAQFK1JBaUGnjxA/company-background_10000/company-background_10000/0/1613748941108/universidad_nacional_del_santa_cover?e=2147483647&v=beta&t=-U1F3jK23SkW4DyCTHgNfnY1LJsIieM45hDebmGGIV4');

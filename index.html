@@ -44,44 +44,37 @@
                 </div>
 
                 <nav class="hidden md:flex items-center gap-8 text-base font-semibold">
-    
-    <div class="relative inline-block text-left group">
-        <button id="btn-admision" class="nav-link flex items-center gap-1 focus:outline-none">
-            Admisión <i class="fa-solid fa-chevron-down text-xs"></i>
-        </button>
-        
-        <div id="menu-admision" class="hidden absolute left-0 mt-4 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-[100] overflow-hidden font-normal text-left">
-            <div class="py-1">
-                <a href="images/modalidades_20022ok.jpeg" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition">
-                    <i class="fa-solid fa-image text-[#b30000] opacity-70"></i>
-                    <span>Modalidades de Ingreso</span>
-                </a>
-                
-                <a href="documentos/Cronograma_Admision_UNS_2026.pdf" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
-                    <i class="fa-solid fa-file-pdf text-[#b30000] opacity-70"></i>
-                    <span>Cronograma de Admisión</span>
-                </a>
-            </div>
-        </div>
-    </div>
+                    <div class="relative inline-block text-left group">
+                        <button id="btn-admision" class="nav-link flex items-center gap-1 focus:outline-none">
+                            Admisión <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        
+                        <div id="menu-admision" class="hidden absolute left-0 mt-4 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-[100] overflow-hidden font-normal text-left">
+                            <div class="py-1">
+                                <a href="images/modalidades_20022ok.jpeg" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition">
+                                    <i class="fa-solid fa-image text-[#b30000] opacity-70"></i>
+                                    <span>Modalidades de Ingreso</span>
+                                </a>
+                                <a href="documentos/Cronograma_Admision_UNS_2026.pdf" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
+                                    <i class="fa-solid fa-file-pdf text-[#b30000] opacity-70"></i>
+                                    <span>Cronograma de Admisión</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-    <span class="text-gray-300">|</span>
-    <a href="#facultades" class="nav-link">Facultades</a>
-    
-    <span class="text-gray-300">|</span>
-    <a href="#posgrado" class="nav-link">Posgrado</a>
-    
-    <span class="text-gray-300">|</span>
-    <a href="#centros" class="nav-link">Centros Universitarios</a>
-    
-    <span class="text-gray-300">|</span>
-    <a href="#noticias" class="nav-link">Noticias</a>
-    
-</nav>
+                    <span class="text-gray-300">|</span>
+                    <a href="#facultades" class="nav-link">Facultades</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#posgrado" class="nav-link">Posgrado</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#centros" class="nav-link">Centros Universitarios</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#noticias" class="nav-link">Noticias</a>
+                </nav>
 
                 <div class="flex items-center gap-4">
-                    <button onclick="abrirIntranet()" 
-                            class="bg-uns hover:bg-uns-dark text-white px-7 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg">
+                    <button id="btn-intranet-desktop" class="bg-uns hover:bg-uns-dark text-white px-7 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all duration-300 hover:scale-105 shadow-lg">
                         <i class="fa-solid fa-user-graduate"></i>
                         <span class="hidden sm:inline">Intranet</span>
                     </button>
@@ -101,8 +94,7 @@
                 <a href="#centros" class="hover:text-uns">Centros Universitarios</a>
                 <a href="#noticias" class="hover:text-uns">Noticias</a>
                 
-                <button onclick="abrirIntranet()" 
-                        class="mt-4 bg-uns text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 text-lg">
+                <button id="btn-intranet-mobile" class="mt-4 bg-uns text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 text-lg">
                     <i class="fa-solid fa-user-graduate"></i> Acceder a Intranet
                 </button>
             </div>
@@ -238,7 +230,6 @@
         <div class="absolute bottom-0 left-0 w-80 h-80 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16 border-b border-white/20 pb-8">
                 <div class="max-w-2xl">
                     <span class="bg-white/10 backdrop-blur border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block shadow-sm">
@@ -255,7 +246,6 @@
             </div>
 
             <div class="grid lg:grid-cols-12 gap-10 items-stretch">
-                
                 <div class="lg:col-span-7 bg-white text-gray-800 rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-gray-100 flex flex-col group transition-shadow duration-500">
                     <div class="h-56 overflow-hidden relative">
                         <img src="https://i0.wp.com/educacionalfuturo.com/wp-content/uploads/2018/11/FOTO_36857751_xl-2015-1-1-compressed-2.jpg?w=2000&ssl=1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -273,48 +263,37 @@
                     <div class="p-8 flex-1 bg-gray-50/50">
                         <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm font-semibold text-gray-700">
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Ciencias de Enfermería</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Ciencias de Enfermería</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Ciencias de la Educación</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Ciencias de la Educación</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Ciencias Energéticas</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Ciencias Energéticas</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Gerencia de Industrias Agropecuarias</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Gerencia de Industrias Agropecuarias</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Gestión Ambiental</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Gestión Ambiental</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Ingeniería Sistemas e Informática</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Ingeniería Sistemas e Informática</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Comunicación y Mercadeo Digital</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Comunicación y Mercadeo Digital</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Gestión Pedagógica de Idiomas Extranjeros</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Gestión Pedagógica de Idiomas Extranjeros</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Gestión Pública</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Gestión Pública</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item">
-                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight">Derecho Penal</span>
+                                <i class="fa-solid fa-circle-check text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span>Derecho Penal</span>
                             </li>
                             <li class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 hover:text-uns cursor-pointer transition-all duration-300 hover:translate-x-1 group/item sm:col-span-2 mt-2 bg-gray-100 border border-gray-200">
-                                <i class="fa-solid fa-scale-balanced text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i>
-                                <span class="leading-tight text-gray-800">Derecho Constitucional</span>
+                                <i class="fa-solid fa-scale-balanced text-uns/70 group-hover/item:text-uns text-lg flex-shrink-0"></i><span class="leading-tight text-gray-800">Derecho Constitucional</span>
                             </li>
                         </ul>
                     </div>
@@ -347,7 +326,6 @@
                                     <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
                                 </div>
                             </a>
-                            
                             <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
                                 <div class="flex items-center gap-4">
                                     <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
@@ -359,7 +337,6 @@
                                     <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
                                 </div>
                             </a>
-                            
                             <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
                                 <div class="flex items-center gap-4">
                                     <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
@@ -371,7 +348,6 @@
                                     <i class="fa-solid fa-arrow-right text-xs text-gray-500 group-hover/link:text-uns group-hover/link:-rotate-45 transition-all"></i>
                                 </div>
                             </a>
-                            
                             <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl hover:bg-red-50 hover:text-uns hover:shadow-md hover:border-red-100 font-bold transition-all duration-300 group/link border border-gray-100 shadow-sm">
                                 <div class="flex items-center gap-4">
                                     <div class="bg-gray-50 group-hover/link:bg-white p-2 rounded-lg transition-colors">
@@ -391,7 +367,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -401,21 +376,13 @@
             <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Centros de Producción y Servicios</h2>
             
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-                
                 <a href="#" class="block bg-uns rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
                     <div class="h-56 overflow-hidden bg-gray-300">
                         <img src="images/cepuns.png" alt="CEPUNS" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     </div>
-                    
                     <div class="flex flex-col relative pb-6">
-                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
-                            CEPUNS
-                        </div>
-                        
-                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
-                            Centro Preuniversitario. Prepárate con los mejores para tu ingreso.
-                        </p>
-
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">CEPUNS</div>
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">Centro Preuniversitario. Prepárate con los mejores para tu ingreso.</p>
                         <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
                             <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
                             <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
@@ -430,12 +397,8 @@
                         <img src="https://www.uns.edu.pe/vistas/ceiduns/img/1.jpg" alt="CEIDUNS" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     </div>
                     <div class="flex flex-col relative pb-6">
-                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
-                            CEIDUNS
-                        </div>
-                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
-                            Centro de Idiomas. Domina nuevos idiomas y certifica tu nivel.
-                        </p>
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">CEIDUNS</div>
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">Centro de Idiomas. Domina nuevos idiomas y certifica tu nivel.</p>
                         <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
                             <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
                             <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
@@ -450,12 +413,8 @@
                         <img src="images/cecomp.png" alt="CECOMP" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                     </div>
                     <div class="flex flex-col relative pb-6">
-                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">
-                            CECOMP
-                        </div>
-                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">
-                            Centro de Cómputo. Cursos de ofimática, diseño y programación.
-                        </p>
+                        <div class="bg-gradient-to-r from-uns-dark to-gray-900 text-white font-bold text-xl py-3 px-6 w-10/12 rounded-r-full -mt-5 relative z-10 shadow-md">CECOMP</div>
+                        <p class="px-6 mt-5 text-gray-100 text-sm line-clamp-2">Centro de Cómputo. Cursos de ofimática, diseño y programación.</p>
                         <div class="px-6 mt-6 flex items-center justify-between text-white font-bold uppercase text-sm tracking-wider">
                             <span class="group-hover:text-yellow-300 transition-colors">Conoce más</span>
                             <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:bg-white group-hover:text-uns group-hover:border-white transition-all">
@@ -464,7 +423,6 @@
                         </div>
                     </div>
                 </a>
-
             </div>
         </div>
     </section>
@@ -521,10 +479,9 @@
 
     <footer class="bg-[#1a1a1a] text-gray-400">
         <div class="max-w-7xl mx-auto px-6 py-16">
-            
             <div class="flex flex-wrap justify-center md:justify-start gap-6 mb-12 border-b border-gray-800 pb-8">
                 <div class="bg-white px-4 py-2 rounded">
-                    <img src="images/logo-pcm.png" alt="Presidencia del Consejo de Ministros" class="h-10 object-contain">
+                    <img src="images/logo-pcm.png" alt="PCM" class="h-10 object-contain">
                 </div>
                 <div class="bg-white px-4 py-2 rounded">
                     <img src="images/logo-sunedu.png" alt="SUNEDU" class="h-10 object-contain">
@@ -557,21 +514,19 @@
                 </div>
                 
                 <div>
-    <h4 class="text-white font-semibold mb-4 tracking-wide uppercase text-sm">Síguenos</h4>
-    <div class="flex gap-4 text-2xl">
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
-            <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:text-white transition">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        
-        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition">
-            <i class="fa-brands fa-youtube"></i>
-        </a>
-    </div>
-</div>
+                    <h4 class="text-white font-semibold mb-4 tracking-wide uppercase text-sm">Síguenos</h4>
+                    <div class="flex gap-4 text-2xl">
+                        <a href="https://www.facebook.com/UNSChimbote" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/unschimbote/" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-600 hover:text-white transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@UniversidadNacionaldelSanta" target="_blank" rel="noopener noreferrer" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -582,7 +537,7 @@
 
     <div id="ventana-intranet" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md relative transform scale-95 transition-transform duration-300" id="contenido-intranet">
-            <button onclick="cerrarIntranet()" class="absolute top-5 right-5 text-gray-400 hover:text-uns bg-gray-100 hover:bg-red-50 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+            <button id="btn-cerrar-intranet" class="absolute top-5 right-5 text-gray-400 hover:text-uns bg-gray-100 hover:bg-red-50 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
@@ -620,52 +575,5 @@
         </div>
     </div>
 
-    <script>
-        // Lógica de la Ventana de Intranet
-        const ventana = document.getElementById('ventana-intranet');
-        const contenidoVentana = document.getElementById('contenido-intranet');
-
-        function abrirIntranet() {
-            ventana.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoVentana.classList.remove('scale-95');
-            contenidoVentana.classList.add('scale-100');
-        }
-
-        function cerrarIntranet() {
-            ventana.classList.add('opacity-0', 'pointer-events-none');
-            contenidoVentana.classList.remove('scale-100');
-            contenidoVentana.classList.add('scale-95');
-        }
-
-        // Cerrar ventana al hacer clic fuera del contenido
-        ventana.addEventListener('click', function(e) {
-            if (e.target === ventana) {
-                cerrarIntranet();
-            }
-        });
-
-        // Observador para Animaciones al Bajar (Scroll)
-        document.addEventListener("DOMContentLoaded", function() {
-            const opcionesObservador = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observador = new IntersectionObserver((entradas, observador) => {
-                entradas.forEach(entrada => {
-                    if (entrada.isIntersecting) {
-                        entrada.target.classList.remove('opacity-0', 'translate-y-8');
-                        entrada.target.classList.add('opacity-100', 'translate-y-0');
-                        observador.unobserve(entrada.target); // Solo animar la primera vez
-                    }
-                });
-            }, opcionesObservador);
-
-            document.querySelectorAll('.animacion-scroll').forEach((elemento) => {
-                observador.observe(elemento);
-            });
-        });
-    </script>
 </body>
 </html>
