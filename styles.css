@@ -61,6 +61,23 @@ a {
 }
 
 /* ==========================================
+   EFECTOS FACULTADES (Tarjetas Modernas)
+========================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Sombra extra para los títulos dentro de la imagen del Banner */
+.text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* ==========================================
    IMAGEN DE PORTADA (Hero Section Fixed)
 ========================================== */
 .hero-bg {
@@ -69,4 +86,70 @@ a {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
+
+/* Animación de Zoom Lento para las imágenes del Slider */
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.animate-slow-zoom {
+    animation: slowZoom 20s linear infinite alternate;
+}
+
+/* Control de visibilidad del Slider */
+.slide.opacity-100 {
+    z-index: 10;
+}
+.slide.opacity-0 {
+    z-index: 0;
+}
+
+/* Para suavizar el cambio de color en los puntos */
+.slider-dot.active {
+    width: 2rem;
+    background-color: #b30000; /* Color UNS */
+}
+
+/* ==========================================
+   ANIMACIÓN DE ICONOS (LOGROS)
+========================================== */
+@keyframes floatIcon {
+    0% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-10px); /* Qué tanto sube el icono */
+    }
+    100% { 
+        transform: translateY(0px); 
+    }
+}
+
+.animate-float-icon {
+    /* ease-in-out hace que frene suavemente al llegar arriba y abajo */
+    animation: floatIcon 3s ease-in-out infinite; 
+}
+
+/* ==========================================
+   ANIMACIÓN DE ILUMINACIÓN PARA PUNKURI
+========================================== */
+@keyframes glowPunkuri {
+    0% { 
+        opacity: 0.15; 
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); 
+    }
+    50% { 
+        opacity: 0.45; /* Sube la visibilidad */
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); /* Brillo de luz blanco */
+    }
+    100% { 
+        opacity: 0.15; 
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); 
+    }
+}
+
+.animate-glow-punkuri {
+    animation: glowPunkuri 6s ease-in-out infinite; /* Ciclo lento de 6 segundos */
 }
