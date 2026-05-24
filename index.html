@@ -44,16 +44,40 @@
                 </div>
 
                 <nav class="hidden md:flex items-center gap-8 text-base font-semibold">
-                    <a href="#admision" class="nav-link">Admisión</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="#facultades" class="nav-link">Facultades</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="#posgrado" class="nav-link">Posgrado</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="#centros" class="nav-link">Centros Universitarios</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="#noticias" class="nav-link">Noticias</a>
-                </nav>
+    
+    <div class="relative inline-block text-left group">
+        <button id="btn-admision" class="nav-link flex items-center gap-1 focus:outline-none">
+            Admisión <i class="fa-solid fa-chevron-down text-xs"></i>
+        </button>
+        
+        <div id="menu-admision" class="hidden absolute left-0 mt-4 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-[100] overflow-hidden font-normal text-left">
+            <div class="py-1">
+                <a href="images/modalidades_20022ok.jpeg" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition">
+                    <i class="fa-solid fa-image text-[#b30000] opacity-70"></i>
+                    <span>Modalidades de Ingreso</span>
+                </a>
+                
+                <a href="documentos/Cronograma_Admision_UNS_2026.pdf" target="_blank" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
+                    <i class="fa-solid fa-file-pdf text-[#b30000] opacity-70"></i>
+                    <span>Cronograma de Admisión</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <span class="text-gray-300">|</span>
+    <a href="#facultades" class="nav-link">Facultades</a>
+    
+    <span class="text-gray-300">|</span>
+    <a href="#posgrado" class="nav-link">Posgrado</a>
+    
+    <span class="text-gray-300">|</span>
+    <a href="#centros" class="nav-link">Centros Universitarios</a>
+    
+    <span class="text-gray-300">|</span>
+    <a href="#noticias" class="nav-link">Noticias</a>
+    
+</nav>
 
                 <div class="flex items-center gap-4">
                     <button onclick="abrirIntranet()" 

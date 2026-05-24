@@ -49,4 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3. Menú Desplegable de Admisión (Escritorio)
+    const btnAdmision = document.getElementById('btn-admision');
+    const menuAdmision = document.getElementById('menu-admision');
+
+    if (btnAdmision && menuAdmision) {
+        // Alternar el menú al hacer clic en el botón
+        btnAdmision.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evita que el clic se propague al document
+            menuAdmision.classList.toggle('hidden');
+        });
+
+        // Cerrar el menú si se hace clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (!menuAdmision.contains(e.target) && e.target !== btnAdmision) {
+                menuAdmision.classList.add('hidden');
+            }
+        });
+    }
+    
+
 });
