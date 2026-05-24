@@ -29,45 +29,44 @@
 </head>
 <body class="font-sans bg-gray-50 text-gray-800">
 
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-4 cursor-pointer hover:opacity-80 transition">
-                <img src="images/logo-uns.png" alt="Logo UNS" class="h-16 object-contain">
-                <div>
-                    <h1 class="text-2xl font-bold text-uns leading-tight">Universidad Nacional<br>del Santa</h1>
+    <header class="flex w-full sticky top-0 z-50 h-20 shadow-2xl">
+        <div class="bg-white px-6 md:px-10 flex items-center justify-center shrink-0 border-b-4 border-uns">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <img src="images/logo-uns.png" alt="Logo UNS" class="h-12 object-contain hidden sm:block">
+                <div class="w-12 h-12 bg-uns text-white font-bold flex sm:hidden items-center justify-center text-xs">UNS</div>
+                
+                <div class="border-l-2 border-gray-200 pl-3">
+                    <h1 class="text-sm font-extrabold text-uns leading-none tracking-tight uppercase">Universidad<br>Nacional<br>del Santa</h1>
                 </div>
             </div>
-            
-            <nav class="hidden lg:flex gap-8 text-sm uppercase tracking-wide font-bold text-gray-600">
-                <a href="#admision" class="hover:text-uns transition relative group">
-                    Admisión
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-uns transition-all group-hover:w-full"></span>
-                </a>
-                <a href="#facultades" class="hover:text-uns transition relative group">
-                    Facultades
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-uns transition-all group-hover:w-full"></span>
-                </a>
-                <a href="#posgrado" class="hover:text-uns transition relative group">
+        </div>
+        
+        <div class="flex-1 bg-black flex items-center px-8 justify-between border-b-4 border-black">
+            <nav class="hidden md:flex gap-6 lg:gap-8 text-white font-bold text-[14px] lg:text-[15px]">
+                <div class="flex items-center gap-1.5 hover:text-uns transition cursor-pointer group">
+                    Modalidades de estudio <i class="fa-solid fa-chevron-down text-[10px] group-hover:translate-y-0.5 transition-transform"></i>
+                </div>
+                <div class="flex items-center gap-1.5 hover:text-uns transition cursor-pointer group">
+                    Facultades <i class="fa-solid fa-chevron-down text-[10px] group-hover:translate-y-0.5 transition-transform"></i>
+                </div>
+                <div class="flex items-center gap-1.5 hover:text-uns transition cursor-pointer group">
+                    Admisión <i class="fa-solid fa-chevron-down text-[10px] group-hover:translate-y-0.5 transition-transform"></i>
+                </div>
+                <div class="flex items-center gap-1.5 hover:text-uns transition cursor-pointer group">
+                    Vida UNS <i class="fa-solid fa-chevron-down text-[10px] group-hover:translate-y-0.5 transition-transform"></i>
+                </div>
+                <div class="flex items-center gap-1.5 hover:text-uns transition cursor-pointer group">
+                    Campus <i class="fa-solid fa-chevron-down text-[10px] group-hover:translate-y-0.5 transition-transform"></i>
+                </div>
+                <a href="#posgrado" class="hover:text-uns transition flex items-center">
                     Posgrado
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-uns transition-all group-hover:w-full"></span>
-                </a>
-                <a href="#centros" class="hover:text-uns transition relative group">
-                    C. Producción
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-uns transition-all group-hover:w-full"></span>
-                </a>
-                <a href="#noticias" class="hover:text-uns transition relative group">
-                    Noticias
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-uns transition-all group-hover:w-full"></span>
                 </a>
             </nav>
 
-            <div class="hidden md:flex gap-4 items-center">
-                <button onclick="abrirIntranet()" class="flex items-center gap-2 border-2 border-uns text-uns hover:bg-uns hover:text-white px-5 py-2 rounded-xl font-bold transition">
+            <div class="hidden xl:block">
+                <button onclick="abrirIntranet()" class="bg-uns hover:bg-uns-light text-white px-6 py-2 rounded-sm font-bold transition flex items-center gap-2 text-sm">
                     <i class="fa-solid fa-user-graduate"></i> Intranet
                 </button>
-                <a href="#admision" class="bg-uns hover:bg-uns-light text-white px-6 py-2.5 rounded-xl font-semibold transition shadow-lg hover:shadow-[0_5px_15px_rgba(179,0,0,0.4)]">
-                    Postula 2026
-                </a>
             </div>
         </div>
     </header>
