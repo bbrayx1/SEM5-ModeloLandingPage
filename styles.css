@@ -1,9 +1,9 @@
 /* ==========================================
-   1. VARIABLES GLOBALES Y RESET
+   VARIABLES GLOBALES Y RESET
 ========================================== */
 :root {
-    --rojo-uns: #b30000; /* Rojo representativo */
-    --rojo-claro-uns: #e60000; /* Rojo más claro para acentos */
+    --rojo-uns: #b30000;
+    --rojo-claro-uns: #a82626;
     --gris-claro: #f4f4f9;
     --texto-oscuro: #333333;
     --blanco: #ffffff;
@@ -31,317 +31,125 @@ a {
 }
 
 /* ==========================================
-   2. CABECERA Y NAVEGACIÓN
+   EFECTOS EN ENLACES (Navbar)
 ========================================== */
-header#inicio {
-    /* FONDO 1: Reemplaza "tu-fondo-header.jpg" con tu imagen. 
-       El linear-gradient es un overlay rojo oscuro para que el texto resalte */
-    background: linear-gradient(rgba(102, 0, 0, 0.8), rgba(102, 0, 0, 0.8)), 
-                url('tu-fondo-header.jpg') center/cover no-repeat;
-    color: var(--blanco);
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
+.nav-link {
+    position: relative;
+    color: #374151;
+    transition: all 0.3s ease;
 }
 
-.logo-institucional {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px 5%;
+.nav-link:hover {
+    color: #b30000;
+    transform: translateY(-2px);
 }
 
-.logo-institucional img {
-    height: 60px; /* Ajusta según el tamaño de tu logo */
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -6px;
+    left: 0;
+    background-color: #b30000;
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
-.logo-institucional h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.menu-principal {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    padding: 15px 5%;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.menu-principal ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.menu-principal a {
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: var(--transicion);
-}
-
-.menu-principal a:hover {
-    color: #ffd700; /* Toque dorado/amarillo al pasar el mouse (combina bien con rojo) */
-}
-
-/* ==========================================
-   3. SECCIONES GENERALES
-========================================== */
-section {
-    padding: 80px 5%;
-}
-
-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: var(--rojo-uns);
-}
-
-/* ==========================================
-   4. NOTICIAS (Grid de tarjetas)
-========================================== */
-#noticias {
-    background-color: var(--gris-claro);
-    /* FONDO 2: Opcional. Si quieres fondo de imagen aquí, usa la misma sintaxis del header */
-}
-
-.grid-noticias {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.card-noticia {
-    background: var(--blanco);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--sombra);
-    transition: var(--transicion);
-}
-
-.card-noticia:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-}
-
-.card-noticia img {
+.nav-link:hover:after {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-noticia h3 {
-    padding: 20px 20px 10px;
-    font-size: 1.2rem;
-    color: var(--rojo-uns);
-}
-
-.card-noticia p {
-    padding: 0 20px 20px;
-    color: #666;
-    font-size: 0.95rem;
-}
-
-.card-noticia a {
-    display: inline-block;
-    margin: 0 20px 20px;
-    color: var(--rojo-claro-uns);
-    font-weight: bold;
 }
 
 /* ==========================================
-   5. LOGROS (Cifras destacadas)
+   EFECTOS FACULTADES (Tarjetas Modernas)
 ========================================== */
-#logros {
-    background-color: var(--gris-claro); /* Cambiamos el fondo a gris claro */
-    color: var(--texto-oscuro);
-    text-align: center;
-    /* Agregamos bordes sutiles para enmarcar la sección */
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-#logros h2 {
-    color: var(--rojo-uns);
-    margin-bottom: 10px;
-    font-weight: 700;
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
-hr.style-three {
-    border: 0;
-    height: 3px; /* Un poco más grueso para que resalte más */
-    background: var(--rojo-claro-uns);
-    width: 80px;
-    margin: 0 auto 40px auto;
-}
-
-.grid-logros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-}
-
-.item-logro {
-    background-color: var(--rojo-uns); /* Las cajitas de cada logro serán blancas */
-    padding: 25px 15px;
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: var(--sombra); /* Sombreado para que parezcan tarjetas */
-    transition: var(--transicion);
-}
-
-.item-logro:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15); /* Sombra más fuerte al pasar el mouse */
-}
-
-.link-plomo {
-    display: block;
-    color: #555555;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: var(--transicion);
-}
-
-.link-plomo:hover {
-    color: var(--rojo-claro-uns);
-}
-
-.link-plomo img {
-    max-width: 60px;
-    height: auto;
-    margin-bottom: 15px;
-    transition: var(--transicion);
-}
-
-.link-plomo:hover img {
-    transform: scale(1.1);
+/* Sombra extra para los títulos dentro de la imagen del Banner */
+.text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 /* ==========================================
-   6. CENTROS DE PRODUCCIÓN
+   IMAGEN DE PORTADA (Hero Section Fixed)
 ========================================== */
-#centros-produccion {
-    background-color: var(--blanco);
+.hero-bg {
+    background-image: linear-gradient(rgba(127, 17, 17, 0.577), rgb(10, 10, 10)), 
+                      url('https://media.licdn.com/dms/image/v2/C4D1BAQFK1JBaUGnjxA/company-background_10000/company-background_10000/0/1613748941108/universidad_nacional_del_santa_cover?e=2147483647&v=beta&t=-U1F3jK23SkW4DyCTHgNfnY1LJsIieM45hDebmGGIV4');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-.grid-centros {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+/* Animación de Zoom Lento para las imágenes del Slider */
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
 }
 
-.card-centro {
-    background-color: var(--rojo-uns);
-    color: var(--blanco);
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: var(--sombra);
-    border-bottom: 5px solid var(--rojo-claro-uns);
+.animate-slow-zoom {
+    animation: slowZoom 20s linear infinite alternate;
 }
 
-.card-centro h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+/* Control de visibilidad del Slider */
+.slide.opacity-100 {
+    z-index: 10;
+}
+.slide.opacity-0 {
+    z-index: 0;
+}
+
+/* Para suavizar el cambio de color en los puntos */
+.slider-dot.active {
+    width: 2rem;
+    background-color: #b30000; /* Color UNS */
 }
 
 /* ==========================================
-   7. FOOTER / PIE DE PÁGINA
+   ANIMACIÓN DE ICONOS (LOGROS)
 ========================================== */
-footer#contacto {
-    /* FONDO 4: Color granate/rojo muy oscuro para el footer */
-    background-color: #2b0505; 
-    color: #cccccc;
-    padding: 50px 5% 20px;
+@keyframes floatIcon {
+    0% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-10px); /* Qué tanto sube el icono */
+    }
+    100% { 
+        transform: translateY(0px); 
+    }
 }
 
-.footer-contenedor {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-institucional .logos-estado {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.footer-institucional img {
-    height: 50px;
-    background: var(--blanco); /* Fondo blanco por si los logos tienen transparencias oscuras */
-    padding: 5px;
-    border-radius: 4px;
-}
-
-.enlaces-ayuda a {
-    color: var(--rojo-claro-uns);
-    text-decoration: underline;
-}
-
-.footer-contacto h3, .footer-redes h3 {
-    color: var(--blanco);
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.footer-contacto ul {
-    list-style: none;
-}
-
-.footer-contacto li {
-    margin-bottom: 10px;
-}
-
-.iconos-redes {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.iconos-redes a {
-    transition: var(--transicion);
-}
-
-.iconos-redes a:hover {
-    color: var(--blanco);
-    padding-left: 5px; /* Pequeño efecto al hacer hover */
-}
-
-.footer-legal {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 0.9rem;
+.animate-float-icon {
+    /* ease-in-out hace que frene suavemente al llegar arriba y abajo */
+    animation: floatIcon 3s ease-in-out infinite; 
 }
 
 /* ==========================================
-   8. MEDIA QUERIES (Responsividad para móviles)
+   ANIMACIÓN DE ILUMINACIÓN PARA PUNKURI
 ========================================== */
-@media (max-width: 768px) {
-    .logo-institucional {
-        flex-direction: column;
-        text-align: center;
+@keyframes glowPunkuri {
+    0% { 
+        opacity: 0.15; 
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); 
     }
-    
-    .menu-principal ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+    50% { 
+        opacity: 0.45; /* Sube la visibilidad */
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.4)); /* Brillo de luz blanco */
     }
-    
-    section h2 {
-        font-size: 2rem;
+    100% { 
+        opacity: 0.15; 
+        filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0)); 
     }
-    
-    .cifra-destacada {
-        font-size: 2.5rem;
-    }
+}
+
+.animate-glow-punkuri {
+    animation: glowPunkuri 6s ease-in-out infinite; /* Ciclo lento de 6 segundos */
 }
