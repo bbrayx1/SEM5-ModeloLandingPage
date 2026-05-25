@@ -53,6 +53,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAdmision = document.getElementById('btn-admision');
     const menuAdmision = document.getElementById('menu-admision');
 
+    /* ==========================================================================
+       MENÚ DESPLEGABLE DE DIRECCIONES (Escritorio)
+       ========================================================================== */
+    const btnDirecciones = document.getElementById('btn-direcciones');
+    const menuDirecciones = document.getElementById('menu-direcciones');
+
+    if (btnDirecciones && menuDirecciones) {
+        btnDirecciones.addEventListener('click', function(e) {
+            e.stopPropagation(); 
+            menuDirecciones.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!menuDirecciones.contains(e.target) && e.target !== btnDirecciones) {
+                menuDirecciones.classList.add('hidden');
+            }
+        });
+    }
+
     if (btnAdmision && menuAdmision) {
         btnAdmision.addEventListener('click', function(e) {
             e.stopPropagation(); 
