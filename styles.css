@@ -153,3 +153,22 @@ a {
 .animate-glow-punkuri {
     animation: glowPunkuri 6s ease-in-out infinite; /* Ciclo lento de 6 segundos */
 }
+
+/* ==========================================
+   SCROLLBARS PERSONALIZADOS (BIZAGI)
+========================================== */
+.custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b30000; /* Color UNS al pasar el mouse */
+}

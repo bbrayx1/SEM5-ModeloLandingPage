@@ -327,4 +327,67 @@ document.addEventListener('DOMContentLoaded', () => {
             cerrarInscripcion();
         });
     }
+    /* ==========================================================================
+       MODAL BIZAGI: DRAG-TO-SCROLL HORIZONTAL
+       ========================================================================== */
+    const modalBizagi = document.getElementById('ventana-bizagi');
+    const contenidoBizagi = document.getElementById('contenido-bizagi');
+    const btnAbrirBizagi = document.getElementById('btn-proceso-bizagi');
+    const btnCerrarBizagi = document.getElementById('btn-cerrar-bizagi');
+    const scrollContainer = document.getElementById('contenedor-scroll-bizagi');
+
+    const abrirBizagi = (e) => {
+        if(e) e.preventDefault();
+        if (modalBizagi && contenidoBizagi) {
+            modalBizagi.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoBizagi.classList.remove('scale-95');
+            contenidoBizagi.classList.add('scale-100');
+        }
+    };
+
+    const cerrarBizagi = () => {
+        if (modalBizagi && contenidoBizagi) {
+            modalBizagi.classList.add('opacity-0', 'pointer-events-none');
+            contenidoBizagi.classList.remove('scale-100');
+            contenidoBizagi.classList.add('scale-95');
+        }
+    };
+
+    if (btnAbrirBizagi) btnAbrirBizagi.addEventListener('click', abrirBizagi);
+    if (btnCerrarBizagi) btnCerrarBizagi.addEventListener('click', cerrarBizagi);
+
+    if (modalBizagi) {
+        modalBizagi.addEventListener('click', function(e) {
+            if (e.target === modalBizagi) cerrarBizagi();
+        });
+    }
+
+    // Lógica para arrastrar el diagrama con el mouse
+    if (scrollContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.classList.add('active');
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        scrollContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            scrollContainer.classList.remove('active');
+        });
+        scrollContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.classList.remove('active');
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.5; // Multiplicador de velocidad
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+    }
 });

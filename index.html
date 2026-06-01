@@ -62,10 +62,10 @@
                                 <div class="px-4 py-2 mt-1 bg-gray-50 border-t border-gray-100">
                                     <span class="text-xs font-bold text-gray-900 uppercase tracking-wider">Proceso de Admisión</span>
                                 </div>
-                                
-                                <a href="#" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
-                                    Proceso de Inscripción
-                                </a>
+                               
+                                <button id="btn-proceso-bizagi" class="w-full text-left block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50 focus:outline-none">
+                                    Proceso de Inscripción (Bizagi)
+                                </button>
                                 <a href="#" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
                                     Derecho de Inscripción
                                 </a>
@@ -866,6 +866,100 @@
                 </button>
             </form>
         </div>
+    </div>
+
+    <div id="ventana-bizagi" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[150] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+            <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-bizagi">
+                
+                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-xl shadow-inner">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-extrabold text-gray-800 tracking-tight">Proceso de Admisión UNS</h3>
+                            <p class="text-sm text-gray-500 font-medium">Mapeo del flujo y características institucionales</p>
+                        </div>
+                    </div>
+                    <button id="btn-cerrar-bizagi" class="text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm border border-gray-100">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6 overflow-y-auto flex-1 custom-scrollbar">
+                    
+                    <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-sitemap text-uns"></i> Flujo del Proceso (BPMN)
+                    </h4>
+                    <div class="bg-gray-100 rounded-2xl p-2 mb-10 border border-gray-200 shadow-inner">
+                        <div class="w-full overflow-x-auto pb-4 custom-scrollbar cursor-grab active:cursor-grabbing" id="contenedor-scroll-bizagi">
+                            
+                            <img src="images/tu_diagrama_bizagi.png" alt="Proceso Bizagi" class="max-w-none h-auto min-w-[2000px] object-contain rounded-xl border border-gray-300 bg-white pointer-events-none select-none">
+                            
+                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-2 font-semibold tracking-wide">
+                            <i class="fa-solid fa-arrows-left-right text-uns mr-1"></i> Desliza horizontalmente o arrastra con el ratón para explorar el mapa
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Modalidades de Ingreso</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3 bg-red-50/50 p-4 rounded-xl border border-red-100/50 hover:shadow-md transition-shadow">
+                                    <i class="fa-solid fa-check-circle text-uns mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Modalidad I: CEPUNS</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">Ingreso directo mediante 3 exámenes sumativos durante el ciclo de preparación.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 bg-red-50/50 p-4 rounded-xl border border-red-100/50 hover:shadow-md transition-shadow">
+                                    <i class="fa-solid fa-check-circle text-uns mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Modalidades II al IV</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">Incluye traslados, titulados, deportistas destacados, primeros puestos e ingreso preferente.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 bg-red-50/50 p-4 rounded-xl border border-red-100/50 hover:shadow-md transition-shadow">
+                                    <i class="fa-solid fa-check-circle text-uns mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Modalidad V: Examen Ordinario</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">Evaluación general de Aptitud Verbal, Matemática y Conocimientos específicos.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Requisitos e Información</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-uns/30 transition-colors">
+                                    <i class="fa-solid fa-building-columns text-gray-400 mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Pago de Derechos</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">El pago se realiza únicamente en agencias físicas del Banco de la Nación a nivel nacional (no aplica en agentes).</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-uns/30 transition-colors">
+                                    <i class="fa-solid fa-brain text-gray-400 mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Perfil del Postulante</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">Demostrar alta capacidad de análisis, razonamiento matemático, trabajo en equipo y tolerancia a la frustración.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-uns/30 transition-colors">
+                                    <i class="fa-solid fa-id-card-clip text-gray-400 mt-0.5"></i>
+                                    <div>
+                                        <span class="font-bold text-gray-800 text-sm block">Acreditación Oficial</span>
+                                        <span class="text-xs text-gray-600 leading-relaxed">Fase obligatoria para todo postulante que alcanza vacante, requisito para la entrega de constancia de ingreso.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
     </div>
 </body>
 </html>
