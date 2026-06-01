@@ -140,7 +140,7 @@
 
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-6">
             <div class="px-6 flex flex-col gap-6 text-lg font-medium text-gray-700">
-                <a href="#admision" class="hover:text-uns">Admisión</a>
+                <a href="#inicio" class="hover:text-uns">Admisión</a>
                 <a href="#facultades" class="hover:text-uns">Facultades</a>
                 <a href="#posgrado" class="hover:text-uns">Posgrado</a>
                 <a href="#centros" class="hover:text-uns">Centros Universitarios</a>
@@ -166,8 +166,8 @@
                         <h2 class="mb-6 text-5xl font-extrabold leading-tight md:text-7xl">Liderazgo que <br><span class="text-uns-light">Transforma el Futuro</span></h2>
                         <p class="mb-8 text-lg text-gray-200 md:text-xl">Inicia tu camino profesional en la universidad licenciada más importante de la región.</p>
                         <div class="flex flex-wrap gap-4">
-                            <a href="#" class="px-8 py-4 font-bold transition duration-300 bg-uns rounded-xl hover:bg-uns-dark hover:scale-105 shadow-2xl">Inscríbete Ahora</a>
-                            <a href="#" class="px-8 py-4 font-bold transition duration-300 border-2 border-white/50 backdrop-blur-md rounded-xl hover:bg-white hover:text-black">Explorar Carreras</a>
+                            <button id="btn-inscripcion" class="px-8 py-4 font-bold transition duration-300 bg-uns rounded-xl hover:bg-uns-dark hover:scale-105 shadow-2xl text-white">Inscríbete Ahora</button>
+                            <a href="#facultades" class="px-8 py-4 font-bold transition duration-300 border-2 border-white/50 backdrop-blur-md rounded-xl hover:bg-white hover:text-black">Explorar Carreras</a>
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                     <div class="max-w-3xl text-white">
                         <h2 class="mb-6 text-5xl font-extrabold md:text-6xl">Excelencia en <br>Investigación Científica</h2>
                         <p class="mb-8 text-lg text-gray-200 md:text-xl">Contamos con laboratorios de última generación y docentes investigadores RENACYT.</p>
-                        <a href="#" class="inline-block px-10 py-4 font-bold transition bg-white text-uns rounded-xl hover:bg-uns hover:text-white">Ver Proyectos</a>
+                        <a href="#logros" class="inline-block px-10 py-4 font-bold transition bg-white text-uns rounded-xl hover:bg-uns hover:text-white">Ver Proyectos</a>
                     </div>
                 </div>
             </div>
@@ -595,7 +595,7 @@
                             </a>
                         </div>
 
-                        <a href="#" class="w-full bg-uns hover:bg-uns-dark text-white text-center font-extrabold py-5 rounded-2xl shadow-[0_10px_20px_rgba(179,0,0,0.2)] hover:shadow-[0_15px_30px_rgba(179,0,0,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group tracking-widest uppercase text-sm md:text-base">
+                        <a href="mailto:informes@uns.edu.pe" class="w-full bg-uns hover:bg-uns-dark text-white text-center font-extrabold py-5 rounded-2xl shadow-[0_10px_20px_rgba(179,0,0,0.2)] hover:shadow-[0_15px_30px_rgba(179,0,0,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group tracking-widest uppercase text-sm md:text-base">
                             <i class="fa-solid fa-paper-plane text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                             Informes e Inscripciones
                         </a>
@@ -666,7 +666,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-end mb-12">
                 <h2 class="text-4xl font-bold text-gray-800">Últimas Noticias</h2>
-                <a href="#" class="text-uns font-bold hover:underline hidden sm:block">Ver todas las noticias &rarr;</a>
+                <a href="https://www.uns.edu.pe/noticias" target="_blank" class="text-uns font-bold hover:underline hidden sm:block">Ver todas las noticias &rarr;</a>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
@@ -707,7 +707,7 @@
                 </article>
             </div>
             <div class="mt-8 text-center sm:hidden">
-                <a href="#" class="text-uns font-bold hover:underline">Ver todas las noticias &rarr;</a>
+                <a href="https://www.uns.edu.pe/noticias" target="_blank" class="text-uns font-bold hover:underline">Ver todas las noticias &rarr;</a>
             </div>
         </div>
     </section>
@@ -804,6 +804,68 @@
             </div>
         </div>
     </div>
+    <!-- Modal de Inscripción -->
+    <div id="ventana-inscripcion" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto">
+        <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full max-w-lg relative transform scale-95 transition-transform duration-300 my-8" id="contenido-inscripcion">
+            <button id="btn-cerrar-inscripcion" class="absolute top-5 right-5 text-gray-400 hover:text-uns bg-gray-100 hover:bg-red-50 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-uns text-2xl">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-gray-800">Inscripción Admisión</h3>
+                <p class="text-sm text-gray-500 mt-2">Completa tus datos para postular a la universidad.</p>
+            </div>
+            
+            <form id="form-inscripcion" class="space-y-4 text-left">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nombres</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Apellidos</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors" required>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">DNI</label>
+                        <input type="text" maxlength="8" pattern="[0-9]{8}" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors" placeholder="8 dígitos" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Celular</label>
+                        <input type="tel" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors" required>
+                    </div>
+                </div>
 
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Correo Electrónico</label>
+                    <input type="email" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Carrera a Postular</label>
+                    <select class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:border-uns focus:ring-1 focus:ring-uns transition-colors bg-white cursor-pointer" required>
+                        <option value="" disabled selected>Seleccione una carrera...</option>
+                        <option value="sistemas">Ingeniería de Sistemas e Informática</option>
+                        <option value="energia">Ingeniería en Energía</option>
+                        <option value="civil">Ingeniería Civil</option>
+                        <option value="medicina">Medicina Humana</option>
+                        <option value="enfermeria">Enfermería</option>
+                        <option value="derecho">Derecho y Ciencias Políticas</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-uns hover:bg-uns-dark text-white font-bold py-3.5 rounded-xl transition-colors mt-6 shadow-md flex items-center justify-center gap-2 group">
+                    <span>Enviar Inscripción</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

@@ -251,4 +251,80 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    /* ==========================================================================
+       9. INTERCEPTOR DE ENLACES TEMPORALES (TOAST UX)
+       ========================================================================== */
+    const enlacesTemporales = document.querySelectorAll('a[href="#"]');
+    
+    enlacesTemporales.forEach(enlace => {
+        enlace.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita que la página salte hacia arriba
+            
+            // Crear el elemento Toast con clases de Tailwind
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-gray-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-[200] font-medium border-l-4 border-uns';
+            toast.innerHTML = '<i class="fa-solid fa-person-digging text-uns-light text-xl"></i> Sección en construcción';
+            
+            document.body.appendChild(toast);
+            
+            // Trigger para la animación de entrada
+            setTimeout(() => {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+            }, 10);
+            
+            // Animación de salida y destrucción del elemento en el DOM
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        });
+    });
+    /* ==========================================================================
+       10. LÓGICA DEL MODAL DE INSCRIPCIÓN (Formulario)
+       ========================================================================== */
+    const modalInscripcion = document.getElementById('ventana-inscripcion');
+    const contenidoInscripcion = document.getElementById('contenido-inscripcion');
+    const btnInscripcion = document.getElementById('btn-inscripcion');
+    const btnCerrarInscripcion = document.getElementById('btn-cerrar-inscripcion');
+    const formInscripcion = document.getElementById('form-inscripcion');
+
+    const abrirInscripcion = (e) => {
+        if(e) e.preventDefault();
+        if (modalInscripcion && contenidoInscripcion) {
+            modalInscripcion.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoInscripcion.classList.remove('scale-95');
+            contenidoInscripcion.classList.add('scale-100');
+        }
+    };
+
+    const cerrarInscripcion = () => {
+        if (modalInscripcion && contenidoInscripcion) {
+            modalInscripcion.classList.add('opacity-0', 'pointer-events-none');
+            contenidoInscripcion.classList.remove('scale-100');
+            contenidoInscripcion.classList.add('scale-95');
+        }
+    };
+
+    if (btnInscripcion) btnInscripcion.addEventListener('click', abrirInscripcion);
+    if (btnCerrarInscripcion) btnCerrarInscripcion.addEventListener('click', cerrarInscripcion);
+
+    // Cerrar al hacer clic fuera del modal
+    if (modalInscripcion) {
+        modalInscripcion.addEventListener('click', function(e) {
+            if (e.target === modalInscripcion) {
+                cerrarInscripcion();
+            }
+        });
+    }
+
+    // Prevenir el recargo de página al enviar el formulario (Simulación)
+    if (formInscripcion) {
+        formInscripcion.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Aquí en un futuro puedes conectar tu API o backend
+            alert('¡Inscripción enviada correctamente!');
+            formInscripcion.reset();
+            cerrarInscripcion();
+        });
+    }
 });
