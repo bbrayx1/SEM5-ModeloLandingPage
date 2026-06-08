@@ -390,4 +390,30 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollContainer.scrollLeft = scrollLeft - walk;
         });
     }
+
+    /* ==========================================================================
+       11. TRANSICIONES SUAVES ENTRE PÁGINAS (.HTML)
+       ========================================================================== */
+    // Buscar todos los enlaces que sean internos (que no abran en otra pestaña y no sean anclas #)
+    const enlacesInternos = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
+
+    enlacesInternos.forEach(enlace => {
+        enlace.addEventListener('click', function(e) {
+            const urlDestino = this.getAttribute('href');
+
+            // Ignorar enlaces sin destino real
+            if (!urlDestino || urlDestino.startsWith('javascript:')) return;
+
+            e.preventDefault(); // Detener el salto inmediato
+
+            // Agregar la clase de salida (Fade out)
+            document.body.classList.remove('page-transition');
+            document.body.classList.add('page-transition-out');
+
+            // Esperar 400ms (lo que dura la animación CSS) para cambiar de página
+            setTimeout(() => {
+                window.location.href = urlDestino;
+            }, 400);
+        });
+    });
 });

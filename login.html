@@ -24,7 +24,7 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden page-transition">
 
     <!-- Efectos de fondo difuminados geométricos -->
     <div class="absolute w-[500px] h-[500px] bg-uns/20 rounded-full blur-[120px] -top-40 -left-40 pointer-events-none animate-pulse"></div>
@@ -203,12 +203,22 @@
 
         // Función para los botones del ERP / CRM
         function accederSistema(sistema) {
-    if (sistema === 'ERP') {
-        window.location.href = 'erp.html';
-    } else if (sistema === 'CRM') {
-        window.location.href = 'crm.html';
-    }
-}
+            // Cierra el modal suavemente
+            cerrarModal();
+            
+            // Aplica la animación de salida a toda la página
+            document.body.classList.remove('page-transition');
+            document.body.classList.add('page-transition-out');
+
+            // Lógica de ruteo funcional
+            setTimeout(() => {
+                if (sistema === 'CRM') {
+                    window.location.href = 'crm.html'; // Redirige al CRM
+                } else if (sistema === 'ERP') {
+                    window.location.href = 'crm.html'; // Por ahora lo mandamos al CRM también, cámbialo a erp.html si lo creas
+                }
+            }, 400); // 400ms es el tiempo que toma el fadeOutPage
+        }
 
         // Función para el botón de cancelar / cerrar sesión
         function cerrarSesion() {
