@@ -3,371 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema CRM Universitario | UNS</title>
+    <title>CRM UNS | Universidad Nacional del Santa</title>
     <link rel="icon" type="image/png" href="images/logo_rojo_UNS.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        uns: {
-                            DEFAULT: '#b30000',
-                            dark: '#8a0000',
-                            light: '#e60000'
-                        }
+                        uns: { DEFAULT: '#b30000', dark: '#8a0000', light: '#e60000' }
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-slate-50 flex min-h-screen font-sans">
+<body class="bg-gray-100 font-sans">
 
-    <!-- Menú Lateral -->
-    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-4 border-r border-slate-800">
-        <div>
-            <div class="flex items-center gap-3 px-2 py-4 border-b border-slate-800 mb-6">
-                <div class="bg-white p-1 rounded-lg">
-                    <div class="w-7 h-7 bg-uns rounded flex items-center justify-center text-white text-xs font-black">U</div>
+    <!-- Header -->
+    <header class="bg-uns text-white shadow-md">
+        <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-11 h-11 bg-white rounded-full flex items-center justify-center overflow-hidden border-2 border-white">
+                    <img src="images/logo_rojo_UNS.png" alt="Logo UNS" class="h-9 w-9 object-contain">
                 </div>
-                <div>
-                    <h1 class="font-black text-sm tracking-tight text-white">CRM UNS</h1>
-                    <h2 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Gestión Relacional</h2>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-2xl tracking-tight">CRM UNS</span>
+                    <span class="text-white/70 text-lg">|</span>
+                    <span class="font-medium text-lg">Universidad Nacional del Santa</span>
                 </div>
             </div>
-            
-            <nav class="space-y-1">
-                <button data-target="panel-atencion" class="tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20">
-                    <i class="fa-solid fa-headset text-lg"></i>
-                    <span class="text-sm">Atención al Estudiante</span>
-                </button>
-                <button data-target="panel-admisiones" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-users-viewfinder text-lg"></i>
-                    <span class="text-sm">Admisión y Seguimiento</span>
-                </button>
-                <button data-target="panel-comunicacion" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-comments text-lg"></i>
-                    <span class="text-sm">Comunicación Personalizada</span>
-                </button>
-            </nav>
-        </div>
-        
-        <div class="p-2 bg-slate-950/40 rounded-xl border border-slate-800/80 text-[11px] text-slate-500 font-mono text-center">
-            UNS - CRM Estudiantil
-        </div>
-    </aside>
-
-    <!-- Contenido Principal -->
-    <main class="flex-1 p-6 md:p-8 overflow-y-auto">
-        <header class="flex justify-between items-center mb-8 bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-100">
-            <div>
-                <h2 id="header-title" class="text-xl font-black text-gray-900 tracking-tight">Atención al Estudiante</h2>
-                <p id="header-desc" class="text-xs text-gray-500 mt-0.5">Resolución de consultas, reclamos, trámites y problemas académicos</p>
-            </div>
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-3 border-r pr-6 border-slate-200">
-                    <div class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold text-xs">A</div>
-                    <span class="text-xs font-bold text-gray-700">Asesor Universitario</span>
+            <div class="flex items-center gap-4 text-sm">
+                <div class="bg-white/10 px-4 py-2 rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span class="font-medium">Personal Administrativo</span>
                 </div>
-                <a href="login.html" class="text-xs font-bold text-uns hover:text-uns-dark transition flex items-center gap-1.5 uppercase tracking-wider">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span>Salir</span>
+                <a href="login.html" class="flex items-center gap-2 hover:bg-white/10 px-4 py-2 rounded-full transition">
+                    <i class="fa-solid fa-sign-out-alt"></i> <span>Salir</span>
                 </a>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Módulo 1: Atención al Estudiante -->
-        <div id="panel-atencion" class="content-section space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-amber-500 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tickets Pendientes</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-amber-500 transition-colors">24</h4>
+    <div class="max-w-screen-2xl mx-auto flex">
+        
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r min-h-[calc(100vh-65px)] p-5">
+            <nav class="mt-4 space-y-1">
+                <button onclick="showSection('dashboard')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-semibold hover:bg-gray-100 bg-gray-100">
+                    <i class="fa-solid fa-chart-line w-5"></i> <span>Dashboard</span>
+                </button>
+                <button onclick="showSection('postulantes')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-semibold hover:bg-gray-100">
+                    <i class="fa-solid fa-user-graduate w-5"></i> <span>Postulantes</span>
+                </button>
+                <button onclick="showSection('tickets')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-semibold hover:bg-gray-100">
+                    <i class="fa-solid fa-headset w-5"></i> <span>Tickets de Atención</span>
+                </button>
+                <button onclick="showSection('comunicaciones')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-semibold hover:bg-gray-100">
+                    <i class="fa-solid fa-envelope w-5"></i> <span>Comunicaciones</span>
+                </button>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-8">
+
+            <!-- ==================== DASHBOARD MEJORADO ==================== -->
+            <div id="dashboard" class="section">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold">Dashboard</h1>
+                    <p class="text-gray-500">Resumen del sistema de gestión de postulantes y atención - UNS</p>
+                </div>
+
+                <!-- Tarjetas de métricas -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Postulantes Registrados</p>
+                                <p class="text-4xl font-bold text-uns mt-2" id="total-postulantes">0</p>
+                            </div>
+                            <div class="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center">
+                                <i class="fa-solid fa-user-graduate text-uns text-2xl"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-500 text-lg shadow-inner">
-                        <i class="fa-solid fa-ticket"></i>
+
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Tickets Abiertos</p>
+                                <p class="text-4xl font-bold text-amber-500 mt-2">34</p>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
+                                <i class="fa-solid fa-ticket text-amber-500 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Tasa de Seguimiento</p>
+                                <p class="text-4xl font-bold text-green-600 mt-2">68%</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
+                                <i class="fa-solid fa-chart-line text-green-600 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Comunicaciones Enviadas</p>
+                                <p class="text-4xl font-bold text-blue-600 mt-2">1,245</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
+                                <i class="fa-solid fa-envelope text-blue-600 text-2xl"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-blue-500 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tiempo Medio de Respuesta</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-blue-500 transition-colors">1.5 hrs</h4>
+
+                <!-- Gráficos -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Gráfico de Barras -->
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <h3 class="font-bold text-lg mb-4">Postulantes por Mes (2026)</h3>
+                        <canvas id="chartPostulantes" height="120"></canvas>
                     </div>
-                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500 text-lg shadow-inner">
-                        <i class="fa-regular fa-clock"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-green-500 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Casos Resueltos (Hoy)</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-green-500 transition-colors">142</h4>
-                    </div>
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-500 text-lg shadow-inner">
-                        <i class="fa-solid fa-check-double"></i>
+
+                    <!-- Gráfico Circular -->
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm">
+                        <h3 class="font-bold text-lg mb-4">Distribución por Carrera</h3>
+                        <canvas id="chartCarreras" height="120"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabla de Tickets de Atención -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-                    <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Bandeja de Entrada de Solicitudes</h3>
+            <!-- POSTULANTES -->
+            <div id="postulantes" class="section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold">Gestión de Postulantes</h2>
+                        <p class="text-gray-500">Registro y seguimiento de interesados en admisión 2026</p>
+                    </div>
+                    <button onclick="abrirModal()" class="bg-uns hover:bg-uns-dark text-white px-5 py-2.5 rounded-xl font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> <span>Nuevo Postulante</span>
+                    </button>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
+
+                <div class="bg-white rounded-2xl border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-4">ID Ticket</th>
-                                <th class="px-6 py-4">Estudiante / Usuario</th>
-                                <th class="px-6 py-4">Motivo de Consulta</th>
-                                <th class="px-6 py-4">Prioridad</th>
-                                <th class="px-6 py-4 text-center">Estado</th>
+                                <th class="px-6 py-4 text-left font-semibold">Nombre</th>
+                                <th class="px-6 py-4 text-left font-semibold">DNI</th>
+                                <th class="px-6 py-4 text-left font-semibold">Carrera</th>
+                                <th class="px-6 py-4 text-left font-semibold">Estado</th>
+                                <th class="px-6 py-4 text-center font-semibold">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900">#TK-1042</td>
-                                <td class="px-6 py-4">
-                                    <span class="block text-slate-900 font-bold">Martín Perez</span>
-                                    <span class="text-[10px] text-slate-400">0202114022 - Ing. Sistemas</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-500">Cruce de horarios en matrícula regular</td>
-                                <td class="px-6 py-4"><span class="text-red-500 font-bold"><i class="fa-solid fa-circle-exclamation"></i> Alta</span></td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded border border-amber-200 bg-amber-50 text-amber-700 text-[10px] font-bold">Pendiente</span></td>
+                        <tbody id="tabla-postulantes" class="divide-y text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TICKETS -->
+            <div id="tickets" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">Tickets de Atención Estudiantil</h2>
+                <div class="bg-white rounded-2xl border overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left">ID</th>
+                                <th class="px-6 py-4 text-left">Estudiante</th>
+                                <th class="px-6 py-4 text-left">Motivo</th>
+                                <th class="px-6 py-4 text-left">Estado</th>
+                                <th class="px-6 py-4 text-center">Acción</th>
                             </tr>
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900">#TK-1041</td>
-                                <td class="px-6 py-4">
-                                    <span class="block text-slate-900 font-bold">Lucía Gómez</span>
-                                    <span class="text-[10px] text-slate-400">Postulante CEPUNS</span>
-                                </td>
-                                <td class="px-6 py-4 text-slate-500">Problemas con el pago en Banco de la Nación</td>
-                                <td class="px-6 py-4"><span class="text-amber-500 font-bold">Media</span></td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded border border-green-200 bg-green-50 text-green-700 text-[10px] font-bold">Resuelto</span></td>
-                            </tr>
+                        </thead>
+                        <tbody class="divide-y text-sm">
+                            <tr><td class="px-6 py-4 font-bold">#TK-2048</td><td class="px-6 py-4">María López - Ing. Sistemas</td><td class="px-6 py-4">Problema con matrícula</td><td class="px-6 py-4"><span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">Pendiente</span></td><td class="px-6 py-4 text-center"><button class="text-uns font-semibold">Ver</button></td></tr>
+                            <tr><td class="px-6 py-4 font-bold">#TK-2047</td><td class="px-6 py-4">Carlos Ruiz - Medicina</td><td class="px-6 py-4">Solicitud de constancia</td><td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Resuelto</span></td><td class="px-6 py-4 text-center"><button class="text-uns font-semibold">Ver</button></td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
 
-        <!-- Módulo 2: Admisión y Seguimiento -->
-        <div id="panel-admisiones" class="content-section hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Formulario Registro Postulante -->
-                <div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
-                    <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider mb-6 border-l-4 border-uns pl-3">Registrar Interesado</h3>
-                    <form id="prospecto-form" class="space-y-4">
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Nombres Completos</label>
-                            <input type="text" placeholder="Ej. Ana María López" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Celular</label>
-                                <input type="tel" placeholder="999 888 777" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Carrera de Interés</label>
-                                <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer">
-                                    <option value="sistemas">Ing. Sistemas</option>
-                                    <option value="medicina">Medicina</option>
-                                    <option value="derecho">Derecho</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Fase de Acompañamiento</label>
-                            <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
-                                <option value="informacion">1. Solicitó Información</option>
-                                <option value="proceso">2. En proceso de inscripción</option>
-                                <option value="matriculado">3. Listo para examen / Matriculado</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-md mt-4">
-                            Agregar a Seguimiento
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Tabla Seguimiento -->
-                <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Embudo de Postulantes Activos</h3>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                                <tr>
-                                    <th class="px-6 py-4">Postulante</th>
-                                    <th class="px-6 py-4">Modalidad</th>
-                                    <th class="px-6 py-4">Estado de Seguimiento</th>
-                                    <th class="px-6 py-4 text-center">Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                                <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4">
-                                        <span class="font-bold text-slate-900 block">Javier Soto Ríos</span>
-                                        <span class="text-[10px] text-slate-400">Interés: Medicina Humana</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-slate-500">Examen Ordinario</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-0.5 rounded border border-gray-200 bg-gray-100 text-gray-600 text-[10px] font-bold">1. Solicitó Información</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <button class="text-uns hover:text-uns-dark transition bg-red-50 p-2 rounded-lg" title="Registrar Llamada"><i class="fa-solid fa-phone"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4">
-                                        <span class="font-bold text-slate-900 block">Brenda Castro M.</span>
-                                        <span class="text-[10px] text-slate-400">Interés: Ing. Civil</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-slate-500">CEPUNS</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-0.5 rounded border border-amber-200 bg-amber-50 text-amber-700 text-[10px] font-bold">2. Faltan documentos</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <button class="text-uns hover:text-uns-dark transition bg-red-50 p-2 rounded-lg" title="Enviar Recordatorio"><i class="fa-brands fa-whatsapp"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4">
-                                        <span class="font-bold text-slate-900 block">Carlos Mendoza</span>
-                                        <span class="text-[10px] text-slate-400">Interés: Educación</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-slate-500">Primeros Puestos</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-0.5 rounded border border-green-200 bg-green-50 text-green-700 text-[10px] font-bold">3. Inscripción Completa</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <button class="text-uns hover:text-uns-dark transition bg-red-50 p-2 rounded-lg" title="Ver Expediente"><i class="fa-solid fa-folder-open"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Módulo 3: Comunicación Personalizada -->
-        <div id="panel-comunicacion" class="content-section hidden space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-green-500 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">WhatsApp Enviados</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-green-500 transition-colors">1,450</h4>
-                    </div>
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-lg shadow-inner">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Correos Institucionales</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">5,200</h4>
-                    </div>
-                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-purple-500 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Campañas Activas</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-purple-500 transition-colors">3</h4>
-                    </div>
-                    <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-500 text-lg shadow-inner">
-                        <i class="fa-solid fa-bullhorn"></i>
-                    </div>
+            <!-- COMUNICACIONES -->
+            <div id="comunicaciones" class="section hidden">
+                <h2 class="text-2xl font-bold mb-2">Historial de Comunicaciones</h2>
+                <p class="text-gray-500 mb-6">Registro de mensajes y notificaciones enviadas (uso interno)</p>
+                <div class="bg-white rounded-2xl border p-6 space-y-5 text-sm">
+                    <div class="flex gap-4 border-b pb-4"><i class="fa-solid fa-envelope text-xl text-uns mt-1"></i><div><div class="font-semibold">Correo masivo - Inicio de matrícula 2026-I</div><div class="text-gray-600">Enviado a 2,340 estudiantes activos • 08 Jun 2026</div></div></div>
+                    <div class="flex gap-4 border-b pb-4"><i class="fa-solid fa-bell text-xl text-blue-600 mt-1"></i><div><div class="font-semibold">Notificación Intranet - Recordatorio de pago</div><div class="text-gray-600">Enviado a 142 postulantes CEPUNS • 07 Jun 2026</div></div></div>
                 </div>
             </div>
 
-            <!-- Tabla de envíos -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                <div class="p-5 border-b border-slate-100 bg-slate-50/50">
-                    <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Historial de Comunicaciones por Perfil</h3>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" onclick="if (event.target.id === 'modal') cerrarModal()" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[100]">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-2xl w-full max-w-md p-8">
+            <h3 class="text-xl font-bold mb-6">Registrar Nuevo Postulante</h3>
+            <form id="form-postulante" class="space-y-4">
+                <div><label class="block text-sm font-semibold mb-1">Nombres completos</label><input type="text" id="nombre" class="w-full border rounded-xl px-4 py-2.5" required></div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-sm font-semibold mb-1">DNI</label><input type="text" id="dni" maxlength="8" class="w-full border rounded-xl px-4 py-2.5" required></div>
+                    <div><label class="block text-sm font-semibold mb-1">Celular</label><input type="tel" id="celular" class="w-full border rounded-xl px-4 py-2.5" required></div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                            <tr>
-                                <th class="px-6 py-4">Perfil Destino</th>
-                                <th class="px-6 py-4">Mensaje / Asunto</th>
-                                <th class="px-6 py-4 text-center">Canal</th>
-                                <th class="px-6 py-4 text-center">Tasa de Lectura</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900"><i class="fa-solid fa-user-graduate text-uns mr-2"></i>Alumnos Activos</td>
-                                <td class="px-6 py-4 text-slate-500">"Recordatorio: Inicio de Matrícula Regular 2026-I"</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-1 bg-red-50 text-uns rounded font-bold border border-red-100">Correo Intranet</span></td>
-                                <td class="px-6 py-4 text-center font-bold text-green-600">85%</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900"><i class="fa-solid fa-users text-amber-500 mr-2"></i>Postulantes (CEPUNS)</td>
-                                <td class="px-6 py-4 text-slate-500">"¡Último día para validar tu pago en el Banco de la Nación!"</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-1 bg-green-50 text-green-600 rounded font-bold border border-green-200">WhatsApp</span></td>
-                                <td class="px-6 py-4 text-center font-bold text-green-600">92%</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900"><i class="fa-solid fa-user-tie text-blue-500 mr-2"></i>Egresados</td>
-                                <td class="px-6 py-4 text-slate-500">"Invitación: Feria Laboral y Bolsa de Trabajo UNS"</td>
-                                <td class="px-6 py-4 text-center"><span class="px-2 py-1 bg-red-50 text-uns rounded font-bold border border-red-100">Correo Masivo</span></td>
-                                <td class="px-6 py-4 text-center font-bold text-amber-500">41%</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">Carrera de interés</label>
+                    <select id="carrera" class="w-full border rounded-xl px-4 py-2.5" required>
+                        <option value="Ingeniería de Sistemas e Informática">Ingeniería de Sistemas e Informática</option>
+                        <option value="Medicina Humana">Medicina Humana</option>
+                        <option value="Derecho y Ciencias Políticas">Derecho y Ciencias Políticas</option>
+                        <option value="Enfermería">Enfermería</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                    </select>
                 </div>
-            </div>
+                <div class="flex gap-3 pt-4">
+                    <button type="button" onclick="cerrarModal()" class="flex-1 border py-3 rounded-xl font-semibold">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-uns text-white py-3 rounded-xl font-semibold">Guardar Postulante</button>
+                </div>
+            </form>
         </div>
-    </main>
+    </div>
 
     <script>
-        const titles = {
-            'panel-atencion': { title: 'Atención al Estudiante', desc: 'Gestión de consultas, reclamos, trámites y soporte académico' },
-            'panel-admisiones': { title: 'Admisión y Seguimiento', desc: 'Registro de interesados y acompañamiento hasta la matrícula' },
-            'panel-comunicacion': { title: 'Comunicación Personalizada', desc: 'Envío de mensajes segmentados por correo, WhatsApp y llamadas' }
-        };
+        // === LOCAL STORAGE ===
+        function getPostulantes() {
+            const data = localStorage.getItem('crm_uns_postulantes');
+            return data ? JSON.parse(data) : [];
+        }
+        function savePostulantes(data) {
+            localStorage.setItem('crm_uns_postulantes', JSON.stringify(data));
+        }
 
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Reset styles
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left';
+        let postulantes = getPostulantes();
+
+        function renderPostulantes() {
+            const tbody = document.getElementById('tabla-postulantes');
+            tbody.innerHTML = '';
+            if (postulantes.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-8 text-center text-gray-500">No hay postulantes registrados aún.</td></tr>`;
+            } else {
+                postulantes.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 font-semibold">${p.nombre}</td>
+                        <td class="px-6 py-4">${p.dni}</td>
+                        <td class="px-6 py-4">${p.carrera}</td>
+                        <td class="px-6 py-4"><span class="px-3 py-1 text-xs font-bold rounded-full ${p.estado.includes('seguimiento') ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}">${p.estado}</span></td>
+                        <td class="px-6 py-4 text-center"><button onclick="verDetalle(${p.id})" class="text-uns hover:underline font-semibold text-sm">Ver</button></td>
+                    `;
+                    tbody.appendChild(tr);
                 });
-                
-                // Active style
-                this.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20';
-                
-                const target = this.getAttribute('data-target');
-                
-                // Hide all sections
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.add('hidden');
-                });
-                
-                // Show target section
-                document.getElementById(target).classList.remove('hidden');
-                
-                // Update Header
-                document.getElementById('header-title').textContent = titles[target].title;
-                document.getElementById('header-desc').textContent = titles[target].desc;
+            }
+            const totalEl = document.getElementById('total-postulantes');
+            if (totalEl) totalEl.textContent = postulantes.length;
+        }
+
+        let chartPostulantesInstance = null;
+        let chartCarrerasInstance = null;
+
+        function crearGraficos() {
+            // Gráfico de Barras - Postulantes por mes
+            const ctx1 = document.getElementById('chartPostulantes');
+            if (chartPostulantesInstance) chartPostulantesInstance.destroy();
+
+            chartPostulantesInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Postulantes',
+                        data: [45, 62, 78, 95, 120, 87],
+                        backgroundColor: '#b30000',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
             });
+
+            // Gráfico Circular - Distribución por carrera
+            const ctx2 = document.getElementById('chartCarreras');
+            if (chartCarrerasInstance) chartCarrerasInstance.destroy();
+
+            chartCarrerasInstance = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Ing. Sistemas', 'Medicina', 'Derecho', 'Enfermería', 'Ing. Civil'],
+                    datasets: [{
+                        data: [35, 28, 18, 12, 7],
+                        backgroundColor: ['#b30000', '#e60000', '#f87171', '#fb923c', '#fbbf24']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        function abrirModal() {
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+        function cerrarModal() {
+            document.getElementById('modal').classList.remove('flex');
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        document.getElementById('form-postulante').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevo = {
+                id: Date.now(),
+                nombre: document.getElementById('nombre').value,
+                dni: document.getElementById('dni').value,
+                carrera: document.getElementById('carrera').value,
+                estado: "En seguimiento"
+            };
+            postulantes.unshift(nuevo);
+            savePostulantes(postulantes);
+            renderPostulantes();
+            cerrarModal();
+            this.reset();
+            alert("Postulante registrado correctamente.");
         });
 
-        // Formulario de captura
-        document.getElementById('prospecto-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Postulante/Interesado agregado a la base de seguimiento.');
-            this.reset();
-        });
+        function verDetalle(id) {
+            const p = postulantes.find(x => x.id === id);
+            if (p) alert(`Detalle del Postulante\n\n${p.nombre}\nDNI: ${p.dni}\nCarrera: ${p.carrera}\nEstado: ${p.estado}`);
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-gray-100'));
+            event.currentTarget.classList.add('bg-gray-100');
+        }
+
+        function init() {
+            postulantes = getPostulantes();
+            renderPostulantes();
+            crearGraficos();
+            document.getElementById('dashboard').classList.remove('hidden');
+        }
+
+        window.onload = init;
     </script>
 </body>
 </html>
