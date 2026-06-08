@@ -23,7 +23,6 @@
         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Toast Notifications */
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
         .toast { 
             background: white; border-radius: 12px; padding: 16px 20px; 
@@ -39,38 +38,40 @@
         @keyframes slideOut { to { transform: translateX(400px); opacity: 0; } }
         .toast.hiding { animation: slideOut 0.3s ease forwards; }
 
-        /* Kanban Drag & Drop */
         .kanban-column { min-height: 200px; transition: background 0.2s; }
         .kanban-column.drag-over { background: #f3f4f6; border: 2px dashed #b30000; }
         .kanban-card { cursor: grab; transition: transform 0.2s, box-shadow 0.2s; }
         .kanban-card:active { cursor: grabbing; transform: rotate(2deg); }
         .kanban-card.dragging { opacity: 0.5; transform: scale(0.95); }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
 
-        /* Pagination */
         .page-btn { transition: all 0.2s; }
         .page-btn.active { background: #b30000; color: white; }
         .page-btn:hover:not(.active) { background: #f3f4f6; }
 
-        /* Tab system */
         .tab-btn { transition: all 0.2s; border-bottom: 2px solid transparent; }
         .tab-btn.active { color: #b30000; border-bottom-color: #b30000; }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 
-        /* Loading skeleton */
         .skeleton { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* Calendar styles */
+        .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
+        .calendar-day:hover { background: #f3f4f6; }
+        .calendar-day.today { background: #b30000; color: white; font-weight: bold; }
+        .calendar-day.has-event { position: relative; }
+        .calendar-day.has-event::after { content: ''; position: absolute; bottom: 4px; width: 4px; height: 4px; background: #b30000; border-radius: 50%; }
+        .calendar-day.selected { background: #fee2e2; color: #b30000; font-weight: bold; }
     </style>
 <base target="_blank">
 </head>
 <body class="bg-gray-50 font-sans">
-    <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
 
     <header class="bg-uns text-white shadow-md sticky top-0 z-50">
@@ -124,13 +125,23 @@
                         <i class="fa-solid fa-headset w-5 text-center"></i> <span>Tickets</span>
                         <span id="menu-tickets-badge" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full">0</span>
                     </button>
+                    <button onclick="showSection('calendario', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-calendar-days w-5 text-center"></i> <span>Calendario</span>
+                        <span id="menu-calendario-badge" class="ml-auto bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
                     <button onclick="showSection('comunicaciones', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
                         <i class="fa-solid fa-envelope-open-text w-5 text-center"></i> <span>Campañas</span>
+                    </button>
+                    <button onclick="showSection('reportes', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-chart-column w-5 text-center"></i> <span>Reportes</span>
+                    </button>
+                    <button onclick="showSection('documentos', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-folder-open w-5 text-center"></i> <span>Documentos</span>
                     </button>
                 </nav>
             </div>
             <div class="p-6 border-t">
-                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-500 hover:bg-gray-100 transition">
+                <button onclick="showSection('configuracion', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-500 hover:bg-gray-100 transition">
                     <i class="fa-solid fa-gear w-5 text-center"></i> <span>Configuración</span>
                 </button>
             </div>
@@ -185,7 +196,6 @@
                     </div>
                 </div>
 
-                <!-- Actividad Reciente -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                     <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
@@ -205,9 +215,7 @@
                         <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider flex items-center gap-2">
                             <i class="fa-solid fa-clock-rotate-left text-uns"></i> Actividad Reciente
                         </h4>
-                        <div id="actividad-reciente" class="space-y-4 max-h-80 overflow-y-auto pr-2">
-                            <!-- Se llena dinámicamente -->
-                        </div>
+                        <div id="actividad-reciente" class="space-y-4 max-h-80 overflow-y-auto pr-2"></div>
                     </div>
                 </div>
             </div>
@@ -262,7 +270,6 @@
                             <tbody id="tabla-postulantes" class="divide-y divide-gray-100"></tbody>
                         </table>
                     </div>
-                    <!-- Paginación -->
                     <div class="px-6 py-4 border-t flex items-center justify-between">
                         <span class="text-xs text-gray-500" id="paginacion-info">Mostrando 0 de 0</span>
                         <div class="flex gap-1" id="paginacion-botones"></div>
@@ -330,6 +337,44 @@
                 </div>
             </div>
 
+            <!-- CALENDARIO -->
+            <div id="calendario" class="section hidden animate-fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800">Calendario de Actividades</h2>
+                        <p class="text-gray-500 text-sm">Agenda de llamadas, reuniones y seguimientos.</p>
+                    </div>
+                    <button onclick="abrirModalEvento()" class="bg-purple-600 text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-purple-700 transition shadow-md">
+                        <i class="fa-solid fa-plus"></i> <span>Nuevo Evento</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <button onclick="cambiarMes(-1)" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-chevron-left"></i></button>
+                            <h3 class="font-bold text-lg text-gray-800" id="calendario-mes">Junio 2026</h3>
+                            <button onclick="cambiarMes(1)" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Dom</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Lun</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Mar</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Mié</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Jue</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Vie</div>
+                            <div class="text-center text-xs font-bold text-gray-400 py-2">Sáb</div>
+                        </div>
+                        <div id="calendario-grid" class="grid grid-cols-7 gap-1"></div>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Eventos del Día</h4>
+                        <div id="eventos-dia" class="space-y-3">
+                            <p class="text-sm text-gray-400 italic">Selecciona un día para ver eventos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- COMUNICACIONES -->
             <div id="comunicaciones" class="section hidden animate-fade-in">
                 <div class="mb-6 flex justify-between items-center">
@@ -354,6 +399,101 @@
                         </thead>
                         <tbody id="tabla-comunicaciones" class="divide-y divide-gray-100"></tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- REPORTES -->
+            <div id="reportes" class="section hidden animate-fade-in">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-black text-gray-800">Reportes y Analítica</h2>
+                    <p class="text-gray-500 text-sm">Métricas detalladas del proceso de admisión.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Conversión por Canal</h4>
+                        <div class="relative h-64">
+                            <canvas id="chartCanales"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Rendimiento por Carrera</h4>
+                        <div class="space-y-4" id="reporte-carreras"></div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Resumen de Embudo</h4>
+                    <div class="grid grid-cols-5 gap-4" id="reporte-embudo"></div>
+                </div>
+            </div>
+
+            <!-- DOCUMENTOS -->
+            <div id="documentos" class="section hidden animate-fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800">Gestión Documental</h2>
+                        <p class="text-gray-500 text-sm">Documentos y expedientes de postulantes.</p>
+                    </div>
+                    <button onclick="abrirModalDocumento()" class="bg-uns text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
+                        <i class="fa-solid fa-upload"></i> <span>Subir Documento</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="grid-documentos">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- CONFIGURACIÓN -->
+            <div id="configuracion" class="section hidden animate-fade-in">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-black text-gray-800">Configuración del CRM</h2>
+                    <p class="text-gray-500 text-sm">Personaliza tu experiencia y gestiona datos.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Datos del Sistema</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-gray-600">Total Postulantes</span>
+                                <span class="font-bold text-gray-800" id="config-postulantes">0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-gray-600">Total Tareas</span>
+                                <span class="font-bold text-gray-800" id="config-tareas">0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-gray-600">Total Tickets</span>
+                                <span class="font-bold text-gray-800" id="config-tickets">0</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm text-gray-600">Documentos</span>
+                                <span class="font-bold text-gray-800" id="config-documentos">0</span>
+                            </div>
+                        </div>
+                        <button onclick="limpiarDatos()" class="mt-4 w-full border-2 border-red-200 text-red-600 font-bold py-2.5 rounded-lg hover:bg-red-50 transition">
+                            <i class="fa-solid fa-trash mr-2"></i>Limpiar Todos los Datos
+                        </button>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Preferencias</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Notificaciones por Email</span>
+                                <button onclick="toggleSwitch(this)" class="w-12 h-6 bg-uns rounded-full relative transition"><div class="w-4 h-4 bg-white rounded-full absolute right-1 top-1 transition"></div></button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Sonido de Alertas</span>
+                                <button onclick="toggleSwitch(this)" class="w-12 h-6 bg-gray-300 rounded-full relative transition"><div class="w-4 h-4 bg-white rounded-full absolute left-1 top-1 transition"></div></button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Modo Oscuro</span>
+                                <button onclick="toggleSwitch(this)" class="w-12 h-6 bg-gray-300 rounded-full relative transition"><div class="w-4 h-4 bg-white rounded-full absolute left-1 top-1 transition"></div></button>
+                            </div>
+                            <div class="pt-4 border-t">
+                                <label class="text-xs font-bold text-gray-600 uppercase block mb-2">Carreras Disponibles</label>
+                                <div id="lista-carreras-config" class="space-y-2"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -414,7 +554,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="flex gap-3 pt-6 border-t mt-6">
                     <button type="button" onclick="cerrarModalPostulante()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
                     <button type="submit" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md">Guardar en CRM</button>
@@ -423,7 +562,7 @@
         </div>
     </div>
 
-    <!-- Modal Ver Perfil Postulante -->
+    <!-- Modal Perfil -->
     <div id="modal-perfil" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
@@ -431,13 +570,11 @@
                 <button onclick="cerrarModalPerfil()" class="hover:text-red-200"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
             <div class="p-6">
-                <!-- Tabs -->
                 <div class="flex border-b mb-4">
                     <button onclick="switchTab('info')" class="tab-btn active px-4 py-2 text-sm font-bold text-gray-600">Información</button>
                     <button onclick="switchTab('historial')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Historial</button>
                     <button onclick="switchTab('notas')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Notas</button>
                 </div>
-
                 <div id="tab-info" class="tab-content active">
                     <div class="grid grid-cols-2 gap-4" id="perfil-info-content"></div>
                 </div>
@@ -461,7 +598,7 @@
         </div>
     </div>
 
-    <!-- Modal Responder Ticket -->
+    <!-- Modal Ticket -->
     <div id="modal-responder-ticket" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
@@ -486,12 +623,10 @@
                         <p class="text-sm text-gray-600" id="ticket-asunto-display">Problema para subir DNI al sistema</p>
                     </div>
                 </div>
-
                 <div>
                     <label class="text-xs font-bold text-gray-600 uppercase mb-1 block">Tu Respuesta</label>
                     <textarea id="ticket-respuesta" rows="4" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-3 mt-1 focus:outline-none focus:border-uns transition resize-none" placeholder="Escribe tu respuesta al postulante..."></textarea>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="text-xs font-bold text-gray-600 uppercase mb-1 block">Cambiar Estado</label>
@@ -511,9 +646,7 @@
                         </select>
                     </div>
                 </div>
-
                 <div id="ticket-historial" class="max-h-32 overflow-y-auto space-y-2"></div>
-
                 <div class="flex gap-3 pt-4 border-t mt-4">
                     <button type="button" onclick="cerrarModalTicket()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
                     <button type="button" onclick="enviarRespuestaTicket()" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2">
@@ -524,7 +657,7 @@
         </div>
     </div>
 
-    <!-- Modal Nueva Tarea -->
+    <!-- Modal Tarea -->
     <div id="modal-tarea" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
             <div class="bg-slate-800 px-6 py-4 flex justify-between items-center text-white">
@@ -571,16 +704,101 @@
         </div>
     </div>
 
+    <!-- Modal Evento Calendario -->
+    <div id="modal-evento" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+            <div class="bg-purple-600 px-6 py-4 flex justify-between items-center text-white">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-calendar-plus mr-2"></i>Nuevo Evento</h3>
+                <button onclick="cerrarModalEvento()" class="hover:text-purple-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="form-evento" class="p-6 space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Título del Evento <span class="text-red-500">*</span></label>
+                    <input type="text" id="e-titulo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-purple-500" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Descripción</label>
+                    <textarea id="e-desc" rows="2" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-purple-500 resize-none"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Fecha</label>
+                        <input type="date" id="e-fecha" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-purple-500" required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Hora</label>
+                        <input type="time" id="e-hora" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-purple-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Tipo</label>
+                    <select id="e-tipo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-purple-500 cursor-pointer">
+                        <option value="llamada">Llamada</option>
+                        <option value="reunion">Reunión</option>
+                        <option value="seguimiento">Seguimiento</option>
+                        <option value="recordatorio">Recordatorio</option>
+                    </select>
+                </div>
+                <div class="flex gap-3 pt-4 border-t mt-4">
+                    <button type="button" onclick="cerrarModalEvento()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-lg transition shadow-md">Guardar Evento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Documento -->
+    <div id="modal-documento" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+            <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-upload mr-2"></i>Subir Documento</h3>
+                <button onclick="cerrarModalDocumento()" class="hover:text-red-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="form-documento" class="p-6 space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Nombre del Documento <span class="text-red-500">*</span></label>
+                    <input type="text" id="d-nombre" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Tipo</label>
+                    <select id="d-tipo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
+                        <option value="dni">DNI / Documento</option>
+                        <option value="voucher">Voucher de Pago</option>
+                        <option value="certificado">Certificado de Estudios</option>
+                        <option value="foto">Fotografía</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Postulante Asociado</label>
+                    <select id="d-postulante" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
+                        <option value="">Sin postulante</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Archivo (simulado)</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center mt-1 hover:border-uns transition cursor-pointer">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-sm text-gray-500">Arrastra un archivo o haz clic para seleccionar</p>
+                        <p class="text-xs text-gray-400 mt-1">PDF, JPG, PNG (máx. 10MB)</p>
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-4 border-t mt-4">
+                    <button type="button" onclick="cerrarModalDocumento()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md">Subir Documento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // ==================== UTILIDADES ====================
         function showToast(message, type = 'success', duration = 3000) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-
             const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
             const colors = { success: 'text-emerald-500', error: 'text-red-500', warning: 'text-amber-500', info: 'text-blue-500' };
-
             toast.innerHTML = `
                 <i class="fa-solid ${icons[type]} ${colors[type]} text-xl"></i>
                 <div class="flex-1">
@@ -589,9 +807,7 @@
                 </div>
                 <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
             `;
-
             container.appendChild(toast);
-
             setTimeout(() => {
                 toast.classList.add('hiding');
                 setTimeout(() => toast.remove(), 300);
@@ -600,7 +816,7 @@
 
         function formatDate(dateStr) {
             if (!dateStr) return 'Hoy';
-            const d = new Date(dateStr);
+            const d = new Date(dateStr + 'T00:00:00');
             return d.toLocaleDateString('es-PE', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
@@ -608,15 +824,17 @@
         function showSection(section, btnElement) {
             document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
             document.getElementById(section).classList.remove('hidden');
-
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.className = 'nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition';
             });
             if(btnElement) {
                 btnElement.className = 'nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold bg-uns/10 text-uns transition';
             }
-
             if (section === 'tareas') renderKanban();
+            if (section === 'calendario') renderCalendario();
+            if (section === 'reportes') renderReportes();
+            if (section === 'documentos') renderDocumentos();
+            if (section === 'configuracion') renderConfiguracion();
         }
 
         // ==================== POSTULANTES ====================
@@ -670,14 +888,12 @@
             const filtroTexto = document.getElementById('buscador-postulantes').value.toLowerCase();
             const filtroEstado = document.getElementById('filtro-estado').value;
             const filtroCarrera = document.getElementById('filtro-carrera').value;
-
             let filtrados = postulantes.filter(p => {
                 const matchTexto = p.nombre.toLowerCase().includes(filtroTexto) || p.dni.includes(filtroTexto);
                 const matchEstado = !filtroEstado || p.estado === filtroEstado;
                 const matchCarrera = !filtroCarrera || p.carrera === filtroCarrera;
                 return matchTexto && matchEstado && matchCarrera;
             });
-
             if (ordenActual.campo) {
                 filtrados.sort((a, b) => {
                     let valA = a[ordenActual.campo].toLowerCase();
@@ -685,14 +901,12 @@
                     return ordenActual.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
                 });
             }
-
             return filtrados;
         }
 
         function renderPostulantes() {
             const tbody = document.getElementById('tabla-postulantes');
             tbody.innerHTML = '';
-
             const filtrados = getPostulantesFiltrados();
             const total = filtrados.length;
             const totalPaginas = Math.ceil(total / itemsPorPagina);
@@ -725,7 +939,7 @@
                     </td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex items-center justify-center gap-2">
-                            <button title="WhatsApp" onclick="window.open('https://wa.me/51${p.celular}', '_blank')" class="w-8 h-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition flex items-center justify-center"><i class="fa-brands fa-whatsapp text-lg"></i></button>
+                            <button title="Llamar" onclick="window.location.href='tel:+51${p.celular}'" class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white transition flex items-center justify-center"><i class="fa-solid fa-phone"></i></button>
                             <button title="Ver Perfil" onclick="verPostulante(${p.id})" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-600 hover:text-white transition flex items-center justify-center"><i class="fa-regular fa-eye"></i></button>
                             <button title="Eliminar" onclick="confirmarEliminarPostulante(${p.id})" class="w-8 h-8 rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
                         </div>
@@ -734,8 +948,7 @@
                 tbody.appendChild(tr);
             });
 
-            // Paginación
-            document.getElementById('paginacion-info').innerText = `Mostrando ${inicio + 1}-${Math.min(inicio + itemsPorPagina, total)} de ${total}`;
+            document.getElementById('paginacion-info').innerText = `Mostrando ${total > 0 ? inicio + 1 : 0}-${Math.min(inicio + itemsPorPagina, total)} de ${total}`;
             const pagDiv = document.getElementById('paginacion-botones');
             pagDiv.innerHTML = '';
             for (let i = 1; i <= totalPaginas; i++) {
@@ -751,7 +964,6 @@
             actualizarDashboard();
         }
 
-        // Debounce para búsqueda
         let debounceTimer;
         document.getElementById('buscador-postulantes').addEventListener('input', () => {
             clearTimeout(debounceTimer);
@@ -791,7 +1003,6 @@
             cerrarModalPerfil();
         }
 
-        // Modales Postulante
         function abrirModalPostulante() {
             document.getElementById('modal-postulante').classList.remove('hidden');
             document.getElementById('error-dni').classList.add('hidden');
@@ -805,30 +1016,21 @@
 
         document.getElementById('form-postulante').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const dni = document.getElementById('p-dni').value;
             const celular = document.getElementById('p-celular').value;
             const correo = document.getElementById('p-correo').value;
-
             let valido = true;
-
             if (!validarDNI(dni)) { document.getElementById('error-dni').classList.remove('hidden'); valido = false; }
             else { document.getElementById('error-dni').classList.add('hidden'); }
-
             if (!validarCelular(celular)) { document.getElementById('error-celular').classList.remove('hidden'); valido = false; }
             else { document.getElementById('error-celular').classList.add('hidden'); }
-
             if (!validarEmail(correo)) { document.getElementById('error-correo').classList.remove('hidden'); valido = false; }
             else { document.getElementById('error-correo').classList.add('hidden'); }
-
             if (!valido) return;
-
-            // Detectar duplicado
             if (postulantes.some(p => p.dni === dni)) {
                 showToast('Ya existe un postulante con ese DNI', 'error');
                 return;
             }
-
             const nuevo = {
                 id: Date.now(),
                 nombre: document.getElementById('p-nombre').value,
@@ -851,12 +1053,11 @@
             actualizarActividadReciente();
         });
 
-        // ==================== PERFIL POSTULANTE ====================
+        // ==================== PERFIL ====================
         function verPostulante(id) {
             postulanteActualId = id;
             const p = postulantes.find(x => x.id === id);
             if (!p) return;
-
             document.getElementById('perfil-info-content').innerHTML = `
                 <div><span class="text-xs text-gray-400 uppercase font-bold">Nombre</span><p class="font-medium text-gray-800">${p.nombre}</p></div>
                 <div><span class="text-xs text-gray-400 uppercase font-bold">DNI</span><p class="font-medium text-gray-800">${p.dni}</p></div>
@@ -867,7 +1068,6 @@
                 <div><span class="text-xs text-gray-400 uppercase font-bold">Canal</span><p class="font-medium text-gray-800">${p.canal || 'N/A'}</p></div>
                 <div><span class="text-xs text-gray-400 uppercase font-bold">Estado</span><span class="inline-block mt-1 text-xs font-bold rounded-full px-2 py-1 ${obtenerColorEstado(p.estado)}">${p.estado}</span></div>
             `;
-
             const histDiv = document.getElementById('perfil-historial-content');
             histDiv.innerHTML = '';
             (p.historial || []).slice().reverse().forEach(h => {
@@ -881,7 +1081,6 @@
                     </div>
                 `;
             });
-
             renderNotas();
             switchTab('info');
             document.getElementById('modal-perfil').classList.remove('hidden');
@@ -955,11 +1154,9 @@
                 container.innerHTML = '';
                 const filtradas = tareas.filter(t => t.estado === est);
                 document.getElementById('count-' + est).innerText = filtradas.length;
-
                 filtradas.forEach(t => {
                     const iconos = { llamada: 'fa-phone', whatsapp: 'fa-brands fa-whatsapp', email: 'fa-envelope', reunion: 'fa-handshake' };
                     const colores = { Alta: 'bg-red-100 text-red-700', Media: 'bg-amber-100 text-amber-700', Baja: 'bg-gray-100 text-gray-600' };
-
                     const div = document.createElement('div');
                     div.className = 'kanban-card bg-white p-4 rounded-xl shadow-sm border-l-4 ' + (est === 'pendiente' ? 'border-amber-400' : est === 'proceso' ? 'border-blue-400' : 'border-emerald-400');
                     div.draggable = true;
@@ -980,7 +1177,6 @@
                     container.appendChild(div);
                 });
             });
-
             document.getElementById('dash-tareas').innerText = tareas.filter(t => t.estado !== 'completada').length;
             document.getElementById('dash-tareas-hoy').innerText = tareas.filter(t => t.estado === 'pendiente' && t.fecha === new Date().toISOString().split('T')[0]).length;
             document.getElementById('menu-tareas-badge').innerText = tareas.filter(t => t.estado === 'pendiente').length;
@@ -1030,6 +1226,107 @@
             showToast('Tarea creada correctamente', 'success');
         });
 
+        // ==================== CALENDARIO ====================
+        let eventos = JSON.parse(localStorage.getItem('crm_uns_eventos')) || [
+            {id: 1, titulo: "Reunión con padres", desc: "Presentación de carreras", fecha: "2026-06-10", hora: "10:00", tipo: "reunion"},
+            {id: 2, titulo: "Llamada seguimiento", desc: "María Gonzales", fecha: "2026-06-12", hora: "15:00", tipo: "llamada"},
+            {id: 3, titulo: "Cierre inscripciones", desc: "Último día", fecha: "2026-06-15", hora: "23:59", tipo: "recordatorio"}
+        ];
+        let calendarioActual = new Date();
+        let diaSeleccionado = null;
+
+        function guardarEventos() {
+            localStorage.setItem('crm_uns_eventos', JSON.stringify(eventos));
+        }
+
+        function renderCalendario() {
+            const year = calendarioActual.getFullYear();
+            const month = calendarioActual.getMonth();
+            const primerDia = new Date(year, month, 1).getDay();
+            const diasEnMes = new Date(year, month + 1, 0).getDate();
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            document.getElementById('calendario-mes').innerText = `${meses[month]} ${year}`;
+
+            const grid = document.getElementById('calendario-grid');
+            grid.innerHTML = '';
+
+            for (let i = 0; i < primerDia; i++) {
+                grid.innerHTML += '<div></div>';
+            }
+
+            const hoy = new Date().toISOString().split('T')[0];
+            for (let d = 1; d <= diasEnMes; d++) {
+                const fechaStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const tieneEvento = eventos.some(e => e.fecha === fechaStr);
+                const esHoy = fechaStr === hoy;
+                const esSeleccionado = diaSeleccionado === fechaStr;
+
+                const div = document.createElement('div');
+                div.className = `calendar-day ${esHoy ? 'today' : ''} ${tieneEvento ? 'has-event' : ''} ${esSeleccionado ? 'selected' : ''}`;
+                div.innerText = d;
+                div.onclick = () => { diaSeleccionado = fechaStr; renderCalendario(); renderEventosDia(fechaStr); };
+                grid.appendChild(div);
+            }
+
+            document.getElementById('menu-calendario-badge').innerText = eventos.filter(e => e.fecha >= hoy).length;
+        }
+
+        function cambiarMes(delta) {
+            calendarioActual.setMonth(calendarioActual.getMonth() + delta);
+            renderCalendario();
+        }
+
+        function renderEventosDia(fecha) {
+            const div = document.getElementById('eventos-dia');
+            const evs = eventos.filter(e => e.fecha === fecha);
+            if (evs.length === 0) {
+                div.innerHTML = '<p class="text-sm text-gray-400 italic">No hay eventos para este día</p>';
+                return;
+            }
+            div.innerHTML = '';
+            const iconos = { llamada: 'fa-phone text-blue-500', reunion: 'fa-handshake text-purple-500', seguimiento: 'fa-user-check text-uns', recordatorio: 'fa-bell text-amber-500' };
+            evs.forEach(e => {
+                div.innerHTML += `
+                    <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-purple-400">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i class="fa-solid ${iconos[e.tipo]} text-xs"></i>
+                            <span class="text-xs font-bold text-gray-500 uppercase">${e.tipo}</span>
+                            <span class="ml-auto text-xs text-gray-400">${e.hora || 'Todo el día'}</span>
+                        </div>
+                        <p class="font-bold text-sm text-gray-800">${e.titulo}</p>
+                        ${e.desc ? `<p class="text-xs text-gray-500 mt-1">${e.desc}</p>` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function abrirModalEvento() {
+            document.getElementById('modal-evento').classList.remove('hidden');
+            document.getElementById('e-fecha').value = diaSeleccionado || new Date().toISOString().split('T')[0];
+        }
+        function cerrarModalEvento() {
+            document.getElementById('modal-evento').classList.add('hidden');
+            document.getElementById('form-evento').reset();
+        }
+
+        document.getElementById('form-evento').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevo = {
+                id: Date.now(),
+                titulo: document.getElementById('e-titulo').value,
+                desc: document.getElementById('e-desc').value,
+                fecha: document.getElementById('e-fecha').value,
+                hora: document.getElementById('e-hora').value,
+                tipo: document.getElementById('e-tipo').value
+            };
+            eventos.push(nuevo);
+            guardarEventos();
+            renderCalendario();
+            renderEventosDia(nuevo.fecha);
+            cerrarModalEvento();
+            showToast('Evento agregado al calendario', 'success');
+        });
+
         // ==================== TICKETS ====================
         let tickets = JSON.parse(localStorage.getItem('crm_uns_tickets')) || [
             {id: 'TK-1024', asunto: 'Problema para subir DNI al sistema', postulante: 'Carlos Ruiz', estado: 'Abierto', prioridad: 'Alta', fecha: '2026-06-07', respuestas: []},
@@ -1056,10 +1353,8 @@
         function renderTickets() {
             const tbody = document.getElementById('tabla-tickets');
             tbody.innerHTML = '';
-
             const filtroEstado = document.getElementById('filtro-ticket-estado').value;
             const filtrados = tickets.filter(t => !filtroEstado || t.estado === filtroEstado);
-
             filtrados.forEach(t => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-gray-50 transition";
@@ -1079,7 +1374,6 @@
                 `;
                 tbody.appendChild(tr);
             });
-
             const abiertos = tickets.filter(t => t.estado === 'Abierto' || t.estado === 'En Proceso').length;
             document.getElementById('dash-tickets').innerText = abiertos;
             document.getElementById('dash-tickets-urgentes').innerText = tickets.filter(t => (t.estado === 'Abierto' || t.estado === 'En Proceso') && t.prioridad === 'Alta').length;
@@ -1090,7 +1384,6 @@
             ticketActualId = ticketId;
             const ticket = tickets.find(t => t.id === ticketId);
             if (!ticket) return;
-
             document.getElementById('ticket-id-display').innerText = '#' + ticket.id;
             document.getElementById('ticket-postulante-display').innerText = ticket.postulante;
             document.getElementById('ticket-asunto-display').innerText = ticket.asunto;
@@ -1098,7 +1391,6 @@
             document.getElementById('ticket-estado-badge').className = `px-2 py-1 rounded text-xs font-bold ${obtenerColorEstadoTicket(ticket.estado)}`;
             document.getElementById('ticket-nuevo-estado').value = ticket.estado;
             document.getElementById('ticket-respuesta').value = '';
-
             const historialDiv = document.getElementById('ticket-historial');
             historialDiv.innerHTML = '';
             if (ticket.respuestas && ticket.respuestas.length > 0) {
@@ -1116,7 +1408,6 @@
             } else {
                 historialDiv.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-2">Sin respuestas previas</p>';
             }
-
             document.getElementById('modal-responder-ticket').classList.remove('hidden');
         }
 
@@ -1130,9 +1421,7 @@
             const texto = document.getElementById('ticket-respuesta').value.trim();
             const nuevoEstado = document.getElementById('ticket-nuevo-estado').value;
             const canal = document.getElementById('ticket-canal-envio').value;
-
             if (!texto) { showToast('Escribe una respuesta antes de enviar', 'warning'); return; }
-
             const ticket = tickets.find(t => t.id === ticketActualId);
             if (ticket) {
                 ticket.respuestas.push({ texto: texto, fecha: new Date().toISOString().split('T')[0], autor: 'Asesor Admisión', canal: canal });
@@ -1166,13 +1455,182 @@
             `;
         }
 
-        // ==================== DASHBOARD DINÁMICO ====================
+        // ==================== REPORTES ====================
+        function renderReportes() {
+            const canalesCount = {};
+            postulantes.forEach(p => { canalesCount[p.canal || 'Otro'] = (canalesCount[p.canal || 'Otro'] || 0) + 1; });
+            const ctxCanales = document.getElementById('chartCanales');
+            if (ctxCanales) {
+                const existing = Chart.getChart(ctxCanales);
+                if (existing) existing.destroy();
+                new Chart(ctxCanales, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(canalesCount),
+                        datasets: [{
+                            label: 'Postulantes',
+                            data: Object.values(canalesCount),
+                            backgroundColor: ['#b30000', '#e60000', '#f87171', '#fb923c', '#fbbf24'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
+
+            const carrerasCount = {};
+            postulantes.forEach(p => { carrerasCount[p.carrera] = (carrerasCount[p.carrera] || 0) + 1; });
+            const total = postulantes.length;
+            const div = document.getElementById('reporte-carreras');
+            div.innerHTML = '';
+            Object.entries(carrerasCount).sort((a, b) => b[1] - a[1]).forEach(([carrera, count]) => {
+                const pct = Math.round((count / total) * 100);
+                div.innerHTML += `
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-medium text-gray-700">${carrera}</span>
+                            <span class="font-bold text-gray-800">${count} (${pct}%)</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2">
+                            <div class="bg-uns h-2 rounded-full transition-all" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const embudoDiv = document.getElementById('reporte-embudo');
+            const estados = ['Nuevo Lead', 'Interesado', 'Prospecto Caliente', 'Inscrito / Pagó', 'Descartado'];
+            const colores = ['bg-blue-500', 'bg-amber-500', 'bg-orange-500', 'bg-emerald-500', 'bg-gray-400'];
+            embudoDiv.innerHTML = '';
+            estados.forEach((est, i) => {
+                const count = postulantes.filter(p => p.estado === est).length;
+                embudoDiv.innerHTML += `
+                    <div class="text-center p-4 bg-white rounded-xl border border-gray-100">
+                        <div class="w-10 h-10 ${colores[i]} rounded-full flex items-center justify-center text-white font-bold mx-auto mb-2">${count}</div>
+                        <p class="text-xs font-bold text-gray-600">${est}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // ==================== DOCUMENTOS ====================
+        let documentos = JSON.parse(localStorage.getItem('crm_uns_documentos')) || [
+            {id: 1, nombre: "DNI_Carlos_Ruiz.pdf", tipo: "dni", postulante: "Carlos Ruiz", fecha: "2026-06-02", size: "2.4 MB"},
+            {id: 2, nombre: "Voucher_Maria_Gonzales.pdf", tipo: "voucher", postulante: "María Gonzales", fecha: "2026-06-03", size: "1.1 MB"},
+            {id: 3, nombre: "Certificado_Juan_Cardenas.pdf", tipo: "certificado", postulante: "Juan Cárdenas", fecha: "2026-06-04", size: "3.2 MB"}
+        ];
+
+        function guardarDocumentos() {
+            localStorage.setItem('crm_uns_documentos', JSON.stringify(documentos));
+        }
+
+        function renderDocumentos() {
+            const grid = document.getElementById('grid-documentos');
+            grid.innerHTML = '';
+            const iconos = { dni: 'fa-id-card text-blue-500', voucher: 'fa-receipt text-emerald-500', certificado: 'fa-graduation-cap text-amber-500', foto: 'fa-image text-purple-500', otro: 'fa-file text-gray-500' };
+            documentos.forEach(d => {
+                grid.innerHTML += `
+                    <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition group">
+                        <div class="flex items-start gap-3">
+                            <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid ${iconos[d.tipo]} text-xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="font-bold text-sm text-gray-800 truncate">${d.nombre}</p>
+                                <p class="text-xs text-gray-500">${d.postulante || 'Sin postulante'}</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-[10px] text-gray-400">${d.size}</span>
+                                    <span class="text-[10px] text-gray-400">• ${formatDate(d.fecha)}</span>
+                                </div>
+                            </div>
+                            <button onclick="eliminarDocumento(${d.id})" class="text-gray-300 hover:text-red-500 transition opacity-0 group-hover:opacity-100"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('config-documentos').innerText = documentos.length;
+        }
+
+        function abrirModalDocumento() {
+            const select = document.getElementById('d-postulante');
+            select.innerHTML = '<option value="">Sin postulante</option>';
+            postulantes.forEach(p => {
+                select.innerHTML += `<option value="${p.nombre}">${p.nombre} (${p.dni})</option>`;
+            });
+            document.getElementById('modal-documento').classList.remove('hidden');
+        }
+        function cerrarModalDocumento() {
+            document.getElementById('modal-documento').classList.add('hidden');
+            document.getElementById('form-documento').reset();
+        }
+
+        document.getElementById('form-documento').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevo = {
+                id: Date.now(),
+                nombre: document.getElementById('d-nombre').value + '.pdf',
+                tipo: document.getElementById('d-tipo').value,
+                postulante: document.getElementById('d-postulante').value,
+                fecha: new Date().toISOString().split('T')[0],
+                size: (Math.random() * 5 + 0.5).toFixed(1) + ' MB'
+            };
+            documentos.unshift(nuevo);
+            guardarDocumentos();
+            renderDocumentos();
+            cerrarModalDocumento();
+            showToast('Documento registrado', 'success');
+        });
+
+        function eliminarDocumento(id) {
+            documentos = documentos.filter(d => d.id !== id);
+            guardarDocumentos();
+            renderDocumentos();
+            showToast('Documento eliminado', 'success');
+        }
+
+        // ==================== CONFIGURACIÓN ====================
+        function renderConfiguracion() {
+            document.getElementById('config-postulantes').innerText = postulantes.length;
+            document.getElementById('config-tareas').innerText = tareas.length;
+            document.getElementById('config-tickets').innerText = tickets.length;
+            document.getElementById('config-documentos').innerText = documentos.length;
+
+            const carreras = [...new Set(postulantes.map(p => p.carrera))];
+            const div = document.getElementById('lista-carreras-config');
+            div.innerHTML = '';
+            carreras.forEach(c => {
+                div.innerHTML += `<div class="flex items-center justify-between p-2 bg-gray-50 rounded-lg text-sm text-gray-700"><span>${c}</span><span class="text-xs text-gray-400">${postulantes.filter(p => p.carrera === c).length} postulantes</span></div>`;
+            });
+        }
+
+        function toggleSwitch(btn) {
+            const isOn = btn.classList.contains('bg-uns');
+            if (isOn) {
+                btn.classList.remove('bg-uns');
+                btn.classList.add('bg-gray-300');
+                btn.querySelector('div').style.right = '';
+                btn.querySelector('div').style.left = '4px';
+            } else {
+                btn.classList.remove('bg-gray-300');
+                btn.classList.add('bg-uns');
+                btn.querySelector('div').style.left = '';
+                btn.querySelector('div').style.right = '4px';
+            }
+        }
+
+        function limpiarDatos() {
+            if (confirm('¿ESTÁS SEGURO?\n\nSe eliminarán TODOS los datos del CRM (postulantes, tareas, tickets, eventos, documentos).\n\nEsta acción no se puede deshacer.')) {
+                localStorage.clear();
+                showToast('Todos los datos han sido eliminados. Recarga la página.', 'warning');
+            }
+        }
+
+        // ==================== DASHBOARD ====================
         function actualizarDashboard() {
             const total = postulantes.length;
             const inscritos = postulantes.filter(p => p.estado === 'Inscrito / Pagó').length;
             const conversion = total > 0 ? Math.round((inscritos / total) * 100) : 0;
             document.getElementById('dash-conversion').innerText = conversion + '%';
-
             const mesActual = new Date().toISOString().split('T')[0].slice(0, 7);
             const esteMes = postulantes.filter(p => p.fecha && p.fecha.startsWith(mesActual)).length;
             document.getElementById('dash-postulantes-mes').innerText = '+' + esteMes;
@@ -1181,7 +1639,6 @@
         function actualizarActividadReciente() {
             const div = document.getElementById('actividad-reciente');
             div.innerHTML = '';
-
             let actividades = [];
             postulantes.forEach(p => {
                 (p.historial || []).forEach(h => {
@@ -1193,7 +1650,6 @@
                     actividades.push({accion: `Ticket ${t.id}: ${r.texto.substring(0, 30)}...`, fecha: r.fecha, autor: r.autor, postulante: t.postulante, tipo: 'ticket'});
                 });
             });
-
             actividades.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
             actividades.slice(0, 10).forEach(a => {
                 const icono = a.tipo === 'ticket' ? 'fa-headset text-blue-500' : 'fa-user text-uns';
@@ -1215,7 +1671,6 @@
             const headers = ['ID', 'Nombre', 'DNI', 'Celular', 'Correo', 'Colegio', 'Carrera', 'Estado', 'Canal', 'Fecha'];
             const rows = postulantes.map(p => [p.id, `"${p.nombre}"`, p.dni, p.celular, p.correo || '', `"${p.colegio || ''}"`, `"${p.carrera}"`, `"${p.estado}"`, `"${p.canal || ''}"`, p.fecha || '']);
             const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-
             const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -1230,6 +1685,8 @@
             renderTickets();
             renderComunicaciones();
             renderKanban();
+            renderCalendario();
+            renderDocumentos();
             actualizarDashboard();
             actualizarActividadReciente();
 
@@ -1259,7 +1716,6 @@
                 postulantes.forEach(p => { carrerasCount[p.carrera] = (carrerasCount[p.carrera] || 0) + 1; });
                 const labels = Object.keys(carrerasCount).length > 0 ? Object.keys(carrerasCount) : ['Sistemas','Medicina','Derecho','Ing. Civil','Otros'];
                 const data = Object.keys(carrerasCount).length > 0 ? Object.values(carrerasCount) : [35, 25, 20, 10, 10];
-
                 new Chart(ctxCarreras, {
                     type: 'doughnut',
                     data: { 
