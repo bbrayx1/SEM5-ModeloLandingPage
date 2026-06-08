@@ -172,3 +172,21 @@ a {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #b30000; /* Color UNS al pasar el mouse */
 }
+
+.page-transition {
+    animation: fadeInPage 0.4s ease-out forwards;
+}
+
+.page-transition-out {
+    animation: fadeOutPage 0.4s ease-in forwards;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutPage {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-15px); }
+}
