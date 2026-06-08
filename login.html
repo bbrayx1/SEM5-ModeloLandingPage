@@ -203,9 +203,12 @@
 
         // Función para los botones del ERP / CRM
         function accederSistema(sistema) {
-            // Aquí puedes reemplazar el alert con window.location.href = 'ruta-a-tu-sistema.html';
-            alert('Conectando de forma segura al módulo: ' + sistema);
-        }
+    if (sistema === 'ERP') {
+        window.location.href = 'erp.html';
+    } else if (sistema === 'CRM') {
+        window.location.href = 'crm.html';
+    }
+}
 
         // Función para el botón de cancelar / cerrar sesión
         function cerrarSesion() {
