@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM UNS • Universidad Nacional del Santa</title>
+    <title>CRM UNS | Universidad Nacional del Santa</title>
     <link rel="icon" type="image/png" href="images/logo_rojo_UNS.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -19,387 +19,1261 @@
             }
         }
     </script>
+    <style>
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Toast Notifications */
+        .toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { 
+            background: white; border-radius: 12px; padding: 16px 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px;
+            min-width: 320px; transform: translateX(400px); opacity: 0;
+            animation: slideIn 0.4s ease forwards; border-left: 4px solid;
+        }
+        .toast.success { border-left-color: #10b981; }
+        .toast.error { border-left-color: #ef4444; }
+        .toast.warning { border-left-color: #f59e0b; }
+        .toast.info { border-left-color: #3b82f6; }
+        @keyframes slideIn { to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { to { transform: translateX(400px); opacity: 0; } }
+        .toast.hiding { animation: slideOut 0.3s ease forwards; }
+
+        /* Kanban Drag & Drop */
+        .kanban-column { min-height: 200px; transition: background 0.2s; }
+        .kanban-column.drag-over { background: #f3f4f6; border: 2px dashed #b30000; }
+        .kanban-card { cursor: grab; transition: transform 0.2s, box-shadow 0.2s; }
+        .kanban-card:active { cursor: grabbing; transform: rotate(2deg); }
+        .kanban-card.dragging { opacity: 0.5; transform: scale(0.95); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+        /* Pagination */
+        .page-btn { transition: all 0.2s; }
+        .page-btn.active { background: #b30000; color: white; }
+        .page-btn:hover:not(.active) { background: #f3f4f6; }
+
+        /* Tab system */
+        .tab-btn { transition: all 0.2s; border-bottom: 2px solid transparent; }
+        .tab-btn.active { color: #b30000; border-bottom-color: #b30000; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        /* Loading skeleton */
+        .skeleton { background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
+<base target="_blank">
 </head>
 <body class="bg-gray-50 font-sans">
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
 
-    <!-- Header -->
-    <header class="bg-uns text-white shadow-sm">
-        <div class="max-w-screen-2xl mx-auto px-8 py-4 flex items-center justify-between">
+    <header class="bg-uns text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <img src="images/logo_rojo_UNS.png" class="h-8 w-8 object-contain" alt="UNS">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
+                    <span class="text-uns font-black text-xl">U</span>
                 </div>
                 <div>
-                    <span class="font-bold text-2xl tracking-tight">CRM UNS</span>
-                    <span class="ml-2 text-white/60 text-sm">Universidad Nacional del Santa</span>
+                    <h1 class="font-bold text-xl tracking-tight leading-none">CRM UNS</h1>
+                    <span class="text-white/70 text-xs">Universidad Nacional del Santa</span>
                 </div>
             </div>
-
-            <div class="flex items-center gap-3">
-                <div onclick="mostrarPerfil()" class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <span class="text-sm font-medium">Asesor de Admisión</span>
+            <div class="flex items-center gap-4">
+                <button class="relative p-2 text-white/80 hover:text-white transition" onclick="mostrarNotificaciones()">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border-2 border-uns animate-pulse"></span>
+                </button>
+                <div class="flex items-center gap-3 px-4 py-1.5 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition border border-white/10">
+                    <div class="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user text-xs"></i></div>
+                    <div class="hidden sm:block text-left">
+                        <p class="text-sm font-bold leading-none">Asesor Admisión</p>
+                        <p class="text-[10px] text-white/70">Online</p>
+                    </div>
                 </div>
-                <a href="login.html" class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full transition text-sm">
+                <a href="#" class="flex items-center gap-2 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-sm">
                     <i class="fa-solid fa-sign-out-alt"></i>
-                    <span>Salir</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <div class="max-w-screen-2xl mx-auto flex">
-        
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white border-r min-h-screen p-6">
-            <div class="text-xs font-bold text-gray-400 tracking-widest mb-3 px-3">MÓDULOS</div>
-            <nav class="space-y-1">
-                <button onclick="showSection('dashboard')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left font-semibold hover:bg-gray-100 bg-gray-100 transition">
-                    <i class="fa-solid fa-chart-pie w-5"></i> <span>Dashboard</span>
+    <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-64px)] overflow-hidden">
+
+        <aside class="w-64 bg-white border-r h-full flex flex-col justify-between overflow-y-auto">
+            <div class="p-6">
+                <div class="text-xs font-black text-gray-400 tracking-widest mb-4 px-3 uppercase">Módulos CRM</div>
+                <nav class="space-y-2">
+                    <button onclick="showSection('dashboard', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold bg-uns/10 text-uns transition">
+                        <i class="fa-solid fa-chart-pie w-5 text-center"></i> <span>Dashboard</span>
+                    </button>
+                    <button onclick="showSection('postulantes', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-users w-5 text-center"></i> <span>Postulantes</span>
+                        <span id="menu-postulantes-badge" class="ml-auto bg-red-100 text-uns text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    <button onclick="showSection('tareas', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-list-check w-5 text-center"></i> <span>Mis Tareas</span>
+                        <span id="menu-tareas-badge" class="ml-auto bg-amber-100 text-amber-700 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    <button onclick="showSection('tickets', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-headset w-5 text-center"></i> <span>Tickets</span>
+                        <span id="menu-tickets-badge" class="ml-auto bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    <button onclick="showSection('comunicaciones', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition">
+                        <i class="fa-solid fa-envelope-open-text w-5 text-center"></i> <span>Campañas</span>
+                    </button>
+                </nav>
+            </div>
+            <div class="p-6 border-t">
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-500 hover:bg-gray-100 transition">
+                    <i class="fa-solid fa-gear w-5 text-center"></i> <span>Configuración</span>
                 </button>
-                <button onclick="showSection('postulantes')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left font-semibold hover:bg-gray-100 transition">
-                    <i class="fa-solid fa-user-graduate w-5"></i> <span>Postulantes</span>
-                </button>
-                <button onclick="showSection('tickets')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left font-semibold hover:bg-gray-100 transition">
-                    <i class="fa-solid fa-headset w-5"></i> <span>Tickets</span>
-                </button>
-                <button onclick="showSection('comunicaciones')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left font-semibold hover:bg-gray-100 transition">
-                    <i class="fa-solid fa-envelope w-5"></i> <span>Comunicaciones</span>
-                </button>
-            </nav>
+            </div>
         </aside>
 
-        <!-- Contenido -->
-        <main class="flex-1 p-8">
+        <main class="flex-1 h-full overflow-y-auto bg-slate-50/50 p-8">
 
             <!-- DASHBOARD -->
-            <div id="dashboard" class="section">
-                <h1 class="text-3xl font-bold mb-1">Dashboard</h1>
-                <p class="text-gray-500 mb-8">Resumen general del sistema • Junio 2026</p>
+            <div id="dashboard" class="section block animate-fade-in">
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h1 class="text-3xl font-black text-gray-800">Dashboard</h1>
+                        <p class="text-gray-500 font-medium mt-1">Resumen de captación y gestión - Admisión 2026</p>
+                    </div>
+                    <button onclick="exportarCSV()" class="bg-white border shadow-sm px-4 py-2 rounded-lg text-sm font-bold text-gray-600 hover:bg-gray-50 transition">
+                        <i class="fa-solid fa-download mr-2"></i>Exportar Reporte CSV
+                    </button>
+                </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <div class="text-sm text-gray-500">Postulantes Activos</div>
-                        <div class="text-4xl font-bold text-uns mt-2" id="dash-postulantes">0</div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition">
+                        <div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Total Postulantes</div>
+                            <div class="text-3xl font-black text-gray-800 group-hover:text-uns transition" id="dash-postulantes">0</div>
+                            <div class="text-xs text-emerald-600 font-bold mt-1"><i class="fa-solid fa-arrow-trend-up"></i> <span id="dash-postulantes-mes">+0</span> este mes</div>
+                        </div>
+                        <div class="w-12 h-12 bg-red-50 text-uns rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-user-graduate"></i></div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <div class="text-sm text-gray-500">Tickets Abiertos</div>
-                        <div class="text-4xl font-bold text-amber-500 mt-2">28</div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition">
+                        <div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Tasa Conversión</div>
+                            <div class="text-3xl font-black text-emerald-600" id="dash-conversion">0%</div>
+                            <div class="text-xs text-gray-400 mt-1">Inscritos / Total</div>
+                        </div>
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-chart-line"></i></div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <div class="text-sm text-gray-500">Tasa de Conversión</div>
-                        <div class="text-4xl font-bold text-emerald-600 mt-2">71%</div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition">
+                        <div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Tareas Pendientes</div>
+                            <div class="text-3xl font-black text-amber-500" id="dash-tareas">0</div>
+                            <div class="text-xs text-amber-600 font-bold mt-1"><span id="dash-tareas-hoy">0</span> para hoy</div>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-clipboard-list"></i></div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <div class="text-sm text-gray-500">Comunicaciones Este Mes</div>
-                        <div class="text-4xl font-bold text-blue-600 mt-2">487</div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between group hover:shadow-md transition">
+                        <div>
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Tickets Abiertos</div>
+                            <div class="text-3xl font-black text-blue-600" id="dash-tickets">0</div>
+                            <div class="text-xs text-blue-500 font-bold mt-1"><span id="dash-tickets-urgentes">0</span> urgentes</div>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-headset"></i></div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <h4 class="font-semibold mb-4">Postulantes por Mes</h4>
-                        <canvas id="chartPostulantes"></canvas>
+                <!-- Actividad Reciente -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
+                            <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Crecimiento de Postulantes</h4>
+                            <div class="relative w-full h-64">
+                                <canvas id="chartPostulantes"></canvas>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
+                            <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider">Interés por Facultades</h4>
+                            <div class="relative w-full h-64 flex justify-center">
+                                <canvas id="chartCarreras"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border">
-                        <h4 class="font-semibold mb-4">Distribución por Carrera</h4>
-                        <canvas id="chartCarreras"></canvas>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-sm tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left text-uns"></i> Actividad Reciente
+                        </h4>
+                        <div id="actividad-reciente" class="space-y-4 max-h-80 overflow-y-auto pr-2">
+                            <!-- Se llena dinámicamente -->
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- POSTULANTES -->
-            <div id="postulantes" class="section hidden">
+            <div id="postulantes" class="section hidden animate-fade-in">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800">Base de Postulantes</h2>
+                        <p class="text-gray-500 text-sm">Gestiona el embudo de ventas y admisión.</p>
+                    </div>
+                    <div class="flex gap-3 w-full md:w-auto flex-wrap">
+                        <div class="relative w-full md:w-64">
+                            <i class="fa-solid fa-search absolute left-3 top-3 text-gray-400"></i>
+                            <input type="text" id="buscador-postulantes" placeholder="Buscar DNI o nombre..." class="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:border-uns text-sm">
+                        </div>
+                        <select id="filtro-estado" onchange="aplicarFiltros()" class="border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-uns cursor-pointer bg-white">
+                            <option value="">Todos los estados</option>
+                            <option value="Nuevo Lead">Nuevo Lead</option>
+                            <option value="Interesado">Interesado</option>
+                            <option value="Prospecto Caliente">Prospecto Caliente</option>
+                            <option value="Inscrito / Pagó">Inscrito / Pagó</option>
+                            <option value="Descartado">Descartado</option>
+                        </select>
+                        <select id="filtro-carrera" onchange="aplicarFiltros()" class="border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-uns cursor-pointer bg-white">
+                            <option value="">Todas las carreras</option>
+                            <option>Ing. de Sistemas e Informática</option>
+                            <option>Ingeniería Civil</option>
+                            <option>Medicina Humana</option>
+                            <option>Derecho y Ciencias Políticas</option>
+                            <option>Comunicación Social</option>
+                            <option>Enfermería</option>
+                        </select>
+                        <button onclick="abrirModalPostulante()" class="bg-uns text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-uns-dark transition shadow-md whitespace-nowrap">
+                            <i class="fa-solid fa-plus"></i> <span>Añadir</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-gray-600 font-bold uppercase text-[11px] tracking-wider border-b">
+                                <tr>
+                                    <th class="px-6 py-4 cursor-pointer hover:bg-gray-100 transition" onclick="ordenarPor('nombre')">Postulante <i class="fa-solid fa-sort text-gray-300 ml-1"></i></th>
+                                    <th class="px-6 py-4">Carrera de Interés</th>
+                                    <th class="px-6 py-4 text-center cursor-pointer hover:bg-gray-100 transition" onclick="ordenarPor('estado')">Fase del Embudo <i class="fa-solid fa-sort text-gray-300 ml-1"></i></th>
+                                    <th class="px-6 py-4 text-center">Canal</th>
+                                    <th class="px-6 py-4 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-postulantes" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                    <!-- Paginación -->
+                    <div class="px-6 py-4 border-t flex items-center justify-between">
+                        <span class="text-xs text-gray-500" id="paginacion-info">Mostrando 0 de 0</span>
+                        <div class="flex gap-1" id="paginacion-botones"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAREAS KANBAN -->
+            <div id="tareas" class="section hidden animate-fade-in">
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold">Postulantes</h2>
-                        <p class="text-gray-500">Gestión y seguimiento de admisión 2026-I</p>
+                        <h2 class="text-2xl font-black text-gray-800">Mis Tareas (Kanban)</h2>
+                        <p class="text-gray-500 text-sm">Arrastra las tarjetas entre columnas para cambiar su estado.</p>
                     </div>
-                    <button onclick="abrirModalPostulante()" class="bg-uns text-white px-6 py-2.5 rounded-2xl font-semibold flex items-center gap-2 hover:bg-uns-dark">
-                        <i class="fa-solid fa-plus"></i> <span>Nuevo Postulante</span>
+                    <button onclick="abrirModalTarea()" class="bg-slate-800 text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-black transition shadow-md">
+                        <i class="fa-solid fa-plus"></i> <span>Nueva Tarea</span>
                     </button>
                 </div>
 
-                <div class="bg-white rounded-3xl border overflow-hidden">
-                    <table class="w-full">
-                        <thead class="bg-gray-50 text-sm">
-                            <tr>
-                                <th class="px-6 py-4 text-left">Nombre</th>
-                                <th class="px-6 py-4 text-left">DNI</th>
-                                <th class="px-6 py-4 text-left">Carrera</th>
-                                <th class="px-6 py-4 text-left">Estado</th>
-                                <th class="px-6 py-4 text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-postulantes" class="text-sm divide-y"></tbody>
-                    </table>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="kanban-column bg-gray-100 rounded-2xl p-4 border" data-estado="pendiente" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+                        <h3 class="font-bold text-gray-700 mb-4 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-amber-400"></div> Por Hacer <span class="ml-auto text-xs bg-white px-2 py-0.5 rounded-full text-gray-500" id="count-pendiente">0</span></h3>
+                        <div id="kanban-pendiente" class="space-y-3 min-h-[100px]"></div>
+                    </div>
+                    <div class="kanban-column bg-gray-50 rounded-2xl p-4 border" data-estado="proceso" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+                        <h3 class="font-bold text-gray-700 mb-4 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-blue-400"></div> En Proceso <span class="ml-auto text-xs bg-white px-2 py-0.5 rounded-full text-gray-500" id="count-proceso">0</span></h3>
+                        <div id="kanban-proceso" class="space-y-3 min-h-[100px]"></div>
+                    </div>
+                    <div class="kanban-column bg-gray-50 rounded-2xl p-4 border opacity-90" data-estado="completada" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
+                        <h3 class="font-bold text-gray-700 mb-4 flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-emerald-400"></div> Completadas <span class="ml-auto text-xs bg-white px-2 py-0.5 rounded-full text-gray-500" id="count-completada">0</span></h3>
+                        <div id="kanban-completada" class="space-y-3 min-h-[100px]"></div>
+                    </div>
                 </div>
             </div>
 
             <!-- TICKETS -->
-            <div id="tickets" class="section hidden">
-                <div class="flex justify-between items-center mb-6">
+            <div id="tickets" class="section hidden animate-fade-in">
+                <div class="mb-6 flex justify-between items-center">
                     <div>
-                        <h2 class="text-2xl font-bold">Tickets de Atención</h2>
-                        <p class="text-gray-500">Consultas, reclamos y trámites de estudiantes</p>
+                        <h2 class="text-2xl font-black text-gray-800">Tickets de Soporte</h2>
+                        <p class="text-gray-500 text-sm">Consultas y reclamos de postulantes.</p>
                     </div>
-                    <button onclick="abrirModalTicket()" class="bg-uns text-white px-6 py-2.5 rounded-2xl font-semibold flex items-center gap-2 hover:bg-uns-dark">
-                        <i class="fa-solid fa-plus"></i> <span>Nuevo Ticket</span>
-                    </button>
+                    <div class="flex gap-2">
+                        <select id="filtro-ticket-estado" onchange="renderTickets()" class="border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-uns cursor-pointer bg-white">
+                            <option value="">Todos</option>
+                            <option value="Abierto">Abierto</option>
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Resuelto">Resuelto</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="bg-white rounded-3xl border overflow-hidden">
-                    <table class="w-full text-sm">
-                        <thead class="bg-gray-50">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 font-bold uppercase text-[11px] border-b">
                             <tr>
-                                <th class="px-6 py-4 text-left">ID</th>
-                                <th class="px-6 py-4 text-left">Estudiante</th>
-                                <th class="px-6 py-4 text-left">Motivo</th>
+                                <th class="px-6 py-4">Ticket</th>
+                                <th class="px-6 py-4">Asunto</th>
                                 <th class="px-6 py-4 text-center">Prioridad</th>
                                 <th class="px-6 py-4 text-center">Estado</th>
-                                <th class="px-6 py-4 text-center">Acciones</th>
+                                <th class="px-6 py-4 text-center">Acción</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla-tickets" class="divide-y"></tbody>
+                        <tbody id="tabla-tickets" class="divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
 
             <!-- COMUNICACIONES -->
-            <div id="comunicaciones" class="section hidden">
-                <div class="mb-6">
-                    <h2 class="text-2xl font-bold">Comunicaciones</h2>
-                    <p class="text-gray-500">Historial de mensajes enviados a postulantes y estudiantes</p>
+            <div id="comunicaciones" class="section hidden animate-fade-in">
+                <div class="mb-6 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-800">Campañas Email / SMS</h2>
+                        <p class="text-gray-500 text-sm">Envíos masivos a bases de datos.</p>
+                    </div>
+                    <button class="bg-uns text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-paper-plane"></i> <span>Crear Campaña</span>
+                    </button>
                 </div>
-
-                <div class="bg-white rounded-3xl border overflow-hidden">
-                    <table class="w-full text-sm">
-                        <thead class="bg-gray-50">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 font-bold uppercase text-[11px] border-b">
                             <tr>
-                                <th class="px-6 py-4 text-left">Fecha</th>
-                                <th class="px-6 py-4 text-left">Tipo</th>
-                                <th class="px-6 py-4 text-left">Asunto</th>
-                                <th class="px-6 py-4 text-left">Destinatarios</th>
-                                <th class="px-6 py-4 text-center">Cantidad</th>
+                                <th class="px-6 py-4">Fecha</th>
+                                <th class="px-6 py-4">Asunto / Nombre Campaña</th>
+                                <th class="px-6 py-4">Destinatarios</th>
+                                <th class="px-6 py-4 text-center">Tasa Apertura</th>
                                 <th class="px-6 py-4 text-center">Estado</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla-comunicaciones" class="divide-y"></tbody>
+                        <tbody id="tabla-comunicaciones" class="divide-y divide-gray-100"></tbody>
                     </table>
                 </div>
             </div>
-
         </main>
     </div>
 
-    <!-- Modales -->
     <!-- Modal Postulante -->
-    <div id="modal-postulante" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[100]">
-        <div class="bg-white rounded-3xl w-full max-w-md p-8">
-            <h3 class="text-xl font-bold mb-6">Registrar Nuevo Postulante</h3>
-            <form id="form-postulante" class="space-y-4">
-                <!-- campos -->
-                <div><label class="text-sm font-semibold">Nombres completos</label><input type="text" id="p-nombre" class="w-full border rounded-2xl px-4 py-2.5 mt-1" required></div>
+    <div id="modal-postulante" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] overflow-y-auto">
+            <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-user-plus mr-2"></i>Nuevo Postulante</h3>
+                <button onclick="cerrarModalPostulante()" class="hover:text-red-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="form-postulante" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label class="text-xs font-bold text-gray-600 uppercase">Nombres Completos <span class="text-red-500">*</span></label>
+                        <input type="text" id="p-nombre" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns transition" required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">DNI <span class="text-red-500">*</span></label>
+                        <input type="text" id="p-dni" maxlength="8" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" required placeholder="8 dígitos">
+                        <p id="error-dni" class="text-xs text-red-500 mt-1 hidden">Ingrese 8 dígitos numéricos</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Celular / WhatsApp <span class="text-red-500">*</span></label>
+                        <input type="tel" id="p-celular" maxlength="9" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" required placeholder="9 dígitos">
+                        <p id="error-celular" class="text-xs text-red-500 mt-1 hidden">Ingrese 9 dígitos numéricos</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Correo Electrónico</label>
+                        <input type="email" id="p-correo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" placeholder="ejemplo@correo.com">
+                        <p id="error-correo" class="text-xs text-red-500 mt-1 hidden">Correo inválido</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Colegio de Procedencia</label>
+                        <input type="text" id="p-colegio" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" placeholder="Ej. Santa Rosa">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Carrera de Interés <span class="text-red-500">*</span></label>
+                        <select id="p-carrera" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option>Ing. de Sistemas e Informática</option>
+                            <option>Ingeniería Civil</option>
+                            <option>Medicina Humana</option>
+                            <option>Derecho y Ciencias Políticas</option>
+                            <option>Comunicación Social</option>
+                            <option>Enfermería</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Canal (¿Cómo se enteró?)</label>
+                        <select id="p-canal" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
+                            <option>Facebook Ads</option>
+                            <option>Instagram</option>
+                            <option>Feria Vocacional</option>
+                            <option>Recomendación</option>
+                            <option>Página Web</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-6 border-t mt-6">
+                    <button type="button" onclick="cerrarModalPostulante()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md">Guardar en CRM</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Ver Perfil Postulante -->
+    <div id="modal-perfil" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-id-card mr-2"></i>Ficha del Postulante</h3>
+                <button onclick="cerrarModalPerfil()" class="hover:text-red-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-6">
+                <!-- Tabs -->
+                <div class="flex border-b mb-4">
+                    <button onclick="switchTab('info')" class="tab-btn active px-4 py-2 text-sm font-bold text-gray-600">Información</button>
+                    <button onclick="switchTab('historial')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Historial</button>
+                    <button onclick="switchTab('notas')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Notas</button>
+                </div>
+
+                <div id="tab-info" class="tab-content active">
+                    <div class="grid grid-cols-2 gap-4" id="perfil-info-content"></div>
+                </div>
+                <div id="tab-historial" class="tab-content">
+                    <div id="perfil-historial-content" class="space-y-3 max-h-64 overflow-y-auto"></div>
+                </div>
+                <div id="tab-notas" class="tab-content">
+                    <div class="space-y-3">
+                        <div id="perfil-notas-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
+                        <div class="flex gap-2 pt-2">
+                            <input type="text" id="nueva-nota-input" class="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-uns" placeholder="Escribe una nota...">
+                            <button onclick="agregarNota()" class="bg-uns text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-uns-dark"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t bg-gray-50 flex justify-between">
+                <button onclick="eliminarPostulanteActual()" class="text-red-500 font-bold text-sm hover:text-red-700 transition"><i class="fa-solid fa-trash mr-1"></i>Eliminar Postulante</button>
+                <button onclick="cerrarModalPerfil()" class="text-gray-500 font-bold text-sm hover:text-gray-700">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Responder Ticket -->
+    <div id="modal-responder-ticket" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
+            <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-reply mr-2"></i>Responder Ticket</h3>
+                <button onclick="cerrarModalTicket()" class="hover:text-red-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Ticket ID</span>
+                            <p class="font-bold text-gray-800" id="ticket-id-display">#TK-1024</p>
+                        </div>
+                        <span id="ticket-estado-badge" class="bg-amber-100 text-amber-700 px-2 py-1 rounded text-xs font-bold">Abierto</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Postulante</span>
+                        <p class="font-medium text-gray-700 text-sm" id="ticket-postulante-display">Carlos Ruiz</p>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Asunto</span>
+                        <p class="text-sm text-gray-600" id="ticket-asunto-display">Problema para subir DNI al sistema</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase mb-1 block">Tu Respuesta</label>
+                    <textarea id="ticket-respuesta" rows="4" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-3 mt-1 focus:outline-none focus:border-uns transition resize-none" placeholder="Escribe tu respuesta al postulante..."></textarea>
+                </div>
+
                 <div class="grid grid-cols-2 gap-4">
-                    <div><label class="text-sm font-semibold">DNI</label><input type="text" id="p-dni" maxlength="8" class="w-full border rounded-2xl px-4 py-2.5 mt-1" required></div>
-                    <div><label class="text-sm font-semibold">Celular</label><input type="tel" id="p-celular" class="w-full border rounded-2xl px-4 py-2.5 mt-1" required></div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase mb-1 block">Cambiar Estado</label>
+                        <select id="ticket-nuevo-estado" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 focus:outline-none focus:border-uns cursor-pointer">
+                            <option value="Abierto">Abierto</option>
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Resuelto">Resuelto</option>
+                            <option value="Cerrado">Cerrado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase mb-1 block">Enviar como</label>
+                        <select id="ticket-canal-envio" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 focus:outline-none focus:border-uns cursor-pointer">
+                            <option value="email">Correo Electrónico</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="interno">Nota Interna</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="ticket-historial" class="max-h-32 overflow-y-auto space-y-2"></div>
+
+                <div class="flex gap-3 pt-4 border-t mt-4">
+                    <button type="button" onclick="cerrarModalTicket()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="button" onclick="enviarRespuestaTicket()" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Enviar Respuesta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nueva Tarea -->
+    <div id="modal-tarea" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+            <div class="bg-slate-800 px-6 py-4 flex justify-between items-center text-white">
+                <h3 class="text-lg font-bold"><i class="fa-solid fa-plus mr-2"></i>Nueva Tarea</h3>
+                <button onclick="cerrarModalTarea()" class="hover:text-gray-300"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <form id="form-tarea" class="p-6 space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Título <span class="text-red-500">*</span></label>
+                    <input type="text" id="t-titulo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns" required>
                 </div>
                 <div>
-                    <label class="text-sm font-semibold">Carrera de interés</label>
-                    <select id="p-carrera" class="w-full border rounded-2xl px-4 py-2.5 mt-1" required>
-                        <!-- Todas las carreras -->
-                        <option>Ingeniería de Sistemas e Informática</option>
-                        <option>Ingeniería en Energía</option>
-                        <option>Ingeniería Agroindustrial</option>
-                        <option>Ingeniería Civil</option>
-                        <option>Ingeniería Mecánica</option>
-                        <option>Ingeniería Agrónoma</option>
-                        <option>Biología en Acuicultura</option>
-                        <option>Enfermería</option>
-                        <option>Biotecnología</option>
-                        <option>Medicina Humana</option>
-                        <option>Educación Inicial</option>
-                        <option>Educación Primaria</option>
-                        <option>Educación Secundaria</option>
-                        <option>Comunicación Social</option>
-                        <option>Derecho y Ciencias Políticas</option>
-                    </select>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Descripción</label>
+                    <textarea id="t-desc" rows="2" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns resize-none"></textarea>
                 </div>
-                <div class="flex gap-3 pt-4">
-                    <button type="button" onclick="cerrarModalPostulante()" class="flex-1 border py-3 rounded-2xl">Cancelar</button>
-                    <button type="submit" class="flex-1 bg-uns text-white py-3 rounded-2xl font-semibold">Guardar</button>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Tipo</label>
+                        <select id="t-tipo" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
+                            <option value="llamada">Llamada</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="email">Correo</option>
+                            <option value="reunion">Reunión</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-600 uppercase">Prioridad</label>
+                        <select id="t-prioridad" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
+                            <option value="Alta">Alta</option>
+                            <option value="Media" selected>Media</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600 uppercase">Fecha Límite</label>
+                    <input type="date" id="t-fecha" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns">
+                </div>
+                <div class="flex gap-3 pt-4 border-t mt-4">
+                    <button type="button" onclick="cerrarModalTarea()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="submit" class="flex-1 bg-slate-800 hover:bg-black text-white font-bold py-2.5 rounded-lg transition shadow-md">Crear Tarea</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // === Funciones principales ===
-        function showSection(section) {
+        // ==================== UTILIDADES ====================
+        function showToast(message, type = 'success', duration = 3000) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+            const colors = { success: 'text-emerald-500', error: 'text-red-500', warning: 'text-amber-500', info: 'text-blue-500' };
+
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type]} ${colors[type]} text-xl"></i>
+                <div class="flex-1">
+                    <p class="font-bold text-sm text-gray-800">${type === 'success' ? '¡Éxito!' : type === 'error' ? 'Error' : type === 'warning' ? 'Atención' : 'Info'}</p>
+                    <p class="text-xs text-gray-500">${message}</p>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('hiding');
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'Hoy';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('es-PE', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // ==================== NAVEGACIÓN ====================
+        function showSection(section, btnElement) {
             document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
             document.getElementById(section).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-gray-100'));
-            event.currentTarget.classList.add('bg-gray-100');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = 'nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold text-gray-600 hover:bg-gray-100 transition';
+            });
+            if(btnElement) {
+                btnElement.className = 'nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-bold bg-uns/10 text-uns transition';
+            }
+
+            if (section === 'tareas') renderKanban();
         }
 
-        function mostrarPerfil() {
-            alert("Usuario: Asesor de Admisión\nUniversidad Nacional del Santa\nTeléfono: (043) 310445\nEmail: informesadmision@uns.edu.pe");
-        }
+        // ==================== POSTULANTES ====================
+        let postulantes = JSON.parse(localStorage.getItem('crm_uns_postulantes')) || [
+            {id: 1, nombre: "María Gonzales", dni: "76543210", celular: "987654321", correo: "maria@email.com", colegio: "I.E. Santa Rosa", carrera: "Medicina Humana", estado: "Interesado", canal: "Facebook Ads", fecha: "2026-06-01", notas: [], historial: [{accion: "Registrado en CRM", fecha: "2026-06-01", autor: "Sistema"}]},
+            {id: 2, nombre: "Juan Cárdenas", dni: "71234567", celular: "912345678", correo: "juan@email.com", colegio: "Trilce", carrera: "Ing. de Sistemas e Informática", estado: "Prospecto Caliente", canal: "Feria Vocacional", fecha: "2026-06-03", notas: [], historial: [{accion: "Registrado en CRM", fecha: "2026-06-03", autor: "Sistema"}]},
+            {id: 3, nombre: "Lucía Mendoza", dni: "72345678", celular: "934567890", correo: "lucia@email.com", colegio: "Cesar Vallejo", carrera: "Derecho y Ciencias Políticas", estado: "Nuevo Lead", canal: "Instagram", fecha: "2026-06-05", notas: [], historial: [{accion: "Registrado en CRM", fecha: "2026-06-05", autor: "Sistema"}]},
+            {id: 4, nombre: "Carlos Ruiz", dni: "73456789", celular: "945678901", correo: "carlos@email.com", colegio: "San Agustín", carrera: "Ingeniería Civil", estado: "Inscrito / Pagó", canal: "Página Web", fecha: "2026-06-02", notas: [], historial: [{accion: "Registrado en CRM", fecha: "2026-06-02", autor: "Sistema"}, {accion: "Cambió a Inscrito / Pagó", fecha: "2026-06-04", autor: "Asesor"}]}
+        ];
 
-        // Postulantes con LocalStorage
-        let postulantes = JSON.parse(localStorage.getItem('crm_uns_postulantes')) || [];
+        let postulanteActualId = null;
+        let paginaActual = 1;
+        const itemsPorPagina = 5;
+        let ordenActual = { campo: null, asc: true };
 
         function guardarPostulantes() {
             localStorage.setItem('crm_uns_postulantes', JSON.stringify(postulantes));
         }
 
+        function obtenerColorEstado(estado) {
+            const map = {
+                'Nuevo Lead': 'bg-blue-100 text-blue-700',
+                'Interesado': 'bg-amber-100 text-amber-700',
+                'Prospecto Caliente': 'bg-orange-100 text-orange-700',
+                'Inscrito / Pagó': 'bg-emerald-100 text-emerald-700',
+                'Descartado': 'bg-gray-100 text-gray-500'
+            };
+            return map[estado] || 'bg-gray-100 text-gray-700';
+        }
+
+        function validarDNI(dni) { return /^\d{8}$/.test(dni); }
+        function validarCelular(cel) { return /^\d{9}$/.test(cel); }
+        function validarEmail(email) { return !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+        function aplicarFiltros() {
+            paginaActual = 1;
+            renderPostulantes();
+        }
+
+        function ordenarPor(campo) {
+            if (ordenActual.campo === campo) {
+                ordenActual.asc = !ordenActual.asc;
+            } else {
+                ordenActual.campo = campo;
+                ordenActual.asc = true;
+            }
+            renderPostulantes();
+        }
+
+        function getPostulantesFiltrados() {
+            const filtroTexto = document.getElementById('buscador-postulantes').value.toLowerCase();
+            const filtroEstado = document.getElementById('filtro-estado').value;
+            const filtroCarrera = document.getElementById('filtro-carrera').value;
+
+            let filtrados = postulantes.filter(p => {
+                const matchTexto = p.nombre.toLowerCase().includes(filtroTexto) || p.dni.includes(filtroTexto);
+                const matchEstado = !filtroEstado || p.estado === filtroEstado;
+                const matchCarrera = !filtroCarrera || p.carrera === filtroCarrera;
+                return matchTexto && matchEstado && matchCarrera;
+            });
+
+            if (ordenActual.campo) {
+                filtrados.sort((a, b) => {
+                    let valA = a[ordenActual.campo].toLowerCase();
+                    let valB = b[ordenActual.campo].toLowerCase();
+                    return ordenActual.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                });
+            }
+
+            return filtrados;
+        }
+
         function renderPostulantes() {
             const tbody = document.getElementById('tabla-postulantes');
             tbody.innerHTML = '';
-            postulantes.forEach(p => {
+
+            const filtrados = getPostulantesFiltrados();
+            const total = filtrados.length;
+            const totalPaginas = Math.ceil(total / itemsPorPagina);
+            const inicio = (paginaActual - 1) * itemsPorPagina;
+            const paginados = filtrados.slice(inicio, inicio + itemsPorPagina);
+
+            paginados.forEach(p => {
                 const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 transition group";
                 tr.innerHTML = `
-                    <td class="px-6 py-4 font-medium">${p.nombre}</td>
-                    <td class="px-6 py-4">${p.dni}</td>
-                    <td class="px-6 py-4">${p.carrera}</td>
-                    <td class="px-6 py-4"><span class="px-3 py-1 text-xs rounded-full font-bold bg-yellow-100 text-yellow-700">${p.estado}</span></td>
-                    <td class="px-6 py-4 text-center"><button onclick="verPostulante(${p.id})" class="text-uns font-semibold">Ver</button></td>
+                    <td class="px-6 py-4">
+                        <div class="font-bold text-gray-800">${p.nombre}</div>
+                        <div class="text-[11px] text-gray-500 mt-0.5"><i class="fa-regular fa-id-card"></i> ${p.dni} | <i class="fa-solid fa-mobile-screen"></i> ${p.celular}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="font-medium text-gray-600 text-sm">${p.carrera}</div>
+                        <div class="text-[10px] text-gray-400">${p.colegio || 'Sin colegio'}</div>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <select onchange="cambiarEstadoPostulante(${p.id}, this.value)" class="text-xs font-bold rounded-full px-3 py-1 outline-none cursor-pointer ${obtenerColorEstado(p.estado || 'Nuevo Lead')}">
+                            <option value="Nuevo Lead" ${(p.estado==='Nuevo Lead')?'selected':''}>Nuevo Lead</option>
+                            <option value="Interesado" ${(p.estado==='Interesado')?'selected':''}>Interesado</option>
+                            <option value="Prospecto Caliente" ${(p.estado==='Prospecto Caliente')?'selected':''}>Prospecto Caliente</option>
+                            <option value="Inscrito / Pagó" ${(p.estado==='Inscrito / Pagó')?'selected':''}>Inscrito / Pagó</option>
+                            <option value="Descartado" ${(p.estado==='Descartado')?'selected':''}>Descartado</option>
+                        </select>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">${p.canal || 'N/A'}</span>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <button title="WhatsApp" onclick="window.open('https://wa.me/51${p.celular}', '_blank')" class="w-8 h-8 rounded-full bg-green-50 text-green-600 hover:bg-green-500 hover:text-white transition flex items-center justify-center"><i class="fa-brands fa-whatsapp text-lg"></i></button>
+                            <button title="Ver Perfil" onclick="verPostulante(${p.id})" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-600 hover:text-white transition flex items-center justify-center"><i class="fa-regular fa-eye"></i></button>
+                            <button title="Eliminar" onclick="confirmarEliminarPostulante(${p.id})" class="w-8 h-8 rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>
+                        </div>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
+
+            // Paginación
+            document.getElementById('paginacion-info').innerText = `Mostrando ${inicio + 1}-${Math.min(inicio + itemsPorPagina, total)} de ${total}`;
+            const pagDiv = document.getElementById('paginacion-botones');
+            pagDiv.innerHTML = '';
+            for (let i = 1; i <= totalPaginas; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.className = `page-btn w-8 h-8 rounded-lg text-xs font-bold ${i === paginaActual ? 'active' : 'text-gray-600'}`;
+                btn.onclick = () => { paginaActual = i; renderPostulantes(); };
+                pagDiv.appendChild(btn);
+            }
+
             document.getElementById('dash-postulantes').innerText = postulantes.length;
+            document.getElementById('menu-postulantes-badge').innerText = postulantes.length;
+            actualizarDashboard();
         }
 
+        // Debounce para búsqueda
+        let debounceTimer;
+        document.getElementById('buscador-postulantes').addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => { paginaActual = 1; renderPostulantes(); }, 300);
+        });
+
+        function cambiarEstadoPostulante(id, nuevoEstado) {
+            const p = postulantes.find(x => x.id === id);
+            if (p) {
+                const oldEstado = p.estado;
+                p.estado = nuevoEstado;
+                p.historial.push({
+                    accion: `Cambió de "${oldEstado}" a "${nuevoEstado}"`,
+                    fecha: new Date().toISOString().split('T')[0],
+                    autor: 'Asesor Admisión'
+                });
+                guardarPostulantes();
+                showToast(`Estado de ${p.nombre} actualizado a "${nuevoEstado}"`, 'success');
+                renderPostulantes();
+                actualizarActividadReciente();
+            }
+        }
+
+        function confirmarEliminarPostulante(id) {
+            const p = postulantes.find(x => x.id === id);
+            if (confirm(`¿Estás seguro de eliminar a ${p.nombre}?\n\nEsta acción no se puede deshacer.`)) {
+                postulantes = postulantes.filter(x => x.id !== id);
+                guardarPostulantes();
+                showToast('Postulante eliminado correctamente', 'success');
+                renderPostulantes();
+                actualizarDashboard();
+            }
+        }
+
+        function eliminarPostulanteActual() {
+            if (postulanteActualId) confirmarEliminarPostulante(postulanteActualId);
+            cerrarModalPerfil();
+        }
+
+        // Modales Postulante
         function abrirModalPostulante() {
             document.getElementById('modal-postulante').classList.remove('hidden');
-            document.getElementById('modal-postulante').classList.add('flex');
+            document.getElementById('error-dni').classList.add('hidden');
+            document.getElementById('error-celular').classList.add('hidden');
+            document.getElementById('error-correo').classList.add('hidden');
         }
-
         function cerrarModalPostulante() {
-            document.getElementById('modal-postulante').classList.remove('flex');
             document.getElementById('modal-postulante').classList.add('hidden');
+            document.getElementById('form-postulante').reset();
         }
 
         document.getElementById('form-postulante').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            const dni = document.getElementById('p-dni').value;
+            const celular = document.getElementById('p-celular').value;
+            const correo = document.getElementById('p-correo').value;
+
+            let valido = true;
+
+            if (!validarDNI(dni)) { document.getElementById('error-dni').classList.remove('hidden'); valido = false; }
+            else { document.getElementById('error-dni').classList.add('hidden'); }
+
+            if (!validarCelular(celular)) { document.getElementById('error-celular').classList.remove('hidden'); valido = false; }
+            else { document.getElementById('error-celular').classList.add('hidden'); }
+
+            if (!validarEmail(correo)) { document.getElementById('error-correo').classList.remove('hidden'); valido = false; }
+            else { document.getElementById('error-correo').classList.add('hidden'); }
+
+            if (!valido) return;
+
+            // Detectar duplicado
+            if (postulantes.some(p => p.dni === dni)) {
+                showToast('Ya existe un postulante con ese DNI', 'error');
+                return;
+            }
+
             const nuevo = {
                 id: Date.now(),
                 nombre: document.getElementById('p-nombre').value,
-                dni: document.getElementById('p-dni').value,
+                dni: dni,
+                celular: celular,
+                correo: correo,
+                colegio: document.getElementById('p-colegio').value,
                 carrera: document.getElementById('p-carrera').value,
-                estado: "En seguimiento"
+                canal: document.getElementById('p-canal').value,
+                estado: "Nuevo Lead",
+                fecha: new Date().toISOString().split('T')[0],
+                notas: [],
+                historial: [{accion: "Registrado en CRM", fecha: new Date().toISOString().split('T')[0], autor: "Asesor Admisión"}]
             };
             postulantes.unshift(nuevo);
             guardarPostulantes();
             renderPostulantes();
             cerrarModalPostulante();
-            this.reset();
+            showToast(`${nuevo.nombre} registrado exitosamente`, 'success');
+            actualizarActividadReciente();
         });
 
+        // ==================== PERFIL POSTULANTE ====================
         function verPostulante(id) {
+            postulanteActualId = id;
             const p = postulantes.find(x => x.id === id);
-            alert(`Postulante: ${p.nombre}\nDNI: ${p.dni}\nCarrera: ${p.carrera}\nEstado: ${p.estado}`);
+            if (!p) return;
+
+            document.getElementById('perfil-info-content').innerHTML = `
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Nombre</span><p class="font-medium text-gray-800">${p.nombre}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">DNI</span><p class="font-medium text-gray-800">${p.dni}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Celular</span><p class="font-medium text-gray-800">${p.celular}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Correo</span><p class="font-medium text-gray-800">${p.correo || 'No registrado'}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Colegio</span><p class="font-medium text-gray-800">${p.colegio || 'No registrado'}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Carrera</span><p class="font-medium text-gray-800">${p.carrera}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Canal</span><p class="font-medium text-gray-800">${p.canal || 'N/A'}</p></div>
+                <div><span class="text-xs text-gray-400 uppercase font-bold">Estado</span><span class="inline-block mt-1 text-xs font-bold rounded-full px-2 py-1 ${obtenerColorEstado(p.estado)}">${p.estado}</span></div>
+            `;
+
+            const histDiv = document.getElementById('perfil-historial-content');
+            histDiv.innerHTML = '';
+            (p.historial || []).slice().reverse().forEach(h => {
+                histDiv.innerHTML += `
+                    <div class="flex gap-3 items-start p-3 bg-gray-50 rounded-lg border-l-2 border-uns">
+                        <div class="w-8 h-8 rounded-full bg-uns/10 text-uns flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-clock-rotate-left text-xs"></i></div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">${h.accion}</p>
+                            <p class="text-xs text-gray-400">${h.autor} • ${formatDate(h.fecha)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            renderNotas();
+            switchTab('info');
+            document.getElementById('modal-perfil').classList.remove('hidden');
         }
 
-        // Tickets
-        let tickets = [
-            {id: 2048, estudiante: "María López", motivo: "Problema con matrícula", prioridad: "Alta", estado: "Pendiente"},
-            {id: 2047, estudiante: "Carlos Ruiz", motivo: "Solicitud de constancia", prioridad: "Media", estado: "Resuelto"}
+        function cerrarModalPerfil() {
+            document.getElementById('modal-perfil').classList.add('hidden');
+            postulanteActualId = null;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+
+        function renderNotas() {
+            if (!postulanteActualId) return;
+            const p = postulantes.find(x => x.id === postulanteActualId);
+            const div = document.getElementById('perfil-notas-list');
+            div.innerHTML = '';
+            (p.notas || []).slice().reverse().forEach((n, idx) => {
+                div.innerHTML += `
+                    <div class="bg-gray-50 rounded-lg p-3 text-sm flex justify-between items-start">
+                        <span class="text-gray-700">${n}</span>
+                        <button onclick="eliminarNota(${p.notas.length - 1 - idx})" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                `;
+            });
+            if (!p.notas || p.notas.length === 0) div.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-4">Sin notas</p>';
+        }
+
+        function agregarNota() {
+            const input = document.getElementById('nueva-nota-input');
+            const texto = input.value.trim();
+            if (!texto || !postulanteActualId) return;
+            const p = postulantes.find(x => x.id === postulanteActualId);
+            if (!p.notas) p.notas = [];
+            p.notas.push(texto);
+            p.historial.push({accion: `Nota agregada: "${texto}"`, fecha: new Date().toISOString().split('T')[0], autor: "Asesor"});
+            guardarPostulantes();
+            input.value = '';
+            renderNotas();
+            showToast('Nota guardada', 'success');
+        }
+
+        function eliminarNota(index) {
+            const p = postulantes.find(x => x.id === postulanteActualId);
+            p.notas.splice(index, 1);
+            guardarPostulantes();
+            renderNotas();
+        }
+
+        // ==================== TAREAS KANBAN ====================
+        let tareas = JSON.parse(localStorage.getItem('crm_uns_tareas')) || [
+            {id: 1, titulo: "Seguimiento a Luis Pérez", desc: "Preguntar si logró pagar el voucher en el BN.", tipo: "llamada", prioridad: "Alta", estado: "pendiente", fecha: "2026-06-08"},
+            {id: 2, titulo: "Enviar temario a Ana Gómez", desc: "", tipo: "whatsapp", prioridad: "Media", estado: "pendiente", fecha: "2026-06-08"},
+            {id: 3, titulo: "Recordatorio Cierre Inscripciones", desc: "Enviar a prospectos de Ing. Sistemas.", tipo: "email", prioridad: "Media", estado: "proceso", fecha: "2026-06-10"},
+            {id: 4, titulo: "Llamada de bienvenida a Carlos", desc: "", tipo: "llamada", prioridad: "Baja", estado: "completada", fecha: "2026-06-05"}
         ];
+
+        function guardarTareas() {
+            localStorage.setItem('crm_uns_tareas', JSON.stringify(tareas));
+        }
+
+        function renderKanban() {
+            const estados = ['pendiente', 'proceso', 'completada'];
+            estados.forEach(est => {
+                const container = document.getElementById('kanban-' + est);
+                container.innerHTML = '';
+                const filtradas = tareas.filter(t => t.estado === est);
+                document.getElementById('count-' + est).innerText = filtradas.length;
+
+                filtradas.forEach(t => {
+                    const iconos = { llamada: 'fa-phone', whatsapp: 'fa-brands fa-whatsapp', email: 'fa-envelope', reunion: 'fa-handshake' };
+                    const colores = { Alta: 'bg-red-100 text-red-700', Media: 'bg-amber-100 text-amber-700', Baja: 'bg-gray-100 text-gray-600' };
+
+                    const div = document.createElement('div');
+                    div.className = 'kanban-card bg-white p-4 rounded-xl shadow-sm border-l-4 ' + (est === 'pendiente' ? 'border-amber-400' : est === 'proceso' ? 'border-blue-400' : 'border-emerald-400');
+                    div.draggable = true;
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-gray-400"><i class="fa-solid ${iconos[t.tipo]}"></i> ${t.tipo.toUpperCase()}</span>
+                            <span class="text-[10px] ${colores[t.prioridad]} px-2 py-0.5 rounded font-bold">${t.prioridad}</span>
+                        </div>
+                        <p class="font-bold text-sm text-gray-800">${t.titulo}</p>
+                        ${t.desc ? `<p class="text-xs text-gray-500 mt-1">${t.desc}</p>` : ''}
+                        ${t.fecha ? `<p class="text-[10px] text-gray-400 mt-2"><i class="fa-regular fa-calendar"></i> ${formatDate(t.fecha)}</p>` : ''}
+                    `;
+                    div.addEventListener('dragstart', (e) => {
+                        div.classList.add('dragging');
+                        e.dataTransfer.setData('text/plain', t.id);
+                    });
+                    div.addEventListener('dragend', () => div.classList.remove('dragging'));
+                    container.appendChild(div);
+                });
+            });
+
+            document.getElementById('dash-tareas').innerText = tareas.filter(t => t.estado !== 'completada').length;
+            document.getElementById('dash-tareas-hoy').innerText = tareas.filter(t => t.estado === 'pendiente' && t.fecha === new Date().toISOString().split('T')[0]).length;
+            document.getElementById('menu-tareas-badge').innerText = tareas.filter(t => t.estado === 'pendiente').length;
+        }
+
+        function allowDrop(ev) { ev.preventDefault(); }
+        function dragEnter(ev) { ev.currentTarget.classList.add('drag-over'); }
+        function dragLeave(ev) { ev.currentTarget.classList.remove('drag-over'); }
+        function drop(ev) {
+            ev.preventDefault();
+            ev.currentTarget.classList.remove('drag-over');
+            const id = parseInt(ev.dataTransfer.getData('text/plain'));
+            const nuevoEstado = ev.currentTarget.getAttribute('data-estado');
+            const tarea = tareas.find(t => t.id === id);
+            if (tarea && tarea.estado !== nuevoEstado) {
+                tarea.estado = nuevoEstado;
+                guardarTareas();
+                renderKanban();
+                showToast(`Tarea movida a "${nuevoEstado === 'pendiente' ? 'Por Hacer' : nuevoEstado === 'proceso' ? 'En Proceso' : 'Completadas'}"`, 'success');
+            }
+        }
+
+        function abrirModalTarea() {
+            document.getElementById('modal-tarea').classList.remove('hidden');
+            document.getElementById('t-fecha').value = new Date().toISOString().split('T')[0];
+        }
+        function cerrarModalTarea() {
+            document.getElementById('modal-tarea').classList.add('hidden');
+            document.getElementById('form-tarea').reset();
+        }
+
+        document.getElementById('form-tarea').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nueva = {
+                id: Date.now(),
+                titulo: document.getElementById('t-titulo').value,
+                desc: document.getElementById('t-desc').value,
+                tipo: document.getElementById('t-tipo').value,
+                prioridad: document.getElementById('t-prioridad').value,
+                estado: 'pendiente',
+                fecha: document.getElementById('t-fecha').value
+            };
+            tareas.push(nueva);
+            guardarTareas();
+            renderKanban();
+            cerrarModalTarea();
+            showToast('Tarea creada correctamente', 'success');
+        });
+
+        // ==================== TICKETS ====================
+        let tickets = JSON.parse(localStorage.getItem('crm_uns_tickets')) || [
+            {id: 'TK-1024', asunto: 'Problema para subir DNI al sistema', postulante: 'Carlos Ruiz', estado: 'Abierto', prioridad: 'Alta', fecha: '2026-06-07', respuestas: []},
+            {id: 'TK-1025', asunto: 'No recibió correo de confirmación', postulante: 'Ana Torres', estado: 'Abierto', prioridad: 'Media', fecha: '2026-06-08', respuestas: []},
+            {id: 'TK-1023', asunto: 'Duda sobre requisitos de medicina', postulante: 'Luis Mendoza', estado: 'En Proceso', prioridad: 'Baja', fecha: '2026-06-06', respuestas: [{texto: 'Le envié el PDF de requisitos', fecha: '2026-06-07', autor: 'Asesor'}]},
+            {id: 'TK-1022', asunto: 'Error en monto de pago', postulante: 'Diana Flores', estado: 'Resuelto', prioridad: 'Alta', fecha: '2026-06-05', respuestas: [{texto: 'Monto corregido en sistema', fecha: '2026-06-06', autor: 'Soporte'}]}
+        ];
+
+        let ticketActualId = null;
+
+        function guardarTickets() {
+            localStorage.setItem('crm_uns_tickets', JSON.stringify(tickets));
+        }
+
+        function obtenerColorEstadoTicket(estado) {
+            const map = { 'Abierto': 'bg-amber-100 text-amber-700', 'En Proceso': 'bg-blue-100 text-blue-700', 'Resuelto': 'bg-emerald-100 text-emerald-700', 'Cerrado': 'bg-gray-100 text-gray-600' };
+            return map[estado] || 'bg-gray-100 text-gray-700';
+        }
+        function obtenerColorPrioridad(p) {
+            const map = { 'Alta': 'bg-red-100 text-red-700', 'Media': 'bg-amber-100 text-amber-700', 'Baja': 'bg-gray-100 text-gray-600' };
+            return map[p] || 'bg-gray-100 text-gray-700';
+        }
 
         function renderTickets() {
             const tbody = document.getElementById('tabla-tickets');
             tbody.innerHTML = '';
-            tickets.forEach(t => {
+
+            const filtroEstado = document.getElementById('filtro-ticket-estado').value;
+            const filtrados = tickets.filter(t => !filtroEstado || t.estado === filtroEstado);
+
+            filtrados.forEach(t => {
                 const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 transition";
                 tr.innerHTML = `
-                    <td class="px-6 py-4 font-bold">#TK-${t.id}</td>
-                    <td class="px-6 py-4">${t.estudiante}</td>
-                    <td class="px-6 py-4">${t.motivo}</td>
-                    <td class="px-6 py-4 text-center"><span class="px-3 py-1 text-xs rounded-full font-bold ${t.prioridad === 'Alta' ? 'bg-red-100 text-red-700' : 'bg-gray-200'}">${t.prioridad}</span></td>
-                    <td class="px-6 py-4 text-center">
-                        <select class="border rounded-lg px-2 py-1 text-xs" onchange="cambiarEstado(${t.id}, this.value)">
-                            <option value="Pendiente" ${t.estado === 'Pendiente' ? 'selected' : ''}>Pendiente</option>
-                            <option value="En proceso" ${t.estado === 'En proceso' ? 'selected' : ''}>En proceso</option>
-                            <option value="Resuelto" ${t.estado === 'Resuelto' ? 'selected' : ''}>Resuelto</option>
-                        </select>
+                    <td class="px-6 py-4 font-bold text-gray-800">#${t.id}</td>
+                    <td class="px-6 py-4">
+                        <span class="text-sm font-medium text-gray-800">${t.asunto}</span><br>
+                        <span class="text-[10px] text-gray-500">Postulante: ${t.postulante}</span>
                     </td>
-                    <td class="px-6 py-4 text-center"><button onclick="verTicket(${t.id})" class="text-uns font-semibold">Ver</button></td>
+                    <td class="px-6 py-4 text-center"><span class="${obtenerColorPrioridad(t.prioridad)} px-2 py-1 rounded text-xs font-bold">${t.prioridad}</span></td>
+                    <td class="px-6 py-4 text-center"><span class="${obtenerColorEstadoTicket(t.estado)} px-2 py-1 rounded text-xs font-bold">${t.estado}</span></td>
+                    <td class="px-6 py-4 text-center">
+                        <button onclick="abrirModalTicket('${t.id}')" class="text-uns font-bold text-sm hover:underline hover:text-uns-dark transition">
+                            <i class="fa-solid fa-reply mr-1"></i>Responder
+                        </button>
+                    </td>
                 `;
                 tbody.appendChild(tr);
             });
+
+            const abiertos = tickets.filter(t => t.estado === 'Abierto' || t.estado === 'En Proceso').length;
+            document.getElementById('dash-tickets').innerText = abiertos;
+            document.getElementById('dash-tickets-urgentes').innerText = tickets.filter(t => (t.estado === 'Abierto' || t.estado === 'En Proceso') && t.prioridad === 'Alta').length;
+            document.getElementById('menu-tickets-badge').innerText = abiertos;
         }
 
-        function cambiarEstado(id, nuevoEstado) {
-            const ticket = tickets.find(t => t.id === id);
-            if (ticket) ticket.estado = nuevoEstado;
-            renderTickets();
+        function abrirModalTicket(ticketId) {
+            ticketActualId = ticketId;
+            const ticket = tickets.find(t => t.id === ticketId);
+            if (!ticket) return;
+
+            document.getElementById('ticket-id-display').innerText = '#' + ticket.id;
+            document.getElementById('ticket-postulante-display').innerText = ticket.postulante;
+            document.getElementById('ticket-asunto-display').innerText = ticket.asunto;
+            document.getElementById('ticket-estado-badge').innerText = ticket.estado;
+            document.getElementById('ticket-estado-badge').className = `px-2 py-1 rounded text-xs font-bold ${obtenerColorEstadoTicket(ticket.estado)}`;
+            document.getElementById('ticket-nuevo-estado').value = ticket.estado;
+            document.getElementById('ticket-respuesta').value = '';
+
+            const historialDiv = document.getElementById('ticket-historial');
+            historialDiv.innerHTML = '';
+            if (ticket.respuestas && ticket.respuestas.length > 0) {
+                ticket.respuestas.forEach(r => {
+                    historialDiv.innerHTML += `
+                        <div class="bg-gray-50 rounded-lg p-2 text-xs border-l-2 border-uns">
+                            <div class="flex justify-between text-gray-400 mb-1">
+                                <span class="font-bold text-gray-600">${r.autor}</span>
+                                <span>${r.fecha}</span>
+                            </div>
+                            <p class="text-gray-700">${r.texto}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                historialDiv.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-2">Sin respuestas previas</p>';
+            }
+
+            document.getElementById('modal-responder-ticket').classList.remove('hidden');
         }
 
-        function verTicket(id) {
-            const t = tickets.find(x => x.id === id);
-            alert(`Ticket #TK-${t.id}\nEstudiante: ${t.estudiante}\nMotivo: ${t.motivo}\nEstado: ${t.estado}\n\nTeléfono UNS: (043) 310445`);
+        function cerrarModalTicket() {
+            document.getElementById('modal-responder-ticket').classList.add('hidden');
+            ticketActualId = null;
         }
 
-        function abrirModalTicket() {
-            const nombre = prompt("Nombre del estudiante:");
-            if (!nombre) return;
-            const motivo = prompt("Motivo de la consulta:");
-            if (!motivo) return;
-            tickets.unshift({
-                id: Math.floor(Math.random() * 9000) + 1000,
-                estudiante: nombre,
-                motivo: motivo,
-                prioridad: "Media",
-                estado: "Pendiente"
-            });
-            renderTickets();
+        function enviarRespuestaTicket() {
+            if (!ticketActualId) return;
+            const texto = document.getElementById('ticket-respuesta').value.trim();
+            const nuevoEstado = document.getElementById('ticket-nuevo-estado').value;
+            const canal = document.getElementById('ticket-canal-envio').value;
+
+            if (!texto) { showToast('Escribe una respuesta antes de enviar', 'warning'); return; }
+
+            const ticket = tickets.find(t => t.id === ticketActualId);
+            if (ticket) {
+                ticket.respuestas.push({ texto: texto, fecha: new Date().toISOString().split('T')[0], autor: 'Asesor Admisión', canal: canal });
+                ticket.estado = nuevoEstado;
+                guardarTickets();
+                renderTickets();
+                const canalTexto = canal === 'email' ? 'correo' : canal === 'whatsapp' ? 'WhatsApp' : 'nota interna';
+                showToast(`Respuesta enviada por ${canalTexto}. Estado: ${nuevoEstado}`, 'success');
+                cerrarModalTicket();
+            }
         }
 
-        // Comunicaciones
-        const comunicaciones = [
-            {id:1, fecha:"08 Jun", tipo:"Correo", asunto:"Inicio de matrícula 2026-I", destinatarios:"Estudiantes activos", cantidad:"2,340"},
-            {id:2, fecha:"07 Jun", tipo:"Notificación", asunto:"Recordatorio de pago CEPUNS", destinatarios:"Postulantes CEPUNS", cantidad:"142"}
-        ];
-
+        // ==================== COMUNICACIONES ====================
         function renderComunicaciones() {
             const tbody = document.getElementById('tabla-comunicaciones');
-            tbody.innerHTML = '';
-            comunicaciones.forEach(c => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="px-6 py-4">${c.fecha}</td>
-                    <td class="px-6 py-4"><span class="px-3 py-1 text-xs rounded-full font-bold bg-red-100 text-uns">${c.tipo}</span></td>
-                    <td class="px-6 py-4 font-medium">${c.asunto}</td>
-                    <td class="px-6 py-4">${c.destinatarios}</td>
-                    <td class="px-6 py-4 text-center font-bold">${c.cantidad}</td>
-                    <td class="px-6 py-4 text-center"><span class="px-3 py-1 text-xs rounded-full font-bold bg-green-100 text-green-700">Enviado</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
+            tbody.innerHTML = `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 text-gray-500 text-sm">Ayer, 10:00 AM</td>
+                    <td class="px-6 py-4 font-medium text-gray-800"><i class="fa-solid fa-envelope text-blue-500 mr-2"></i>Invitación Charla Vocacional</td>
+                    <td class="px-6 py-4 text-sm">Base de datos Colegios (1,500)</td>
+                    <td class="px-6 py-4 text-center font-bold text-emerald-600">42%</td>
+                    <td class="px-6 py-4 text-center"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Enviado</span></td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 text-gray-500 text-sm">05/06/2026, 14:30</td>
+                    <td class="px-6 py-4 font-medium text-gray-800"><i class="fa-solid fa-comment-sms text-amber-500 mr-2"></i>Recordatorio Pago Voucher</td>
+                    <td class="px-6 py-4 text-sm">Prospectos Calientes (320)</td>
+                    <td class="px-6 py-4 text-center font-bold text-emerald-600">68%</td>
+                    <td class="px-6 py-4 text-center"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-bold">Enviado</span></td>
+                </tr>
+            `;
         }
 
-        function init() {
+        // ==================== DASHBOARD DINÁMICO ====================
+        function actualizarDashboard() {
+            const total = postulantes.length;
+            const inscritos = postulantes.filter(p => p.estado === 'Inscrito / Pagó').length;
+            const conversion = total > 0 ? Math.round((inscritos / total) * 100) : 0;
+            document.getElementById('dash-conversion').innerText = conversion + '%';
+
+            const mesActual = new Date().toISOString().split('T')[0].slice(0, 7);
+            const esteMes = postulantes.filter(p => p.fecha && p.fecha.startsWith(mesActual)).length;
+            document.getElementById('dash-postulantes-mes').innerText = '+' + esteMes;
+        }
+
+        function actualizarActividadReciente() {
+            const div = document.getElementById('actividad-reciente');
+            div.innerHTML = '';
+
+            let actividades = [];
+            postulantes.forEach(p => {
+                (p.historial || []).forEach(h => {
+                    actividades.push({...h, postulante: p.nombre, tipo: 'postulante'});
+                });
+            });
+            tickets.forEach(t => {
+                (t.respuestas || []).forEach(r => {
+                    actividades.push({accion: `Ticket ${t.id}: ${r.texto.substring(0, 30)}...`, fecha: r.fecha, autor: r.autor, postulante: t.postulante, tipo: 'ticket'});
+                });
+            });
+
+            actividades.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+            actividades.slice(0, 10).forEach(a => {
+                const icono = a.tipo === 'ticket' ? 'fa-headset text-blue-500' : 'fa-user text-uns';
+                div.innerHTML += `
+                    <div class="flex gap-3 items-start p-3 hover:bg-gray-50 rounded-lg transition">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"><i class="fa-solid ${icono} text-xs"></i></div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-800 truncate">${a.accion}</p>
+                            <p class="text-xs text-gray-400">${a.postulante} • ${formatDate(a.fecha)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            if (actividades.length === 0) div.innerHTML = '<p class="text-xs text-gray-400 italic text-center py-4">Sin actividad reciente</p>';
+        }
+
+        // ==================== EXPORTAR CSV ====================
+        function exportarCSV() {
+            const headers = ['ID', 'Nombre', 'DNI', 'Celular', 'Correo', 'Colegio', 'Carrera', 'Estado', 'Canal', 'Fecha'];
+            const rows = postulantes.map(p => [p.id, `"${p.nombre}"`, p.dni, p.celular, p.correo || '', `"${p.colegio || ''}"`, `"${p.carrera}"`, `"${p.estado}"`, `"${p.canal || ''}"`, p.fecha || '']);
+            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `CRM_UNS_Postulantes_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            showToast('Reporte CSV descargado correctamente', 'success');
+        }
+
+        // ==================== INICIALIZACIÓN ====================
+        window.onload = function() {
             renderPostulantes();
             renderTickets();
             renderComunicaciones();
+            renderKanban();
+            actualizarDashboard();
+            actualizarActividadReciente();
 
-            // Gráficos
-            new Chart(document.getElementById('chartPostulantes'), {
-                type: 'bar',
-                data: { labels: ['Ene','Feb','Mar','Abr','May','Jun'], datasets: [{data: [45,62,78,95,120,87], backgroundColor: '#b30000'}] },
-                options: { responsive: true, plugins: { legend: { display: false } } }
-            });
-            new Chart(document.getElementById('chartCarreras'), {
-                type: 'doughnut',
-                data: { labels: ['Sistemas','Medicina','Derecho','Enfermería','Civil'], datasets: [{data: [35,28,18,12,10], backgroundColor: ['#b30000','#e60000','#f87171','#fb923c','#fbbf24']}] },
-                options: { responsive: true }
-            });
+            const ctxPostulantes = document.getElementById('chartPostulantes');
+            const ctxCarreras = document.getElementById('chartCarreras');
 
-            document.getElementById('dashboard').classList.remove('hidden');
-        }
+            if (ctxPostulantes) {
+                new Chart(ctxPostulantes, {
+                    type: 'line',
+                    data: { 
+                        labels: ['Ene','Feb','Mar','Abr','May','Jun'], 
+                        datasets: [{
+                            label: 'Leads Captados',
+                            data: [15, 30, 80, 150, 220, postulantes.length > 10 ? postulantes.length : 310], 
+                            borderColor: '#b30000',
+                            backgroundColor: 'rgba(179, 0, 0, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }] 
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                });
+            }
 
-        window.onload = init;
+            if (ctxCarreras) {
+                const carrerasCount = {};
+                postulantes.forEach(p => { carrerasCount[p.carrera] = (carrerasCount[p.carrera] || 0) + 1; });
+                const labels = Object.keys(carrerasCount).length > 0 ? Object.keys(carrerasCount) : ['Sistemas','Medicina','Derecho','Ing. Civil','Otros'];
+                const data = Object.keys(carrerasCount).length > 0 ? Object.values(carrerasCount) : [35, 25, 20, 10, 10];
+
+                new Chart(ctxCarreras, {
+                    type: 'doughnut',
+                    data: { 
+                        labels: labels, 
+                        datasets: [{
+                            data: data, 
+                            backgroundColor: ['#b30000','#e60000','#f87171','#fb923c','#e5e7eb','#94a3b8'],
+                            borderWidth: 0
+                        }] 
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, cutout: '70%' }
+                });
+            }
+        };
     </script>
 </body>
 </html>
