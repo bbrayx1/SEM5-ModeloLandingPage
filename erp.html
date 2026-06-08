@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema ERP | UNS</title>
+    <link rel="icon" type="image/png" href="images/logo_rojo_UNS.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script>
@@ -22,9 +24,9 @@
         }
     </script>
 </head>
-<body class="bg-slate-50 flex min-h-screen font-sans">
+<body class="bg-slate-50 flex min-h-screen font-sans overflow-hidden">
 
-    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-4 border-r border-slate-800">
+    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-4 border-r border-slate-800 z-20">
         <div>
             <div class="flex items-center gap-3 px-2 py-4 border-b border-slate-800 mb-6">
                 <div class="bg-white p-1 rounded-lg">
@@ -38,184 +40,255 @@
             
             <nav class="space-y-1">
                 <button data-target="panel-principal" class="tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20">
-                    <i class="fa-solid fa-chart-pie text-lg"></i>
+                    <i class="fa-solid fa-chart-pie text-lg w-5 text-center"></i>
                     <span class="text-sm">Panel Principal</span>
                 </button>
                 <button data-target="panel-matriculas" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-id-card-clip text-lg"></i>
+                    <i class="fa-solid fa-id-card-clip text-lg w-5 text-center"></i>
                     <span class="text-sm">Admisión y Matrículas</span>
                 </button>
                 <button data-target="panel-finanzas" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-wallet text-lg"></i>
+                    <i class="fa-solid fa-wallet text-lg w-5 text-center"></i>
                     <span class="text-sm">Finanzas y Pagos</span>
+                </button>
+                
+                <div class="my-4 border-t border-slate-800 pt-4"></div>
+                
+                <button data-target="panel-posgrado" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
+                    <i class="fa-solid fa-microscope text-lg w-5 text-center"></i>
+                    <span class="text-sm">Investigación y Posgrado</span>
                 </button>
             </nav>
         </div>
         
-        <div class="p-2 bg-slate-950/40 rounded-xl border border-slate-800/80 text-[11px] text-slate-500 font-mono text-center">
-            UNS - 2026
+        <div class="space-y-4">
+            <a href="login.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/60 rounded-xl transition-colors w-full text-sm font-semibold">
+                <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+            <div class="p-2 bg-slate-950/40 rounded-xl border border-slate-800/80 text-[11px] text-slate-500 font-mono text-center">
+                UNS - 2026
+            </div>
         </div>
     </aside>
 
-    <main class="flex-1 p-6 md:p-8 overflow-y-auto">
-        <header class="flex justify-between items-center mb-8 bg-white px-6 py-4 rounded-2xl shadow-sm border border-slate-100">
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <header class="bg-white px-8 py-5 border-b border-slate-200 flex justify-between items-center z-10 shadow-sm">
             <div>
                 <h2 id="header-title" class="text-xl font-black text-gray-900 tracking-tight">Consola de Control Central</h2>
                 <p id="header-desc" class="text-xs text-gray-500 mt-0.5">Indicadores generales de recursos de la Universidad Nacional del Santa</p>
             </div>
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-3 border-r pr-6 border-slate-200">
-                    <div class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold text-xs">U</div>
-                    <span class="text-xs font-bold text-gray-700">Usuario Corporativo</span>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block border-r border-slate-200 pr-4">
+                    <p class="text-sm font-bold text-gray-800">Usuario Corporativo</p>
+                    <p class="text-xs text-gray-500">Administrador General</p>
                 </div>
-                <a href="login.html" class="text-xs font-bold text-uns hover:text-uns-dark transition flex items-center gap-1.5 uppercase tracking-wider">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span>Salir</span>
-                </a>
+                <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold text-sm shadow-sm">
+                    U
+                </div>
             </div>
         </header>
 
-        <div id="panel-principal" class="content-section space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Alumnos Matriculados</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">4,821</h4>
+        <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
+            
+            <div id="panel-principal" class="content-section block space-y-8 animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Alumnos Matriculados</p>
+                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">4,821</h4>
+                        </div>
+                        <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
                     </div>
-                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
-                        <i class="fa-solid fa-user-graduate"></i>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-slate-800 transition-all duration-300">
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Trámites Pendientes</p>
+                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-slate-800 transition-colors">59</h4>
+                        </div>
+                        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 text-lg shadow-inner">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-green-600 transition-all duration-300">
+                        <div>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Aulas Operativas</p>
+                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-green-600 transition-colors">94%</h4>
+                        </div>
+                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-lg shadow-inner">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-slate-800 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Trámites Pendientes</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-slate-800 transition-colors">59</h4>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-black text-gray-800 text-xs uppercase tracking-wider">Estado Operativo de Facultades</h3>
                     </div>
-                    <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 text-lg shadow-inner">
-                        <i class="fa-solid fa-file-invoice"></i>
-                    </div>
-                </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                                <span class="text-xs font-bold text-gray-800 block mb-2">Facultad de Ingeniería</span>
+                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-uns h-full rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">85% Capacidad</span>
+                            </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-green-600 transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Aulas Operativas</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-green-600 transition-colors">94%</h4>
-                    </div>
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-lg shadow-inner">
-                        <i class="fa-solid fa-school"></i>
+                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                                <span class="text-xs font-bold text-gray-800 block mb-2">Facultad de Ciencias</span>
+                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-uns h-full rounded-full" style="width: 92%"></div>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">92% Capacidad</span>
+                            </div>
+
+                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                                <span class="text-xs font-bold text-gray-800 block mb-2">Educación y Humanidades</span>
+                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-uns h-full rounded-full" style="width: 78%"></div>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">78% Capacidad</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                <div class="p-6 border-b border-slate-100 bg-slate-50/50">
-                    <h3 class="font-black text-gray-800 text-xs uppercase tracking-wider">Estado Operativo de Facultades</h3>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                            <span class="text-xs font-bold text-gray-880 block mb-2">Facultad de Ingeniería</span>
-                            <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                <div class="bg-uns h-full rounded-full" style="width: 85%"></div>
+            <div id="panel-matriculas" class="content-section hidden animate-fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
+                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider mb-6 border-l-4 border-uns pl-3">Formulario de Registro</h3>
+                        <form id="matricula-form" class="space-y-4">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Código Estudiante</label>
+                                <input type="text" placeholder="Ej. 0202614001" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
                             </div>
-                            <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">85% Capacidad</span>
-                        </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Nombres Completos</label>
+                                <input type="text" placeholder="Nombres y Apellidos" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Escuela Profesional</label>
+                                <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
+                                    <option value="" disabled selected>Seleccione carrera...</option>
+                                    <option value="sistemas">Ing. de Sistemas e Informática</option>
+                                    <option value="civil">Ingeniería Civil</option>
+                                    <option value="medicina">Medicina Humana</option>
+                                    <option value="derecho">Derecho y Ciencias Políticas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Tipo de Ingreso</label>
+                                <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
+                                    <option value="regular">Regular / Continuante</option>
+                                    <option value="ordinario">Examen Ordinario</option>
+                                    <option value="cepuns">Ingreso CEPUNS</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-md mt-4">
+                                Procesar Matrícula
+                            </button>
+                        </form>
+                    </div>
 
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                            <span class="text-xs font-bold text-gray-800 block mb-2">Facultad de Ciencias</span>
-                            <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                <div class="bg-uns h-full rounded-full" style="width: 92%"></div>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">92% Capacidad</span>
+                    <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                            <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Historial de Solicitudes Recientes</h3>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-50 text-uns border border-red-100">Periodo 2026-I</span>
                         </div>
-
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                            <span class="text-xs font-bold text-gray-800 block mb-2">Educación y Humanidades</span>
-                            <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                <div class="bg-uns h-full rounded-full" style="width: 78%"></div>
-                            </div>
-                            <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">78% Capacidad</span>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
+                                    <tr>
+                                        <th class="px-6 py-4">Código</th>
+                                        <th class="px-6 py-4">Estudiante</th>
+                                        <th class="px-6 py-4">Escuela Profesional</th>
+                                        <th class="px-6 py-4">Estado</th>
+                                        <th class="px-6 py-4 text-center">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                                    <tr class="hover:bg-slate-50/50 transition">
+                                        <td class="px-6 py-4 font-bold text-slate-900">0202314012</td>
+                                        <td class="px-6 py-4">Alvarado Mendez Luis</td>
+                                        <td class="px-6 py-4 text-slate-500">Sistemas e Informática</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Confirmado</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition">
+                                        <td class="px-6 py-4 font-bold text-slate-900">0202611005</td>
+                                        <td class="px-6 py-4">Vasquez Flores Elena</td>
+                                        <td class="px-6 py-4 text-slate-500">Medicina Humana</td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">En Revisión</span>
+                                        </td>
+                                        <td class="px-6 py-4 text-center">
+                                            <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="panel-matriculas" class="content-section hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
-                    <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider mb-6 border-l-4 border-uns pl-3">Formulario de Registro</h3>
-                    <form id="matricula-form" class="space-y-4">
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Código Estudiante</label>
-                            <input type="text" placeholder="Ej. 0202614001" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
+            <div id="panel-finanzas" class="content-section hidden space-y-8 animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-xl shadow-inner">
+                            <i class="fa-solid fa-building"></i>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Nombres Completos</label>
-                            <input type="text" placeholder="Nombres y Apellidos" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Canal Principal Autorizado</span>
+                            <span class="text-base font-black text-slate-800 block mt-0.5">Banco de la Nación</span>
+                            <span class="text-[11px] font-medium text-slate-500 block mt-0.5">Sincronización automática de transacciones por lote</span>
                         </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
                         <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Escuela Profesional</label>
-                            <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
-                                <option value="" disabled selected>Seleccione carrera...</option>
-                                <option value="sistemas">Ing. de Sistemas e Informática</option>
-                                <option value="civil">Ingeniería Civil</option>
-                                <option value="medicina">Medicina Humana</option>
-                                <option value="derecho">Derecho y Ciencias Políticas</option>
-                            </select>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Recaudación de Tasas Académicas (Mes Actual)</p>
+                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">S/. 142,450.00</h4>
                         </div>
-                        <div>
-                            <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Tipo de Ingreso</label>
-                            <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
-                                <option value="regular">Regular / Continuante</option>
-                                <option value="ordinario">Examen Ordinario</option>
-                                <option value="cepuns">Ingreso CEPUNS</option>
-                            </select>
+                        <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
+                            <i class="fa-solid fa-money-bill-trend-up"></i>
                         </div>
-                        <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-md mt-4">
-                            Procesar Matrícula
-                        </button>
-                    </form>
+                    </div>
                 </div>
 
-                <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Historial de Solicitudes Recientes</h3>
-                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-50 text-uns border border-red-100">Periodo 2026-I</span>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="p-5 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Transacciones de Caja Recientes</h3>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-xs">
                             <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
                                 <tr>
-                                    <th class="px-6 py-4">Código</th>
-                                    <th class="px-6 py-4">Estudiante</th>
-                                    <th class="px-6 py-4">Escuela Profesional</th>
-                                    <th class="px-6 py-4">Estado</th>
-                                    <th class="px-6 py-4 text-center">Acción</th>
+                                    <th class="px-6 py-4">N° Operación BN</th>
+                                    <th class="px-6 py-4">Código Alumno</th>
+                                    <th class="px-6 py-4">Concepto de Pago</th>
+                                    <th class="px-6 py-4 text-right">Monto</th>
+                                    <th class="px-6 py-4 text-center">Validación</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                                 <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4 font-bold text-slate-900">0202314012</td>
-                                    <td class="px-6 py-4">Alvarado Mendez Luis</td>
-                                    <td class="px-6 py-4 text-slate-500">Sistemas e Informática</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Confirmado</span>
-                                    </td>
+                                    <td class="px-6 py-4 font-bold text-slate-900">#89411082</td>
+                                    <td class="px-6 py-4">0202214002</td>
+                                    <td class="px-6 py-4 text-slate-500">Derecho de Inscripción / Matrícula Ordinaria</td>
+                                    <td class="px-6 py-4 text-right font-bold text-slate-800">S/. 250.00</td>
                                     <td class="px-6 py-4 text-center">
-                                        <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4 font-bold text-slate-900">0202611005</td>
-                                    <td class="px-6 py-4">Vasquez Flores Elena</td>
-                                    <td class="px-6 py-4 text-slate-500">Medicina Humana</td>
-                                    <td class="px-6 py-4">
-                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">En Revisión</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Conforme</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -223,91 +296,177 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="panel-finanzas" class="content-section hidden space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-xl shadow-inner">
-                        <i class="fa-solid fa-building"></i>
+            <div id="panel-posgrado" class="content-section hidden space-y-8 animate-fade-in">
+                
+                <div class="bg-gradient-to-r from-uns-dark to-uns p-8 rounded-2xl text-white shadow-lg shadow-uns/10 flex justify-between items-center relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-white/10 text-9xl">
+                        <i class="fa-solid fa-microscope"></i>
                     </div>
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Canal Principal Autorizado</span>
-                        <span class="text-base font-black text-slate-800 block mt-0.5">Banco de la Nación</span>
-                        <span class="text-[11px] font-medium text-slate-500 block mt-0.5">Sincronización automática de transacciones por lote</span>
+                    <div class="relative z-10">
+                        <span class="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">Vicerrectorado de Investigación</span>
+                        <h3 class="text-3xl font-black tracking-tight">Gestión Académica Científica</h3>
+                        <p class="text-sm text-red-100/80 mt-1 font-light">Monitoreo integrado de programas de posgrado, proyectos financiados e investigadores RENACYT.</p>
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
-                    <div>
-                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Recaudación de Tasas Académicas (Mes Actual)</p>
-                        <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">S/. 142,450.00</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Docentes RENACYT</span>
+                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-id-card-clip"></i></div>
+                        </div>
+                        <h4 class="text-3xl font-black text-slate-900">124</h4>
                     </div>
-                    <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
-                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Proyectos Activos</span>
+                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-flask-vial"></i></div>
+                        </div>
+                        <h4 class="text-3xl font-black text-slate-900">45</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Maestrías y Doctorados</span>
+                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-graduation-cap"></i></div>
+                        </div>
+                        <h4 class="text-3xl font-black text-slate-900">18</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border-l-4 border-emerald-600 shadow-sm hover:shadow-md transition-all">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Fondos Concursables</span>
+                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm"><i class="fa-solid fa-sack-dollar"></i></div>
+                        </div>
+                        <h4 class="text-3xl font-black text-slate-900">S/ 3.2M</h4>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                        <div class="p-5 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                            <h4 class="font-extrabold text-slate-800 text-xs tracking-wide uppercase">Programas en Admisión</h4>
+                            <span class="bg-red-50 text-uns border border-red-100 text-[10px] font-bold px-2.5 py-1 rounded-full">Convocatoria Vigor</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
+                                        <th class="p-4 pl-6">Mención del Programa</th>
+                                        <th class="p-4">Nivel</th>
+                                        <th class="p-4">Postulantes</th>
+                                        <th class="p-4 text-center">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-medium text-slate-700 divide-y divide-slate-100">
+                                    <tr class="hover:bg-slate-50/60 transition-colors">
+                                        <td class="p-4 pl-6 font-bold text-slate-900">Ingeniería de Sistemas e Informática</td>
+                                        <td class="p-4">Maestría</td>
+                                        <td class="p-4 font-bold text-uns">32 alumnos</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Activo</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60 transition-colors">
+                                        <td class="p-4 pl-6 font-bold text-slate-900">Gestión Pública y Modernización</td>
+                                        <td class="p-4">Maestría</td>
+                                        <td class="p-4 font-bold text-uns">45 alumnos</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Activo</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/60 transition-colors">
+                                        <td class="p-4 pl-6 font-bold text-slate-900">Derecho Constitucional y Penal</td>
+                                        <td class="p-4">Doctorado</td>
+                                        <td class="p-4 font-bold text-uns">18 alumnos</td>
+                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">Cierre</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-extrabold text-slate-800 text-xs tracking-wide uppercase mb-4 pb-2 border-b border-slate-100">Últimas Publicaciones</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-xl transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-file-pdf text-uns text-lg mt-0.5"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 leading-snug">Algoritmos Avanzados en Redes de Datos UNS</p>
+                                        <p class="text-[10px] text-slate-500 font-medium">Publicado en Scopus • 2026</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-xl transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-file-pdf text-uns text-lg mt-0.5"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 leading-snug">Optimización de Bioprocesos Agroindustriales</p>
+                                        <p class="text-[10px] text-slate-500 font-medium">Revista Científica UNS • 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-colors text-xs mt-6 uppercase tracking-wider shadow-md">
+                            Registrar Nuevo Paper
+                        </button>
                     </div>
                 </div>
             </div>
-
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                <div class="p-5 border-b border-slate-100 bg-slate-50/50">
-                    <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Transacciones de Caja Recientes</h3>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                            <tr>
-                                <th class="px-6 py-4">N° Operación BN</th>
-                                <th class="px-6 py-4">Código Alumno</th>
-                                <th class="px-6 py-4">Concepto de Pago</th>
-                                <th class="px-6 py-4 text-right">Monto</th>
-                                <th class="px-6 py-4 text-center">Validación</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                            <tr class="hover:bg-slate-50/50 transition">
-                                <td class="px-6 py-4 font-bold text-slate-900">#89411082</td>
-                                <td class="px-6 py-4">0202214002</td>
-                                <td class="px-6 py-4 text-slate-500">Derecho de Inscripción / Matrícula Ordinaria</td>
-                                <td class="px-6 py-4 text-right font-bold text-slate-800">S/. 250.00</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Conforme</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
         </div>
     </main>
 
+    <style>
+        /* Animación suave para cambio de pestañas */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Scrollbar interno */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #b30000; }
+    </style>
+
     <script>
+        // Objeto actualizado con los 4 módulos
         const titles = {
             'panel-principal': { title: 'Consola de Control Central', desc: 'Indicadores generales de recursos de la Universidad Nacional del Santa' },
             'panel-matriculas': { title: 'Gestión de Admisión y Matrículas', desc: 'Procesamiento y control de registro formal de estudiantes regulares y nuevos ingresantes' },
-            'panel-finanzas': { title: 'Control de Finanzas y Pagos', desc: 'Consolidación de tasas recaudadas mediante entidades autorizadas y auditoría de cuentas estudiantiles' }
+            'panel-finanzas': { title: 'Control de Finanzas y Pagos', desc: 'Consolidación de tasas recaudadas mediante entidades autorizadas y auditoría de cuentas estudiantiles' },
+            'panel-posgrado': { title: 'Gestión de Investigación y Posgrado', desc: 'Monitoreo integrado de programas de posgrado, proyectos financiados e investigadores RENACYT' }
         };
 
+        // Lógica de pestañas
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                // Resetear botones
                 document.querySelectorAll('.tab-btn').forEach(b => {
                     b.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left';
                 });
 
+                // Activar botón clickeado
                 this.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20';
 
                 const target = this.getAttribute('data-target');
 
+                // Ocultar todos los paneles
                 document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('block');
                     section.classList.add('hidden');
                 });
+                
+                // Mostrar el panel clickeado
                 document.getElementById(target).classList.remove('hidden');
+                document.getElementById(target).classList.add('block');
 
+                // Cambiar el título del header
                 document.getElementById('header-title').textContent = titles[target].title;
                 document.getElementById('header-desc').textContent = titles[target].desc;
             });
         });
 
+        // Formulario de Matrícula (simulado)
         document.getElementById('matricula-form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Matrícula registrada exitosamente en la cola de procesamiento ERP.');
