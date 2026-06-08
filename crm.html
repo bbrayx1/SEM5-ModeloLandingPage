@@ -74,7 +74,7 @@
 <body class="bg-gray-50 font-sans">
     <div id="toast-container" class="toast-container"></div>
 
-    <header class="bg-uns text-white shadow-md sticky top-0 z-50">
+        <header class="bg-uns text-white shadow-md sticky top-0 z-50">
         <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
@@ -86,20 +86,69 @@
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <button class="relative p-2 text-white/80 hover:text-white transition" onclick="mostrarNotificaciones()">
-                    <i class="fa-regular fa-bell text-xl"></i>
-                    <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border-2 border-uns animate-pulse"></span>
-                </button>
-                <div class="flex items-center gap-3 px-4 py-1.5 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition border border-white/10">
-                    <div class="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user text-xs"></i></div>
-                    <div class="hidden sm:block text-left">
-                        <p class="text-sm font-bold leading-none">Asesor Admisión</p>
-                        <p class="text-[10px] text-white/70">Online</p>
+                <!-- NOTIFICACIONES -->
+                <div class="relative">
+                    <button onclick="toggleNotificaciones()" class="relative p-2 text-white/80 hover:text-white transition">
+                        <i class="fa-regular fa-bell text-xl"></i>
+                        <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border-2 border-uns animate-pulse"></span>
+                    </button>
+                    <!-- Panel de Notificaciones -->
+                    <div id="panel-notificaciones" class="hidden absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[200]">
+                        <div class="bg-uns px-4 py-3 flex justify-between items-center">
+                            <h3 class="font-bold text-sm text-white"><i class="fa-solid fa-bell mr-2"></i>Notificaciones</h3>
+                            <button onclick="marcarTodasLeidas()" class="text-xs text-white/80 hover:text-white">Marcar todas leídas</button>
+                        </div>
+                        <div id="lista-notificaciones" class="max-h-80 overflow-y-auto">
+                            <!-- Se llena dinámicamente -->
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="flex items-center gap-2 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-sm">
+
+                <!-- PERFIL USUARIO -->
+                <div class="relative" id="perfil-container">
+                    <button onclick="togglePerfilMenu()" class="flex items-center gap-3 px-4 py-1.5 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition border border-white/10">
+                        <div class="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user text-xs"></i></div>
+                        <div class="hidden sm:block text-left">
+                            <p class="text-sm font-bold leading-none">Asesor Admisión</p>
+                            <p class="text-[10px] text-white/70">Online</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-xs text-white/60 hidden sm:block"></i>
+                    </button>
+                    <!-- Menú desplegable perfil -->
+                    <div id="menu-perfil" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[200]">
+                        <div class="p-4 bg-gray-50 border-b">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-uns rounded-full flex items-center justify-center text-white font-bold">A</div>
+                                <div>
+                                    <p class="font-bold text-sm text-gray-800">Asesor Admisión</p>
+                                    <p class="text-xs text-gray-500">asesor@uns.edu.pe</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <button onclick="showSection('configuracion', document.querySelectorAll('.nav-btn')[8])" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fa-solid fa-gear text-gray-400 w-5"></i> Configuración
+                            </button>
+                            <button onclick="toggleModoOscuro()" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fa-solid fa-moon text-gray-400 w-5"></i> Modo Oscuro
+                                <span id="modo-oscuro-badge" class="ml-auto text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">OFF</span>
+                            </button>
+                            <button onclick="showSection('postulantes', document.querySelectorAll('.nav-btn')[1])" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fa-solid fa-users text-gray-400 w-5"></i> Mis Postulantes
+                            </button>
+                        </div>
+                        <div class="p-2 border-t">
+                            <button onclick="confirmarCerrarSesion()" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-red-600 hover:bg-red-50 transition">
+                                <i class="fa-solid fa-sign-out-alt w-5"></i> Cerrar Sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CERRAR SESIÓN RÁPIDO -->
+                <button onclick="confirmarCerrarSesion()" class="flex items-center gap-2 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-sm" title="Cerrar Sesión">
                     <i class="fa-solid fa-sign-out-alt"></i>
-                </a>
+                </button>
             </div>
         </div>
     </header>
@@ -788,6 +837,22 @@
                     <button type="submit" class="flex-1 bg-uns hover:bg-uns-dark text-white font-bold py-2.5 rounded-lg transition shadow-md">Subir Documento</button>
                 </div>
             </form>
+        </div>
+            <!-- Modal Cerrar Sesión -->
+        <div id="modal-cerrar-sesion" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[200]">
+            <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden text-center p-8">
+                <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-sign-out-alt text-2xl text-red-500"></i>
+                </div>
+                <h3 class="text-xl font-black text-gray-800 mb-2">¿Cerrar Sesión?</h3>
+                <p class="text-sm text-gray-500 mb-6">Tu sesión actual se cerrará y deberás volver a iniciar sesión para acceder al CRM.</p>
+                <div class="flex gap-3">
+                    <button onclick="cerrarModalSesion()" class="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-2.5 rounded-lg hover:bg-gray-50 transition">Cancelar</button>
+                    <button onclick="cerrarSesion()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 rounded-lg transition shadow-md">
+                        <i class="fa-solid fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1730,6 +1795,169 @@
                 });
             }
         };
+                // ==================== NOTIFICACIONES ====================
+        let notificaciones = JSON.parse(localStorage.getItem('crm_uns_notificaciones')) || [
+            {id: 1, texto: "Nuevo postulante: Lucía Mendoza", tipo: "postulante", fecha: "2026-06-08", leida: false},
+            {id: 2, texto: "Ticket #TK-1025 sin respuesta", tipo: "ticket", fecha: "2026-06-08", leida: false},
+            {id: 3, texto: "Tarea vencida: Seguimiento a Luis Pérez", tipo: "tarea", fecha: "2026-06-07", leida: true}
+        ];
+
+        function guardarNotificaciones() {
+            localStorage.setItem('crm_uns_notificaciones', JSON.stringify(notificaciones));
+        }
+
+        function toggleNotificaciones() {
+            const panel = document.getElementById('panel-notificaciones');
+            const menuPerfil = document.getElementById('menu-perfil');
+            menuPerfil.classList.add('hidden'); // cerrar perfil si está abierto
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) renderNotificaciones();
+        }
+
+        function renderNotificaciones() {
+            const div = document.getElementById('lista-notificaciones');
+            const noLeidas = notificaciones.filter(n => !n.leida);
+            
+            // Actualizar badge
+            const badge = document.getElementById('notif-badge');
+            if (noLeidas.length > 0) {
+                badge.classList.remove('hidden');
+                badge.classList.add('animate-pulse');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if (notificaciones.length === 0) {
+                div.innerHTML = '<p class="text-sm text-gray-400 text-center py-6">No hay notificaciones</p>';
+                return;
+            }
+
+            div.innerHTML = '';
+            const iconos = { postulante: 'fa-user text-blue-500', ticket: 'fa-headset text-amber-500', tarea: 'fa-clipboard-list text-purple-500', sistema: 'fa-gear text-gray-500' };
+            
+            notificaciones.slice().reverse().forEach(n => {
+                div.innerHTML += `
+                    <div class="flex gap-3 p-3 hover:bg-gray-50 transition cursor-pointer ${n.leida ? 'opacity-60' : 'bg-blue-50/30'}" onclick="marcarLeida(${n.id})">
+                        <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid ${iconos[n.tipo]} text-xs"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-800 ${n.leida ? '' : 'font-bold'}">${n.texto}</p>
+                            <p class="text-xs text-gray-400 mt-0.5">${formatDate(n.fecha)}</p>
+                        </div>
+                        ${!n.leida ? '<div class="w-2 h-2 bg-uns rounded-full mt-2 flex-shrink-0"></div>' : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function marcarLeida(id) {
+            const n = notificaciones.find(x => x.id === id);
+            if (n) n.leida = true;
+            guardarNotificaciones();
+            renderNotificaciones();
+        }
+
+        function marcarTodasLeidas() {
+            notificaciones.forEach(n => n.leida = true);
+            guardarNotificaciones();
+            renderNotificaciones();
+            showToast('Todas las notificaciones marcadas como leídas', 'success');
+        }
+
+        function agregarNotificacion(texto, tipo) {
+            notificaciones.push({
+                id: Date.now(),
+                texto: texto,
+                tipo: tipo,
+                fecha: new Date().toISOString().split('T')[0],
+                leida: false
+            });
+            guardarNotificaciones();
+            // Actualizar badge
+            const badge = document.getElementById('notif-badge');
+            badge.classList.remove('hidden');
+        }
+
+        // ==================== MENÚ PERFIL ====================
+        function togglePerfilMenu() {
+            const menu = document.getElementById('menu-perfil');
+            const panel = document.getElementById('panel-notificaciones');
+            panel.classList.add('hidden'); // cerrar notificaciones si están abiertas
+            menu.classList.toggle('hidden');
+        }
+
+        // Cerrar menús al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            const perfilContainer = document.getElementById('perfil-container');
+            const notifContainer = document.querySelector('.relative:has(#panel-notificaciones)');
+            
+            if (perfilContainer && !perfilContainer.contains(e.target)) {
+                document.getElementById('menu-perfil').classList.add('hidden');
+            }
+            // Para notificaciones, el botón está dentro del div relative
+            const notifBtn = e.target.closest('[onclick="toggleNotificaciones()"]');
+            const panelNotif = document.getElementById('panel-notificaciones');
+            if (!notifBtn && panelNotif && !panelNotif.contains(e.target)) {
+                panelNotif.classList.add('hidden');
+            }
+        });
+
+        // ==================== CERRAR SESIÓN ====================
+        function confirmarCerrarSesion() {
+            // Cerrar menús abiertos
+            document.getElementById('menu-perfil').classList.add('hidden');
+            document.getElementById('panel-notificaciones').classList.add('hidden');
+            document.getElementById('modal-cerrar-sesion').classList.remove('hidden');
+        }
+
+        function cerrarModalSesion() {
+            document.getElementById('modal-cerrar-sesion').classList.add('hidden');
+        }
+
+        function cerrarSesion() {
+            // Limpiar sesión simulada
+            localStorage.removeItem('crm_uns_sesion');
+            document.getElementById('modal-cerrar-sesion').classList.add('hidden');
+            showToast('Sesión cerrada correctamente', 'success');
+            
+            // Simular redirección (en producción sería window.location.href = '/login')
+            setTimeout(() => {
+                document.body.innerHTML = `
+                    <div class="min-h-screen bg-uns flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                                <span class="text-uns font-black text-3xl">U</span>
+                            </div>
+                            <h1 class="text-3xl font-black mb-2">Sesión Cerrada</h1>
+                            <p class="text-white/70 mb-6">Has salido del CRM UNS correctamente.</p>
+                            <button onclick="location.reload()" class="bg-white text-uns px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition shadow-lg">
+                                <i class="fa-solid fa-arrow-right mr-2"></i>Volver a Iniciar Sesión
+                            </button>
+                        </div>
+                    </div>
+                `;
+n            }, 1000);
+        }
+
+        // ==================== MODO OSCURO ====================
+        let modoOscuro = localStorage.getItem('crm_uns_modo_oscuro') === 'true';
+        
+        function toggleModoOscuro() {
+            modoOscuro = !modoOscuro;
+            localStorage.setItem('crm_uns_modo_oscuro', modoOscuro);
+            document.getElementById('modo-oscuro-badge').innerText = modoOscuro ? 'ON' : 'OFF';
+            document.getElementById('modo-oscuro-badge').className = modoOscuro 
+                ? 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full' 
+                : 'ml-auto text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full';
+            showToast(modoOscuro ? 'Modo oscuro activado' : 'Modo oscuro desactivado', 'info');
+        }
+
+        // Inicializar badge modo oscuro
+        if (modoOscuro) {
+            document.getElementById('modo-oscuro-badge').innerText = 'ON';
+            document.getElementById('modo-oscuro-badge').className = 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full';
+        }
     </script>
 </body>
 </html>
