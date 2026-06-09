@@ -74,7 +74,7 @@
 <body class="bg-gray-50 font-sans">
     <div id="toast-container" class="toast-container"></div>
 
-        <header class="bg-uns text-white shadow-md sticky top-0 z-50">
+    <header class="bg-uns text-white shadow-md sticky top-0 z-50">
         <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-inner">
@@ -86,74 +86,29 @@
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <!-- NOTIFICACIONES -->
                 <div class="relative">
                     <button onclick="toggleNotificaciones()" class="relative p-2 text-white/80 hover:text-white transition">
                         <i class="fa-regular fa-bell text-xl"></i>
                         <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-yellow-400 rounded-full border-2 border-uns animate-pulse"></span>
                     </button>
-                    <!-- Panel de Notificaciones -->
                     <div id="panel-notificaciones" class="hidden absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[200]">
                         <div class="bg-uns px-4 py-3 flex justify-between items-center">
                             <h3 class="font-bold text-sm text-white"><i class="fa-solid fa-bell mr-2"></i>Notificaciones</h3>
                             <button onclick="marcarTodasLeidas()" class="text-xs text-white/80 hover:text-white">Marcar todas leídas</button>
                         </div>
                         <div id="lista-notificaciones" class="max-h-80 overflow-y-auto">
-                            <!-- Se llena dinámicamente -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PERFIL USUARIO -->
-                <div class="relative" id="perfil-container">
-                    <button onclick="togglePerfilMenu()" class="flex items-center gap-3 px-4 py-1.5 bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition border border-white/10">
-                        <div class="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user text-xs"></i></div>
-                        <div class="hidden sm:block text-left">
-                            <p class="text-sm font-bold leading-none">Asesor Admisión</p>
-                            <p class="text-[10px] text-white/70">Online</p>
-                        </div>
-                        <i class="fa-solid fa-chevron-down text-xs text-white/60 hidden sm:block"></i>
-                    </button>
-                    <!-- Menú desplegable perfil -->
-                    <div id="menu-perfil" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-[200]">
-                        <div class="p-4 bg-gray-50 border-b">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-uns rounded-full flex items-center justify-center text-white font-bold">A</div>
-                                <div>
-                                    <p class="font-bold text-sm text-gray-800">Asesor Admisión</p>
-                                    <p class="text-xs text-gray-500">asesor@uns.edu.pe</p>
-                                </div>
                             </div>
-                        </div>
-                        <div class="p-2">
-                            <button onclick="showSection('configuracion', document.querySelectorAll('.nav-btn')[8])" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
-                                <i class="fa-solid fa-gear text-gray-400 w-5"></i> Configuración
-                            </button>
-                            <button onclick="toggleModoOscuro()" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
-                                <i class="fa-solid fa-moon text-gray-400 w-5"></i> Modo Oscuro
-                                <span id="modo-oscuro-badge" class="ml-auto text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">OFF</span>
-                            </button>
-                            <button onclick="showSection('postulantes', document.querySelectorAll('.nav-btn')[1])" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-gray-700 hover:bg-gray-100 transition">
-                                <i class="fa-solid fa-users text-gray-400 w-5"></i> Mis Postulantes
-                            </button>
-                        </div>
-                        <div class="p-2 border-t">
-                            <button onclick="confirmarCerrarSesion()" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left text-sm font-medium text-red-600 hover:bg-red-50 transition">
-                                <i class="fa-solid fa-sign-out-alt w-5"></i> Cerrar Sesión
-                            </button>
-                        </div>
                     </div>
                 </div>
 
-                <!-- CERRAR SESIÓN RÁPIDO -->
-                <button onclick="confirmarCerrarSesion()" class="flex items-center gap-2 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition text-sm" title="Cerrar Sesión">
-                    <i class="fa-solid fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-64px)] overflow-hidden">
+                <div class="flex items-center gap-3 px-4 py-1.5 bg-white/10 rounded-full border border-white/10">
+                    <div class="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-user text-xs"></i></div>
+                    <div class="hidden sm:block text-left">
+                        <p class="text-sm font-bold leading-none">Asesor Admisión</p>
+                        <p class="text-[10px] text-white/70">Online</p>
+                    </div>
+                </div>
+            </div> </div> </header> <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-64px)] overflow-hidden">
 
         <aside class="w-64 bg-white border-r h-full flex flex-col justify-between overflow-y-auto">
             <div class="p-6">
@@ -198,7 +153,6 @@
 
         <main class="flex-1 h-full overflow-y-auto bg-slate-50/50 p-8">
 
-            <!-- DASHBOARD -->
             <div id="dashboard" class="section block animate-fade-in">
                 <div class="flex justify-between items-end mb-8">
                     <div>
@@ -269,7 +223,6 @@
                 </div>
             </div>
 
-            <!-- POSTULANTES -->
             <div id="postulantes" class="section hidden animate-fade-in">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     <div>
@@ -290,14 +243,25 @@
                             <option value="Descartado">Descartado</option>
                         </select>
                         <select id="filtro-carrera" onchange="aplicarFiltros()" class="border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-uns cursor-pointer bg-white">
-                            <option value="">Todas las carreras</option>
-                            <option>Ing. de Sistemas e Informática</option>
-                            <option>Ingeniería Civil</option>
-                            <option>Medicina Humana</option>
-                            <option>Derecho y Ciencias Políticas</option>
-                            <option>Comunicación Social</option>
-                            <option>Enfermería</option>
+                        <option value="">Todas las carreras</option>
+                        <option>Ingeniería de Sistemas e Informática</option>
+                        <option>Ingeniería en Energía</option>
+                        <option>Ingeniería Agroindustrial</option>
+                        <option>Ingeniería Civil</option>
+                        <option>Ingeniería Mecánica</option>
+                        <option>Ingeniería Agrónoma</option>
+                        <option>Biología en Acuicultura</option>
+                        <option>Enfermería</option>
+                        <option>Biotecnología</option>
+                        <option>Medicina Humana</option>
+                        <option>Educación Inicial</option>
+                        <option>Educación Primaria</option>
+                        <option>Educación Secundaria</option>
+                        <option>Comunicación Social</option>
+                        <option>Derecho y Ciencias Políticas</option>
                         </select>
+
+
                         <button onclick="abrirModalPostulante()" class="bg-uns text-white px-5 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-uns-dark transition shadow-md whitespace-nowrap">
                             <i class="fa-solid fa-plus"></i> <span>Añadir</span>
                         </button>
@@ -326,7 +290,6 @@
                 </div>
             </div>
 
-            <!-- TAREAS KANBAN -->
             <div id="tareas" class="section hidden animate-fade-in">
                 <div class="flex justify-between items-center mb-6">
                     <div>
@@ -354,7 +317,6 @@
                 </div>
             </div>
 
-            <!-- TICKETS -->
             <div id="tickets" class="section hidden animate-fade-in">
                 <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -386,7 +348,6 @@
                 </div>
             </div>
 
-            <!-- CALENDARIO -->
             <div id="calendario" class="section hidden animate-fade-in">
                 <div class="flex justify-between items-center mb-6">
                     <div>
@@ -424,7 +385,6 @@
                 </div>
             </div>
 
-            <!-- COMUNICACIONES -->
             <div id="comunicaciones" class="section hidden animate-fade-in">
                 <div class="mb-6 flex justify-between items-center">
                     <div>
@@ -451,7 +411,6 @@
                 </div>
             </div>
 
-            <!-- REPORTES -->
             <div id="reportes" class="section hidden animate-fade-in">
                 <div class="mb-6">
                     <h2 class="text-2xl font-black text-gray-800">Reportes y Analítica</h2>
@@ -475,7 +434,6 @@
                 </div>
             </div>
 
-            <!-- DOCUMENTOS -->
             <div id="documentos" class="section hidden animate-fade-in">
                 <div class="flex justify-between items-center mb-6">
                     <div>
@@ -487,11 +445,9 @@
                     </button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="grid-documentos">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                    </div>
             </div>
 
-            <!-- CONFIGURACIÓN -->
             <div id="configuracion" class="section hidden animate-fade-in">
                 <div class="mb-6">
                     <h2 class="text-2xl font-black text-gray-800">Configuración del CRM</h2>
@@ -548,7 +504,6 @@
         </main>
     </div>
 
-    <!-- Modal Postulante -->
     <div id="modal-postulante" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden transform transition-all max-h-[90vh] overflow-y-auto">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
@@ -583,21 +538,30 @@
                     <div>
                         <label class="text-xs font-bold text-gray-600 uppercase">Carrera de Interés <span class="text-red-500">*</span></label>
                         <select id="p-carrera" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer" required>
-                            <option value="" disabled selected>Seleccione...</option>
-                            <option>Ing. de Sistemas e Informática</option>
-                            <option>Ingeniería Civil</option>
-                            <option>Medicina Humana</option>
-                            <option>Derecho y Ciencias Políticas</option>
-                            <option>Comunicación Social</option>
-                            <option>Enfermería</option>
-                        </select>
+                        <option value="" disabled selected>Seleccione...</option>
+                        <option>Ingeniería de Sistemas e Informática</option>
+                        <option>Ingeniería en Energía</option>
+                        <option>Ingeniería Agroindustrial</option>
+                        <option>Ingeniería Civil</option>
+                        <option>Ingeniería Mecánica</option>
+                        <option>Ingeniería Agrónoma</option>
+                        <option>Biología en Acuicultura</option>
+                        <option>Enfermería</option>
+                        <option>Biotecnología</option>
+                        <option>Medicina Humana</option>
+                        <option>Educación Inicial</option>
+                        <option>Educación Primaria</option>
+                        <option>Educación Secundaria</option>
+                        <option>Comunicación Social</option>
+                        <option>Derecho y Ciencias Políticas</option>
+                    </select>
+                    
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-600 uppercase">Canal (¿Cómo se enteró?)</label>
                         <select id="p-canal" class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white rounded-lg px-4 py-2 mt-1 focus:outline-none focus:border-uns cursor-pointer">
                             <option>Facebook Ads</option>
                             <option>Instagram</option>
-                            <option>Feria Vocacional</option>
                             <option>Recomendación</option>
                             <option>Página Web</option>
                         </select>
@@ -611,7 +575,6 @@
         </div>
     </div>
 
-    <!-- Modal Perfil -->
     <div id="modal-perfil" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
@@ -620,9 +583,9 @@
             </div>
             <div class="p-6">
                 <div class="flex border-b mb-4">
-                    <button onclick="switchTab('info')" class="tab-btn active px-4 py-2 text-sm font-bold text-gray-600">Información</button>
-                    <button onclick="switchTab('historial')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Historial</button>
-                    <button onclick="switchTab('notas')" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Notas</button>
+                    <button onclick="switchTab('info', this)" class="tab-btn active px-4 py-2 text-sm font-bold text-gray-600">Información</button>
+                    <button onclick="switchTab('historial', this)" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Historial</button>
+                    <button onclick="switchTab('notas', this)" class="tab-btn px-4 py-2 text-sm font-bold text-gray-600">Notas</button>
                 </div>
                 <div id="tab-info" class="tab-content active">
                     <div class="grid grid-cols-2 gap-4" id="perfil-info-content"></div>
@@ -647,7 +610,6 @@
         </div>
     </div>
 
-    <!-- Modal Ticket -->
     <div id="modal-responder-ticket" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
@@ -706,7 +668,6 @@
         </div>
     </div>
 
-    <!-- Modal Tarea -->
     <div id="modal-tarea" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
             <div class="bg-slate-800 px-6 py-4 flex justify-between items-center text-white">
@@ -753,7 +714,6 @@
         </div>
     </div>
 
-    <!-- Modal Evento Calendario -->
     <div id="modal-evento" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
             <div class="bg-purple-600 px-6 py-4 flex justify-between items-center text-white">
@@ -796,7 +756,6 @@
         </div>
     </div>
 
-    <!-- Modal Documento -->
     <div id="modal-documento" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[100]">
         <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
             <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
@@ -838,8 +797,7 @@
                 </div>
             </form>
         </div>
-            <!-- Modal Cerrar Sesión -->
-        <div id="modal-cerrar-sesion" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[200]">
+            <div id="modal-cerrar-sesion" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[200]">
             <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden text-center p-8">
                 <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-sign-out-alt text-2xl text-red-500"></i>
@@ -1156,10 +1114,17 @@
             postulanteActualId = null;
         }
 
-        function switchTab(tab) {
+        function switchTab(tab, btn = null) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                const defaultBtn = document.querySelector(`button[onclick="switchTab('${tab}', this)"]`);
+                if (defaultBtn) defaultBtn.classList.add('active');
+            }
+            
             document.getElementById('tab-' + tab).classList.add('active');
         }
 
@@ -1795,7 +1760,8 @@
                 });
             }
         };
-                // ==================== NOTIFICACIONES ====================
+
+        // ==================== NOTIFICACIONES ====================
         let notificaciones = JSON.parse(localStorage.getItem('crm_uns_notificaciones')) || [
             {id: 1, texto: "Nuevo postulante: Lucía Mendoza", tipo: "postulante", fecha: "2026-06-08", leida: false},
             {id: 2, texto: "Ticket #TK-1025 sin respuesta", tipo: "ticket", fecha: "2026-06-08", leida: false},
@@ -1809,7 +1775,7 @@
         function toggleNotificaciones() {
             const panel = document.getElementById('panel-notificaciones');
             const menuPerfil = document.getElementById('menu-perfil');
-            menuPerfil.classList.add('hidden'); // cerrar perfil si está abierto
+            if(menuPerfil) menuPerfil.classList.add('hidden'); // Validar si existe antes de ocultar
             panel.classList.toggle('hidden');
             if (!panel.classList.contains('hidden')) renderNotificaciones();
         }
@@ -1874,28 +1840,28 @@
                 leida: false
             });
             guardarNotificaciones();
-            // Actualizar badge
             const badge = document.getElementById('notif-badge');
-            badge.classList.remove('hidden');
+            if(badge) badge.classList.remove('hidden');
         }
 
         // ==================== MENÚ PERFIL ====================
         function togglePerfilMenu() {
             const menu = document.getElementById('menu-perfil');
             const panel = document.getElementById('panel-notificaciones');
-            panel.classList.add('hidden'); // cerrar notificaciones si están abiertas
-            menu.classList.toggle('hidden');
+            if(panel) panel.classList.add('hidden');
+            if(menu) menu.classList.toggle('hidden');
         }
 
         // Cerrar menús al hacer clic fuera
         document.addEventListener('click', function(e) {
             const perfilContainer = document.getElementById('perfil-container');
             const notifContainer = document.querySelector('.relative:has(#panel-notificaciones)');
+            const menuPerfil = document.getElementById('menu-perfil');
             
-            if (perfilContainer && !perfilContainer.contains(e.target)) {
-                document.getElementById('menu-perfil').classList.add('hidden');
+            if (perfilContainer && !perfilContainer.contains(e.target) && menuPerfil) {
+                menuPerfil.classList.add('hidden');
             }
-            // Para notificaciones, el botón está dentro del div relative
+            
             const notifBtn = e.target.closest('[onclick="toggleNotificaciones()"]');
             const panelNotif = document.getElementById('panel-notificaciones');
             if (!notifBtn && panelNotif && !panelNotif.contains(e.target)) {
@@ -1905,9 +1871,12 @@
 
         // ==================== CERRAR SESIÓN ====================
         function confirmarCerrarSesion() {
-            // Cerrar menús abiertos
-            document.getElementById('menu-perfil').classList.add('hidden');
-            document.getElementById('panel-notificaciones').classList.add('hidden');
+            const menuPerfil = document.getElementById('menu-perfil');
+            const panelNotificaciones = document.getElementById('panel-notificaciones');
+            
+            if(menuPerfil) menuPerfil.classList.add('hidden');
+            if(panelNotificaciones) panelNotificaciones.classList.add('hidden');
+            
             document.getElementById('modal-cerrar-sesion').classList.remove('hidden');
         }
 
@@ -1916,12 +1885,10 @@
         }
 
         function cerrarSesion() {
-            // Limpiar sesión simulada
             localStorage.removeItem('crm_uns_sesion');
             document.getElementById('modal-cerrar-sesion').classList.add('hidden');
             showToast('Sesión cerrada correctamente', 'success');
             
-            // Simular redirección (en producción sería window.location.href = '/login')
             setTimeout(() => {
                 document.body.innerHTML = `
                     <div class="min-h-screen bg-uns flex items-center justify-center">
@@ -1937,7 +1904,7 @@
                         </div>
                     </div>
                 `;
-n            }, 1000);
+            }, 1000); // Aquí estaba la "n" estorbando
         }
 
         // ==================== MODO OSCURO ====================
@@ -1946,17 +1913,22 @@ n            }, 1000);
         function toggleModoOscuro() {
             modoOscuro = !modoOscuro;
             localStorage.setItem('crm_uns_modo_oscuro', modoOscuro);
-            document.getElementById('modo-oscuro-badge').innerText = modoOscuro ? 'ON' : 'OFF';
-            document.getElementById('modo-oscuro-badge').className = modoOscuro 
-                ? 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full' 
-                : 'ml-auto text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full';
+            
+            const badge = document.getElementById('modo-oscuro-badge');
+            if (badge) {
+                badge.innerText = modoOscuro ? 'ON' : 'OFF';
+                badge.className = modoOscuro 
+                    ? 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full' 
+                    : 'ml-auto text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full';
+            }
             showToast(modoOscuro ? 'Modo oscuro activado' : 'Modo oscuro desactivado', 'info');
         }
 
         // Inicializar badge modo oscuro
-        if (modoOscuro) {
-            document.getElementById('modo-oscuro-badge').innerText = 'ON';
-            document.getElementById('modo-oscuro-badge').className = 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full';
+        const badgeOscuro = document.getElementById('modo-oscuro-badge');
+        if (modoOscuro && badgeOscuro) {
+            badgeOscuro.innerText = 'ON';
+            badgeOscuro.className = 'ml-auto text-[10px] bg-uns text-white px-2 py-0.5 rounded-full';
         }
     </script>
 </body>
