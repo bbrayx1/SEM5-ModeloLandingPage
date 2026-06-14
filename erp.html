@@ -31,8 +31,8 @@
         .animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes slideUp { from { opacity: 0; transform: scale(0.96) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 14px; min-width: 320px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-left: 4px solid #b30000; }
+        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .toast { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 14px; min-width: 300px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-left: 4px solid #b30000; }
         .toast.show { transform: translateX(0); }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -49,46 +49,63 @@
         .table-row-hover:hover { background-color: #f8fafc; transition: 0.15s; cursor: default; }
     </style>
 </head>
-<body class="bg-slate-50 font-sans h-screen flex flex-col overflow-hidden">
+<body class="bg-slate-50 font-sans h-screen flex flex-col overflow-hidden w-full">
 
 <div id="toast-container" class="toast-container"></div>
 
-<header class="bg-uns text-white shadow-md z-50 flex-shrink-0">
-    <div class="px-5 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-inner">
-                <span class="text-uns font-black text-xl leading-none">U</span>
+<header class="bg-uns text-white shadow-md z-40 flex-shrink-0 relative">
+    <div class="px-4 sm:px-5 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3 sm:gap-4">
+            <button onclick="toggleSidebar()" class="lg:hidden text-white hover:text-red-200 transition p-1">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+            
+            <div class="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center shadow-inner overflow-hidden flex-shrink-0">
+                <img src="images/logo_rojo_UNS.png" alt="Logo UNS" class="w-full h-full object-contain p-0.5">
             </div>
             <div>
-                <h1 class="font-black text-xl leading-none tracking-tight">ERP <span class="opacity-80 font-light">UNS</span></h1>
-                <span class="text-white/70 text-[11px] font-medium tracking-wide uppercase">Core System Universitaria</span>
+                <h1 class="font-black text-lg sm:text-xl leading-none tracking-tight">ERP <span class="opacity-80 font-light">UNS</span></h1>
+                <span class="hidden sm:block text-white/70 text-[10px] sm:text-[11px] font-medium tracking-wide uppercase">Core System Universitaria</span>
             </div>
         </div>
 
         <div class="hidden lg:flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2 w-[28rem] focus-within:bg-white/20 transition shadow-inner">
             <i class="fa-solid fa-magnifying-glass text-white/70 text-sm"></i>
-            <input type="text" placeholder="Búsqueda global indexada del campus..." class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full ml-2 font-medium">
+            <input type="text" id="search-global-desktop" onkeyup="sincronizarBusqueda(this.value)" placeholder="Búsqueda global inteligente..." class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full ml-2 font-medium">
         </div>
 
-        <div class="flex items-center gap-3">
-            <button onclick="generarReporteGeneral()" class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 transition text-sm font-bold shadow-sm">
-                <i class="fa-solid fa-file-pdf text-red-200"></i> Reporte Institucional
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button onclick="generarReporteGeneral()" class="hidden sm:flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 transition text-xs sm:text-sm font-bold shadow-sm">
+                <i class="fa-solid fa-file-pdf text-red-200"></i> <span class="hidden md:inline">Reporte General</span>
             </button>
-            <div class="w-px h-8 bg-white/20 mx-2"></div>
-            <div class="flex items-center gap-3 px-2 py-1">
-                <div class="text-right hidden md:block">
-                    <p class="text-sm font-bold leading-none">Administrador General</p>
-                    <p class="text-[10px] text-red-300 font-bold tracking-wider mt-1 uppercase">Control Central OTI</p>
+            <div class="hidden sm:block w-px h-8 bg-white/20 mx-1 sm:mx-2"></div>
+            <div class="flex items-center gap-2 sm:gap-3 px-2 py-1">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs sm:text-sm font-bold leading-none">Administrador General</p>
+                    <p class="text-[9px] sm:text-[10px] text-red-300 font-bold tracking-wider mt-1 uppercase">Control OTI</p>
                 </div>
-                <div class="w-9 h-9 rounded-full bg-white text-uns flex items-center justify-center text-sm font-black shadow-md">AG</div>
+                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-uns flex items-center justify-center text-xs sm:text-sm font-black shadow-md flex-shrink-0">AG</div>
             </div>
+        </div>
+    </div>
+    
+    <div class="lg:hidden px-4 pb-3">
+        <div class="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2 focus-within:bg-white/20 transition shadow-inner">
+            <i class="fa-solid fa-magnifying-glass text-white/70 text-sm"></i>
+            <input type="text" id="search-global-mobile" onkeyup="sincronizarBusqueda(this.value)" placeholder="Buscar en el ERP..." class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full ml-2 font-medium">
         </div>
     </div>
 </header>
 
-<div class="flex flex-1 overflow-hidden">
+<div class="flex flex-1 overflow-hidden relative w-full">
 
-<aside class="w-64 bg-white border-r border-gray-200 flex flex-col h-full flex-shrink-0 z-40 relative shadow-sm">
+<div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/60 z-[50] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm lg:hidden"></div>
+
+<aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 flex flex-col z-[60] transform -translate-x-full transition-transform duration-300 shadow-2xl lg:relative lg:translate-x-0 lg:shadow-sm">
+    <div class="flex items-center justify-between p-4 border-b border-gray-100 lg:hidden bg-gray-50">
+        <span class="font-black text-uns text-lg">Menú ERP</span>
+        <button onclick="toggleSidebar()" class="text-gray-500 hover:text-uns text-xl"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     <div class="flex-1 overflow-y-auto py-4 px-3 custom-scrollbar">
         
         <nav class="space-y-1 mb-5">
@@ -149,76 +166,76 @@
     </div>
 </aside>
 
-<main class="flex-1 h-full overflow-y-auto bg-slate-100/60 relative custom-scrollbar">
+<main class="flex-1 h-full overflow-y-auto bg-slate-100/60 relative custom-scrollbar w-full">
 
-    <div id="mod-dashboard" class="modulo-contenido seccion-visible p-8 animate-fade-in">
+    <div id="mod-dashboard" class="modulo-contenido seccion-visible p-4 sm:p-8 animate-fade-in w-full">
         <div class="mb-6">
-            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Consola Gerencial Centralizada</h2>
-            <p class="text-gray-500 text-sm mt-1">Cuadro de mando analítico integral. Correlación de recursos, gestión docente y extensión universitaria.</p>
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Consola Gerencial Centralizada</h2>
+            <p class="text-gray-500 text-xs sm:text-sm mt-1">Cuadro de mando analítico integral. Correlación de recursos, gestión docente y extensión universitaria.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-emerald-500 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Balance Neto Contable</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-balance">S/ 0.00</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-balance">S/ 0.00</h3>
                 <p class="text-[10px] text-emerald-600 font-bold mt-2"><i class="fa-solid fa-wallet mr-1"></i>Libro Diario Sincronizado</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Inventario de Bienes SGI</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-sgi">0 Activos</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-sgi">0 Activos</h3>
                 <p class="text-[10px] text-gray-500 mt-2" id="dash-sgi-status"><i class="fa-solid fa-boxes-stacked mr-1"></i>Carga de hardware controlada</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-amber-500 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Abastecimiento / Compras</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-kpi-compras">0</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-kpi-compras">0</h3>
                 <p class="text-[10px] text-amber-700 font-semibold mt-2"><i class="fa-solid fa-clock mr-1"></i>Requerimientos Activos</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-slate-700 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Carga Plana Docente</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-docentes">0 Activos</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-docentes">0 Activos</h3>
                 <p class="text-[10px] text-slate-600 mt-2"><i class="fa-solid fa-address-book mr-1"></i>Escalafón Universitario</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-red-400 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Comensales Registrados</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-comedor">0 Atenciones</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-comedor">0 Atenciones</h3>
                 <p class="text-[10px] text-uns font-bold mt-2"><i class="fa-solid fa-bowl-food mr-1"></i>Control de Raciones Diarias</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-cyan-600 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Alianzas de Bolsa Empleo</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-kpi-bolsa">0</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-kpi-bolsa">0</h3>
                 <p class="text-[10px] text-cyan-700 font-semibold mt-2"><i class="fa-solid fa-briefcase mr-1"></i>Convenios Vigentes</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-purple-500 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Proyectos de Extensión</p>
-                <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-kpi-proyectos">0</h3>
+                <h3 class="text-xl sm:text-2xl font-black text-gray-800 mt-1 truncate" id="dash-kpi-proyectos">0</h3>
                 <p class="text-[10px] text-purple-700 font-semibold mt-2"><i class="fa-solid fa-people-roof mr-1"></i>Responsabilidad Social</p>
             </div>
             <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-5 rounded-2xl shadow-sm border border-gray-200 text-white flex flex-col justify-center">
                 <p class="text-[10px] text-slate-300 font-bold uppercase tracking-wider">Padrón de Alumnos Activo</p>
-                <h3 class="text-xl font-black mt-1" id="dash-kpi-alumnos">5,430 Alumnos</h3>
+                <h3 class="text-xl sm:text-2xl font-black mt-1 truncate" id="dash-kpi-alumnos">5,430 Alumnos</h3>
                 <p class="text-[10px] text-emerald-400 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Datos de Ingresantes Consolidados</p>
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h4 class="font-bold text-gray-800 mb-4 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-chart-line text-uns"></i> Flujo Analítico Consolidado (Ingresos Propios vs Egresos Semestrales de Módulos)</h4>
-            <div class="relative h-72 w-full"><canvas id="chartGerencial"></canvas></div>
+        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-200 w-full overflow-hidden">
+            <h4 class="font-bold text-gray-800 mb-4 text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-chart-line text-uns"></i> Flujo Analítico Consolidado</h4>
+            <div class="relative h-64 sm:h-72 w-full"><canvas id="chartGerencial"></canvas></div>
         </div>
     </div>
 
-    <div id="mod-finanzas" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex justify-between items-end mb-6">
+    <div id="mod-finanzas" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Libro Diario de Caja Universitaria</h2>
-                <p class="text-gray-500 text-sm mt-1">Gestión institucional de flujo de caja, tasas de recaudación y egresos ordinarios.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Libro Diario de Caja</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Gestión institucional de flujo de caja, tasas de recaudación y egresos.</p>
             </div>
-            <button onclick="abrirModalTesoreria()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+            <button onclick="abrirModalTesoreria()" class="w-full sm:w-auto bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center justify-center gap-2">
                 <i class="fa-solid fa-money-bill-transfer"></i> Registrar Operación
             </button>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase tracking-wider border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Asiento ID</th>
@@ -233,19 +250,19 @@
         </div>
     </div>
 
-    <div id="mod-compras" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex justify-between items-end mb-6">
+    <div id="mod-compras" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Adquisiciones y Abastecimiento</h2>
-                <p class="text-gray-500 text-sm mt-1">Gestión interna de requerimientos logísticos de facultades y oficinas ordinarias.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Adquisiciones y Abastecimiento</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Gestión interna de requerimientos logísticos de facultades y oficinas.</p>
             </div>
-            <button onclick="abrirModalCompras()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+            <button onclick="abrirModalCompras()" class="w-full sm:w-auto bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center justify-center gap-2">
                 <i class="fa-solid fa-plus"></i> Generar Requerimiento
             </button>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Código Req</th>
@@ -261,27 +278,27 @@
         </div>
     </div>
 
-    <div id="mod-logistica" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+    <div id="mod-logistica" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Control Patrimonial SGI</h2>
-                <p class="text-gray-500 text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware de servidores del campus.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Control Patrimonial SGI</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <button onclick="abrirModalLogistica()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-black transition">
+            <div class="flex flex-col sm:flex-row w-full xl:w-auto gap-2">
+                <button onclick="abrirModalLogistica()" class="flex-1 sm:flex-none bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:bg-black transition">
                     <i class="fa-solid fa-plus"></i> Registrar Activo
                 </button>
-                <button onclick="exportarSgiCompletoPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
+                <button onclick="exportarSgiCompletoPDF()" class="flex-1 sm:flex-none bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:bg-uns-dark transition">
                     <i class="fa-solid fa-file-pdf"></i> Descargar Inventario
                 </button>
             </div>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-gray-50 text-xs font-bold text-gray-600 uppercase tracking-wider">
+            <div class="p-4 bg-red-50 text-xs font-bold text-uns-dark uppercase tracking-wider">
                 Vistazo General de Equipos en Control de Mantenimiento
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Cod. Patrimonial</th>
@@ -296,31 +313,31 @@
         </div>
     </div>
 
-    <div id="mod-rrhh" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex justify-between items-end mb-6">
+    <div id="mod-rrhh" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Escalafón y Carga Docente</h2>
-                <p class="text-gray-500 text-sm mt-1">Registro formal, contratos, remuneraciones y distribución lectiva semanal.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Escalafón y Carga Docente</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Registro formal, contratos, remuneraciones y distribución lectiva.</p>
             </div>
-            <div class="flex gap-2">
-                <button onclick="exportarEscalafonDocentePDF()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-black transition">
+            <div class="flex flex-col sm:flex-row w-full xl:w-auto gap-2">
+                <button onclick="exportarEscalafonDocentePDF()" class="flex-1 sm:flex-none bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:bg-black transition">
                     <i class="fa-solid fa-file-pdf"></i> Descargar Planilla
                 </button>
-                <button onclick="abrirModalDocente()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                <button onclick="abrirModalDocente()" class="flex-1 sm:flex-none bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center justify-center gap-2">
                     <i class="fa-solid fa-user-plus"></i> Añadir Docente
                 </button>
             </div>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Docente Universitario</th>
                             <th class="px-6 py-4">Categoría / Dedicación</th>
                             <th class="px-6 py-4 text-center">Carga Horaria</th>
                             <th class="px-6 py-4 text-right">Remuneración Base</th>
-                            <th class="px-6 py-4 text-center">Horarios y Salón</th>
+                            <th class="px-6 py-4 text-center">Horarios</th>
                         </tr>
                     </thead>
                     <tbody id="tabla-rrhh" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
@@ -329,21 +346,21 @@
         </div>
     </div>
 
-    <div id="mod-academico" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <div id="mod-academico" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-4 mb-6">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Padrón de Estudiantes Unificado</h2>
-                <p class="text-gray-500 text-sm mt-1">Registros consolidados extraídos de la data oficial de ingresantes.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Padrón de Estudiantes Unificado</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Registros consolidados extraídos de la data oficial de ingresantes.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <button onclick="descargarPadronPDF('2024')" class="bg-gray-800 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-black transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2024</button>
-                <button onclick="descargarPadronPDF('2025')" class="bg-uns text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-uns-dark transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2025</button>
-                <button onclick="descargarPadronPDF('2026')" class="bg-gray-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-gray-700 transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2026</button>
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2 w-full xl:w-auto">
+                <button onclick="descargarPadronPDF('2024')" class="flex-1 sm:flex-none bg-gray-800 text-white px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-black transition flex justify-center items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2024</button>
+                <button onclick="descargarPadronPDF('2025')" class="flex-1 sm:flex-none bg-uns text-white px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-uns-dark transition flex justify-center items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2025</button>
+                <button onclick="descargarPadronPDF('2026')" class="flex-1 sm:flex-none bg-gray-600 text-white px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold hover:bg-gray-700 transition flex justify-center items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2026</button>
             </div>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Matrícula</th>
@@ -358,18 +375,18 @@
         </div>
     </div>
 
-    <div id="mod-bienestar" class="modulo-contenido seccion-oculta p-8 animate-fade-in">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+    <div id="mod-bienestar" class="modulo-contenido seccion-oculta p-4 sm:p-8 animate-fade-in">
+        <div class="flex flex-col xl:flex-row justify-between items-start xl:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bienestar Universitario - Comedor Central</h2>
-                <p class="text-gray-500 text-sm mt-1">Planificación integral de raciones alimentarias, desayuno, almuerzo y control de comensales.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Bienestar - Comedor Central</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Planificación integral de raciones alimentarias y control de comensales.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <button onclick="exportarComedorAptosPDF()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md hover:bg-black transition">
-                    <i class="fa-solid fa-file-pdf text-red-200"></i> Alumnos Aptos Comedor
+            <div class="flex flex-col sm:flex-row w-full xl:w-auto gap-2">
+                <button onclick="exportarComedorAptosPDF()" class="flex-1 sm:flex-none bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex justify-center items-center gap-2 shadow-md hover:bg-black transition">
+                    <i class="fa-solid fa-file-pdf text-red-200"></i> Alumnos Aptos
                 </button>
-                <button onclick="exportarMenusSemanaPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
-                    <i class="fa-solid fa-calendar-days"></i> Rol de Menús Semanal
+                <button onclick="exportarMenusSemanaPDF()" class="flex-1 sm:flex-none bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex justify-center items-center gap-2 shadow-md hover:bg-uns-dark transition">
+                    <i class="fa-solid fa-calendar-days"></i> Rol de Menús
                 </button>
             </div>
         </div>
@@ -402,9 +419,11 @@
                 </form>
             </div>
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
-                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">Rol Rotativo de Servicios Programados</div>
-                <div class="overflow-x-auto flex-1">
-                    <table class="w-full text-left text-xs">
+                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
+                    Rol Rotativo de Servicios Programados
+                </div>
+                <div class="overflow-x-auto flex-1 w-full">
+                    <table class="w-full text-left text-xs whitespace-nowrap">
                         <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
                             <tr>
                                 <th class="px-4 py-3">Fecha / Día</th>
@@ -454,8 +473,8 @@
             </div>
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
                 <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">Control de Comensales en Turno Actual</div>
-                <div class="overflow-x-auto flex-1">
-                    <table class="w-full text-left text-xs">
+                <div class="overflow-x-auto flex-1 w-full">
+                    <table class="w-full text-left text-xs whitespace-nowrap">
                         <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
                             <tr>
                                 <th class="px-6 py-3">Código Estudiante</th>
@@ -472,19 +491,19 @@
         </div>
     </div>
 
-    <div id="mod-bolsa" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex justify-between items-end mb-6">
+    <div id="mod-bolsa" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bolsa de Empleo y Convenios</h2>
-                <p class="text-gray-500 text-sm mt-1">Plataforma de vinculación laboral entre alumnos de últimos ciclos y empresas empleadoras.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Bolsa de Empleo y Convenios</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Plataforma de vinculación laboral entre alumnos de últimos ciclos y empresas empleadoras.</p>
             </div>
-            <button onclick="abrirModalBolsa()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+            <button onclick="abrirModalBolsa()" class="w-full sm:w-auto bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center justify-center gap-2">
                 <i class="fa-solid fa-plus"></i> Registrar Oferta
             </button>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Puesto / Requerimiento Profesional</th>
@@ -500,19 +519,19 @@
         </div>
     </div>
 
-    <div id="mod-proyeccion" class="modulo-contenido seccion-oculta p-8">
-        <div class="flex justify-between items-end mb-6">
+    <div id="mod-proyeccion" class="modulo-contenido seccion-oculta p-4 sm:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
             <div>
-                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Proyección Social Universitaria</h2>
-                <p class="text-gray-500 text-sm mt-1">Registro de horas prácticas en la comunidad e intervenciones de responsabilidad social.</p>
+                <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Proyección Social Universitaria</h2>
+                <p class="text-gray-500 text-xs sm:text-sm mt-1">Registro de horas prácticas en la comunidad e intervenciones de responsabilidad social.</p>
             </div>
-            <button onclick="abrirModalProyeccion()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+            <button onclick="abrirModalProyeccion()" class="w-full sm:w-auto bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center justify-center gap-2">
                 <i class="fa-solid fa-plus"></i> Añadir Proyecto
             </button>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left text-sm whitespace-nowrap">
                     <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Título del Proyecto Comunitario</th>
@@ -531,10 +550,10 @@
 </main>
 </div>
 
-<div id="modal-horario" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS (3 Bloques)</h3>
+<div id="modal-horario" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS</h3>
             <button onclick="cerrarModalHorario()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="p-6 space-y-4">
@@ -544,8 +563,8 @@
                 <p class="text-xs text-gray-500">Distribución de carga según plan curricular oficial.</p>
             </div>
             
-            <div class="overflow-x-auto border rounded-xl shadow-sm bg-white">
-                <table class="w-full text-left text-xs">
+            <div class="overflow-x-auto border rounded-xl shadow-sm bg-white w-full">
+                <table class="w-full text-left text-xs whitespace-nowrap">
                     <thead class="bg-gray-50 font-bold text-gray-700 border-b">
                         <tr>
                             <th class="p-3">Bloque</th>
@@ -558,15 +577,15 @@
                 </table>
             </div>
 
-            <button onclick="cerrarModalHorario()" class="w-full bg-slate-950 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
+            <button onclick="cerrarModalHorario()" class="w-full bg-slate-950 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm mt-2">Cerrar Visor</button>
         </div>
     </div>
 </div>
 
-<div id="modal-logistica" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-box-open"></i> Registrar Nuevo Activo (SGI)</h3>
+<div id="modal-logistica" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-box-open"></i> Registrar Nuevo Activo</h3>
             <button onclick="cerrarModalLogistica()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <form id="form-logistica" class="p-6 space-y-4">
@@ -588,15 +607,15 @@
             </div>
             <div class="flex gap-3 pt-4 border-t mt-2">
                 <button type="button" onclick="cerrarModalLogistica()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
-                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Registrar Activo</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Registrar</button>
             </div>
         </form>
     </div>
 </div>
 
-<div id="modal-compras" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+<div id="modal-compras" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
             <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-cart-plus"></i> Ingresar Requerimiento</h3>
             <button onclick="cerrarModalCompras()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -615,22 +634,22 @@
             </div>
             <div class="flex gap-3 pt-4 border-t mt-2">
                 <button type="button" onclick="cerrarModalCompras()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
-                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Procesar Alta Requerimiento</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Procesar Alta</button>
             </div>
         </form>
     </div>
 </div>
 
-<div id="modal-tesoreria" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+<div id="modal-tesoreria" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
             <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-vault"></i> Registrar Operación de Caja</h3>
             <button onclick="cerrarModalTesoreria()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <form id="form-tesoreria" class="p-6 space-y-4">
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Asiento ID *</label>
-                <input type="text" id="tx-asiento" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" placeholder="Ej. OP-4435" required>
+                <input type="text" id="tx-asiento" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" required>
             </div>
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Descripción de Operación Financiera *</label>
@@ -645,7 +664,7 @@
             </div>
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Monto Líquido (S/) *</label>
-                <input type="number" step="0.01" id="tx-monto" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" placeholder="0.00" required>
+                <input type="number" step="0.01" id="tx-monto" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" required>
             </div>
             <div class="flex gap-3 pt-4 border-t border-gray-100 mt-2">
                 <button type="button" onclick="cerrarModalTesoreria()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
@@ -655,9 +674,9 @@
     </div>
 </div>
 
-<div id="modal-docente" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+<div id="modal-docente" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
             <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-user-plus"></i> Registrar Docente en Escalafón</h3>
             <button onclick="cerrarModalDocente()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -690,16 +709,16 @@
             </div>
             <div class="flex gap-3 pt-4 border-t mt-2">
                 <button type="button" onclick="cerrarModalDocente()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
-                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Dar de Alta Docente</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Dar de Alta</button>
             </div>
         </form>
     </div>
 </div>
 
-<div id="modal-bolsa" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> Registrar Nueva Oferta / Convenio</h3>
+<div id="modal-bolsa" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> Registrar Nueva Oferta</h3>
             <button onclick="cerrarModalBolsa()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <form id="form-bolsa" class="p-6 space-y-4">
@@ -732,9 +751,9 @@
     </div>
 </div>
 
-<div id="modal-proyeccion" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+<div id="modal-proyeccion" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white sticky top-0">
             <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-people-roof"></i> Añadir Proyecto Comunitario</h3>
             <button onclick="cerrarModalProyeccion()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -748,7 +767,7 @@
                 <input type="text" id="proy-escuela" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Enfermería" required>
             </div>
             <div>
-                <label class="text-xs font-bold text-gray-500 uppercase">Público / Asentamiento Beneficiario *</label>
+                <label class="text-xs font-bold text-gray-500 uppercase">Público Beneficiario *</label>
                 <input type="text" id="proy-benef" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. A.H. San Pedro" required>
             </div>
             <div>
@@ -768,6 +787,75 @@
 </div>
 
 <script>
+// ==================== RESPONSIVE SIDEBAR TOGGLE ====================
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+        setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+    } else {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.classList.add('hidden'), 300);
+    }
+}
+
+// ==================== BUSCADOR GLOBAL INTELIGENTE ====================
+function sincronizarBusqueda(query) {
+    document.getElementById('search-global-desktop').value = query;
+    document.getElementById('search-global-mobile').value = query;
+    realizarBusquedaGlobal(query.toLowerCase());
+}
+
+function realizarBusquedaGlobal(query) {
+    if(!query) {
+        renderizarTablas(); // Restaurar todo
+        return;
+    }
+
+    // Identificar el módulo de destino si hay coincidencia
+    let moduloDestino = null;
+
+    if(DB_ACADEMICO.some(x => x.cod.toLowerCase().includes(query) || x.nombre.toLowerCase().includes(query))) moduloDestino = 'academico';
+    else if(DB_LOGISTICA.some(x => x.cod.toLowerCase().includes(query) || x.desc.toLowerCase().includes(query))) moduloDestino = 'logistica';
+    else if(DB_FINANZAS.some(x => x.op.toLowerCase().includes(query) || x.desc.toLowerCase().includes(query))) moduloDestino = 'finanzas';
+    else if(DB_COMPRAS.some(x => x.req.toLowerCase().includes(query) || x.desc.toLowerCase().includes(query))) moduloDestino = 'compras';
+    else if(DB_RRHH.some(x => x.nombre.toLowerCase().includes(query))) moduloDestino = 'rrhh';
+    else if(DB_BIENESTAR.some(x => x.cod.toLowerCase().includes(query))) moduloDestino = 'bienestar';
+    else if(DB_BOLSA.some(x => x.empresa.toLowerCase().includes(query) || x.oferta.toLowerCase().includes(query))) moduloDestino = 'bolsa';
+    else if(DB_PROYECCION.some(x => x.proy.toLowerCase().includes(query) || x.esc.toLowerCase().includes(query))) moduloDestino = 'proyeccion';
+
+    if(moduloDestino) {
+        const moduloActual = document.querySelector('.seccion-visible').id.replace('mod-', '');
+        if(moduloActual !== moduloDestino) {
+            const btnAsociado = document.querySelector(`button[onclick="cambiarModulo('${moduloDestino}', this)"]`);
+            // Cambiar vista sin borrar la busqueda ni cerrar menú
+            document.querySelectorAll('.modulo-contenido').forEach(mod => {
+                mod.classList.remove('seccion-visible', 'animate-fade-in');
+                mod.classList.add('seccion-oculta');
+            });
+            document.getElementById('mod-' + moduloDestino).classList.remove('seccion-oculta');
+            document.getElementById('mod-' + moduloDestino).classList.add('seccion-visible', 'animate-fade-in');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            if(btnAsociado) btnAsociado.classList.add('active');
+        }
+    }
+
+    // Filtrar visualmente la tabla activa
+    setTimeout(() => {
+        let panelActivo = document.querySelector('.seccion-visible');
+        if(panelActivo) {
+            let filas = panelActivo.querySelectorAll('table tbody tr');
+            filas.forEach(fila => {
+                fila.style.display = fila.innerText.toLowerCase().includes(query) ? '' : 'none';
+            });
+        }
+    }, 50);
+}
+
 // ==================== RESTRUCTURACIÓN DE DATA ARRAYS ====================
 
 const DB_FINANZAS = [
@@ -943,7 +1031,7 @@ function renderizarTablas() {
     `).join('');
     document.getElementById('dash-kpi-compras').textContent = DB_COMPRAS.length + " Requerimientos";
 
-    // Logística SGI Vistazo
+    // Logística SGI
     document.getElementById('tabla-logistica').innerHTML = DB_LOGISTICA.map(l => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-500">${l.cod}</td>
@@ -1004,7 +1092,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
             <td class="px-6 py-3.5 text-center font-black text-gray-800">${b.post}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Vigente'?'bg-emerald-50 text-emerald-700':'bg-slate-100 text-slate-700'}">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Vigente'?'bg-emerald-50 text-emerald-700':'bg-gray-100 text-gray-600'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
         </tr>
     `).join('');
@@ -1038,6 +1126,7 @@ function cambiarModulo(moduloId, btnElement) {
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
     if(moduloId === 'dashboard') inicializarGraficos();
+    if(window.innerWidth < 1024) toggleSidebar();
 }
 
 function abrirModalLogistica() { document.getElementById('modal-logistica').classList.remove('hidden'); }
@@ -1211,6 +1300,7 @@ function exportarComedorAptosPDF() {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1231,6 +1321,7 @@ function exportarMenusSemanaPDF() {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1248,6 +1339,7 @@ function exportarEscalafonDocentePDF() {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1265,6 +1357,7 @@ function descargarPadronPDF(anio) {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1299,6 +1392,7 @@ function exportarSgiCompletoPDF() {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1328,6 +1422,7 @@ function exportarConvenioPDF(empresa, oferta) {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1350,6 +1445,7 @@ function exportarConvenioPDF(empresa, oferta) {
 function exportarProyectoSocialPDF(proyecto, escuela) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
+    
     doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
     doc.setTextColor(255,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(14);
     doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
@@ -1361,6 +1457,7 @@ function exportarProyectoSocialPDF(proyecto, escuela) {
     doc.text(doc.splitTextToSize(texto, 170), 20, 58);
     
     doc.rect(80, 140, 50, 22); doc.setFont("helvetica","bold"); doc.text("SELLO DIGITAL\nOFICINA RSU-UNS", 105, 149, null, null, "center");
+    
     doc.save(`Proyecto_RS_${escuela.replace(/\s/g,'_')}.pdf`);
 }
 
@@ -1370,8 +1467,7 @@ function generarReporteGeneral() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        // Cabecera Principal Institucional
-        doc.setFillColor(179, 0, 0); // Rojo UNS
+        doc.setFillColor(179, 0, 0); 
         doc.rect(0, 0, 210, 30, 'F');
         doc.setTextColor(255, 255, 255); 
         doc.setFont("helvetica", "bold"); 
@@ -1381,7 +1477,6 @@ function generarReporteGeneral() {
         doc.setFont("helvetica", "normal");
         doc.text("REPORTE EJECUTIVO INSTITUCIONAL - CORE ERP", 105, 22, null, null, "center");
 
-        // Metadatos de Auditoría
         doc.setTextColor(50, 50, 50); 
         doc.setFontSize(10); 
         doc.setFont("helvetica", "bold");
@@ -1389,14 +1484,12 @@ function generarReporteGeneral() {
         doc.text(`Fecha de Emisión: ${fecha}`, 14, 40);
         doc.text("Generado por: Administrador General OTI", 14, 46);
 
-        // Sección I: Resumen Financiero y Patrimonial
         doc.setDrawColor(179,0,0);
         doc.setLineWidth(0.5);
         doc.line(14, 52, 196, 52);
         doc.setFontSize(12);
         doc.text("I. RESUMEN FINANCIERO Y PATRIMONIAL", 14, 60);
 
-        // Cálculos dinámicos en vivo para KPIs de cabecera PDF
         let tIngresos = 0, tEgresos = 0;
         DB_FINANZAS.forEach(f => f.tipo==='Ingreso'? tIngresos+=f.monto : tEgresos+=f.monto);
         
@@ -1408,7 +1501,6 @@ function generarReporteGeneral() {
         doc.text(`Activos Inventariados (SGI): ${DB_LOGISTICA.length} Equipos registrados`, 110, 68);
         doc.text(`Plana Docente Activa: ${DB_RRHH.length} Profesores en Escalafón`, 110, 74);
 
-        // Sección II: Últimos Movimientos
         doc.setFontSize(12);
         doc.setFont("helvetica", "bold");
         doc.text("II. ÚLTIMOS MOVIMIENTOS EN CAJA (TESORERÍA)", 14, 92);
@@ -1422,7 +1514,6 @@ function generarReporteGeneral() {
             headStyles: { fillColor: [40, 40, 40] } 
         });
 
-        // Sección III: Estado del SGI
         let finalY = doc.lastAutoTable.finalY + 15;
         if (finalY > 250) { doc.addPage(); finalY = 20; }
         
@@ -1439,7 +1530,6 @@ function generarReporteGeneral() {
             headStyles: { fillColor: [179, 0, 0] } 
         });
 
-        // Footer y Visto Bueno
         finalY = doc.lastAutoTable.finalY + 30;
         if (finalY > 260) { doc.addPage(); finalY = 40; }
         doc.setDrawColor(0,0,0);
