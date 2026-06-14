@@ -499,3 +499,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    // Referencias a los elementos
+    const btnTablaDesktop = document.getElementById('btn-tabla-desktop');
+    const btnTablaMobile = document.getElementById('btn-tabla-mobile');
+    const ventanaTabla = document.getElementById('ventana-tabla');
+    const btnCerrarTabla = document.getElementById('btn-cerrar-tabla');
+    const contenidoTabla = document.getElementById('contenido-tabla');
+    const mobileMenu = document.getElementById('mobile-menu'); // Menú de celular
+    
+    // Función para abrir el modal
+    const abrirModalTabla = (e) => {
+        e.preventDefault();
+        ventanaTabla.classList.remove('opacity-0', 'pointer-events-none');
+        contenidoTabla.classList.remove('scale-95');
+        contenidoTabla.classList.add('scale-100');
+        // Cerrar menú móvil si está abierto
+        if (mobileMenu) mobileMenu.classList.add('hidden');
+    };
+
+    if (btnTablaDesktop) btnTablaDesktop.addEventListener('click', abrirModalTabla);
+    if (btnTablaMobile) btnTablaMobile.addEventListener('click', abrirModalTabla);
+
+    // Cerrar modal
+    if (btnCerrarTabla) {
+        btnCerrarTabla.addEventListener('click', () => {
+            ventanaTabla.classList.add('opacity-0', 'pointer-events-none');
+            contenidoTabla.classList.remove('scale-100');
+            contenidoTabla.classList.add('scale-95');
+        });
+    }
+
+    // Cerrar si hace click fuera del modal
+    if (ventanaTabla) {
+        ventanaTabla.addEventListener('click', (e) => {
+            if (e.target === ventanaTabla) btnCerrarTabla.click();
+        });
+    }
+
+    // ==========================================
+    // GENERADOR AUTOMÁTICO DE LA TABLA (UNS)
+    // ==========================================
+    const tbody = document.getElementById('cuerpo-tabla-conversiones');
+    
+    if (tbody) {
+        let htmlFilas = '';
+        const FACTOR_UNS = 20.377; // Multiplicador oficial de la UNS
+        
+        // El promedio va de 20.00 hasta 11.00
+        for (let nota = 200; nota >= 110; nota--) {
+            let pes = (nota / 10).toFixed(2);
+            let puntaje = (pes * FACTOR_UNS).toFixed(3);
+            
+            // Corrección estética para quitar ceros innecesarios (ej. 407.540 -> 407.54)
+            puntaje = parseFloat(puntaje).toString();
+            
+            // Estilos dinámicos para resaltar números enteros (20.00, 19.00...)
+            let esEntero = (nota % 10 === 0);
+            let bgClass = esEntero ? 'bg-red-50/40 font-bold' : 'hover:bg-gray-50';
+            
+            htmlFilas += `
+                <tr class="transition-colors duration-200 ${bgClass}">
+                    <td class="py-3 px-6 text-center border-r border-gray-100">
+                        <span class="text-gray-700 text-sm md:text-base">${pes}</span>
+                    </td>
+                    <td class="py-3 px-6 text-center">
+                        <span class="text-uns font-bold text-sm md:text-base">${puntaje}</span>
+                    </td>
+                </tr>
+            `;
+        }
+        tbody.innerHTML = htmlFilas;
+    }
+});
