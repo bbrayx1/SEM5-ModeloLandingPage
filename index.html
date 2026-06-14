@@ -345,34 +345,32 @@
                     
                     <div class="p-8 md:p-12">
                         <h4 class="text-xl font-bold text-gray-800 mb-8 border-l-4 border-uns pl-4">Escuelas Profesionales</h4>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <button type="button" id="btn-sistemas" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0">
-                                    <i class="fa-solid fa-laptop-code"></i>
-                                </div>
-                                <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería de Sistemas e Informática</span>
-                            </button>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-bolt"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería en Energía</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-tractor"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería Agroindustrial</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-helmet-safety"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería Civil</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-seedling"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería Agrónoma</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-gears"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería Mecánica</span>
-                            </li>
-                        </ul>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+    <button type="button" data-modal="sistemas" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-laptop-code"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería de Sistemas e Informática</span>
+    </button>
+    <button type="button" data-modal="civil" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-helmet-safety"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería Civil</span>
+    </button>
+    <button type="button" data-modal="agroindustrial" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-industry"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería Agroindustrial</span>
+    </button>
+    <button type="button" data-modal="energia" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-bolt"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería en Energía</span>
+    </button>
+    <button type="button" data-modal="agronoma" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-seedling"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería Agrónoma</span>
+    </button>
+    <button type="button" data-modal="mecanica" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-gears"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería Mecánica</span>
+    </button>
+</div>
                     </div>
                 </div>
 
@@ -389,24 +387,24 @@
                     
                     <div class="p-8 md:p-12">
                         <h4 class="text-xl font-bold text-gray-800 mb-8 border-l-4 border-uns pl-4">Escuelas Profesionales</h4>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-stethoscope"></i></div>
-                                <span class="font-semibold text-gray-700">Medicina Humana</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-user-nurse"></i></div>
-                                <span class="font-semibold text-gray-700">Enfermería</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-dna"></i></div>
-                                <span class="font-semibold text-gray-700">Biotecnología</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-fish-fins"></i></div>
-                                <span class="font-semibold text-gray-700">Biología en Acuicultura</span>
-                            </li>
-                        </ul>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-4 mb-12">
+    <button type="button" data-modal="acuicultura" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-fish"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Biología en Acuicultura</span>
+    </button>
+    <button type="button" data-modal="enfermeria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-user-nurse"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Enfermería</span>
+    </button>
+    <button type="button" data-modal="biotecnologia" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-dna"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Biotecnología</span>
+    </button>
+    <button type="button" data-modal="medicina" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-user-doctor"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Medicina Humana</span>
+    </button>
+</div>
                     </div>
                 </div>
 
@@ -423,28 +421,48 @@
                     
                     <div class="p-8 md:p-12">
                         <h4 class="text-xl font-bold text-gray-800 mb-8 border-l-4 border-uns pl-4">Escuelas Profesionales</h4>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-scale-balanced"></i></div>
-                                <span class="font-semibold text-gray-700">Derecho y Ciencias Políticas</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-microphone-lines"></i></div>
-                                <span class="font-semibold text-gray-700">Comunicación Social</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-chalkboard-user"></i></div>
-                                <span class="font-semibold text-gray-700">Educación Secundaria</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-children"></i></div>
-                                <span class="font-semibold text-gray-700">Educación Primaria</span>
-                            </li>
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-shapes"></i></div>
-                                <span class="font-semibold text-gray-700">Educación Inicial</span>
-                            </li>
-                        </ul>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+    <button type="button" data-modal="inicial" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-child-reaching"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Educación Inicial</span>
+    </button>
+    <button type="button" data-modal="primaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-school"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Educación Primaria</span>
+    </button>
+    <button type="button" data-modal="comunicacion" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-microphone-lines"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Comunicación Social</span>
+    </button>
+    <button type="button" data-modal="derecho" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-scale-balanced"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Derecho y Ciencias Políticas</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-book-open-reader"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Lengua y Literatura</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-calculator"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Matemática, Computación y Física</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-earth-americas"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Historia, Geografía y CC.SS.</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-brain"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Filosofía, Psicología y CC.SS.</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-flask"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Biología, Química y Física</span>
+    </button>
+    <button type="button" data-modal="secundaria" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0"><i class="fa-solid fa-language"></i></div>
+        <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors text-xs">Educación Secundaria: Idiomas: Inglés - Francés</span>
+    </button>
+</div>
                     </div>
                 </div>
 
@@ -1156,100 +1174,69 @@
             </div>
         </div>
     </div>
+    <!-- ========================================================================= -->
+    <!-- INICIO DE TODAS LAS VENTANAS MODALES DE LAS CARRERAS DE LA UNS            -->
+    <!-- ========================================================================= -->
+
+    <!-- ========================================== -->
+    <!-- MODALES: FACULTAD DE INGENIERÍA            -->
+    <!-- ========================================== -->
+
+    <!-- Ventana: SISTEMAS E INFORMÁTICA -->
     <div id="ventana-sistemas" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-sistemas">
-            
             <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-laptop-code"></i></div>
                     <div>
                         <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería de Sistemas e Informática</h3>
                         <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
                     </div>
                 </div>
-                <button type="button" id="btn-cerrar-sistemas" class="text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm border border-gray-100 focus:outline-none">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            
             <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
-                
-                <div class="flex flex-wrap gap-4 mb-8">
-                    <span class="bg-red-50 text-uns px-4 py-2 rounded-xl text-sm font-bold border border-red-100"><i class="fa-solid fa-clock mr-2"></i> 5 Años (10 ciclos)</span>
-                    <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200"><i class="fa-solid fa-graduation-cap mr-2"></i> Bachiller en Ing. de Sistemas e Informática</span>
-                    <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200"><i class="fa-solid fa-medal mr-2"></i> Título: Ingeniero de Sistemas e Informática</span>
-                </div>
-
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="md:col-span-2 space-y-8">
-                        
+                    <div class="md:col-span-2 space-y-6">
                         <div>
-                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Perfil Profesional</h4>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                                Formamos líderes tecnológicos capaces de modelar, construir y desplegar arquitecturas complejas de software. El egresado santeño destaca por su capacidad analítica para resolver problemas del entorno empresarial e institucional.
-                            </p>
-                            <div class="grid sm:grid-cols-2 gap-4 mt-4">
-                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                                    <h5 class="font-bold text-gray-800 text-sm mb-1"><i class="fa-solid fa-code text-uns mr-1"></i> Desarrollo de Software</h5>
-                                    <p class="text-xs text-gray-500">Construcción de sistemas robustos, escalables y seguros bajo estándares de calidad internacional.</p>
-                                </div>
-                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                                    <h5 class="font-bold text-gray-800 text-sm mb-1"><i class="fa-solid fa-chart-network text-uns mr-1"></i> Ciencia de Datos e IA</h5>
-                                    <p class="text-xs text-gray-500">Procesamiento analítico de datos y entrenamiento de modelos predictivos y sistemas inteligentes.</p>
-                                </div>
-                            </div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">La carrera forma profesionales estratégicos encargados de integrar las ciencias de la computación, la ingeniería de software y la gestión empresarial. Los estudiantes aprenden a diseñar, desarrollar y administrar plataformas tecnológicas que optimizan la toma de decisiones en cualquier organización.</p>
                         </div>
-
                         <div>
-                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Ejes de la Malla Curricular</h4>
-                            <div class="space-y-4 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-                                <div class="relative pl-6 border-l-2 border-uns">
-                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-uns rounded-full shadow-[0_0_0_4px_rgba(179,0,0,0.1)]"></span>
-                                    <h5 class="font-bold text-gray-800 text-sm">Ciencias de la Computación e Infraestructura</h5>
-                                    <p class="text-xs text-gray-500 mt-1">Arquitectura de Computadoras, Sistemas Operativos, Redes y Conectividad, Inteligencia Artificial.</p>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El egresado santeño destaca por su capacidad analítica y liderazgo tecnológico. Está preparado para formular proyectos de inversión en TI, auditar sistemas de información, aplicar inteligencia artificial y dirigir equipos de desarrollo de software bajo estándares internacionales de calidad y seguridad.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">El plan de estudios consta de 10 semestres académicos diseñados bajo un enfoque por competencias. Integra progresivamente las matemáticas aplicadas con lenguajes de programación modernos, bases de datos y metodologías ágiles, culminando con el desarrollo de un proyecto de tesis integral.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-code text-uns mr-1"></i> Ingeniería de Software</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Algoritmos, Estructura de Datos, Programación Web/Móvil y Arquitectura de Software.</p>
                                 </div>
-                                <div class="relative pl-6 border-l-2 border-gray-200">
-                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-gray-300 rounded-full"></span>
-                                    <h5 class="font-bold text-gray-800 text-sm">Ingeniería de Software</h5>
-                                    <p class="text-xs text-gray-500 mt-1">Algoritmos, Estructuras de Datos, Base de Datos, Programación Web y Móvil, Arquitectura de Software.</p>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-server text-uns mr-1"></i> Computación y Redes</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Sistemas Operativos, Arquitectura de Computadoras, Redes y Telecomunicaciones.</p>
                                 </div>
-                                <div class="relative pl-6 border-l-2 border-gray-200">
-                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-gray-300 rounded-full"></span>
-                                    <h5 class="font-bold text-gray-800 text-sm">Gestión Organizacional</h5>
-                                    <p class="text-xs text-gray-500 mt-1">Sistemas de Información, Auditoría de TI, Formulación de Proyectos de Inversión, Gestión Ágil.</p>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-database text-uns mr-1"></i> Gestión de Datos e IA</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Modelamiento de Datos, Administración de BD, Sistemas Expertos e Inteligencia Artificial.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-chart-line text-uns mr-1"></i> Gestión y Proyectos TI</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Sistemas de Información, Auditoría Informática, Planeamiento Estratégico y Gestión Ágil.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div>
                         <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
-                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
-                                <i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral
-                            </h4>
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
                             <ul class="space-y-3 text-sm text-gray-200">
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
-                                    <span>Empresas de desarrollo y consultoría de software.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
-                                    <span>Áreas de TI en entidades públicas, bancos y retail.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
-                                    <span>Gestión de bases de datos y análisis de Big Data.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
-                                    <span>Seguridad informática y auditoría de sistemas.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
-                                    <span>Emprendimiento de startups tecnológicas.</span>
-                                </li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Empresas de desarrollo de software globales.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Entidades del sector público y ministerios.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultorías independientes de auditoría TI.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Startups y proyectos de innovación tecnológica.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -1257,5 +1244,900 @@
             </div>
         </div>
     </div>
+
+    <!-- Ventana: CIVIL -->
+    <div id="ventana-civil" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-civil">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-helmet-safety"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería Civil</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Dedicada a la planificación, diseño, construcción, supervisión y mantenimiento de infraestructuras vitales como edificios, carreteras, puentes, represas y sistemas de saneamiento. La carrera combina una sólida base en física y matemáticas con el uso de software de simulación avanzada.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El ingeniero civil de la UNS es un profesional altamente capacitado para dirigir megaproyectos de infraestructura. Evalúa riesgos sísmicos y geotécnicos, gestiona presupuestos de obra y asegura que las construcciones cumplan con las normativas técnicas y ambientales vigentes.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Estructurada en 10 ciclos académicos, la malla inicia con ciencias puras y transita hacia el diseño aplicado. Incluye intensas horas de prácticas en modernos laboratorios de topografía, mecánica de suelos, hidráulica y tecnología de materiales para garantizar una formación integral.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-building text-uns mr-1"></i> Análisis Estructural</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Estática, Resistencia de Materiales, Diseño en Concreto Armado y Acero.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-mountain text-uns mr-1"></i> Geotecnia y Topografía</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Geología, Mecánica de Suelos, Topografía Aplicada y Diseño de Cimentaciones.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-water text-uns mr-1"></i> Hidráulica y Saneamiento</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Mecánica de Fluidos, Hidrología, Abastecimiento de Agua y Drenaje Urbano.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-road text-uns mr-1"></i> Vías y Transportes</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Ingeniería de Tránsito, Diseño de Pavimentos, Caminos y Gestión de Obras.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Transportes y Vivienda.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Empresas constructoras y concesionarias.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultorías topográficas y geotécnicas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Supervisión y auditoría de obras públicas.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: AGROINDUSTRIAL -->
+    <div id="ventana-agroindustrial" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-agroindustrial">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-industry"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería Agroindustrial</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Se encarga de la transformación, conservación y comercialización de materias primas provenientes del sector agrícola, ganadero, pesquero y forestal. Aplica ciencias exactas y biología para dar valor agregado a los productos, alargando su vida útil y asegurando su calidad para el consumo.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El ingeniero agroindustrial está preparado para diseñar y administrar plantas de procesamiento. Es experto en normas de bioseguridad, control de calidad (HACCP), desarrollo de nuevos productos alimentarios y no alimentarios, y optimización de cadenas de suministro para la agroexportación.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Durante los 10 semestres, el estudiante desarrolla competencias en química y microbiología, para luego especializarse en diseño de plantas y procesos industriales. Culmina con una fuerte base en agronegocios y formulación de proyectos para mercados internacionales.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-flask text-uns mr-1"></i> Ciencias Alimentarias</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Bioquímica, Microbiología de Alimentos, Nutrición y Análisis Instrumental.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-gears text-uns mr-1"></i> Procesos Agroindustriales</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Operaciones Unitarias, Tecnología de Frutas, Hortalizas, Cárnicos y Lácteos.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-clipboard-check text-uns mr-1"></i> Calidad e Inocuidad</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Sistemas de Gestión de Calidad, Toxicología, Legislación e Higiene Alimentaria.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-box-open text-uns mr-1"></i> Ingeniería y Gestión</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Diseño de Plantas Agroindustriales, Agronegocios, Marketing y Exportación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Empresas agroexportadoras y pesqueras.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Laboratorios de control de calidad alimentaria.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>SENASA y entidades de regulación sanitaria.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Plantas procesadoras de bebidas y lácteos.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: ENERGÍA -->
+    <div id="ventana-energia" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-energia">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-bolt"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería en Energía</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Forma especialistas en la generación, transmisión, distribución y utilización eficiente de los recursos energéticos. La carrera tiene un fuerte enfoque en la transición hacia energías limpias y la modernización de los sistemas termoeléctricos e hidroeléctricos del país.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El egresado es un líder en innovación energética. Está capacitado para realizar auditorías energéticas, diseñar parques eólicos o plantas solares, optimizar el consumo industrial y formular políticas de sostenibilidad que mitiguen el impacto ambiental del sector eléctrico.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">A lo largo de sus 5 años de duración, el plan de estudios abarca desde la termodinámica fundamental hasta el diseño avanzado de subestaciones y energías alternativas, complementado con cursos de mercado eléctrico y auditoría.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-plug text-uns mr-1"></i> Sistemas Eléctricos</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Teoría de Circuitos, Máquinas Eléctricas, Instalaciones y Subestaciones.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-temperature-arrow-up text-uns mr-1"></i> Termodinámica y Fluidos</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Termodinámica Aplicada, Transferencia de Calor, Turbomáquinas y Neumática.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-solar-panel text-uns mr-1"></i> Energías Renovables</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Ingeniería Solar, Energía Eólica, Biomasa, Geotermia y Centrales Hidroeléctricas.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-lightbulb text-uns mr-1"></i> Eficiencia y Regulación</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Auditoría y Conservación de Energía, Formulación de Proyectos, Mercado Eléctrico.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Empresas generadoras y distribuidoras eléctricas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Energía y Minas, OSINERGMIN.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultorías en proyectos de electrificación.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Gestión de mantenimiento industrial y auditorías.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: AGRÓNOMA -->
+    <div id="ventana-agronoma" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-agronoma">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-seedling"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería Agrónoma</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Carrera vital para la seguridad alimentaria, enfocada en optimizar el manejo de recursos naturales (suelo, agua, plantas) para la producción agrícola. Combina principios de biología, ecología y tecnología aplicada al campo para maximizar el rendimiento de los cultivos de forma sostenible.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Profesional capacitado para administrar fundos agrícolas, diseñar sistemas de riego tecnificado y establecer programas de control biológico de plagas. Es un actor clave en proyectos especiales de irrigación (como Chinecas) y en la exportación agrícola de la región.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Los 10 ciclos académicos desarrollan una profunda comprensión de la biología vegetal, transitando hacia el manejo integral de plagas, topografía, mecanización y el diseño agronómico para grandes y pequeños cultivos.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-leaf text-uns mr-1"></i> Producción Vegetal</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Botánica, Fisiología Vegetal, Genética, Fruticultura y Cultivos Agroindustriales.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-bug text-uns mr-1"></i> Sanidad Agraria</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Entomología Agrícola, Fitopatología, Control Integrado de Plagas y Enfermedades.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-mound text-uns mr-1"></i> Suelos y Aguas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Edafología, Fertilidad de Suelos, Topografía, Riego Tecnificado y Drenaje.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-tractor text-uns mr-1"></i> Ingeniería y Extensión</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Maquinaria Agrícola, Agroecología, Formulación de Proyectos y Extensión Agraria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Fundos agrícolas y empresas agroexportadoras.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Proyectos especiales de irrigación (Chinecas, Chavimochic).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Agricultura y SENASA.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultoría y asistencia técnica a agricultores.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: MECÁNICA -->
+    <div id="ventana-mecanica" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-mecanica">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-gears"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería Mecánica</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Dedicada a la aplicación de los principios de la física y la ciencia de los materiales para el diseño, análisis, fabricación y mantenimiento de sistemas mecánicos. Es el pilar detrás de la industria automotriz, robótica, siderúrgica y de maquinaria pesada.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El ingeniero mecánico diseña piezas y maquinarias utilizando software avanzado (CAD/CAM). Dirige procesos de manufactura, soldadura y ensamblaje, además de planificar planes de mantenimiento predictivo y correctivo para plantas industriales y flotas de transporte.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Con 10 ciclos de formación rigurosa, el estudiante domina la mecánica clásica, el diseño computarizado de estructuras y componentes, y la termodinámica aplicada a motores, adquiriendo gran destreza práctica en talleres.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-drafting-compass text-uns mr-1"></i> Diseño Aplicado</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Dibujo Mecánico (CAD), Resistencia de Materiales, Dinámica y Diseño de Máquinas.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-industry text-uns mr-1"></i> Ciencias de Manufactura</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Metalurgia Física, Procesos de Manufactura, Soldadura, Máquinas Herramienta (CNC).</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-fire text-uns mr-1"></i> Ciencias Térmicas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Termodinámica, Motores de Combustión Interna, Refrigeración y Transferencia de Calor.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-wrench text-uns mr-1"></i> Automatización y Gestión</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Mantenimiento Industrial, Instrumentación, Sistemas Hidráulicos/Neumáticos y Seguridad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Industria metalmecánica, siderúrgica y minera.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Plantas de procesamiento y astilleros navales.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Gestión de mantenimiento industrial y automotriz.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Diseño y automatización de maquinarias.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODALES: FACULTAD DE CIENCIAS              -->
+    <!-- ========================================== -->
+
+    <!-- Ventana: ACUICULTURA -->
+    <div id="ventana-acuicultura" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-acuicultura">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-fish"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Biología en Acuicultura</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ciencias - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Carrera estratégica para aprovechar la riqueza hídrica del país. Se especializa en la crianza, producción, reproducción y manejo sostenible de especies acuáticas comerciales (peces, moluscos, crustáceos, microalgas) en ambientes de agua dulce y marina.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El biólogo acuicultor investiga ecosistemas acuáticos, diseña laboratorios de eclosión (hatcheries) y granjas acuícolas. Domina técnicas de nutrición de peces, control de patologías marinas y mejora genética para garantizar altos rendimientos en la industria pesquera y proteger especies en peligro.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Durante los 10 semestres, el alumno estudia la biodiversidad marina, la oceanografía, y se especializa en tecnologías de cultivo, sanidad acuícola y manejo ambiental de recursos hídricos.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-fish text-uns mr-1"></i> Biología y Biodiversidad</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Ictiología, Malacología, Carcinología, Planctonología, Fisiología Acuática.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-water text-uns mr-1"></i> Ambientes Acuáticos</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Oceanografía, Limnología, Ecología Acuática, Calidad de Agua y Biorremediación.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-shrimp text-uns mr-1"></i> Tecnología Acuícola</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Cultivo de Peces, Cultivo de Invertebrados, Nutrición e Ingeniería Acuícola.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-microscope text-uns mr-1"></i> Sanidad y Producción</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Patología Acuícola, Genética y Reproducción, Evaluación de Impacto Ambiental.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Empresas pesqueras, centros acuícolas y criaderos.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>SANIPES, IMARPE, FONDEPES y ministerios afines.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Gestión de proyectos de conservación hidrobiológica.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Laboratorios de investigación marina y dulceacuícola.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: ENFERMERÍA -->
+    <div id="ventana-enfermeria" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-enfermeria">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-user-nurse"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Enfermería</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ciencias - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Disciplina de las ciencias de la salud dedicada al cuidado holístico y humanizado de las personas, familias y comunidades. Prepara a los estudiantes para asistir a pacientes en procesos de recuperación, administrar medicamentos y liderar programas de prevención en salud.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El enfermero santeño es un pilar en el sistema hospitalario. Demuestra destreza técnica en procedimientos clínicos, capacidad de respuesta en emergencias y cuidados intensivos, y habilidades gerenciales para administrar centros de salud y liderar campañas de vacunación comunitaria.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">El plan de estudios (10 ciclos) integra las ciencias biológicas fundamentales con un fuerte componente clínico práctico, abarcando desde la salud comunitaria preventiva hasta el cuidado del adulto crítico en unidades hospitalarias.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-hand-holding-medical text-uns mr-1"></i> Fundamentos del Cuidado</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Bases de Enfermería, Ética y Deontología, Nutrición y Dietética, Psicología del Desarrollo.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-virus text-uns mr-1"></i> Biología y Terapéutica</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Morfofisiología, Microbiología y Parasitología, Farmacología Aplicada, Epidemiología.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-house-chimney-medical text-uns mr-1"></i> Enfermería Clínica</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Cuidado del Adulto y Adulto Mayor, Cuidado del Niño y Adolescente, Salud Reproductiva.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-users text-uns mr-1"></i> Salud Pública y Gerencia</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Enfermería Comunitaria, Salud Mental y Psiquiatría, Gerencia de Servicios de Salud.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Hospitales, clínicas y redes de salud públicas/privadas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Gestión y gerencia de servicios de salud.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Salud ocupacional en industrias y empresas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Docencia y atención primaria en comunidades.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: BIOTECNOLOGÍA -->
+    <div id="ventana-biotecnologia" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-biotecnologia">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-dna"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Biotecnología</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ciencias - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Carrera de vanguardia científica que utiliza sistemas biológicos, organismos vivos y sus componentes para crear o modificar productos y procesos. Fusiona la biología celular con la ingeniería para resolver problemas en la agricultura, la industria farmacéutica y el medio ambiente.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Profesional investigador e innovador. Experto en manipulación de material genético (ADN), cultivo de células in vitro, biorremediación de ecosistemas contaminados y producción de vacunas, biocombustibles y alimentos transgénicos de manera segura.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Durante los 10 semestres, se dota al estudiante de bases profundas en genética y química, escalando hacia el diseño de biorreactores y bioprocesos aplicados en sectores industriales, médicos y ambientales.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-dna text-uns mr-1"></i> Genética y Biología Celular</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Bioquímica, Ingeniería Genética, Biología Celular, Cultivo de Tejidos Vegetales y Animales.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-vial text-uns mr-1"></i> Bioprocesos Industriales</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Termodinámica, Operaciones Unitarias, Ingeniería Bioquímica, Diseño de Biorreactores.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-seedling text-uns mr-1"></i> Biotecnología Aplicada</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Biotecnología Ambiental, Biotecnología Agrícola, Alimentaria, Médica y Marina.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-network-wired text-uns mr-1"></i> Innovación y Computación</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Bioinformática, Bioética, Legislación y Patentes, Formulación de Proyectos Tecnológicos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Laboratorios de biología molecular y genética.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Industrias farmacéuticas y agroindustriales.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Proyectos de biorremediación ambiental y bioenergía.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Centros de investigación biomédica y agrícola.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: MEDICINA HUMANA -->
+    <div id="ventana-medicina" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-medicina">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-user-doctor"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Medicina Humana</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ciencias - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Forma médicos cirujanos enfocados en preservar la vida y la salud del ser humano. Integra el estudio profundo de la anatomía y las ciencias biomédicas con la práctica hospitalaria, preparando al estudiante para diagnosticar y tratar todo tipo de patologías físicas y mentales.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Profesional con alta calidad científica y profundo sentido humanístico. Está capacitado para liderar equipos de salud, realizar intervenciones clínicas y quirúrgicas de primer nivel, y desarrollar investigaciones epidemiológicas que mejoren las políticas de salud pública del país.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Es la carrera más extensa (14 semestres académicos), iniciando con ciencias básicas (anatomía, fisiología), avanzando a ciencias preclínicas y especialidades médicas, culminando con el riguroso internado médico rotativo en centros de salud y hospitales.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-microscope text-uns mr-1"></i> Ciencias Básicas Integradas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Anatomía Humana, Embriología, Histología, Fisiología, Genética y Bioquímica Médica.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-heart-pulse text-uns mr-1"></i> Ciencias Preclínicas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Patología General, Fisiopatología, Farmacología, Inmunología y Diagnóstico por Imágenes.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-kit-medical text-uns mr-1"></i> Especialidades Clínicas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Medicina Interna, Cirugía General, Pediatría, Ginecología y Obstetricia, Psiquiatría.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-earth-americas text-uns mr-1"></i> Salud Pública e Internado</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Epidemiología, Medicina Comunitaria, Gerencia en Salud, Bioética e Internado Hospitalario.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Hospitales del MINSA, EsSalud y clínicas privadas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Centros de salud comunitaria y postas médicas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Médico investigador y docencia universitaria.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultorios y práctica privada independiente.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODALES: EDUCACIÓN Y HUMANIDADES           -->
+    <!-- ========================================== -->
+
+    <!-- Ventana: INICIAL -->
+    <div id="ventana-inicial" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-inicial">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-child-reaching"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Educación Inicial</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Educación y Humanidades - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Orientada a la formación de maestros especialistas en la primera y más crucial etapa del desarrollo humano (de 0 a 6 años). Basa su enseñanza en la estimulación temprana, la didáctica lúdica y el acompañamiento afectivo del infante para asegurar una base cognitiva sólida.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El egresado posee una profunda vocación de servicio, paciencia y creatividad. Diseña materiales didácticos innovadores, evalúa el desarrollo psicomotriz y cognitivo del niño, y articula el trabajo pedagógico con la participación activa de la familia y la comunidad.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Durante los 10 ciclos de formación, el currículo integra una profunda base en la psicología del desarrollo con estrategias prácticas de expresión artística, musical y psicomotriz, complementado con horas obligatorias de práctica preprofesional.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-brain text-uns mr-1"></i> Psicología y Desarrollo</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Psicología del Desarrollo Infantil, Neurociencia Educativa, Psicopedagogía.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-shapes text-uns mr-1"></i> Didáctica Especializada</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Didáctica de la Matemática Inicial, Desarrollo de la Comunicación, Aprestamiento.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-palette text-uns mr-1"></i> Expresión y Motricidad</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Psicomotricidad, Expresión Artística y Musical, Literatura Infantil, Juegos Teatrales.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-chalkboard-user text-uns mr-1"></i> Práctica y Gestión</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Gestión de Centros de Educación Inicial (Cunas/Jardines), Prácticas Preprofesionales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Cunas, guarderías y jardines de infancia públicos/privados.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Programas no escolarizados (PRONOEI).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Educación (UGELs, DREs).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Animación y recreación de programas infantiles.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: PRIMARIA -->
+    <div id="ventana-primaria" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-primaria">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-school"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Educación Primaria</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Educación y Humanidades - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Forma educadores para la Educación Básica Regular. Su currículo abarca todas las materias fundamentales (matemáticas, lenguaje, ciencias y personal social) para guiar el aprendizaje de niños durante su transición a la adolescencia temprana.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El docente de primaria domina metodologías integradoras que fomentan la comprensión lectora, el razonamiento lógico-matemático y los valores éticos. Es capaz de identificar y atender problemas de aprendizaje e implementar proyectos de innovación pedagógica en el aula escolar.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">Los 10 semestres formativos están diseñados para proporcionar dominio en diversas didácticas (desde matemáticas hasta ciencias ambientales), fuertemente respaldadas por el estudio de la psicología del aprendizaje y la inclusión educativa.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-book-open text-uns mr-1"></i> Didácticas Específicas</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Didáctica de la Lectoescritura, Didáctica de las Matemáticas, Didáctica de Ciencias Ambientales.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-puzzle-piece text-uns mr-1"></i> Formación Psicopedagógica</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Psicología del Aprendizaje, Teorías Educativas, Dificultades de Aprendizaje, Inclusión Educativa.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-laptop-file text-uns mr-1"></i> Recursos y Evaluación</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Elaboración de Materiales Educativos, TICs aplicadas a la Educación, Sistemas de Evaluación.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-school text-uns mr-1"></i> Gestión y Práctica</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Tutoría y Orientación Escolar, Diseño Curricular, Prácticas Intensivas e Investigación Educativa.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Instituciones educativas de nivel primario (Público y Privado).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Educación (Minedu, UGEL, DRE).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>ONGs y proyectos educativos comunitarios.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Diseño de currículos y materiales pedagógicos.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: COMUNICACIÓN -->
+    <div id="ventana-comunicacion" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-comunicacion">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-microphone-lines"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Comunicación Social</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Educación y Humanidades - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Prepara a los estudiantes para analizar, diseñar y ejecutar estrategias de comunicación en distintos formatos y plataformas. Abarca el periodismo escrito y digital, la producción audiovisual (radio, cine y TV) y las relaciones públicas institucionales.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El comunicador social de la UNS es un estratega de la información. Domina la redacción periodística, el manejo de cámaras, la edición de video/audio, y tiene la capacidad de liderar campañas publicitarias y gestionar crisis de imagen corporativa en el sector público y privado.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">La malla curricular de 10 semestres está altamente orientada a la práctica. Cuenta con modernos talleres y laboratorios de radio y TV donde los estudiantes aplican desde la redacción periodística básica hasta la producción de documentales y estrategias de marketing corporativo.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-newspaper text-uns mr-1"></i> Periodismo y Redacción</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Redacción Periodística, Periodismo Digital, Crónica, Entrevista, Deontología.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-video text-uns mr-1"></i> Producción Audiovisual</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Fotografía, Lenguaje Audiovisual, Dirección de Radio y Televisión, Edición Digital.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-bullhorn text-uns mr-1"></i> Comunicación Corporativa</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Relaciones Públicas, Marketing, Publicidad, Gestión de Identidad e Imagen Institucional.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-users text-uns mr-1"></i> Desarrollo y Sociedad</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Sociología, Opinión Pública, Proyectos de Comunicación Social y Responsabilidad Social.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Agencias de publicidad y marketing.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Medios de comunicación (TV, radio, prensa).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Oficinas de Imagen Institucional públicas y privadas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Productoras independientes y periodismo digital.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: DERECHO -->
+    <div id="ventana-derecho" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-derecho">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Derecho y Ciencias Políticas</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Educación y Humanidades - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Forma juristas con sólidos principios éticos, capacitados para interpretar y aplicar el sistema normativo y legal. Profundiza en las ciencias políticas, el funcionamiento del Estado y la resolución pacífica de conflictos para garantizar la justicia y la paz social.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El abogado egresado posee una excelente oratoria y destreza en litigación oral. Analiza críticamente los problemas socio-legales, ejerce la defensa en tribunales y está preparado para desempeñarse como juez, fiscal, notario o asesor corporativo gubernamental y privado.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">A lo largo de 12 semestres académicos (6 años), el estudiante consolida bases teóricas en derecho civil y penal, y realiza prácticas intensivas en clínicas jurídicas, consultorio jurídico gratuito y simulaciones de audiencias orales para perfeccionar la teoría del caso.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-scale-unbalanced text-uns mr-1"></i> Derecho Civil y Comercial</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Derecho de Personas, Familia, Contratos, Derechos Reales y Societario.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-gavel text-uns mr-1"></i> Derecho Penal y Procesal</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Derecho Penal General/Especial, Criminología, Litigación Oral y Teoría del Caso.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-landmark text-uns mr-1"></i> Derecho Público</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Derecho Constitucional, Derecho Administrativo, Laboral y Tributario.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-comments text-uns mr-1"></i> Ciencias Políticas y Resolución</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Teoría del Estado, Derechos Humanos, Conciliación, Arbitraje y Práctica Forense.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Poder Judicial (Jueces, Fiscales).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerios e Instituciones del Estado.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Asesoría corporativa a empresas privadas.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ejercicio libre como Abogado Defensor.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana: SECUNDARIA (Consolidado) -->
+    <div id="ventana-secundaria" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-secundaria">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner"><i class="fa-solid fa-book-open-reader"></i></div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Educación Secundaria</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Educación y Humanidades - UNS</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-cerrar-carrera text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors border border-gray-100 focus:outline-none"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Descripción de la Carrera</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Forma docentes altamente especializados en materias específicas de la ciencia, humanidades o idiomas, enfocados en la enseñanza a adolescentes y jóvenes. Se centra en el desarrollo del pensamiento crítico y la preparación académica de los alumnos para su futura inserción en la educación superior.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">El egresado posee un profundo dominio científico de su materia de especialidad (Matemática, Historia, Biología, Literatura, Idiomas, etc.)[cite: 2]. Sabe aplicar metodologías activas para el trabajo con jóvenes, manejar dinámicas de grupo, ejercer la tutoría y orientar vocacionalmente a los estudiantes, abordando los retos propios de la adolescencia.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 border-l-4 border-uns pl-3">Malla Curricular</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">El currículo de 10 semestres equilibra el dominio científico y la psicología educativa. Durante los últimos ciclos, los estudiantes realizan prácticas intensivas supervisadas en centros educativos de la región, garantizando su capacidad de manejo de aula y diseño de sesiones de aprendizaje eficaces.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-atom text-uns mr-1"></i> Formación de Especialidad</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Cursos profundos según el área elegida (Ej. Análisis Matemático, Física Cuántica, Literatura, Idiomas).</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-chalkboard text-uns mr-1"></i> Didáctica Especializada</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Metodología específica para la enseñanza de las matemáticas, de la historia, de idiomas, etc.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-users-rays text-uns mr-1"></i> Psicología del Adolescente</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Psicología del Desarrollo Juvenil, Orientación Vocacional, Dinámica de Grupos y Manejo de Conflictos.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm"><i class="fa-solid fa-magnifying-glass-chart text-uns mr-1"></i> Investigación y Práctica</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Diseño de Sesiones de Aprendizaje, Evaluación por Competencias, Prácticas Preprofesionales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral</h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Colegios secundarios del sector público y privado.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Academias preuniversitarias e institutos (Especialidades e Idiomas).</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Ministerio de Educación, UGELs y DREs.</span></li>
+                                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-red-400 mt-1"></i><span>Consultoría y elaboración de materiales educativos.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- FIN DE TODAS LAS VENTANAS MODALES DE LAS CARRERAS                         -->
+    <!-- ========================================================================= -->
+
 </body>
 </html>

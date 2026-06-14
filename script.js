@@ -573,34 +573,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 document.addEventListener('DOMContentLoaded', () => {
-    const btnSistemas = document.getElementById('btn-sistemas');
-    const ventanaSistemas = document.getElementById('ventana-sistemas');
-    const btnCerrarSistemas = document.getElementById('btn-cerrar-sistemas');
-    const contenidoSistemas = document.getElementById('contenido-sistemas');
-
-    if (btnSistemas && ventanaSistemas) {
-        // Al abrir
-        btnSistemas.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            // Solo mostramos la ventana, sin congelar nada
-            ventanaSistemas.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoSistemas.classList.remove('scale-95');
-            contenidoSistemas.classList.add('scale-100');
-        });
-
-        // Al cerrar (botón X)
-        btnCerrarSistemas.addEventListener('click', () => {
-            // Solo ocultamos la ventana
-            ventanaSistemas.classList.add('opacity-0', 'pointer-events-none');
-            contenidoSistemas.classList.remove('scale-100');
-            contenidoSistemas.classList.add('scale-95');
-        });
-
-        // Al cerrar (clic fuera del cuadro)
-        ventanaSistemas.addEventListener('click', (e) => {
-            if (e.target === ventanaSistemas) {
-                btnCerrarSistemas.click();
+    
+    // ==============================================================
+    // 1. ABRIR VENTANAS DE TODAS LAS CARRERAS DINÁMICAMENTE
+    // ==============================================================
+    const botonesCarreras = document.querySelectorAll('[data-modal]');
+    
+    botonesCarreras.forEach(boton => {
+        boton.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita saltos raros en la pantalla
+            
+            // Obtiene el nombre de la carrera (ej: "civil", "medicina")
+            const carreraId = boton.getAttribute('data-modal');
+            const ventana = document.getElementById(`ventana-${carreraId}`);
+            const contenido = document.getElementById(`contenido-${carreraId}`);
+            
+            if (ventana && contenido) {
+                // Muestra la ventana sin congelar la página
+                ventana.classList.remove('opacity-0', 'pointer-events-none');
+                contenido.classList.remove('scale-95');
+                contenido.classList.add('scale-100');
             }
         });
-    }
+    });
+
+    // ==============================================================
+    // 2. CERRAR LAS VENTANAS (Botón X)
+    // ==============================================================
+    const botonesCerrar = document.querySelectorAll('.btn-cerrar-carrera');
+    
+    botonesCerrar.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const ventana = e.target.closest('.fixed.inset-0'); // Encuentra la ventana activa
+            if (ventana) {
+                const contenido = ventana.querySelector('.scale-100');
+                // Oculta la ventana
+                ventana.classList.add('opacity-0', 'pointer-events-none');
+                if (contenido) {
+                    contenido.classList.remove('scale-100');
+                    contenido.classList.add('scale-95');
+                }
+            }
+        });
+    });
+
+    // ==============================================================
+    // 3. CERRAR AL DAR CLIC EN EL FONDO OSCURO
+    // ==============================================================
+    document.querySelectorAll('.fixed.inset-0').forEach(ventana => {
+        ventana.addEventListener('click', (e) => {
+            if (e.target === ventana) {
+                const btnCerrar = ventana.querySelector('.btn-cerrar-carrera');
+                if (btnCerrar) btnCerrar.click();
+            }
+        });
+    });
+
 });
