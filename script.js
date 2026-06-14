@@ -417,3 +417,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Funcionalidad para el Temario de Admisión
+document.addEventListener('DOMContentLoaded', () => {
+    const btnTemario = document.getElementById('btn-temario');
+    const ventanaTemario = document.getElementById('ventana-temario');
+    const btnCerrarTemario = document.getElementById('btn-cerrar-temario');
+    const contenidoTemario = document.getElementById('contenido-temario');
+
+    if (btnTemario && ventanaTemario && btnCerrarTemario) {
+        // Abrir el modal del temario
+        btnTemario.addEventListener('click', (e) => {
+            e.preventDefault();
+            ventanaTemario.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoTemario.classList.remove('scale-95');
+            contenidoTemario.classList.add('scale-100');
+        });
+
+        // Cerrar con la 'X'
+        btnCerrarTemario.addEventListener('click', () => {
+            ventanaTemario.classList.add('opacity-0', 'pointer-events-none');
+            contenidoTemario.classList.remove('scale-100');
+            contenidoTemario.classList.add('scale-95');
+        });
+
+        // Cerrar al hacer clic fuera de la ventana blanca
+        ventanaTemario.addEventListener('click', (e) => {
+            if (e.target === ventanaTemario) {
+                btnCerrarTemario.click();
+            }
+        });
+    }
+});

@@ -78,9 +78,9 @@
                                 <a href="#" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
                                     Reglamento
                                 </a>
-                                <a href="#" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
+                                <button id="btn-temario" class="w-full text-left block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50 focus:outline-none">
                                     Temario
-                                </a>
+                                </button>
                                 <a href="#" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-[#b30000] transition border-t border-gray-50">
                                     Consejos
                                 </a>
@@ -965,6 +965,151 @@
 
                 </div>
             </div>
+    </div>
+    <!-- Ventana Modal del Temario Completo -->
+    <div id="ventana-temario" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[150] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-temario">
+            
+            <!-- Cabecera del Modal -->
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-xl shadow-inner">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-extrabold text-gray-800 tracking-tight">Temario Oficial de Admisión</h3>
+                        <p class="text-sm text-gray-500 font-medium">Evaluación General - Universidad Nacional del Santa</p>
+                    </div>
+                </div>
+                <button id="btn-cerrar-temario" class="text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm border border-gray-100 focus:outline-none">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Contenido Scrollable con el Temario Completo -->
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-gray-50/30">
+                
+                <!-- 1. APTITUD ACADÉMICA -->
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-6 border-b-2 border-uns pb-2">
+                        <i class="fa-solid fa-brain text-uns text-2xl"></i>
+                        <h4 class="text-xl font-bold text-gray-800 uppercase tracking-wide">1. Aptitud Académica</h4>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Razonamiento Matemático</h5>
+                            <ul class="space-y-2">
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Sucesiones y series (alfanuméricas).</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Planteo de ecuaciones y edades.</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Operadores matemáticos y criptoaritmética.</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Análisis combinatorio y probabilidades.</li>
+                                <li class="text-sm text-gray-700">Fracciones, porcentajes y regla de tres.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Razonamiento Verbal</h5>
+                            <ul class="space-y-2">
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Sinónimos, antónimos y parónimos.</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Analogías y términos excluidos.</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Oraciones incompletas y conectores lógicos.</li>
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2">Comprensión de lectura (literal, inferencial).</li>
+                                <li class="text-sm text-gray-700">Plan de redacción e ideas principales.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. MATEMÁTICA -->
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-6 border-b-2 border-uns pb-2">
+                        <i class="fa-solid fa-calculator text-uns text-2xl"></i>
+                        <h4 class="text-xl font-bold text-gray-800 uppercase tracking-wide">2. Matemática</h4>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Aritmética y Álgebra</h5>
+                            <ul class="space-y-2">
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2"><strong>Aritmética:</strong> Teoría de conjuntos, numeración, divisibilidad, números primos, MCM y MCD, razones y proporciones, estadística básica.</li>
+                                <li class="text-sm text-gray-700"><strong>Álgebra:</strong> Leyes de exponentes, polinomios, productos y cocientes notables, factorización, ecuaciones e inecuaciones, funciones logarítmicas y exponenciales.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Geometría y Trigonometría</h5>
+                            <ul class="space-y-2">
+                                <li class="text-sm text-gray-700 border-b border-gray-50 pb-2"><strong>Geometría:</strong> Segmentos, ángulos, triángulos, polígonos, circunferencia. Áreas de regiones planas. Geometría del espacio y geometría analítica (recta, cónicas).</li>
+                                <li class="text-sm text-gray-700"><strong>Trigonometría:</strong> Sistemas de medición angular, razones trigonométricas, identidades, resolución de triángulos y funciones trigonométricas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. CIENCIAS NATURALES -->
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-6 border-b-2 border-uns pb-2">
+                        <i class="fa-solid fa-flask text-uns text-2xl"></i>
+                        <h4 class="text-xl font-bold text-gray-800 uppercase tracking-wide">3. Ciencias Naturales y Formales</h4>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Física</h5>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="border-b border-gray-50 pb-2">Análisis dimensional y vectores.</li>
+                                <li class="border-b border-gray-50 pb-2">Cinemática (MRU, MRUV, Caída Libre).</li>
+                                <li class="border-b border-gray-50 pb-2">Estática, Dinámica y Trabajo mecánico.</li>
+                                <li class="border-b border-gray-50 pb-2">Termodinámica y fluidos.</li>
+                                <li>Electricidad, magnetismo y óptica.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Química</h5>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="border-b border-gray-50 pb-2">Materia, estructura atómica y tabla periódica.</li>
+                                <li class="border-b border-gray-50 pb-2">Enlaces químicos y nomenclatura inorgánica.</li>
+                                <li class="border-b border-gray-50 pb-2">Estequiometría y estados de la materia.</li>
+                                <li class="border-b border-gray-50 pb-2">Soluciones y cinética química.</li>
+                                <li>Química orgánica (carbono, hidrocarburos).</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Biología y Anatomía</h5>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="border-b border-gray-50 pb-2">Biología celular, metabolismo y genética.</li>
+                                <li class="border-b border-gray-50 pb-2">Reinos biológicos y ecología.</li>
+                                <li class="border-b border-gray-50 pb-2">Histología y sistema óseo/muscular.</li>
+                                <li class="border-b border-gray-50 pb-2">Sistemas: digestivo, respiratorio, circulatorio.</li>
+                                <li>Sistema nervioso, endocrino y reproductor.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. HUMANIDADES Y CIENCIAS SOCIALES -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6 border-b-2 border-uns pb-2">
+                        <i class="fa-solid fa-landmark text-uns text-2xl"></i>
+                        <h4 class="text-xl font-bold text-gray-800 uppercase tracking-wide">4. Ciencias Sociales y Humanidades</h4>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Letras</h5>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="border-b border-gray-50 pb-2"><strong>Lenguaje:</strong> Comunicación, fonética, morfología, sintaxis, ortografía y signos de puntuación.</li>
+                                <li><strong>Literatura:</strong> Teoría literaria, literatura peruana (Incaica, Colonial, Emancipación, Republicana, Contemporánea), literatura hispanoamericana y universal.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <h5 class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fa-solid fa-caret-right text-uns"></i> Ciencias Sociales</h5>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="border-b border-gray-50 pb-2"><strong>Historia:</strong> Historia del Perú (antiguo, virreinato, república) e Historia Universal contemporánea.</li>
+                                <li class="border-b border-gray-50 pb-2"><strong>Geografía:</strong> Geografía física y económica del Perú. Cartografía básica. Medio ambiente.</li>
+                                <li><strong>Economía y Cívica:</strong> Necesidades, bienes, mercado, sistema financiero peruano. Constitución, derechos humanos y poderes del Estado.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 </html>
