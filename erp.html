@@ -3,475 +3,834 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema ERP | UNS</title>
+    <title>ERP Institucional | Universidad Nacional del Santa</title>
     <link rel="icon" type="image/png" href="images/logo_rojo_UNS.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        uns: {
-                            DEFAULT: '#b30000',
-                            dark: '#8a0000',
-                            light: '#e60000'
-                        }
-                    }
+                    colors: { uns: { DEFAULT: '#b30000', dark: '#8a0000', light: '#d40000', muted: '#fee2e2' } },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-slate-50 flex min-h-screen font-sans overflow-hidden">
-
-    <aside class="w-64 bg-slate-900 text-white flex flex-col justify-between p-4 border-r border-slate-800 z-20">
-        <div>
-            <div class="flex items-center gap-3 px-2 py-4 border-b border-slate-800 mb-6">
-                <div class="bg-white p-1 rounded-lg">
-                    <div class="w-7 h-7 bg-uns rounded flex items-center justify-center text-white text-xs font-black">U</div>
-                </div>
-                <div>
-                    <h1 class="font-black text-sm tracking-tight text-white">SISTEMA ERP</h1>
-                    <h2 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Módulo Administrativo</h2>
-                </div>
-            </div>
-            
-            <nav class="space-y-1">
-                <button data-target="panel-principal" class="tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20">
-                    <i class="fa-solid fa-chart-pie text-lg w-5 text-center"></i>
-                    <span class="text-sm">Panel Principal</span>
-                </button>
-                <button data-target="panel-matriculas" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-id-card-clip text-lg w-5 text-center"></i>
-                    <span class="text-sm">Admisión y Matrículas</span>
-                </button>
-                <button data-target="panel-finanzas" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-wallet text-lg w-5 text-center"></i>
-                    <span class="text-sm">Finanzas y Pagos</span>
-                </button>
-                
-                <div class="my-4 border-t border-slate-800 pt-4"></div>
-                
-                <button data-target="panel-posgrado" class="tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left">
-                    <i class="fa-solid fa-microscope text-lg w-5 text-center"></i>
-                    <span class="text-sm">Investigación y Posgrado</span>
-                </button>
-            </nav>
-        </div>
-        
-        <div class="space-y-4">
-            <a href="login.html" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-red-400 hover:bg-slate-800/60 rounded-xl transition-colors w-full text-sm font-semibold">
-                <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
-                <span>Cerrar Sesión</span>
-            </a>
-            <div class="p-2 bg-slate-950/40 rounded-xl border border-slate-800/80 text-[11px] text-slate-500 font-mono text-center">
-                UNS - 2026
-            </div>
-        </div>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        
-        <header class="bg-white px-8 py-5 border-b border-slate-200 flex justify-between items-center z-10 shadow-sm">
-            <div>
-                <h2 id="header-title" class="text-xl font-black text-gray-900 tracking-tight">Consola de Control Central</h2>
-                <p id="header-desc" class="text-xs text-gray-500 mt-0.5">Indicadores generales de recursos de la Universidad Nacional del Santa</p>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="text-right hidden sm:block border-r border-slate-200 pr-4">
-                    <p class="text-sm font-bold text-gray-800">Usuario Corporativo</p>
-                    <p class="text-xs text-gray-500">Administrador General</p>
-                </div>
-                <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold text-sm shadow-sm">
-                    U
-                </div>
-            </div>
-        </header>
-
-        <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
-            
-            <div id="panel-principal" class="content-section block space-y-8 animate-fade-in">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Alumnos Matriculados</p>
-                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">4,821</h4>
-                        </div>
-                        <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
-                            <i class="fa-solid fa-user-graduate"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-slate-800 transition-all duration-300">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Trámites Pendientes</p>
-                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-slate-800 transition-colors">59</h4>
-                        </div>
-                        <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-slate-600 text-lg shadow-inner">
-                            <i class="fa-solid fa-file-invoice"></i>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-green-600 transition-all duration-300">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Aulas Operativas</p>
-                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-green-600 transition-colors">94%</h4>
-                        </div>
-                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 text-lg shadow-inner">
-                            <i class="fa-solid fa-school"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="p-6 border-b border-slate-100 bg-slate-50/50">
-                        <h3 class="font-black text-gray-800 text-xs uppercase tracking-wider">Estado Operativo de Facultades</h3>
-                    </div>
-                    <div class="p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                                <span class="text-xs font-bold text-gray-800 block mb-2">Facultad de Ingeniería</span>
-                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-uns h-full rounded-full" style="width: 85%"></div>
-                                </div>
-                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">85% Capacidad</span>
-                            </div>
-
-                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                                <span class="text-xs font-bold text-gray-800 block mb-2">Facultad de Ciencias</span>
-                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-uns h-full rounded-full" style="width: 92%"></div>
-                                </div>
-                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">92% Capacidad</span>
-                            </div>
-
-                            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                                <span class="text-xs font-bold text-gray-800 block mb-2">Educación y Humanidades</span>
-                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-uns h-full rounded-full" style="width: 78%"></div>
-                                </div>
-                                <span class="text-[10px] font-bold text-slate-500 mt-2 block text-right">78% Capacidad</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="panel-matriculas" class="content-section hidden animate-fade-in">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 h-fit">
-                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider mb-6 border-l-4 border-uns pl-3">Formulario de Registro</h3>
-                        <form id="matricula-form" class="space-y-4">
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Código Estudiante</label>
-                                <input type="text" placeholder="Ej. 0202614001" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Nombres Completos</label>
-                                <input type="text" placeholder="Nombres y Apellidos" class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition" required>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Escuela Profesional</label>
-                                <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
-                                    <option value="" disabled selected>Seleccione carrera...</option>
-                                    <option value="sistemas">Ing. de Sistemas e Informática</option>
-                                    <option value="civil">Ingeniería Civil</option>
-                                    <option value="medicina">Medicina Humana</option>
-                                    <option value="derecho">Derecho y Ciencias Políticas</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold uppercase text-gray-700 mb-1.5">Tipo de Ingreso</label>
-                                <select class="w-full px-3 py-2.5 text-sm border border-slate-200 bg-slate-50 rounded-xl focus:outline-none focus:border-uns focus:bg-white transition bg-white cursor-pointer" required>
-                                    <option value="regular">Regular / Continuante</option>
-                                    <option value="ordinario">Examen Ordinario</option>
-                                    <option value="cepuns">Ingreso CEPUNS</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition text-xs uppercase tracking-wider shadow-md mt-4">
-                                Procesar Matrícula
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-                            <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Historial de Solicitudes Recientes</h3>
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-50 text-uns border border-red-100">Periodo 2026-I</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                                    <tr>
-                                        <th class="px-6 py-4">Código</th>
-                                        <th class="px-6 py-4">Estudiante</th>
-                                        <th class="px-6 py-4">Escuela Profesional</th>
-                                        <th class="px-6 py-4">Estado</th>
-                                        <th class="px-6 py-4 text-center">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                                    <tr class="hover:bg-slate-50/50 transition">
-                                        <td class="px-6 py-4 font-bold text-slate-900">0202314012</td>
-                                        <td class="px-6 py-4">Alvarado Mendez Luis</td>
-                                        <td class="px-6 py-4 text-slate-500">Sistemas e Informática</td>
-                                        <td class="px-6 py-4">
-                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Confirmado</span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-slate-50/50 transition">
-                                        <td class="px-6 py-4 font-bold text-slate-900">0202611005</td>
-                                        <td class="px-6 py-4">Vasquez Flores Elena</td>
-                                        <td class="px-6 py-4 text-slate-500">Medicina Humana</td>
-                                        <td class="px-6 py-4">
-                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">En Revisión</span>
-                                        </td>
-                                        <td class="px-6 py-4 text-center">
-                                            <button class="text-slate-400 hover:text-uns transition"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="panel-finanzas" class="content-section hidden space-y-8 animate-fade-in">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                        <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-xl shadow-inner">
-                            <i class="fa-solid fa-building"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Canal Principal Autorizado</span>
-                            <span class="text-base font-black text-slate-800 block mt-0.5">Banco de la Nación</span>
-                            <span class="text-[11px] font-medium text-slate-500 block mt-0.5">Sincronización automática de transacciones por lote</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between group hover:border-uns transition-all duration-300">
-                        <div>
-                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Recaudación de Tasas Académicas (Mes Actual)</p>
-                            <h4 class="text-3xl font-black text-slate-900 group-hover:text-uns transition-colors">S/. 142,450.00</h4>
-                        </div>
-                        <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-uns text-lg shadow-inner">
-                            <i class="fa-solid fa-money-bill-trend-up"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="p-5 border-b border-slate-100 bg-slate-50/50">
-                        <h3 class="font-black text-gray-900 text-xs uppercase tracking-wider">Transacciones de Caja Recientes</h3>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                                <tr>
-                                    <th class="px-6 py-4">N° Operación BN</th>
-                                    <th class="px-6 py-4">Código Alumno</th>
-                                    <th class="px-6 py-4">Concepto de Pago</th>
-                                    <th class="px-6 py-4 text-right">Monto</th>
-                                    <th class="px-6 py-4 text-center">Validación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                                <tr class="hover:bg-slate-50/50 transition">
-                                    <td class="px-6 py-4 font-bold text-slate-900">#89411082</td>
-                                    <td class="px-6 py-4">0202214002</td>
-                                    <td class="px-6 py-4 text-slate-500">Derecho de Inscripción / Matrícula Ordinaria</td>
-                                    <td class="px-6 py-4 text-right font-bold text-slate-800">S/. 250.00</td>
-                                    <td class="px-6 py-4 text-center">
-                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Conforme</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div id="panel-posgrado" class="content-section hidden space-y-8 animate-fade-in">
-                
-                <div class="bg-gradient-to-r from-uns-dark to-uns p-8 rounded-2xl text-white shadow-lg shadow-uns/10 flex justify-between items-center relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 text-white/10 text-9xl">
-                        <i class="fa-solid fa-microscope"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <span class="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 inline-block">Vicerrectorado de Investigación</span>
-                        <h3 class="text-3xl font-black tracking-tight">Gestión Académica Científica</h3>
-                        <p class="text-sm text-red-100/80 mt-1 font-light">Monitoreo integrado de programas de posgrado, proyectos financiados e investigadores RENACYT.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Docentes RENACYT</span>
-                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-id-card-clip"></i></div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900">124</h4>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Proyectos Activos</span>
-                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-flask-vial"></i></div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900">45</h4>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl border-l-4 border-uns shadow-sm hover:shadow-md transition-all">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Maestrías y Doctorados</span>
-                            <div class="w-8 h-8 rounded-lg bg-red-50 text-uns flex items-center justify-center text-sm"><i class="fa-solid fa-graduation-cap"></i></div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900">18</h4>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl border-l-4 border-emerald-600 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Fondos Concursables</span>
-                            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm"><i class="fa-solid fa-sack-dollar"></i></div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900">S/ 3.2M</h4>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="p-5 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
-                            <h4 class="font-extrabold text-slate-800 text-xs tracking-wide uppercase">Programas en Admisión</h4>
-                            <span class="bg-red-50 text-uns border border-red-100 text-[10px] font-bold px-2.5 py-1 rounded-full">Convocatoria Vigor</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse text-xs">
-                                <thead>
-                                    <tr class="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider border-b border-slate-100">
-                                        <th class="p-4 pl-6">Mención del Programa</th>
-                                        <th class="p-4">Nivel</th>
-                                        <th class="p-4">Postulantes</th>
-                                        <th class="p-4 text-center">Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="font-medium text-slate-700 divide-y divide-slate-100">
-                                    <tr class="hover:bg-slate-50/60 transition-colors">
-                                        <td class="p-4 pl-6 font-bold text-slate-900">Ingeniería de Sistemas e Informática</td>
-                                        <td class="p-4">Maestría</td>
-                                        <td class="p-4 font-bold text-uns">32 alumnos</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Activo</span></td>
-                                    </tr>
-                                    <tr class="hover:bg-slate-50/60 transition-colors">
-                                        <td class="p-4 pl-6 font-bold text-slate-900">Gestión Pública y Modernización</td>
-                                        <td class="p-4">Maestría</td>
-                                        <td class="p-4 font-bold text-uns">45 alumnos</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-green-100 text-green-700">Activo</span></td>
-                                    </tr>
-                                    <tr class="hover:bg-slate-50/60 transition-colors">
-                                        <td class="p-4 pl-6 font-bold text-slate-900">Derecho Constitucional y Penal</td>
-                                        <td class="p-4">Doctorado</td>
-                                        <td class="p-4 font-bold text-uns">18 alumnos</td>
-                                        <td class="p-4 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-700">Cierre</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-extrabold text-slate-800 text-xs tracking-wide uppercase mb-4 pb-2 border-b border-slate-100">Últimas Publicaciones</h4>
-                            <div class="space-y-4">
-                                <div class="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-xl transition-colors cursor-pointer">
-                                    <i class="fa-solid fa-file-pdf text-uns text-lg mt-0.5"></i>
-                                    <div>
-                                        <p class="text-xs font-bold text-slate-900 leading-snug">Algoritmos Avanzados en Redes de Datos UNS</p>
-                                        <p class="text-[10px] text-slate-500 font-medium">Publicado en Scopus • 2026</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start gap-3 hover:bg-slate-50 p-2 rounded-xl transition-colors cursor-pointer">
-                                    <i class="fa-solid fa-file-pdf text-uns text-lg mt-0.5"></i>
-                                    <div>
-                                        <p class="text-xs font-bold text-slate-900 leading-snug">Optimización de Bioprocesos Agroindustriales</p>
-                                        <p class="text-[10px] text-slate-500 font-medium">Revista Científica UNS • 2025</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-colors text-xs mt-6 uppercase tracking-wider shadow-md">
-                            Registrar Nuevo Paper
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </main>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Animación suave para cambio de pestañas */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        .animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: scale(0.96) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* Scrollbar interno */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #b30000; }
+        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+        .toast { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 14px; min-width: 320px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-left: 4px solid #10b981; }
+        .toast.show { transform: translateX(0); }
+
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+
+        .nav-btn { transition: all 0.2s; }
+        .nav-btn.active { background: #fef2f2; color: #b30000; border-right: 3px solid #b30000; }
+        .nav-btn.active .nav-icon { color: #b30000; }
+        .nav-btn:hover:not(.active) { background: #f8fafc; }
+
+        .seccion-oculta { display: none !important; }
+        .seccion-visible { display: block !important; }
+        .table-row-hover:hover { background-color: #f8fafc; transition: 0.15s; cursor: default; }
     </style>
+</head>
+<body class="bg-slate-50 font-sans h-screen flex flex-col overflow-hidden">
 
-    <script>
-        // Objeto actualizado con los 4 módulos
-        const titles = {
-            'panel-principal': { title: 'Consola de Control Central', desc: 'Indicadores generales de recursos de la Universidad Nacional del Santa' },
-            'panel-matriculas': { title: 'Gestión de Admisión y Matrículas', desc: 'Procesamiento y control de registro formal de estudiantes regulares y nuevos ingresantes' },
-            'panel-finanzas': { title: 'Control de Finanzas y Pagos', desc: 'Consolidación de tasas recaudadas mediante entidades autorizadas y auditoría de cuentas estudiantiles' },
-            'panel-posgrado': { title: 'Gestión de Investigación y Posgrado', desc: 'Monitoreo integrado de programas de posgrado, proyectos financiados e investigadores RENACYT' }
-        };
+<div id="toast-container" class="toast-container"></div>
 
-        // Lógica de pestañas
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Resetear botones
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl font-semibold transition text-left';
-                });
+<header class="bg-uns text-white shadow-md z-50 flex-shrink-0">
+    <div class="px-5 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-inner">
+                <span class="text-uns font-black text-xl leading-none">U</span>
+            </div>
+            <div>
+                <h1 class="font-black text-xl leading-none tracking-tight">ERP <span class="opacity-80 font-light">UNS</span></h1>
+                <span class="text-white/70 text-[11px] font-medium tracking-wide uppercase">Core System Universitaria</span>
+            </div>
+        </div>
 
-                // Activar botón clickeado
-                this.className = 'tab-btn w-full flex items-center gap-3 px-4 py-3 bg-uns text-white rounded-xl font-bold transition text-left shadow-md shadow-uns/20';
+        <div class="hidden lg:flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2 w-[28rem] focus-within:bg-white/20 transition shadow-inner">
+            <i class="fa-solid fa-magnifying-glass text-white/70 text-sm"></i>
+            <input type="text" placeholder="Búsqueda global indexada del campus..." class="bg-transparent text-white placeholder-white/60 text-sm outline-none w-full ml-2 font-medium">
+        </div>
 
-                const target = this.getAttribute('data-target');
+        <div class="flex items-center gap-3">
+            <button onclick="generarReporteGeneral()" class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl border border-white/20 transition text-sm font-bold shadow-sm">
+                <i class="fa-solid fa-file-pdf text-red-200"></i> Reporte Institucional
+            </button>
+            <div class="w-px h-8 bg-white/20 mx-2"></div>
+            <div class="flex items-center gap-3 px-2 py-1 cursor-pointer hover:bg-white/10 rounded-lg transition">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold leading-none">Administrador General</p>
+                    <p class="text-[10px] text-emerald-300 font-bold tracking-wider mt-1 uppercase">Control Central OTI</p>
+                </div>
+                <div class="w-9 h-9 rounded-full bg-white text-uns flex items-center justify-center text-sm font-black shadow-md">AG</div>
+            </div>
+        </div>
+    </div>
+</header>
 
-                // Ocultar todos los paneles
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('block');
-                    section.classList.add('hidden');
-                });
-                
-                // Mostrar el panel clickeado
-                document.getElementById(target).classList.remove('hidden');
-                document.getElementById(target).classList.add('block');
+<div class="flex flex-1 overflow-hidden">
 
-                // Cambiar el título del header
-                document.getElementById('header-title').textContent = titles[target].title;
-                document.getElementById('header-desc').textContent = titles[target].desc;
-            });
-        });
+<aside class="w-64 bg-white border-r border-gray-200 flex flex-col h-full flex-shrink-0 z-40 relative shadow-sm">
+    <div class="flex-1 overflow-y-auto py-4 px-3 custom-scrollbar">
+        
+        <nav class="space-y-1 mb-5">
+            <button onclick="cambiarModulo('dashboard', this)" class="nav-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-layer-group w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Consola Gerencial</span>
+            </button>
+        </nav>
 
-        // Formulario de Matrícula (simulado)
-        document.getElementById('matricula-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Matrícula registrada exitosamente en la cola de procesamiento ERP.');
-            this.reset();
-        });
-    </script>
+        <div class="text-[10px] font-black text-gray-400 tracking-widest mb-2 px-3 uppercase">Finanzas y Operaciones</div>
+        <nav class="space-y-1 mb-5">
+            <button onclick="cambiarModulo('finanzas', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-scale-balanced w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Tesorería y Pagos</span>
+            </button>
+            <button onclick="cambiarModulo('compras', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-receipt w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Abastecimiento (OC)</span>
+            </button>
+            <button onclick="cambiarModulo('logistica', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-boxes-stacked w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Logística SGI</span>
+            </button>
+        </nav>
+
+        <div class="text-[10px] font-black text-gray-400 tracking-widest mb-2 px-3 uppercase">Recursos Humanos</div>
+        <nav class="space-y-1 mb-5">
+            <button onclick="cambiarModulo('rrhh', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-address-book w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Escalafón Docente</span>
+            </button>
+        </nav>
+
+        <div class="text-[10px] font-black text-gray-400 tracking-widest mb-2 px-3 uppercase">Estudiantiles y Extensión</div>
+        <nav class="space-y-1 mb-5">
+            <button onclick="cambiarModulo('academico', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-user-graduate w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Control Estudiantil</span>
+            </button>
+            <button onclick="cambiarModulo('bienestar', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-bowl-food w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Bienestar Universitario</span>
+            </button>
+            <button onclick="cambiarModulo('bolsa', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-briefcase w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Bolsa de Empleo</span>
+            </button>
+            <button onclick="cambiarModulo('proyeccion', this)" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left font-semibold text-gray-700 group">
+                <i class="nav-icon fa-solid fa-people-roof w-5 text-center text-gray-400 text-sm transition"></i>
+                <span class="text-sm">Proyección Social</span>
+            </button>
+        </nav>
+    </div>
+    <div class="p-4 bg-gray-50 border-t border-gray-200">
+        <a href="login.html" class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-bold text-gray-600 bg-white border border-gray-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition">
+            <i class="fa-solid fa-power-off"></i> Cerrar Módulos
+        </a>
+    </div>
+</aside>
+
+<main class="flex-1 h-full overflow-y-auto bg-slate-100/60 relative custom-scrollbar">
+
+    <div id="mod-dashboard" class="modulo-contenido seccion-visible p-8 animate-fade-in">
+        <div class="mb-6">
+            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Consola Gerencial Centralizada</h2>
+            <p class="text-gray-500 text-sm mt-1">Métricas globales y correlación analítica de la operatividad universitaria.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-emerald-500">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Caja Activa General</p>
+                <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-balance">S/ 0.00</h3>
+            </div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-amber-500">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Patrimonio SGI</p>
+                <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-sgi">0 Equipos</h3>
+            </div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Docentes Escalafonados</p>
+                <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-docentes">0 Activos</h3>
+            </div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-purple-500">
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Comensales Hoy (Bienestar)</p>
+                <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-comedor">0 Atenciones</h3>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-800 mb-4 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-chart-line text-uns"></i> Flujo Analítico Consolidado (Ingresos vs Egresos Semestrales)</h4>
+            <div class="relative h-64 w-full"><canvas id="chartGerencial"></canvas></div>
+        </div>
+    </div>
+
+    <div id="mod-finanzas" class="modulo-contenido seccion-oculta p-8">
+        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Libro Diario de Caja Universitaria</h2>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-emerald-50 text-emerald-800 font-bold text-[11px] uppercase border-b border-emerald-200">
+                        <tr>
+                            <th class="px-6 py-4">Asiento ID</th>
+                            <th class="px-6 py-4">Descripción de Operación Financiera</th>
+                            <th class="px-6 py-4 text-center">Clasificación</th>
+                            <th class="px-6 py-4 text-right">Monto Líquido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-finanzas" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-compras" class="modulo-contenido seccion-oculta p-8">
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Adquisiciones y Abastecimiento</h2>
+                <p class="text-gray-500 text-sm mt-1">Gestión interna de requerimientos logísticos de facultades y oficinas.</p>
+            </div>
+            <button onclick="abrirModalCompras()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Generar Requerimiento
+            </button>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-gray-50 text-gray-500 font-bold text-[11px] uppercase border-b">
+                        <tr>
+                            <th class="px-6 py-4">Código Req</th>
+                            <th class="px-6 py-4">Detalle de Bienes Solicitados</th>
+                            <th class="px-6 py-4">Dependencia Emisora</th>
+                            <th class="px-6 py-4 text-right">Valor Estimado</th>
+                            <th class="px-6 py-4 text-center">Estado Flujo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-compras" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-logistica" class="modulo-contenido seccion-oculta p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Control Patrimonial SGI</h2>
+                <p class="text-gray-500 text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware de servidores.</p>
+            </div>
+            <button onclick="exportarSgiCompletoPDF()" class="bg-amber-600 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-amber-700 transition">
+                <i class="fa-solid fa-file-pdf"></i> Descargar Inventario Completo (100 Activos)
+            </button>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-4 bg-amber-50/60 border-b text-xs font-bold text-amber-900 uppercase tracking-wider">
+                Vistazo General de Equipos en Control de Mantenimiento
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-white text-gray-500 font-bold text-[11px] uppercase border-b">
+                        <tr>
+                            <th class="px-6 py-4">Cod. Patrimonial</th>
+                            <th class="px-6 py-4">Descripción Física del Activo</th>
+                            <th class="px-6 py-4">Ubicación Asignada</th>
+                            <th class="px-6 py-4 text-center">Condición de Ciclo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-logistica" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-rrhh" class="modulo-contenido seccion-oculta p-8">
+        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Escalafón y Carga Docente</h2>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-blue-50 text-blue-800 font-bold text-[11px] uppercase border-b border-blue-200">
+                        <tr>
+                            <th class="px-6 py-4">Docente Universitario</th>
+                            <th class="px-6 py-4">Categoría / Dedicación</th>
+                            <th class="px-6 py-4 text-center">Carga Horaria</th>
+                            <th class="px-6 py-4 text-right">Remuneración Base</th>
+                            <th class="px-6 py-4 text-center">Horarios y Salón</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-rrhh" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-academico" class="modulo-contenido seccion-oculta p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Padrón de Estudiantes Unificado</h2>
+                <p class="text-gray-500 text-sm mt-1">Registros consolidados extraídos de la data oficial de ingresantes.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="descargarPadronPDF('2024')" class="bg-slate-800 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-black transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2024</button>
+                <button onclick="descargarPadronPDF('2025')" class="bg-uns text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-uns-dark transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2025</button>
+                <button onclick="descargarPadronPDF('2026')" class="bg-blue-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2026</button>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-gray-800 text-gray-300 font-bold text-[11px] uppercase border-b">
+                        <tr>
+                            <th class="px-6 py-4">Matrícula</th>
+                            <th class="px-6 py-4">Apellidos y Nombres</th>
+                            <th class="px-6 py-4">Escuela Académico-Profesional</th>
+                            <th class="px-6 py-4">Correo Institucional</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-academico" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-bienestar" class="modulo-contenido seccion-oculta p-8 animate-fade-in">
+        <div class="mb-6">
+            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bienestar Universitario - Comedor Central</h2>
+            <p class="text-gray-500 text-sm mt-1">Planificación alimentaria, control de raciones y asignación de becas del comedor.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase">Menú Universitario del Día</p>
+                <p class="text-base font-bold text-gray-800 mt-2"><i class="fa-solid fa-utensils text-uns mr-2"></i>Sopa Criolla + Seco de Pollo</p>
+                <p class="text-xs text-gray-400 mt-1">Lunes a Viernes de 12:00 a 14:00 hrs</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase">Raciones Asignadas Hoy</p>
+                <p class="text-2xl font-black text-uns mt-1">1,200 / 1,200</p>
+                <p class="text-xs text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <p class="text-xs font-bold text-gray-400 uppercase">Becas de Alimentación Libres</p>
+                <p class="text-2xl font-black text-blue-600 mt-1">350 Estudiantes</p>
+                <p class="text-xs text-gray-400 mt-1">Evaluados por Asistencia Social</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
+                Registro de Comensales del Turno Actual
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-white text-gray-500 font-bold text-[11px] uppercase border-b">
+                        <tr>
+                            <th class="px-6 py-4">Código / DNI</th>
+                            <th class="px-6 py-4">Tipo Comensal</th>
+                            <th class="px-6 py-4 text-center">Estado del Ticket</th>
+                            <th class="px-6 py-4 text-center">Hora Marcaje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-bienestar" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-bolsa" class="modulo-contenido seccion-oculta p-8">
+        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Bolsa de Empleo y Convenios</h2>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-cyan-50 text-cyan-800 font-bold text-[11px] uppercase border-b border-cyan-200">
+                        <tr>
+                            <th class="px-6 py-4">Puesto / Requerimiento Profesional</th>
+                            <th class="px-6 py-4">Empresa Aliada</th>
+                            <th class="px-6 py-4 text-center">Postulantes</th>
+                            <th class="px-6 py-4 text-center">Estado</th>
+                            <th class="px-6 py-4 text-center">Documento Marco</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-bolsa" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="mod-proyeccion" class="modulo-contenido seccion-oculta p-8">
+        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Proyección Social Universitaria</h2>
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-purple-50 text-purple-800 font-bold text-[11px] uppercase border-b border-purple-200">
+                        <tr>
+                            <th class="px-6 py-4">Título del Proyecto Comunitario</th>
+                            <th class="px-6 py-4">Facultad / Escuela Responsable</th>
+                            <th class="px-6 py-4 text-center">Público Beneficiario</th>
+                            <th class="px-6 py-4 text-center">Fase de Avance</th>
+                            <th class="px-6 py-4 text-center">Resolución Oficial</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-proyeccion" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main>
+</div>
+
+<div id="modal-horario" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-blue-700 px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS</h3>
+            <button onclick="cerrarModalHorario()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="p-6 space-y-4">
+            <div>
+                <p class="text-xs font-bold text-gray-400 uppercase">Docente Asignado</p>
+                <p id="h-docente" class="text-base font-bold text-gray-800 mt-0.5"></p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-xl border border-gray-200 font-medium text-sm text-gray-700 space-y-2">
+                <p><strong>Carga Lectiva:</strong> <span id="h-carga"></span></p>
+                <p><strong>Horario de Dictado:</strong> <span id="h-horario" class="text-blue-700 font-semibold"></span></p>
+                <p><strong>Pabellón / Aula Física:</strong> <span id="h-salon" class="text-gray-900 font-bold"></span></p>
+            </div>
+            <button onclick="cerrarModalHorario()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-compras" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-cart-plus"></i> Ingresar Requerimiento</h3>
+            <button onclick="cerrarModalCompras()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-compras" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Descripción de Bienes/Insumos *</label>
+                <input type="text" id="req-desc" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Reactivos o Equipos Computacionales" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Área / Facultad Destinataria *</label>
+                <input type="text" id="req-area" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Ing. de Sistemas" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Monto Referencial Estimado (S/) *</label>
+                <input type="number" step="0.01" id="req-monto" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="0.00" required>
+            </div>
+            <div class="flex gap-3 pt-4 border-t mt-2">
+                <button type="button" onclick="cerrarModalCompras()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Procesar Alta Requerimiento</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// ==================== RESTRUCTURACIÓN DE DATA ARRAYS ====================
+
+const DB_FINANZAS = [
+    { op: "OP-4410", desc: "Pago Planilla Docentes Nombrados", tipo: "Egreso", monto: 145000.00 },
+    { op: "OP-4411", desc: "Recaudación Tasas de Matrícula Regular", tipo: "Ingreso", monto: 92400.00 },
+    { op: "OP-4412", desc: "Ingresos Concesión Cafetería y Comedor", tipo: "Ingreso", monto: 14200.00 },
+    { op: "OP-4413", desc: "Compra Servidor Cisco UCS SGI OTI", tipo: "Egreso", monto: 18900.00 },
+    { op: "OP-4414", desc: "Mantenimiento Preventivo Pabellón Civil", tipo: "Egreso", monto: 7400.00 },
+    { op: "OP-4415", desc: "Recaudación Examen de Admisión UNS", tipo: "Ingreso", monto: 284000.00 }
+];
+
+let DB_COMPRAS = [
+    { req: "REQ-26-101", desc: "Reactivos químicos grado analítico HPLC", area: "Facultad de Ciencias", monto: 12450.00, estado: "Aprobado" },
+    { req: "REQ-26-102", desc: "Kit de 40 Computadoras Core i7 16GB", area: "Ing. de Sistemas", monto: 98000.00, estado: "Pendiente" },
+    { req: "REQ-26-103", desc: "Licencias Académicas Autodesk AutoCAD", area: "Ing. Civil", monto: 15400.00, estado: "Aprobado" },
+    { req: "REQ-26-104", desc: "Insumos Clínicos de Simulación", area: "Medicina Humana", monto: 22000.00, estado: "Pendiente" },
+    { req: "REQ-26-105", desc: "Actualización Switch de Fibra Backbone", area: "Oficina de Informática OTI", monto: 14000.00, estado: "Aprobado" },
+    { req: "REQ-26-106", desc: "Mantenimiento de Red Eléctrica Estabilizada", area: "Lab. INGENIERIA DE SISTEMAS 01", monto: 4500.00, estado: "Aprobado" },
+    { req: "REQ-26-107", desc: "Candelas y Reactores Biológicos", area: "Biotecnología", monto: 11200.00, estado: "Rechazado" },
+    { req: "REQ-26-108", desc: "Equipamiento de Protección Personal (EPP)", area: "Servicios Generales", monto: 3500.00, estado: "Aprobado" }
+];
+
+const DB_LOGISTICA = [
+    { cod: "PAT-26-001", desc: "Servidor Rackeable Blade Cisco UCS C220", ubi: "DataCenter OTI Central", estado: "Operativo" },
+    { cod: "PAT-26-002", desc: "Estación de Trabajo HP Z2 Tower 32GB RAM", ubi: "Lab. INGENIERIA DE SISTEMAS 01", estado: "Operativo" },
+    { cod: "PAT-26-003", desc: "Proyector Multimedia Epson PowerLite 4800L", ubi: "Lab. INGENIERIA DE SISTEMAS 01", estado: "Mantenimiento" },
+    { cod: "PAT-26-004", desc: "Estación de Trabajo HP Z2 Tower 32GB RAM", ubi: "Lab. INGENIERIA DE SISTEMAS 02", estado: "Operativo" },
+    { cod: "PAT-26-005", desc: "Osciloscopio Digital Tektronix de 4 Canales", ubi: "Lab. Eléctrica y Energía", estado: "Próximo Mantenimiento" },
+    { cod: "PAT-26-006", desc: "Microscopio Óptico Binocular Olympus CX23", ubi: "Lab. Biología Avanzada", estado: "Operativo" },
+    { cod: "PAT-26-007", desc: "Estación Total Topcon GM-50 Láser", ubi: "Gabinete Topografía Civil", estado: "Próximo Mantenimiento" },
+    { cod: "PAT-26-008", desc: "Impresora Conectada Plotter HP DesignJet", ubi: "Oficina de Planeamiento", estado: "Mantenimiento" }
+];
+
+const DB_RRHH = [
+    { id: 1, nombre: "Dr. Mendoza Ramírez Carlos", cat: "Principal", reg: "Dedicación Exclusiva", carga: "12 L / 28 I", sueldo: 7500.00, horario: "Lunes y Miércoles 08:00 - 11:00", salon: "Pabellón Sistemas - Aula 201" },
+    { id: 2, nombre: "Dra. Aguilar Saldaña Ana", cat: "Asociado", reg: "Tiempo Completo", carga: "20 L / 20 I", sueldo: 4800.00, horario: "Martes y Jueves 14:00 - 17:00", salon: "Pabellón Medicina - Laboratorio A" },
+    { id: 3, nombre: "Mag. Rojas Luis Alberto", cat: "Auxiliar", reg: "Tiempo Completo", carga: "32 L / 8 I", sueldo: 2500.00, horario: "Viernes 08:00 - 14:00", salon: "Pabellón Civil - Aula 104" },
+    { id: 4, nombre: "Ing. Flores Quispe Pedro", cat: "Jefe de Práctica", reg: "Tiempo Parcial", carga: "18 L", sueldo: 1800.00, horario: "Lunes 18:00 - 21:00", salon: "Pabellón Sistemas - Lab Cómputo 02" }
+];
+
+const DB_ACADEMICO = [
+    { cod: "0202411001", nombre: "AGUILAR ANTICONA JUAN MARTIN JULIO", esc: "INGENIERIA EN ENERGIA", email: "202411001@uns.edu.pe" },
+    { cod: "0202411002", nombre: "ALAMAS CRUZ ALEXIS JESUS", esc: "INGENIERIA EN ENERGIA", email: "202411002@uns.edu.pe" },
+    { cod: "0202411003", nombre: "ALVA PULIDO ZAHID MIZRAIM", esc: "INGENIERIA EN ENERGIA", email: "202411003@uns.edu.pe" },
+    { cod: "0202411004", nombre: "ANGULO HIDALGO FRANZ SEBASTIAN", esc: "INGENIERIA EN ENERGIA", email: "202411004@uns.edu.pe" },
+    { cod: "0202424043", nombre: "ROSALES LUJERIO ANTHONY ALEXANDER", esc: "MEDICINA HUMANA", email: "202424043@uns.edu.pe" },
+    { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", email: "202424044@uns.edu.pe" }
+];
+
+const DB_BOLSA = [
+    { oferta: "Ingeniero de Software Trainee", empresa: "SIDERPERÚ S.A.", post: 14, estado: "Vigente" },
+    { oferta: "Practicante Profesional de Control Ambiental", empresa: "APROFERROL Chimbote", post: 6, estado: "Vigente" },
+    { oferta: "Asistente Legal de Asuntos Públicos", empresa: "SIDERPERÚ S.A.", post: 19, estado: "Vigente" }
+];
+
+const DB_PROYECCION = [
+    { proy: "Alfabetización Digital para Pymes Locales", esc: "Ing. de Sistemas e Informática", benef: "Comerciantes Mercado Ferrocarril", fase: "En Ejecución" },
+    { proy: "Monitoreo y Conservación Bio-Ecológica", esc: "Biotecnología", benef: "Bahía El Ferrol - Chimbote", fase: "Finalizado" }
+];
+
+const DB_BIENESTAR = [
+    { cod: "0202411001", tipo: "Regular (Ticket Canjeado)", estado: "Confirmado", hora: "12:15:32" },
+    { cod: "0202424043", tipo: "Beca Alimentaria Completa", estado: "Confirmado", hora: "12:22:11" },
+    { cod: "0202314055", tipo: "Regular (Ticket Reservado)", estado: "En Cola", hora: "12:35:00" }
+];
+
+// ==================== RENDERS DE INTERFAZ E INTERACTIVIDAD ====================
+
+function renderizarTablas() {
+    // Finanzas
+    let balance = 0;
+    document.getElementById('tabla-finanzas').innerHTML = DB_FINANZAS.map(f => {
+        balance += (f.tipo === 'Ingreso' ? f.monto : -f.monto);
+        return `<tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-mono text-xs font-bold text-gray-500">${f.op}</td>
+            <td class="px-6 py-3.5 font-semibold text-gray-800">${f.desc}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${f.tipo==='Ingreso'?'bg-emerald-100 text-emerald-800':'bg-red-100 text-red-800'}">${f.tipo}</span></td>
+            <td class="px-6 py-3.5 text-right font-mono font-bold ${f.tipo==='Ingreso'?'text-emerald-600':'text-red-600'}">S/ ${f.monto.toFixed(2)}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('dash-balance').textContent = `S/ ${balance.toLocaleString('es-PE')}`;
+
+    // Compras
+    document.getElementById('tabla-compras').innerHTML = DB_COMPRAS.map(c => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-mono font-bold text-slate-500">${c.req}</td>
+            <td class="px-6 py-3.5 font-semibold text-gray-800">${c.desc}</td>
+            <td class="px-6 py-3.5 text-xs text-gray-500 font-bold">${c.area}</td>
+            <td class="px-6 py-3.5 text-right font-mono font-bold text-blue-600">S/ ${c.monto.toLocaleString('es-PE')}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-1 rounded text-[10px] font-black uppercase ${c.estado==='Aprobado'?'bg-emerald-100 text-emerald-700':c.estado==='Rechazado'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700'}">${c.estado}</span></td>
+        </tr>
+    `).join('');
+    // Actualizar indicador general oculto si existiera
+    const dashCompras = document.getElementById('dash-kpi-compras');
+    if(dashCompras) dashCompras.textContent = DB_COMPRAS.length;
+
+    // Logística SGI Vistazo
+    document.getElementById('tabla-logistica').innerHTML = DB_LOGISTICA.map(l => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-mono font-bold text-gray-500">${l.cod}</td>
+            <td class="px-6 py-3.5 font-semibold text-gray-800">${l.desc}</td>
+            <td class="px-6 py-3.5 text-xs text-gray-600 font-medium"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>${l.ubi}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-green-100 text-green-800':l.estado==='Mantenimiento'?'bg-red-100 text-red-800':'bg-amber-100 text-amber-800'}">${l.estado}</span></td>
+        </tr>
+    `).join('');
+    document.getElementById('dash-sgi').textContent = DB_LOGISTICA.length + " Equipos";
+
+    // Escalafón Docente
+    document.getElementById('tabla-rrhh').innerHTML = DB_RRHH.map(r => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-bold text-gray-800">${r.nombre}</td>
+            <td class="px-6 py-3.5 text-xs font-bold text-gray-600">${r.cat} / <span class="text-gray-400 font-normal">${r.reg}</span></td>
+            <td class="px-6 py-3.5 text-center text-xs font-mono font-bold text-slate-600 bg-slate-50">${r.carga}</td>
+            <td class="px-6 py-3.5 text-right font-mono font-bold text-gray-700">S/ ${r.sueldo.toFixed(2)}</td>
+            <td class="px-6 py-3.5 text-center">
+                <button onclick="abrirHorarioDocente(${r.id})" class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition flex items-center justify-center mx-auto shadow-sm"><i class="fa-solid fa-eye text-xs"></i></button>
+            </td>
+        </tr>
+    `).join('');
+    document.getElementById('dash-docentes').textContent = DB_RRHH.length + " Activos";
+
+    // Control Estudiantil
+    document.getElementById('tabla-academico').innerHTML = DB_ACADEMICO.map(a => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-mono text-xs font-bold text-gray-500">${a.cod}</td>
+            <td class="px-6 py-3.5 font-bold text-gray-800">${a.nombre}</td>
+            <td class="px-6 py-3.5 text-xs font-semibold text-gray-600">${a.esc}</td>
+            <td class="px-6 py-3.5 text-xs text-blue-500 font-mono">${a.email}</td>
+        </tr>
+    `).join('');
+    const kpiAlum = document.getElementById('dash-kpi-alumnos');
+    if(kpiAlum) kpiAlum.textContent = "5,430 Activos";
+
+    // Bienestar Universitario
+    document.getElementById('tabla-bienestar').innerHTML = DB_BIENESTAR.map(b => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-mono font-bold text-gray-700">${b.cod}</td>
+            <td class="px-6 py-3.5 text-xs font-bold text-slate-600">${b.tipo}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center text-xs font-mono text-gray-400">${b.hora}</td>
+        </tr>
+    `).join('');
+    document.getElementById('dash-comedor').textContent = "1,200 Atenciones";
+
+    // Bolsa de Empleo
+    document.getElementById('tabla-bolsa').innerHTML = DB_BOLSA.map(b => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
+            <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
+            <td class="px-6 py-3.5 text-center font-black text-blue-600">${b.post}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-100 text-emerald-800">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-cyan-300 text-cyan-700 px-3 py-1 rounded bg-cyan-50 hover:bg-cyan-600 hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
+        </tr>
+    `).join('');
+    const kpiBolsa = document.getElementById('dash-kpi-bolsa');
+    if(kpiBolsa) kpiBolsa.textContent = DB_BOLSA.length;
+
+    // Proyección Social
+    document.getElementById('tabla-proyeccion').innerHTML = DB_PROYECCION.map(p => `
+        <tr class="table-row-hover">
+            <td class="px-6 py-3.5 font-bold text-gray-800">${p.proy}</td>
+            <td class="px-6 py-3.5 text-xs text-purple-600 font-bold">${p.esc}</td>
+            <td class="px-6 py-3.5 text-xs text-gray-500 font-medium">${p.benef}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-purple-100 text-purple-800">${p.fase}</span></td>
+            <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-purple-300 text-purple-700 px-3 py-1 rounded bg-purple-50 hover:bg-purple-600 hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
+        </tr>
+    `).join('');
+    const kpiProy = document.getElementById('dash-kpi-proyectos');
+    if(kpiProy) kpiProy.textContent = DB_PROYECCION.length;
+}
+
+// ==================== OPERACIONES Y MANIPULADORES INTERACTIVOS ====================
+
+function cambiarModulo(moduloId, btnElement) {
+    // 1. Limpiamos las clases de todos los módulos
+    document.querySelectorAll('.modulo-contenido').forEach(mod => {
+        mod.classList.remove('seccion-visible', 'animate-fade-in');
+        mod.classList.add('seccion-oculta');
+    });
+    // 2. Mostramos el módulo objetivo
+    const target = document.getElementById('mod-' + moduloId);
+    if (target) {
+        target.classList.remove('seccion-oculta');
+        target.classList.add('seccion-visible', 'animate-fade-in');
+    }
+    // 3. Actualizamos la visualización del sidebar
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    if(btnElement) btnElement.classList.add('active');
+    // 4. Recargar gráficos si es dashboard
+    if(moduloId === 'dashboard') inicializarGraficos();
+}
+
+function abrirModalCompras() { document.getElementById('modal-compras').classList.remove('hidden'); }
+function cerrarModalCompras() { document.getElementById('modal-compras').classList.add('hidden'); }
+
+document.getElementById('form-compras').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_COMPRAS.unshift({
+        req: `REQ-26-${DB_COMPRAS.length + 101}`,
+        desc: document.getElementById('req-desc').value.trim(),
+        area: document.getElementById('req-area').value.trim(),
+        monto: parseFloat(document.getElementById('req-monto').value),
+        estado: 'Pendiente'
+    });
+    renderizarTablas();
+    cerrarModalCompras();
+    this.reset();
+    mostrarToast('Nuevo requerimiento adicionado e indexado a abastecimiento.', 'success');
+});
+
+function abrirHorarioDocente(id) {
+    const d = DB_RRHH.find(x => x.id === id);
+    if(d) {
+        document.getElementById('h-docente').textContent = d.nombre;
+        document.getElementById('h-carga').textContent = d.carga;
+        document.getElementById('h-horario').textContent = d.horario;
+        document.getElementById('h-salon').textContent = d.salon;
+        document.getElementById('modal-horario').classList.remove('hidden');
+    }
+}
+function cerrarModalHorario() { document.getElementById('modal-horario').classList.add('hidden'); }
+
+function mostrarToast(mensaje) {
+    const container = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = 'toast show';
+    t.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-xl"></i><p class="text-sm font-semibold text-gray-700">${mensaje}</p>`;
+    container.appendChild(t);
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3500);
+}
+
+// ==================== COMPILADOR COMPLETO DE ARCHIVOS PDF (jsPDF) ====================
+
+function descargarPadronPDF(anio) {
+    mostrarToast(`Compilando padrón de estudiantes ingresantes ciclo ${anio}...`);
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text(`Dirección de Registro Técnico y Admisión - Padrón Oficial ${anio}`, 105, 18, null, null, "center");
+
+        let data = [];
+        if(anio === '2024') {
+            data = DB_ACADEMICO.map(a => [a.cod, a.nombre, a.esc, a.email]);
+        } else if(anio === '2025') {
+            data = [
+                ["0202511001", "ACERO SANTISTEBAN MARCO ANTONIO", "INGENIERIA EN ENERGIA", "202511001@uns.edu.pe"],
+                ["0202511002", "AGUIRRE CASTAÑEDA YETSY YAMILE", "INGENIERIA EN ENERGIA", "202511002@uns.edu.pe"],
+                ["0202535043", "RAMOS TORRES MASSIEL SARUMI", "DERECHO Y CIENCIAS POLITICAS", "202535043@uns.edu.pe"],
+                ["0202535044", "ROJAS SOBRADO LUCERO KAMILA", "DERECHO Y CIENCIAS POLITICAS", "202535044@uns.edu.pe"],
+                ["0202535045", "ROSALES ZEVALLOS MIRIAN", "DERECHO Y CIENCIAS POLITICAS", "202535045@uns.edu.pe"]
+            ];
+        } else {
+            data = [
+                ["0202614001", "PALACIOS CRUCES ANGEL JAVIER", "INGENIERIA DE SISTEMAS", "202614001@uns.edu.pe"],
+                ["0202624002", "BERMUDEZ REYES REBECA SOFIA", "MEDICINA HUMANA", "202624002@uns.edu.pe"],
+                ["0202613009", "ZAVALETA CASTILLO LUIS FERNANDO", "INGENIERIA CIVIL", "202613009@uns.edu.pe"]
+            ];
+        }
+
+        doc.autoTable({ startY: 35, head: [['Código Universitario', 'Apellidos y Nombres', 'Especialidad', 'Email Institucional']], body: data, headStyles: { fillColor: [40, 40, 40] } });
+        doc.save(`Padron_Estudiantes_${anio}_UNS.pdf`);
+    }, 400);
+}
+
+function exportarSgiCompletoPDF() {
+    mostrarToast('Procesando base de datos patrimonial masiva SGI...');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(180, 83, 9); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text("Dirección de Logística y Margesí de Bienes - Inventario General SGI", 105, 18, null, null, "center");
+
+        let itemsMasivos = [];
+        let catalogos = ["Servidor Rackeable Blade Cisco Catalyst", "Estación de Trabajo HP Z2 Tower Pro", "Osciloscopio Digital Tektronix 100MHz", "Proyector Multimedia Epson PowerLite Pro", "Estación Total Geodésica Topcon Laser"];
+        let locaciones = ["Lab. INGENIERIA DE SISTEMAS 01", "Lab. INGENIERIA DE SISTEMAS 02", "Gabinete Topografía Civil", "DataCenter OTI Central", "Laboratorio de Ciencias Clínicas"];
+        let condiciones = ["Operativo", "Mantenimiento Preventivo", "Programado para Calibración"];
+
+        for(let i=1; i<=100; i++) {
+            itemsMasivos.push([
+                `PAT-26-${String(i).padStart(3, '0')}`,
+                `${catalogos[i % catalogos.length]} Serie ${2000+i}`,
+                locaciones[i % locaciones.length],
+                condiciones[i % condiciones.length]
+            ]);
+        }
+
+        doc.autoTable({ startY: 32, head: [['Cod. Patrimonial', 'Descripción del Activo Físico', 'Ubicación Asignada', 'Condición Actual']], body: itemsMasivos, styles: { fontSize: 8 }, headStyles: { fillColor: [50, 50, 50] } });
+        doc.save("Inventario_Completo_SGI_100_Equipos.pdf");
+    }, 500);
+}
+
+function exportarConvenioPDF(empresa, oferta) {
+    mostrarToast('Compilando instrumento legal formal del convenio...');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(15, 118, 110); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text("Oficina de Cooperación Técnica y Alianzas Estratégicas", 105, 18, null, null, "center");
+
+        doc.setTextColor(30,30,30); doc.setFontSize(12); doc.text("CONVENIO DE INSERCIÓN LABORAL Y EMPLEABILIDAD MARCO", 105, 40, null, null, "center");
+        
+        doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+        let texto = `Conste por el presente acuerdo interinstitucional, las pautas y requisitos de cooperación recíproca que celebran la UNIVERSIDAD NACIONAL DEL SANTA y la organización corporativa ${empresa.toUpperCase()}.\n\nPRÁCTICAS Y EMPLEABILIDAD: Ambas entidades convienen en estructurar mecanismos ágiles de postulación y reclutamiento para el encargo de: "${oferta}", garantizando canales prioritarios para los egresados de la UNS.\n\nCERTIFICACIONES DIGITALES DE VALIDACIÓN DE FIRMAS:\nEl presente documento cuenta con rúbrica y autenticación criptográfica centralizada de archivos del ERP de conformidad con el estatuto universitario vigente.`;
+        doc.text(doc.splitTextToSize(texto, 175), 20, 55);
+
+        doc.setFont("helvetica","bold");
+        doc.line(35, 160, 85, 160); doc.text("RECTORADO UNS\nFirma Digitalizada", 60, 165, null, null, "center");
+        doc.line(125, 160, 175, 160); doc.text(`GERENCIA ${empresa.toUpperCase()}\nRúbrica Autorizada`, 150, 165, null, null, "center");
+
+        doc.save(`Convenio_Oficial_${empresa.replace(/\s/g,'_')}.pdf`);
+    }, 400);
+}
+
+function exportarProyectoSocialPDF(proyecto, escuela) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFillColor(109, 40, 217); doc.rect(0, 0, 210, 25, 'F');
+    doc.setTextColor(255,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(14);
+    doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+    doc.setFontSize(9); doc.text("Dirección de Responsabilidad Social Universitaria", 105, 18, null, null, "center");
+
+    doc.setTextColor(30,30,30); doc.setFontSize(12); doc.text("RESOLUCIÓN DIRECTORAL DE APROBACIÓN DE PROYECTO", 105, 42, null, null, "center");
+    doc.setFont("helvetica","normal"); doc.setFontSize(10);
+    let texto = `VISTO: El informe técnico ingresado al ERP por la dirección de la escuela de ${escuela}.\n\nSE RESUELVE:\n1. VALIDAR y dar conformidad formal al plan de intervención social denominado "${proyecto.toUpperCase()}".\n2. RECONOCER las horas de prácticas extramurales acumuladas por el equipo estudiantil ejecutor como requisito metodológico de egreso institucional.\n\nFirmado y sellado mediante autenticación centralizada en el servidor ERP de la UNS.`;
+    doc.text(doc.splitTextToSize(texto, 170), 20, 58);
+    
+    doc.rect(80, 140, 50, 22); doc.setFont("helvetica","bold"); doc.text("SELLO DIGITAL\nOFICINA RSU-UNS", 105, 149, null, null, "center");
+    
+    doc.save(`Proyecto_RS_${escuela.replace(/\s/g,'_')}.pdf`);
+}
+
+function generarReporteGeneral() {
+    mostrarToast('Compilando Reporte Institucional PDF...', 'success');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(16);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(10); doc.setFont("helvetica", "normal");
+        doc.text("Reporte Estadístico del ERP Central", 105, 18, null, null, "center");
+
+        doc.setTextColor(50, 50, 50); doc.setFontSize(12); doc.setFont("helvetica", "bold");
+        doc.text("1. Resumen de Escalafón Docente (Muestra)", 14, 40);
+        doc.autoTable({ startY: 43, head: [['Docente', 'Categoría', 'Régimen']], body: DB_RRHH.slice(0,5).map(r => [r.nombre, r.cat, r.reg]), styles: { fontSize: 8 }});
+
+        let finalY = doc.lastAutoTable.finalY + 10;
+        doc.setFont("helvetica", "bold"); doc.text("2. Estado de Activos Patrimoniales (SGI)", 14, finalY);
+        doc.autoTable({ startY: finalY + 3, head: [['Activo', 'Ubicación', 'Estado']], body: DB_LOGISTICA.slice(0,6).map(l => [l.desc, l.ubi, l.estado]), headStyles: { fillColor: [245, 158, 11] }, styles: { fontSize: 8 }});
+
+        doc.save(`Reporte_Gerencial_UNS.pdf`);
+    }, 600);
+}
+
+// ==================== CONFIGURACIÓN DE DASHBOARD CHARTS ====================
+let chartGerencialInstancia = null;
+function inicializarGraficos() {
+    const canvas = document.getElementById('chartGerencial');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if(chartGerencialInstancia) chartGerencialInstancia.destroy();
+
+    chartGerencialInstancia = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Inversión Laboratorios', 'Planillas Docentes', 'Recaudación Admisión', 'Inscripciones Idiomas', 'Insumos Comedor'],
+            datasets: [
+                { label: 'Egresos Presupuestales (S/)', data: [85000, 145000, 0, 0, 32000], backgroundColor: '#b30000', borderRadius: 5 },
+                { label: 'Ingresos Propios (S/)', data: [0, 0, 284000, 45000, 14200], backgroundColor: '#10b981', borderRadius: 5 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
+    });
+}
+
+// INIT
+window.addEventListener('load', () => { renderizarTablas(); inicializarGraficos(); });
+</script>
 </body>
 </html>
