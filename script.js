@@ -1,18 +1,15 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     
     /* ==========================================================================
-       1. MENÚ PRINCIPAL RESPONSIVO (Hamburguesa Celulares)
+       1. MENÚ PRINCIPAL RESPONSIVO
        ========================================================================== */
     const mobileBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (mobileBtn && mobileMenu) {
         const mobileIcon = mobileBtn.querySelector('i');
-
         mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            
             if (mobileIcon) {
                 if (mobileMenu.classList.contains('hidden')) {
                     mobileIcon.classList.remove('fa-xmark');
@@ -25,20 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ==========================================================================
-       2. ACORDEONES DESPLEGABLES EN CELULARES
-       ========================================================================== */
     const dropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
-    
     if (dropdownBtns.length > 0) {
         dropdownBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const submenu = btn.nextElementSibling;
                 const icon = btn.querySelector('.fa-chevron-down');
-                
-                if (submenu) {
-                    submenu.classList.toggle('hidden');
-                }
+                if (submenu) submenu.classList.toggle('hidden');
                 if (icon) {
                     icon.classList.toggle('rotate-180');
                     icon.classList.toggle('text-uns');
@@ -48,14 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       3. MENÚ DESPLEGABLE DE ADMISIÓN (Escritorio)
+       2. MENÚS DESPLEGABLES (Escritorio)
        ========================================================================== */
     const btnAdmision = document.getElementById('btn-admision');
     const menuAdmision = document.getElementById('menu-admision');
-
-    /* ==========================================================================
-       MENÚ DESPLEGABLE DE DIRECCIONES (Escritorio)
-       ========================================================================== */
     const btnDirecciones = document.getElementById('btn-direcciones');
     const menuDirecciones = document.getElementById('menu-direcciones');
 
@@ -64,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation(); 
             menuDirecciones.classList.toggle('hidden');
         });
-
         document.addEventListener('click', function(e) {
             if (!menuDirecciones.contains(e.target) && e.target !== btnDirecciones) {
                 menuDirecciones.classList.add('hidden');
@@ -77,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation(); 
             menuAdmision.classList.toggle('hidden');
         });
-
         document.addEventListener('click', function(e) {
             if (!menuAdmision.contains(e.target) && e.target !== btnAdmision) {
                 menuAdmision.classList.add('hidden');
@@ -86,202 +70,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       4. VENTANA DE INTRANET (Modal Control)
+       3. VENTANAS Y MODALES GENERALES
        ========================================================================== */
-    const ventana = document.getElementById('ventana-intranet');
-    const contenidoVentana = document.getElementById('contenido-intranet');
+    // INTRANET
+    const ventanaIntranet = document.getElementById('ventana-intranet');
+    const contenidoIntranet = document.getElementById('contenido-intranet');
     const btnIntranetDesktop = document.getElementById('btn-intranet-desktop');
     const btnIntranetMobile = document.getElementById('btn-intranet-mobile');
     const btnCerrarIntranet = document.getElementById('btn-cerrar-intranet');
 
     const abrirIntranet = () => {
-        if (ventana && contenidoVentana) {
-            ventana.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoVentana.classList.remove('scale-95');
-            contenidoVentana.classList.add('scale-100');
+        if (ventanaIntranet && contenidoIntranet) {
+            document.body.classList.add('overflow-hidden');
+            ventanaIntranet.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoIntranet.classList.remove('scale-95');
+            contenidoIntranet.classList.add('scale-100');
         }
     };
-
     const cerrarIntranet = () => {
-        if (ventana && contenidoVentana) {
-            ventana.classList.add('opacity-0', 'pointer-events-none');
-            contenidoVentana.classList.remove('scale-100');
-            contenidoVentana.classList.add('scale-95');
+        if (ventanaIntranet && contenidoIntranet) {
+            document.body.classList.remove('overflow-hidden');
+            ventanaIntranet.classList.add('opacity-0', 'pointer-events-none');
+            contenidoIntranet.classList.remove('scale-100');
+            contenidoIntranet.classList.add('scale-95');
         }
     };
-
     if (btnIntranetDesktop) btnIntranetDesktop.addEventListener('click', abrirIntranet);
     if (btnIntranetMobile) btnIntranetMobile.addEventListener('click', abrirIntranet);
     if (btnCerrarIntranet) btnCerrarIntranet.addEventListener('click', cerrarIntranet);
+    if (ventanaIntranet) ventanaIntranet.addEventListener('click', (e) => { if (e.target === ventanaIntranet) cerrarIntranet(); });
 
-    if (ventana) {
-        ventana.addEventListener('click', function(e) {
-            if (e.target === ventana) {
-                cerrarIntranet();
-            }
-        });
-    }
-
-    /* ==========================================================================
-       5. INTERSECTION OBSERVER (Animaciones dinámicas al hacer Scroll)
-       ========================================================================== */
-    const opcionesObservador = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const observador = new IntersectionObserver((entradas, observador) => {
-        entradas.forEach(entrada => {
-            if (entrada.isIntersecting) {
-                entrada.target.classList.remove('opacity-0', 'translate-y-8');
-                entrada.target.classList.add('opacity-100', 'translate-y-0');
-                observador.unobserve(entrada.target); 
-            }
-        });
-    }, opcionesObservador);
-
-    document.querySelectorAll('.animacion-scroll').forEach((elemento) => {
-        observador.observe(elemento);
-    });
-    
-    /* ==========================================================================
-    6. LÓGICA DEL BANNER DINÁMICO (AUTO-PLAY SLIDER)
-    ========================================================================== */
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.slider-dot');
-
-    function showSlides() {
-        // Resetear todas las slides
-        slides.forEach(slide => slide.classList.replace('opacity-100', 'opacity-0'));
-        dots.forEach(dot => dot.classList.remove('active', 'bg-uns'));
-
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-
-        // Mostrar slide actual
-        slides[slideIndex - 1].classList.replace('opacity-0', 'opacity-100');
-        dots[slideIndex - 1].classList.add('active', 'bg-uns');
-
-        setTimeout(showSlides, 6000); // Cambia cada 6 segundos
-    }
-
-    // Iniciar el slider cuando cargue el DOM
-    if(slides.length > 0) {
-        // Inicializar primer punto como activo
-        dots[0].classList.add('active');
-        setTimeout(showSlides, 6000);
-    }
-
-    // Función para hacer clic en los puntos (Opcional)
-    function currentSlide(n) {
-        slideIndex = n;
-        slides.forEach(slide => slide.classList.replace('opacity-100', 'opacity-0'));
-        dots.forEach(dot => dot.classList.remove('active', 'bg-uns'));
-        
-        slides[n].classList.replace('opacity-0', 'opacity-100');
-        dots[n].classList.add('active', 'bg-uns');
-    }
-    /* ==========================================================================
-       7. LÓGICA DEL "MINI-SITIO" DE FACULTADES
-       ========================================================================== */
-    const tabsMiniSitio = document.querySelectorAll('.facultad-tab');
-    const paginasFacultades = document.querySelectorAll('.facultad-content');
-
-    if (tabsMiniSitio.length > 0) {
-        tabsMiniSitio.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.getAttribute('data-target');
-
-                // 1. Limpiar estilo de todos los botones de la píldora
-                tabsMiniSitio.forEach(t => {
-                    t.classList.remove('bg-uns', 'text-white', 'shadow-md');
-                    t.classList.add('bg-transparent', 'text-gray-500');
-                });
-
-                // 2. Activar el botón seleccionado
-                tab.classList.remove('bg-transparent', 'text-gray-500');
-                tab.classList.add('bg-uns', 'text-white', 'shadow-md');
-
-                // 3. Ocultar todas las páginas y mostrar la correspondiente con animación
-                paginasFacultades.forEach(pagina => {
-                    if (pagina.id === `content-${target}`) {
-                        pagina.classList.remove('hidden');
-                        pagina.classList.add('block', 'animate-fade-in'); 
-                    } else {
-                        pagina.classList.add('hidden');
-                        pagina.classList.remove('block', 'animate-fade-in');
-                    }
-                });
-            });
-        });
-    }
-    /* ==========================================================================
-       8. LÓGICA DEL "MINI-SITIO" DE POSGRADO (ESTILO FACULTADES)
-       ========================================================================== */
-    const tabsPosgrado = document.querySelectorAll('.posgrado-tab');
-    const paginasPosgrado = document.querySelectorAll('.posgrado-content');
-
-    if (tabsPosgrado.length > 0) {
-        tabsPosgrado.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.getAttribute('data-target');
-
-                // 1. Limpiar estilo de todos los botones de la píldora
-                tabsPosgrado.forEach(t => {
-                    t.classList.remove('bg-uns', 'text-white', 'shadow-md');
-                    t.classList.add('bg-transparent', 'text-gray-500');
-                });
-
-                // 2. Activar el botón seleccionado
-                tab.classList.remove('bg-transparent', 'text-gray-500');
-                tab.classList.add('bg-uns', 'text-white', 'shadow-md');
-
-                // 3. Ocultar todas las páginas y mostrar la correspondiente con animación
-                paginasPosgrado.forEach(pagina => {
-                    if (pagina.id === `content-posgrado-${target}`) {
-                        pagina.classList.remove('hidden');
-                        pagina.classList.add('block', 'animate-fade-in'); 
-                    } else {
-                        pagina.classList.add('hidden');
-                        pagina.classList.remove('block', 'animate-fade-in');
-                    }
-                });
-            });
-        });
-    }
-    /* ==========================================================================
-       9. INTERCEPTOR DE ENLACES TEMPORALES (TOAST UX)
-       ========================================================================== */
-    const enlacesTemporales = document.querySelectorAll('a[href="#"]');
-    
-    enlacesTemporales.forEach(enlace => {
-        enlace.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita que la página salte hacia arriba
-            
-            // Crear el elemento Toast con clases de Tailwind
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-5 right-5 bg-gray-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-[200] font-medium border-l-4 border-uns';
-            toast.innerHTML = '<i class="fa-solid fa-person-digging text-uns-light text-xl"></i> Sección en construcción';
-            
-            document.body.appendChild(toast);
-            
-            // Trigger para la animación de entrada
-            setTimeout(() => {
-                toast.classList.remove('translate-y-20', 'opacity-0');
-            }, 10);
-            
-            // Animación de salida y destrucción del elemento en el DOM
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 2500);
-        });
-    });
-    /* ==========================================================================
-       10. LÓGICA DEL MODAL DE INSCRIPCIÓN (Formulario)
-       ========================================================================== */
+    // INSCRIPCIÓN
     const modalInscripcion = document.getElementById('ventana-inscripcion');
     const contenidoInscripcion = document.getElementById('contenido-inscripcion');
     const btnInscripcion = document.getElementById('btn-inscripcion');
@@ -291,45 +110,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const abrirInscripcion = (e) => {
         if(e) e.preventDefault();
         if (modalInscripcion && contenidoInscripcion) {
+            document.body.classList.add('overflow-hidden');
             modalInscripcion.classList.remove('opacity-0', 'pointer-events-none');
             contenidoInscripcion.classList.remove('scale-95');
             contenidoInscripcion.classList.add('scale-100');
         }
     };
-
     const cerrarInscripcion = () => {
         if (modalInscripcion && contenidoInscripcion) {
+            document.body.classList.remove('overflow-hidden');
             modalInscripcion.classList.add('opacity-0', 'pointer-events-none');
             contenidoInscripcion.classList.remove('scale-100');
             contenidoInscripcion.classList.add('scale-95');
         }
     };
-
     if (btnInscripcion) btnInscripcion.addEventListener('click', abrirInscripcion);
     if (btnCerrarInscripcion) btnCerrarInscripcion.addEventListener('click', cerrarInscripcion);
-
-    // Cerrar al hacer clic fuera del modal
-    if (modalInscripcion) {
-        modalInscripcion.addEventListener('click', function(e) {
-            if (e.target === modalInscripcion) {
-                cerrarInscripcion();
-            }
-        });
-    }
-
-    // Prevenir el recargo de página al enviar el formulario (Simulación)
+    if (modalInscripcion) modalInscripcion.addEventListener('click', (e) => { if (e.target === modalInscripcion) cerrarInscripcion(); });
     if (formInscripcion) {
         formInscripcion.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Aquí en un futuro puedes conectar tu API o backend
             alert('¡Inscripción enviada correctamente!');
             formInscripcion.reset();
             cerrarInscripcion();
         });
     }
-    /* ==========================================================================
-       MODAL BIZAGI: DRAG-TO-SCROLL HORIZONTAL
-       ========================================================================== */
+
+    // BIZAGI
     const modalBizagi = document.getElementById('ventana-bizagi');
     const contenidoBizagi = document.getElementById('contenido-bizagi');
     const btnAbrirBizagi = document.getElementById('btn-proceso-bizagi');
@@ -339,123 +146,188 @@ document.addEventListener('DOMContentLoaded', () => {
     const abrirBizagi = (e) => {
         if(e) e.preventDefault();
         if (modalBizagi && contenidoBizagi) {
+            document.body.classList.add('overflow-hidden');
             modalBizagi.classList.remove('opacity-0', 'pointer-events-none');
             contenidoBizagi.classList.remove('scale-95');
             contenidoBizagi.classList.add('scale-100');
         }
     };
-
     const cerrarBizagi = () => {
         if (modalBizagi && contenidoBizagi) {
+            document.body.classList.remove('overflow-hidden');
             modalBizagi.classList.add('opacity-0', 'pointer-events-none');
             contenidoBizagi.classList.remove('scale-100');
             contenidoBizagi.classList.add('scale-95');
         }
     };
-
     if (btnAbrirBizagi) btnAbrirBizagi.addEventListener('click', abrirBizagi);
     if (btnCerrarBizagi) btnCerrarBizagi.addEventListener('click', cerrarBizagi);
+    if (modalBizagi) modalBizagi.addEventListener('click', (e) => { if (e.target === modalBizagi) cerrarBizagi(); });
 
-    if (modalBizagi) {
-        modalBizagi.addEventListener('click', function(e) {
-            if (e.target === modalBizagi) cerrarBizagi();
-        });
-    }
-
-    // Lógica para arrastrar el diagrama con el mouse
+    // Drag-to-scroll en Bizagi
     if (scrollContainer) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
+        let isDown = false; let startX; let scrollLeft;
         scrollContainer.addEventListener('mousedown', (e) => {
             isDown = true;
             scrollContainer.classList.add('active');
             startX = e.pageX - scrollContainer.offsetLeft;
             scrollLeft = scrollContainer.scrollLeft;
         });
-        scrollContainer.addEventListener('mouseleave', () => {
-            isDown = false;
-            scrollContainer.classList.remove('active');
-        });
-        scrollContainer.addEventListener('mouseup', () => {
-            isDown = false;
-            scrollContainer.classList.remove('active');
-        });
+        scrollContainer.addEventListener('mouseleave', () => { isDown = false; scrollContainer.classList.remove('active'); });
+        scrollContainer.addEventListener('mouseup', () => { isDown = false; scrollContainer.classList.remove('active'); });
         scrollContainer.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 1.5; // Multiplicador de velocidad
+            const walk = (x - startX) * 1.5;
             scrollContainer.scrollLeft = scrollLeft - walk;
         });
     }
 
     /* ==========================================================================
-       11. TRANSICIONES SUAVES ENTRE PÁGINAS (.HTML)
+       4. ANIMACIONES AL HACER SCROLL
        ========================================================================== */
-    // Buscar todos los enlaces que sean internos (que no abran en otra pestaña y no sean anclas #)
-    const enlacesInternos = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="tel:"])');
+    const opcionesObservador = { root: null, rootMargin: '0px', threshold: 0.15 };
+    const observador = new IntersectionObserver((entradas, obs) => {
+        entradas.forEach(entrada => {
+            if (entrada.isIntersecting) {
+                entrada.target.classList.remove('opacity-0', 'translate-y-8');
+                entrada.target.classList.add('opacity-100', 'translate-y-0');
+                obs.unobserve(entrada.target); 
+            }
+        });
+    }, opcionesObservador);
+    document.querySelectorAll('.animacion-scroll').forEach((elemento) => { observador.observe(elemento); });
+    
+    /* ==========================================================================
+       5. BANNER DINÁMICO (SLIDER)
+       ========================================================================== */
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
 
-    enlacesInternos.forEach(enlace => {
-        enlace.addEventListener('click', function(e) {
-            const urlDestino = this.getAttribute('href');
+    function showSlides() {
+        slides.forEach(slide => slide.classList.replace('opacity-100', 'opacity-0'));
+        dots.forEach(dot => dot.classList.remove('active', 'bg-uns'));
+        slideIndex++;
+        if (slideIndex > slides.length) slideIndex = 1;
+        slides[slideIndex - 1].classList.replace('opacity-0', 'opacity-100');
+        dots[slideIndex - 1].classList.add('active', 'bg-uns');
+        setTimeout(showSlides, 6000);
+    }
+    if(slides.length > 0) {
+        dots[0].classList.add('active');
+        setTimeout(showSlides, 6000);
+    }
+    window.currentSlide = function(n) {
+        slideIndex = n;
+        slides.forEach(slide => slide.classList.replace('opacity-100', 'opacity-0'));
+        dots.forEach(dot => dot.classList.remove('active', 'bg-uns'));
+        slides[n].classList.replace('opacity-0', 'opacity-100');
+        dots[n].classList.add('active', 'bg-uns');
+    }
 
-            // Ignorar enlaces sin destino real
-            if (!urlDestino || urlDestino.startsWith('javascript:')) return;
+    /* ==========================================================================
+       6. TABS DE FACULTADES Y POSGRADO
+       ========================================================================== */
+    const configurarTabs = (tabs, contenidos, prefijo) => {
+        if (tabs.length > 0) {
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-uns', 'text-white', 'shadow-md');
+                        t.classList.add('bg-transparent', 'text-gray-500');
+                    });
+                    tab.classList.remove('bg-transparent', 'text-gray-500');
+                    tab.classList.add('bg-uns', 'text-white', 'shadow-md');
+                    contenidos.forEach(pagina => {
+                        if (pagina.id === `${prefijo}-${target}`) {
+                            pagina.classList.remove('hidden');
+                            pagina.classList.add('block', 'animate-fade-in'); 
+                        } else {
+                            pagina.classList.add('hidden');
+                            pagina.classList.remove('block', 'animate-fade-in');
+                        }
+                    });
+                });
+            });
+        }
+    };
+    configurarTabs(document.querySelectorAll('.facultad-tab'), document.querySelectorAll('.facultad-content'), 'content');
+    configurarTabs(document.querySelectorAll('.posgrado-tab'), document.querySelectorAll('.posgrado-content'), 'content-posgrado');
 
-            e.preventDefault(); // Detener el salto inmediato
-
-            // Agregar la clase de salida (Fade out)
-            document.body.classList.remove('page-transition');
-            document.body.classList.add('page-transition-out');
-
-            // Esperar 400ms (lo que dura la animación CSS) para cambiar de página
+    /* ==========================================================================
+       7. INTERCEPTOR ENLACES TEMPORALES (TOAST UX)
+       ========================================================================== */
+    const enlacesTemporales = document.querySelectorAll('a[href="#"]');
+    enlacesTemporales.forEach(enlace => {
+        enlace.addEventListener('click', (e) => {
+            e.preventDefault();
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-gray-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-[200] font-medium border-l-4 border-uns';
+            toast.innerHTML = '<i class="fa-solid fa-person-digging text-uns-light text-xl"></i> Sección en construcción';
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-20', 'opacity-0'); }, 10);
             setTimeout(() => {
-                window.location.href = urlDestino;
-            }, 400);
+                toast.classList.add('translate-y-20', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
         });
     });
 });
 
-// Funcionalidad para el Temario de Admisión
+/* ==========================================================================
+   MODALES ESPECÍFICOS Y MÓVIL
+   ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // TEMARIO
     const btnTemario = document.getElementById('btn-temario');
+    const btnTemarioMobile = document.getElementById('btn-temario-mobile');
     const ventanaTemario = document.getElementById('ventana-temario');
     const btnCerrarTemario = document.getElementById('btn-cerrar-temario');
     const contenidoTemario = document.getElementById('contenido-temario');
 
-    if (btnTemario && ventanaTemario && btnCerrarTemario) {
-        // Abrir el modal del temario
-        btnTemario.addEventListener('click', (e) => {
+    const abrirTemario = (e) => {
+        e.preventDefault();
+        document.body.classList.add('overflow-hidden');
+        ventanaTemario.classList.remove('opacity-0', 'pointer-events-none');
+        contenidoTemario.classList.remove('scale-95');
+        contenidoTemario.classList.add('scale-100');
+        if(mobileMenu) mobileMenu.classList.add('hidden');
+    };
+    const cerrarTemario = () => {
+        document.body.classList.remove('overflow-hidden');
+        ventanaTemario.classList.add('opacity-0', 'pointer-events-none');
+        contenidoTemario.classList.remove('scale-100');
+        contenidoTemario.classList.add('scale-95');
+    };
+    if (btnTemario) btnTemario.addEventListener('click', abrirTemario);
+    if (btnTemarioMobile) btnTemarioMobile.addEventListener('click', abrirTemario);
+    if (btnCerrarTemario) btnCerrarTemario.addEventListener('click', cerrarTemario);
+    if (ventanaTemario) ventanaTemario.addEventListener('click', (e) => { if (e.target === ventanaTemario) cerrarTemario(); });
+
+    // BIZAGI MOBILE (El de escritorio está arriba)
+    const btnBizagiMobile = document.getElementById('btn-proceso-bizagi-mobile');
+    const ventanaBizagi = document.getElementById('ventana-bizagi');
+    const contenidoBizagi = document.getElementById('contenido-bizagi');
+    if (btnBizagiMobile && ventanaBizagi) {
+        btnBizagiMobile.addEventListener('click', (e) => {
             e.preventDefault();
-            ventanaTemario.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoTemario.classList.remove('scale-95');
-            contenidoTemario.classList.add('scale-100');
-        });
-
-        // Cerrar con la 'X'
-        btnCerrarTemario.addEventListener('click', () => {
-            ventanaTemario.classList.add('opacity-0', 'pointer-events-none');
-            contenidoTemario.classList.remove('scale-100');
-            contenidoTemario.classList.add('scale-95');
-        });
-
-        // Cerrar al hacer clic fuera de la ventana blanca
-        ventanaTemario.addEventListener('click', (e) => {
-            if (e.target === ventanaTemario) {
-                btnCerrarTemario.click();
-            }
+            document.body.classList.add('overflow-hidden');
+            ventanaBizagi.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoBizagi.classList.remove('scale-95');
+            contenidoBizagi.classList.add('scale-100');
+            if(mobileMenu) mobileMenu.classList.add('hidden');
         });
     }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Lógica para abrir/cerrar el submenú de Admisión en el celular
+    // ADMISIÓN MOBILE (Desplegable)
     const btnAdmisionMobile = document.getElementById('btn-admision-mobile');
     const submenuAdmisionMobile = document.getElementById('submenu-admision-mobile');
     const iconAdmisionMobile = document.getElementById('icon-admision-mobile');
-
     if(btnAdmisionMobile && submenuAdmisionMobile) {
         btnAdmisionMobile.addEventListener('click', () => {
             submenuAdmisionMobile.classList.toggle('hidden');
@@ -464,97 +336,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Lógica para abrir el Temario desde el celular
-    const btnTemarioMobile = document.getElementById('btn-temario-mobile');
-    const ventanaTemario = document.getElementById('ventana-temario');
-    const contenidoTemario = document.getElementById('contenido-temario');
-    const mobileMenu = document.getElementById('mobile-menu'); // Para cerrar el menú principal
-
-    if (btnTemarioMobile && ventanaTemario) {
-        btnTemarioMobile.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Abrir el modal
-            ventanaTemario.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoTemario.classList.remove('scale-95');
-            contenidoTemario.classList.add('scale-100');
-            // Cerrar el menú del celular para que no estorbe
-            if(mobileMenu) mobileMenu.classList.add('hidden');
-        });
-    }
-
-    // 3. Lógica para abrir Bizagi desde el celular
-    const btnBizagiMobile = document.getElementById('btn-proceso-bizagi-mobile');
-    const ventanaBizagi = document.getElementById('ventana-bizagi');
-    const contenidoBizagi = document.getElementById('contenido-bizagi');
-
-    if (btnBizagiMobile && ventanaBizagi) {
-        btnBizagiMobile.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Abrir el modal
-            ventanaBizagi.classList.remove('opacity-0', 'pointer-events-none');
-            contenidoBizagi.classList.remove('scale-95');
-            contenidoBizagi.classList.add('scale-100');
-            // Cerrar el menú del celular
-            if(mobileMenu) mobileMenu.classList.add('hidden');
-        });
-    }
-});
-document.addEventListener('DOMContentLoaded', () => {
-    // Referencias a los elementos
+    // TABLA DE CONVERSIONES
     const btnTablaDesktop = document.getElementById('btn-tabla-desktop');
     const btnTablaMobile = document.getElementById('btn-tabla-mobile');
     const ventanaTabla = document.getElementById('ventana-tabla');
     const btnCerrarTabla = document.getElementById('btn-cerrar-tabla');
     const contenidoTabla = document.getElementById('contenido-tabla');
-    const mobileMenu = document.getElementById('mobile-menu'); // Menú de celular
     
-    // Función para abrir el modal
     const abrirModalTabla = (e) => {
         e.preventDefault();
+        document.body.classList.add('overflow-hidden');
         ventanaTabla.classList.remove('opacity-0', 'pointer-events-none');
         contenidoTabla.classList.remove('scale-95');
         contenidoTabla.classList.add('scale-100');
-        // Cerrar menú móvil si está abierto
         if (mobileMenu) mobileMenu.classList.add('hidden');
     };
+    const cerrarModalTabla = () => {
+        document.body.classList.remove('overflow-hidden');
+        ventanaTabla.classList.add('opacity-0', 'pointer-events-none');
+        contenidoTabla.classList.remove('scale-100');
+        contenidoTabla.classList.add('scale-95');
+    }
 
     if (btnTablaDesktop) btnTablaDesktop.addEventListener('click', abrirModalTabla);
     if (btnTablaMobile) btnTablaMobile.addEventListener('click', abrirModalTabla);
+    if (btnCerrarTabla) btnCerrarTabla.addEventListener('click', cerrarModalTabla);
+    if (ventanaTabla) ventanaTabla.addEventListener('click', (e) => { if (e.target === ventanaTabla) cerrarModalTabla(); });
 
-    // Cerrar modal
-    if (btnCerrarTabla) {
-        btnCerrarTabla.addEventListener('click', () => {
-            ventanaTabla.classList.add('opacity-0', 'pointer-events-none');
-            contenidoTabla.classList.remove('scale-100');
-            contenidoTabla.classList.add('scale-95');
-        });
-    }
-
-    // Cerrar si hace click fuera del modal
-    if (ventanaTabla) {
-        ventanaTabla.addEventListener('click', (e) => {
-            if (e.target === ventanaTabla) btnCerrarTabla.click();
-        });
-    }
-
-    // ==========================================
-    // GENERADOR AUTOMÁTICO DE LA TABLA (UNS)
-    // ==========================================
+    // GENERADOR DE TABLA
     const tbody = document.getElementById('cuerpo-tabla-conversiones');
-    
     if (tbody) {
         let htmlFilas = '';
-        const FACTOR_UNS = 20.377; // Multiplicador oficial de la UNS
-        
-        // El promedio va de 20.00 hasta 11.00
+        const FACTOR_UNS = 20.377;
         for (let nota = 200; nota >= 110; nota--) {
             let pes = (nota / 10).toFixed(2);
             let puntaje = (pes * FACTOR_UNS).toFixed(3);
-            
-            // Corrección estética para quitar ceros innecesarios (ej. 407.540 -> 407.54)
             puntaje = parseFloat(puntaje).toString();
-            
-            // Estilos dinámicos para resaltar números enteros (20.00, 19.00...)
             let esEntero = (nota % 10 === 0);
             let bgClass = esEntero ? 'bg-red-50/40 font-bold' : 'hover:bg-gray-50';
             
@@ -572,24 +389,22 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = htmlFilas;
     }
 });
+
+/* ==========================================================================
+   MODALES DE CARRERAS DINÁMICOS
+   ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // ==============================================================
-    // 1. ABRIR VENTANAS DE TODAS LAS CARRERAS DINÁMICAMENTE
-    // ==============================================================
     const botonesCarreras = document.querySelectorAll('[data-modal]');
     
     botonesCarreras.forEach(boton => {
         boton.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita saltos raros en la pantalla
-            
-            // Obtiene el nombre de la carrera (ej: "civil", "medicina")
+            e.preventDefault(); 
             const carreraId = boton.getAttribute('data-modal');
             const ventana = document.getElementById(`ventana-${carreraId}`);
             const contenido = document.getElementById(`contenido-${carreraId}`);
             
             if (ventana && contenido) {
-                // Muestra la ventana sin congelar la página
+                document.body.classList.add('overflow-hidden');
                 ventana.classList.remove('opacity-0', 'pointer-events-none');
                 contenido.classList.remove('scale-95');
                 contenido.classList.add('scale-100');
@@ -597,17 +412,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ==============================================================
-    // 2. CERRAR LAS VENTANAS (Botón X)
-    // ==============================================================
     const botonesCerrar = document.querySelectorAll('.btn-cerrar-carrera');
-    
     botonesCerrar.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const ventana = e.target.closest('.fixed.inset-0'); // Encuentra la ventana activa
+            const ventana = e.target.closest('.fixed.inset-0'); 
             if (ventana) {
                 const contenido = ventana.querySelector('.scale-100');
-                // Oculta la ventana
+                document.body.classList.remove('overflow-hidden');
                 ventana.classList.add('opacity-0', 'pointer-events-none');
                 if (contenido) {
                     contenido.classList.remove('scale-100');
@@ -617,9 +428,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ==============================================================
-    // 3. CERRAR AL DAR CLIC EN EL FONDO OSCURO
-    // ==============================================================
     document.querySelectorAll('.fixed.inset-0').forEach(ventana => {
         ventana.addEventListener('click', (e) => {
             if (e.target === ventana) {
@@ -628,5 +436,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});
 
+/* ==========================================================================
+   NUEVO SISTEMA DE TRANSICIÓN MODERNO (Fade Out / Fade In)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('page-transition-overlay');
+
+    if (overlay) {
+        setTimeout(() => {
+            overlay.classList.add('overlay-modern-hidden');
+        }, 700);
+    }
+
+    const enlacesPaginas = document.querySelectorAll('a');
+    
+    enlacesPaginas.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            if (href && href.endsWith('.html') && !href.startsWith('#') && !link.target) {
+                e.preventDefault(); 
+                
+                if (overlay) {
+                    overlay.classList.remove('overlay-modern-hidden');
+                }
+                
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 500);
+            }
+        });
+    });
 });
