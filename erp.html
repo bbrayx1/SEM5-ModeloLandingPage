@@ -32,7 +32,7 @@
         @keyframes slideUp { from { opacity: 0; transform: scale(0.96) translateY(15px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
         .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 14px; min-width: 320px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-left: 4px solid #10b981; }
+        .toast { background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 14px; min-width: 320px; transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); border-left: 4px solid #b30000; }
         .toast.show { transform: translateX(0); }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -75,10 +75,10 @@
                 <i class="fa-solid fa-file-pdf text-red-200"></i> Reporte Institucional
             </button>
             <div class="w-px h-8 bg-white/20 mx-2"></div>
-            <div class="flex items-center gap-3 px-2 py-1 cursor-pointer hover:bg-white/10 rounded-lg transition">
+            <div class="flex items-center gap-3 px-2 py-1">
                 <div class="text-right hidden md:block">
                     <p class="text-sm font-bold leading-none">Administrador General</p>
-                    <p class="text-[10px] text-emerald-300 font-bold tracking-wider mt-1 uppercase">Control Central OTI</p>
+                    <p class="text-[10px] text-red-300 font-bold tracking-wider mt-1 uppercase">Control Central OTI</p>
                 </div>
                 <div class="w-9 h-9 rounded-full bg-white text-uns flex items-center justify-center text-sm font-black shadow-md">AG</div>
             </div>
@@ -144,7 +144,7 @@
     </div>
     <div class="p-4 bg-gray-50 border-t border-gray-200">
         <a href="login.html" class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-bold text-gray-600 bg-white border border-gray-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition">
-            <i class="fa-solid fa-power-off"></i> Cerrar Módulos
+            <i class="fa-solid fa-power-off"></i> Cerrar Sesión
         </a>
     </div>
 </aside>
@@ -158,19 +158,19 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-emerald-500">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-gray-700">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Caja Activa General</p>
                 <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-balance">S/ 0.00</h3>
             </div>
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-amber-500">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Patrimonio SGI</p>
                 <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-sgi">0 Equipos</h3>
             </div>
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-gray-500">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Docentes Escalafonados</p>
                 <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-docentes">0 Activos</h3>
             </div>
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-purple-500">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns-light">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Comensales Hoy (Bienestar)</p>
                 <h3 class="text-xl font-black text-gray-800 mt-1" id="dash-comedor">0 Atenciones</h3>
             </div>
@@ -183,11 +183,19 @@
     </div>
 
     <div id="mod-finanzas" class="modulo-contenido seccion-oculta p-8">
-        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Libro Diario de Caja Universitaria</h2>
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Libro Diario de Caja Universitaria</h2>
+                <p class="text-gray-500 text-sm mt-1">Gestión institucional de flujo de caja, tasas de recaudación y egresos ordinarios.</p>
+            </div>
+            <button onclick="abrirModalTesoreria()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-money-bill-transfer"></i> Registrar Operación
+            </button>
+        </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-emerald-50 text-emerald-800 font-bold text-[11px] uppercase border-b border-emerald-200">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase tracking-wider border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Asiento ID</th>
                             <th class="px-6 py-4">Descripción de Operación Financiera</th>
@@ -205,7 +213,7 @@
         <div class="flex justify-between items-end mb-6">
             <div>
                 <h2 class="text-3xl font-black text-gray-900 tracking-tight">Adquisiciones y Abastecimiento</h2>
-                <p class="text-gray-500 text-sm mt-1">Gestión interna de requerimientos logísticos de facultades y oficinas.</p>
+                <p class="text-gray-500 text-sm mt-1">Gestión interna de requerimientos logísticos de facultades y oficinas ordinarias.</p>
             </div>
             <button onclick="abrirModalCompras()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
                 <i class="fa-solid fa-plus"></i> Generar Requerimiento
@@ -214,7 +222,7 @@
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-50 text-gray-500 font-bold text-[11px] uppercase border-b">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Código Req</th>
                             <th class="px-6 py-4">Detalle de Bienes Solicitados</th>
@@ -233,19 +241,19 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
                 <h2 class="text-3xl font-black text-gray-900 tracking-tight">Control Patrimonial SGI</h2>
-                <p class="text-gray-500 text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware de servidores.</p>
+                <p class="text-gray-500 text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware de servidores del campus.</p>
             </div>
-            <button onclick="exportarSgiCompletoPDF()" class="bg-amber-600 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-amber-700 transition">
+            <button onclick="exportarSgiCompletoPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
                 <i class="fa-solid fa-file-pdf"></i> Descargar Inventario Completo (100 Activos)
             </button>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-amber-50/60 border-b text-xs font-bold text-amber-900 uppercase tracking-wider">
+            <div class="p-4 bg-red-50 text-xs font-bold text-uns-dark uppercase tracking-wider">
                 Vistazo General de Equipos en Control de Mantenimiento
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-white text-gray-500 font-bold text-[11px] uppercase border-b">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Cod. Patrimonial</th>
                             <th class="px-6 py-4">Descripción Física del Activo</th>
@@ -264,7 +272,7 @@
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-blue-50 text-blue-800 font-bold text-[11px] uppercase border-b border-blue-200">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Docente Universitario</th>
                             <th class="px-6 py-4">Categoría / Dedicación</th>
@@ -286,15 +294,15 @@
                 <p class="text-gray-500 text-sm mt-1">Registros consolidados extraídos de la data oficial de ingresantes.</p>
             </div>
             <div class="flex flex-wrap gap-2">
-                <button onclick="descargarPadronPDF('2024')" class="bg-slate-800 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-black transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2024</button>
+                <button onclick="descargarPadronPDF('2024')" class="bg-gray-800 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-black transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2024</button>
                 <button onclick="descargarPadronPDF('2025')" class="bg-uns text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-uns-dark transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2025</button>
-                <button onclick="descargarPadronPDF('2026')" class="bg-blue-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-blue-700 transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2026</button>
+                <button onclick="descargarPadronPDF('2026')" class="bg-gray-600 text-white px-3 py-2 rounded-xl text-xs font-bold hover:bg-gray-700 transition flex items-center gap-1"><i class="fa-solid fa-download"></i> Padrón 2026</button>
             </div>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-gray-800 text-gray-300 font-bold text-[11px] uppercase border-b">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Matrícula</th>
                             <th class="px-6 py-4">Apellidos y Nombres</th>
@@ -311,7 +319,7 @@
     <div id="mod-bienestar" class="modulo-contenido seccion-oculta p-8 animate-fade-in">
         <div class="mb-6">
             <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bienestar Universitario - Comedor Central</h2>
-            <p class="text-gray-500 text-sm mt-1">Planificación alimentaria, control de raciones y asignación de becas del comedor.</p>
+            <p class="text-gray-500 text-sm mt-1">Planificación alimentaria, control de raciones y asignación de becas asistenciales.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -323,11 +331,11 @@
             <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
                 <p class="text-xs font-bold text-gray-400 uppercase">Raciones Asignadas Hoy</p>
                 <p class="text-2xl font-black text-uns mt-1">1,200 / 1,200</p>
-                <p class="text-xs text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
+                <p class="text-xs text-red-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
                 <p class="text-xs font-bold text-gray-400 uppercase">Becas de Alimentación Libres</p>
-                <p class="text-2xl font-black text-blue-600 mt-1">350 Estudiantes</p>
+                <p class="text-2xl font-black text-gray-700 mt-1">350 Estudiantes</p>
                 <p class="text-xs text-gray-400 mt-1">Evaluados por Asistencia Social</p>
             </div>
         </div>
@@ -338,7 +346,7 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-white text-gray-500 font-bold text-[11px] uppercase border-b">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Código / DNI</th>
                             <th class="px-6 py-4">Tipo Comensal</th>
@@ -357,7 +365,7 @@
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-cyan-50 text-cyan-800 font-bold text-[11px] uppercase border-b border-cyan-200">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Puesto / Requerimiento Profesional</th>
                             <th class="px-6 py-4">Empresa Aliada</th>
@@ -377,7 +385,7 @@
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-purple-50 text-purple-800 font-bold text-[11px] uppercase border-b border-purple-200">
+                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
                         <tr>
                             <th class="px-6 py-4">Título del Proyecto Comunitario</th>
                             <th class="px-6 py-4">Facultad / Escuela Responsable</th>
@@ -397,7 +405,7 @@
 
 <div id="modal-horario" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
     <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
-        <div class="bg-blue-700 px-6 py-4 flex justify-between items-center text-white">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
             <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS</h3>
             <button onclick="cerrarModalHorario()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
@@ -408,7 +416,7 @@
             </div>
             <div class="bg-slate-50 p-4 rounded-xl border border-gray-200 font-medium text-sm text-gray-700 space-y-2">
                 <p><strong>Carga Lectiva:</strong> <span id="h-carga"></span></p>
-                <p><strong>Horario de Dictado:</strong> <span id="h-horario" class="text-blue-700 font-semibold"></span></p>
+                <p><strong>Horario de Dictado:</strong> <span id="h-horario" class="text-uns font-semibold"></span></p>
                 <p><strong>Pabellón / Aula Física:</strong> <span id="h-salon" class="text-gray-900 font-bold"></span></p>
             </div>
             <button onclick="cerrarModalHorario()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
@@ -443,6 +451,40 @@
     </div>
 </div>
 
+<div id="modal-tesoreria" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-vault"></i> Registrar Operación de Caja</h3>
+            <button onclick="cerrarModalTesoreria()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-tesoreria" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Asiento ID *</label>
+                <input type="text" id="tx-asiento" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" placeholder="Ej. OP-4435" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Descripción de Operación Financiera *</label>
+                <input type="text" id="tx-desc" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Recaudación por Tasas Académicas" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Clasificación de Flujo *</label>
+                <select id="tx-clase" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white" required>
+                    <option value="Ingreso">Ingreso (Entrada de Caja)</option>
+                    <option value="Egreso">Egreso (Salida / Gasto)</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Monto Líquido (S/) *</label>
+                <input type="number" step="0.01" id="tx-monto" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono font-bold" placeholder="0.00" required>
+            </div>
+            <div class="flex gap-3 pt-4 border-t border-gray-100 mt-2">
+                <button type="button" onclick="cerrarModalTesoreria()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Asentar Movimiento</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 // ==================== RESTRUCTURACIÓN DE DATA ARRAYS ====================
 
@@ -452,7 +494,26 @@ const DB_FINANZAS = [
     { op: "OP-4412", desc: "Ingresos Concesión Cafetería y Comedor", tipo: "Ingreso", monto: 14200.00 },
     { op: "OP-4413", desc: "Compra Servidor Cisco UCS SGI OTI", tipo: "Egreso", monto: 18900.00 },
     { op: "OP-4414", desc: "Mantenimiento Preventivo Pabellón Civil", tipo: "Egreso", monto: 7400.00 },
-    { op: "OP-4415", desc: "Recaudación Examen de Admisión UNS", tipo: "Ingreso", monto: 284000.00 }
+    { op: "OP-4415", desc: "Recaudación Examen de Admisión UNS", tipo: "Ingreso", monto: 284000.00 },
+    { op: "OP-4416", desc: "Transferencia de Canon Minero y Sobrecanon", tipo: "Ingreso", monto: 1250000.00 },
+    { op: "OP-4417", desc: "Pago Planilla Personal Administrativo CAS", tipo: "Egreso", monto: 85000.00 },
+    { op: "OP-4418", desc: "Recaudación CEPUNS - Ciclo Regular", tipo: "Ingreso", monto: 135000.00 },
+    { op: "OP-4419", desc: "Pago de Recibo de Energía Eléctrica - Hidrandina", tipo: "Egreso", monto: 18500.00 },
+    { op: "OP-4420", desc: "Adquisición de Reactivos Lab. Ciencias", tipo: "Egreso", monto: 12300.00 },
+    { op: "OP-4421", desc: "Recaudación Centro de Idiomas (CEID)", tipo: "Ingreso", monto: 45600.00 },
+    { op: "OP-4422", desc: "Pago por Servicio de Internet Fibra Óptica", tipo: "Egreso", monto: 4500.00 },
+    { op: "OP-4423", desc: "Emisión de Grados y Títulos Profesionales", tipo: "Ingreso", monto: 22400.00 },
+    { op: "OP-4424", desc: "Mantenimiento Flota de Buses Universitarios", tipo: "Egreso", monto: 9800.00 },
+    { op: "OP-4425", desc: "Adquisición de Acervo Bibliográfico Físico", tipo: "Egreso", monto: 15000.00 },
+    { op: "OP-4426", desc: "Ingresos por Alquiler Auditorio Central", tipo: "Ingreso", monto: 3500.00 },
+    { op: "OP-4427", desc: "Pago por Servicio de Limpieza y Áreas Verdes", tipo: "Egreso", monto: 21000.00 },
+    { op: "OP-4428", desc: "Viáticos y Pasajes - Comisión de Investigación", tipo: "Egreso", monto: 4200.00 },
+    { op: "OP-4429", desc: "Recaudación Clínica Odontológica UNS", tipo: "Ingreso", monto: 8900.00 },
+    { op: "OP-4430", desc: "Renovación de Licencias Microsoft Campus", tipo: "Egreso", monto: 32000.00 },
+    { op: "OP-4431", desc: "Adquisición de Combustible y Lubricantes", tipo: "Egreso", monto: 14500.00 },
+    { op: "OP-4432", desc: "Tasas por Trámites de Mesa de Partes", tipo: "Ingreso", monto: 5400.00 },
+    { op: "OP-4433", desc: "Compra de Mobiliario para Aulas (Carpetas)", tipo: "Egreso", monto: 28000.00 },
+    { op: "OP-4434", desc: "Fondos para Proyectos de Inv. (Subvenciones)", tipo: "Egreso", monto: 150000.00 }
 ];
 
 let DB_COMPRAS = [
@@ -463,7 +524,12 @@ let DB_COMPRAS = [
     { req: "REQ-26-105", desc: "Actualización Switch de Fibra Backbone", area: "Oficina de Informática OTI", monto: 14000.00, estado: "Aprobado" },
     { req: "REQ-26-106", desc: "Mantenimiento de Red Eléctrica Estabilizada", area: "Lab. INGENIERIA DE SISTEMAS 01", monto: 4500.00, estado: "Aprobado" },
     { req: "REQ-26-107", desc: "Candelas y Reactores Biológicos", area: "Biotecnología", monto: 11200.00, estado: "Rechazado" },
-    { req: "REQ-26-108", desc: "Equipamiento de Protección Personal (EPP)", area: "Servicios Generales", monto: 3500.00, estado: "Aprobado" }
+    { req: "REQ-26-108", desc: "Equipamiento de Protección Personal (EPP)", area: "Servicios Generales", monto: 3500.00, estado: "Aprobado" },
+    { req: "REQ-26-109", desc: "Materiales y Modelos Anatómicos de Estudio", area: "Medicina Humana", monto: 18500.00, estado: "Pendiente" },
+    { req: "REQ-26-110", desc: "Adquisición de Osciloscopios Digitales 200MHz", area: "Lab. Eléctrica y Energía", monto: 29000.00, estado: "Aprobado" },
+    { req: "REQ-26-111", desc: "Servicio de Calibración de Estaciones Totales", area: "Gabinete Topografía Civil", monto: 3800.00, estado: "Aprobado" },
+    { req: "REQ-26-112", desc: "Bebederos Automáticos de Agua Purificada", area: "Bienestar Universitario", monto: 7600.00, estado: "Pendiente" },
+    { req: "REQ-26-113", desc: "Baterías de Respaldo UPS 3000VA DataCenter", area: "Oficina de Informática OTI", monto: 11500.00, estado: "Aprobado" }
 ];
 
 const DB_LOGISTICA = [
@@ -478,10 +544,14 @@ const DB_LOGISTICA = [
 ];
 
 const DB_RRHH = [
-    { id: 1, nombre: "Dr. Mendoza Ramírez Carlos", cat: "Principal", reg: "Dedicación Exclusiva", carga: "12 L / 28 I", sueldo: 7500.00, horario: "Lunes y Miércoles 08:00 - 11:00", salon: "Pabellón Sistemas - Aula 201" },
-    { id: 2, nombre: "Dra. Aguilar Saldaña Ana", cat: "Asociado", reg: "Tiempo Completo", carga: "20 L / 20 I", sueldo: 4800.00, horario: "Martes y Jueves 14:00 - 17:00", salon: "Pabellón Medicina - Laboratorio A" },
-    { id: 3, nombre: "Mag. Rojas Luis Alberto", cat: "Auxiliar", reg: "Tiempo Completo", carga: "32 L / 8 I", sueldo: 2500.00, horario: "Viernes 08:00 - 14:00", salon: "Pabellón Civil - Aula 104" },
-    { id: 4, nombre: "Ing. Flores Quispe Pedro", cat: "Jefe de Práctica", reg: "Tiempo Parcial", carga: "18 L", sueldo: 1800.00, horario: "Lunes 18:00 - 21:00", salon: "Pabellón Sistemas - Lab Cómputo 02" }
+    { id: 1, nombre: "Dr. León César Augusto", cat: "Principal", reg: "Dedicación Exclusiva", carga: "12 Lectivas / 28 Inv.", sueldo: 4200.00, horario: "Lunes y Miércoles 08:00 - 11:00", salon: "Pabellón Sistemas - Aula 201" },
+    { id: 2, nombre: "Dra. Aguilar Saldaña Ana", cat: "Asociado", reg: "Tiempo Completo", carga: "20 Lectivas / 20 Inv.", sueldo: 3500.00, horario: "Martes y Jueves 14:00 - 17:00", salon: "Pabellón Medicina - Laboratorio A" },
+    { id: 3, nombre: "Mag. Rojas Luis Alberto", cat: "Auxiliar", reg: "Tiempo Completo", carga: "32 Lectivas / 8 Inv.", sueldo: 2100.00, horario: "Viernes 08:00 - 14:00", salon: "Pabellón Civil - Aula 104" },
+    { id: 4, nombre: "Ing. Flores Quispe Pedro", cat: "Jefe de Práctica", reg: "Tiempo Parcial", carga: "18 Lectivas", sueldo: 1400.00, horario: "Lunes 18:00 - 21:00", salon: "Pabellón Sistemas - Lab Cómputo 02" },
+    { id: 5, nombre: "Dr. Mendoza Ramírez Carlos", cat: "Principal", reg: "Dedicación Exclusiva", carga: "10 Lectivas / 30 Inv.", sueldo: 4500.00, horario: "Miércoles y Viernes 10:00 - 13:00", salon: "Pabellón Sistemas - Aula 202" },
+    { id: 6, nombre: "Dra. Villalobos Carmen Rosa", cat: "Asociado", reg: "Tiempo Completo", carga: "16 Lectivas / 24 Inv.", sueldo: 3500.00, horario: "Lunes y Jueves 15:00 - 18:00", salon: "Pabellón Ciencias - Aula 305" },
+    { id: 7, nombre: "Mag. Salinas Rodríguez Diana", cat: "Auxiliar", reg: "Tiempo Completo", carga: "28 Lectivas / 12 Inv.", sueldo: 2100.00, horario: "Martes 09:00 - 13:00", salon: "Pabellón Enfermería - Aula 101" },
+    { id: 8, nombre: "Ing. Campos Bocanegra Juan", cat: "Jefe de Práctica", reg: "Tiempo Completo", carga: "30 Lectivas", sueldo: 1900.00, horario: "Jueves y Viernes 08:00 - 11:00", salon: "Pabellón Civil - Gabinete A" }
 ];
 
 const DB_ACADEMICO = [
@@ -489,8 +559,18 @@ const DB_ACADEMICO = [
     { cod: "0202411002", nombre: "ALAMAS CRUZ ALEXIS JESUS", esc: "INGENIERIA EN ENERGIA", email: "202411002@uns.edu.pe" },
     { cod: "0202411003", nombre: "ALVA PULIDO ZAHID MIZRAIM", esc: "INGENIERIA EN ENERGIA", email: "202411003@uns.edu.pe" },
     { cod: "0202411004", nombre: "ANGULO HIDALGO FRANZ SEBASTIAN", esc: "INGENIERIA EN ENERGIA", email: "202411004@uns.edu.pe" },
+    { cod: "0202411005", nombre: "CABANILLAS ARCOS CESAR RAFAEL", esc: "INGENIERIA EN ENERGIA", email: "202411005@uns.edu.pe" },
+    { cod: "0202411006", nombre: "CAMPAÑA LUNA NAYELI ANAMILE", esc: "INGENIERIA EN ENERGIA", email: "202411006@uns.edu.pe" },
+    { cod: "0202411007", nombre: "CAMPOS BOCANEGRA WILDER", esc: "INGENIERIA EN ENERGIA", email: "202411007@uns.edu.pe" },
     { cod: "0202424043", nombre: "ROSALES LUJERIO ANTHONY ALEXANDER", esc: "MEDICINA HUMANA", email: "202424043@uns.edu.pe" },
-    { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", email: "202424044@uns.edu.pe" }
+    { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", email: "202424044@uns.edu.pe" },
+    { cod: "0202424045", nombre: "SAAVEDRA PASCUAL ALEXIS GABRIEL", esc: "MEDICINA HUMANA", email: "202424045@uns.edu.pe" },
+    { cod: "0202424046", nombre: "SALDAÑA HORNA JUAN ALBERTO", esc: "MEDICINA HUMANA", email: "202424046@uns.edu.pe" },
+    { cod: "0202424047", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" },
+    { cod: "0202424048", nombre: "SANCHEZ DE LA CRUZ ALLEN MARSHALL", esc: "MEDICINA HUMANA", email: "202424048@uns.edu.pe" },
+    { cod: "0202424049", nombre: "SILVA CARRANZA ARIANA VALERIA", esc: "MEDICINA HUMANA", email: "202424049@uns.edu.pe" },
+    { cod: "0202424050", nombre: "SILVA MURGA KEVIN ABEL", esc: "MEDICINA HUMANA", email: "202424050@uns.edu.pe" },
+    { cod: "0202424051", nombre: "SORIANO CORONEL IBETH PRISCILA", esc: "MEDICINA HUMANA", email: "202424051@uns.edu.pe" }
 ];
 
 const DB_BOLSA = [
@@ -520,8 +600,8 @@ function renderizarTablas() {
         return `<tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono text-xs font-bold text-gray-500">${f.op}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-800">${f.desc}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${f.tipo==='Ingreso'?'bg-emerald-100 text-emerald-800':'bg-red-100 text-red-800'}">${f.tipo}</span></td>
-            <td class="px-6 py-3.5 text-right font-mono font-bold ${f.tipo==='Ingreso'?'text-emerald-600':'text-red-600'}">S/ ${f.monto.toFixed(2)}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${f.tipo==='Ingreso'?'bg-red-100 text-uns':'bg-gray-100 text-gray-700'}">${f.tipo}</span></td>
+            <td class="px-6 py-3.5 text-right font-mono font-bold ${f.tipo==='Ingreso'?'text-gray-900':'text-uns'}">S/ ${f.monto.toLocaleString('es-PE', {minimumFractionDigits:2})}</td>
         </tr>`;
     }).join('');
     document.getElementById('dash-balance').textContent = `S/ ${balance.toLocaleString('es-PE')}`;
@@ -532,13 +612,10 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-mono font-bold text-slate-500">${c.req}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-800">${c.desc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-bold">${c.area}</td>
-            <td class="px-6 py-3.5 text-right font-mono font-bold text-blue-600">S/ ${c.monto.toLocaleString('es-PE')}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-1 rounded text-[10px] font-black uppercase ${c.estado==='Aprobado'?'bg-emerald-100 text-emerald-700':c.estado==='Rechazado'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700'}">${c.estado}</span></td>
+            <td class="px-6 py-3.5 text-right font-mono font-bold text-gray-900">S/ ${c.monto.toLocaleString('es-PE')}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-1 rounded text-[10px] font-black uppercase ${c.estado==='Aprobado'?'bg-red-100 text-uns':c.estado==='Rechazado'?'bg-gray-200 text-gray-700':'bg-amber-100 text-amber-800'}">${c.estado}</span></td>
         </tr>
     `).join('');
-    // Actualizar indicador general oculto si existiera
-    const dashCompras = document.getElementById('dash-kpi-compras');
-    if(dashCompras) dashCompras.textContent = DB_COMPRAS.length;
 
     // Logística SGI Vistazo
     document.getElementById('tabla-logistica').innerHTML = DB_LOGISTICA.map(l => `
@@ -546,7 +623,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-mono font-bold text-gray-500">${l.cod}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-800">${l.desc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-600 font-medium"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>${l.ubi}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-green-100 text-green-800':l.estado==='Mantenimiento'?'bg-red-100 text-red-800':'bg-amber-100 text-amber-800'}">${l.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-red-50 text-uns':l.estado==='Mantenimiento'?'bg-gray-200 text-gray-800':'bg-amber-100 text-amber-800'}">${l.estado}</span></td>
         </tr>
     `).join('');
     document.getElementById('dash-sgi').textContent = DB_LOGISTICA.length + " Equipos";
@@ -559,7 +636,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 text-center text-xs font-mono font-bold text-slate-600 bg-slate-50">${r.carga}</td>
             <td class="px-6 py-3.5 text-right font-mono font-bold text-gray-700">S/ ${r.sueldo.toFixed(2)}</td>
             <td class="px-6 py-3.5 text-center">
-                <button onclick="abrirHorarioDocente(${r.id})" class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition flex items-center justify-center mx-auto shadow-sm"><i class="fa-solid fa-eye text-xs"></i></button>
+                <button onclick="abrirHorarioDocente(${r.id})" class="w-8 h-8 rounded-lg bg-red-50 text-uns hover:bg-uns hover:text-white transition flex items-center justify-center mx-auto shadow-sm"><i class="fa-solid fa-eye text-xs"></i></button>
             </td>
         </tr>
     `).join('');
@@ -571,18 +648,16 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-mono text-xs font-bold text-gray-500">${a.cod}</td>
             <td class="px-6 py-3.5 font-bold text-gray-800">${a.nombre}</td>
             <td class="px-6 py-3.5 text-xs font-semibold text-gray-600">${a.esc}</td>
-            <td class="px-6 py-3.5 text-xs text-blue-500 font-mono">${a.email}</td>
+            <td class="px-6 py-3.5 text-xs text-slate-600 font-mono">${a.email}</td>
         </tr>
     `).join('');
-    const kpiAlum = document.getElementById('dash-kpi-alumnos');
-    if(kpiAlum) kpiAlum.textContent = "5,430 Activos";
 
     // Bienestar Universitario
     document.getElementById('tabla-bienestar').innerHTML = DB_BIENESTAR.map(b => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-700">${b.cod}</td>
             <td class="px-6 py-3.5 text-xs font-bold text-slate-600">${b.tipo}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-red-50 text-uns':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center text-xs font-mono text-gray-400">${b.hora}</td>
         </tr>
     `).join('');
@@ -593,46 +668,38 @@ function renderizarTablas() {
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
-            <td class="px-6 py-3.5 text-center font-black text-blue-600">${b.post}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-100 text-emerald-800">${b.estado}</span></td>
-            <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-cyan-300 text-cyan-700 px-3 py-1 rounded bg-cyan-50 hover:bg-cyan-600 hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
+            <td class="px-6 py-3.5 text-center font-black text-gray-800">${b.post}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-50 text-uns">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
         </tr>
     `).join('');
-    const kpiBolsa = document.getElementById('dash-kpi-bolsa');
-    if(kpiBolsa) kpiBolsa.textContent = DB_BOLSA.length;
 
     // Proyección Social
     document.getElementById('tabla-proyeccion').innerHTML = DB_PROYECCION.map(p => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-bold text-gray-800">${p.proy}</td>
-            <td class="px-6 py-3.5 text-xs text-purple-600 font-bold">${p.esc}</td>
+            <td class="px-6 py-3.5 text-xs text-gray-700 font-bold">${p.esc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-medium">${p.benef}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-purple-100 text-purple-800">${p.fase}</span></td>
-            <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-purple-300 text-purple-700 px-3 py-1 rounded bg-purple-50 hover:bg-purple-600 hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-50 text-uns">${p.fase}</span></td>
+            <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
         </tr>
     `).join('');
-    const kpiProy = document.getElementById('dash-kpi-proyectos');
-    if(kpiProy) kpiProy.textContent = DB_PROYECCION.length;
 }
 
 // ==================== OPERACIONES Y MANIPULADORES INTERACTIVOS ====================
 
 function cambiarModulo(moduloId, btnElement) {
-    // 1. Limpiamos las clases de todos los módulos
     document.querySelectorAll('.modulo-contenido').forEach(mod => {
         mod.classList.remove('seccion-visible', 'animate-fade-in');
         mod.classList.add('seccion-oculta');
     });
-    // 2. Mostramos el módulo objetivo
     const target = document.getElementById('mod-' + moduloId);
     if (target) {
         target.classList.remove('seccion-oculta');
         target.classList.add('seccion-visible', 'animate-fade-in');
     }
-    // 3. Actualizamos la visualización del sidebar
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     if(btnElement) btnElement.classList.add('active');
-    // 4. Recargar gráficos si es dashboard
     if(moduloId === 'dashboard') inicializarGraficos();
 }
 
@@ -651,7 +718,27 @@ document.getElementById('form-compras').addEventListener('submit', function(e) {
     renderizarTablas();
     cerrarModalCompras();
     this.reset();
-    mostrarToast('Nuevo requerimiento adicionado e indexado a abastecimiento.', 'success');
+    mostrarToast('Nuevo requerimiento adicionado e indexado a abastecimiento.');
+});
+
+function abrirModalTesoreria() { 
+    document.getElementById('modal-tesoreria').classList.remove('hidden'); 
+    document.getElementById('tx-asiento').value = `OP-${DB_FINANZAS.length + 4410}`;
+}
+function cerrarModalTesoreria() { document.getElementById('modal-tesoreria').classList.add('hidden'); }
+
+document.getElementById('form-tesoreria').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_FINANZAS.unshift({
+        op: document.getElementById('tx-asiento').value.trim().toUpperCase(),
+        desc: document.getElementById('tx-desc').value.trim(),
+        tipo: document.getElementById('tx-clase').value,
+        monto: parseFloat(document.getElementById('tx-monto').value)
+    });
+    renderizarTablas();
+    cerrarModalTesoreria();
+    this.reset();
+    mostrarToast('Asiento financiero procesado y guardado en el Libro Diario.');
 });
 
 function abrirHorarioDocente(id) {
@@ -670,7 +757,7 @@ function mostrarToast(mensaje) {
     const container = document.getElementById('toast-container');
     const t = document.createElement('div');
     t.className = 'toast show';
-    t.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-500 text-xl"></i><p class="text-sm font-semibold text-gray-700">${mensaje}</p>`;
+    t.innerHTML = `<i class="fa-solid fa-circle-check text-uns text-xl"></i><p class="text-sm font-semibold text-gray-700">${mensaje}</p>`;
     container.appendChild(t);
     setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3500);
 }
@@ -718,7 +805,7 @@ function exportarSgiCompletoPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        doc.setFillColor(180, 83, 9); doc.rect(0, 0, 210, 25, 'F');
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
         doc.setFontSize(9); doc.text("Dirección de Logística y Margesí de Bienes - Inventario General SGI", 105, 18, null, null, "center");
@@ -748,7 +835,7 @@ function exportarConvenioPDF(empresa, oferta) {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        doc.setFillColor(15, 118, 110); doc.rect(0, 0, 210, 25, 'F');
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
         doc.setFontSize(9); doc.text("Oficina de Cooperación Técnica y Alianzas Estratégicas", 105, 18, null, null, "center");
@@ -770,7 +857,7 @@ function exportarConvenioPDF(empresa, oferta) {
 function exportarProyectoSocialPDF(proyecto, escuela) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.setFillColor(109, 40, 217); doc.rect(0, 0, 210, 25, 'F');
+    doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
     doc.setTextColor(255,255,255); doc.setFont("helvetica","bold"); doc.setFontSize(14);
     doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
     doc.setFontSize(9); doc.text("Dirección de Responsabilidad Social Universitaria", 105, 18, null, null, "center");
@@ -802,7 +889,7 @@ function generarReporteGeneral() {
 
         let finalY = doc.lastAutoTable.finalY + 10;
         doc.setFont("helvetica", "bold"); doc.text("2. Estado de Activos Patrimoniales (SGI)", 14, finalY);
-        doc.autoTable({ startY: finalY + 3, head: [['Activo', 'Ubicación', 'Estado']], body: DB_LOGISTICA.slice(0,6).map(l => [l.desc, l.ubi, l.estado]), headStyles: { fillColor: [245, 158, 11] }, styles: { fontSize: 8 }});
+        doc.autoTable({ startY: finalY + 3, head: [['Activo', 'Ubicación', 'Estado']], body: DB_LOGISTICA.slice(0,6).map(l => [l.desc, l.ubi, l.estado]), headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8 }});
 
         doc.save(`Reporte_Gerencial_UNS.pdf`);
     }, 600);
@@ -822,7 +909,7 @@ function inicializarGraficos() {
             labels: ['Inversión Laboratorios', 'Planillas Docentes', 'Recaudación Admisión', 'Inscripciones Idiomas', 'Insumos Comedor'],
             datasets: [
                 { label: 'Egresos Presupuestales (S/)', data: [85000, 145000, 0, 0, 32000], backgroundColor: '#b30000', borderRadius: 5 },
-                { label: 'Ingresos Propios (S/)', data: [0, 0, 284000, 45000, 14200], backgroundColor: '#10b981', borderRadius: 5 }
+                { label: 'Ingresos Propios (S/)', data: [0, 0, 284000, 45000, 14200], backgroundColor: '#475569', borderRadius: 5 }
             ]
         },
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
