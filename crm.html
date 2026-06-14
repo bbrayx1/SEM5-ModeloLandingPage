@@ -309,39 +309,47 @@
     </div>
 
     <!-- KPI Cards -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-7">
-        <div class="stat-card bg-white p-5 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('postulantes', document.querySelector('[data-section=postulantes]'))">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-7">
+        <div class="stat-card bg-white p-4 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('postulantes', document.querySelector('[data-section=postulantes]'))">
             <div class="flex items-start justify-between mb-3">
                 <div class="w-10 h-10 bg-red-50 text-uns rounded-xl flex items-center justify-center"><i class="fa-solid fa-user-graduate text-base"></i></div>
-                <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i><span id="dash-postulantes-mes">+0</span></span>
+                <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up text-[9px]"></i><span id="dash-postulantes-mes">+8</span></span>
             </div>
-            <p class="text-2xl font-black text-gray-900" id="dash-postulantes">0</p>
+            <p class="text-2xl font-black text-gray-900" id="dash-postulantes">20</p>
             <p class="text-xs text-gray-500 font-medium mt-0.5">Total Postulantes</p>
         </div>
-        <div class="stat-card bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+        <div class="stat-card bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
             <div class="flex items-start justify-between mb-3">
                 <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-chart-line text-base"></i></div>
-                <span class="text-xs font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">Inscritos/Total</span>
+                <span class="text-xs font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">Inscritos</span>
             </div>
-            <p class="text-2xl font-black text-emerald-600" id="dash-conversion">0%</p>
+            <p class="text-2xl font-black text-emerald-600" id="dash-conversion">60%</p>
             <p class="text-xs text-gray-500 font-medium mt-0.5">Tasa de Conversión</p>
-            <div class="progress-bar mt-3"><div class="progress-fill bg-emerald-500" id="dash-conversion-bar" style="width:0%"></div></div>
+            <div class="progress-bar mt-3"><div class="progress-fill bg-emerald-500" id="dash-conversion-bar" style="width:60%"></div></div>
         </div>
-        <div class="stat-card bg-white p-5 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('tareas', document.querySelector('[data-section=tareas]'))">
+        <div class="stat-card bg-white p-4 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('tareas', document.querySelector('[data-section=tareas]'))">
             <div class="flex items-start justify-between mb-3">
                 <div class="w-10 h-10 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center"><i class="fa-solid fa-clipboard-list text-base"></i></div>
-                <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"><span id="dash-tareas-hoy">0</span> hoy</span>
+                <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full"><span id="dash-tareas-hoy">3</span> hoy</span>
             </div>
-            <p class="text-2xl font-black text-amber-500" id="dash-tareas">0</p>
+            <p class="text-2xl font-black text-amber-500" id="dash-tareas">8</p>
             <p class="text-xs text-gray-500 font-medium mt-0.5">Tareas Pendientes</p>
         </div>
-        <div class="stat-card bg-white p-5 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('tickets', document.querySelector('[data-section=tickets]'))">
+        <div class="stat-card bg-white p-4 rounded-2xl border border-gray-100 shadow-sm cursor-pointer" onclick="showSection('tickets', document.querySelector('[data-section=tickets]'))">
             <div class="flex items-start justify-between mb-3">
                 <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-headset text-base"></i></div>
-                <span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full"><span id="dash-tickets-urgentes">0</span> urgentes</span>
+                <span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full"><span id="dash-tickets-urgentes">2</span> urg</span>
             </div>
-            <p class="text-2xl font-black text-blue-600" id="dash-tickets">0</p>
+            <p class="text-2xl font-black text-blue-600" id="dash-tickets">5</p>
             <p class="text-xs text-gray-500 font-medium mt-0.5">Tickets Abiertos</p>
+        </div>
+        <div class="stat-card bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+                <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center"><i class="fa-solid fa-calendar-days text-base"></i></div>
+                <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Próximos</span>
+            </div>
+            <p class="text-2xl font-black text-purple-600" id="dash-eventos">6</p>
+            <p class="text-xs text-gray-500 font-medium mt-0.5">Eventos Programados</p>
         </div>
     </div>
 
@@ -683,7 +691,7 @@
 <div id="reportes" class="section hidden animate-fade-in p-7">
     <div class="mb-6">
         <h2 class="text-2xl font-black text-gray-900">Reportes y Analítica</h2>
-        <p class="text-gray-500 text-sm mt-0.5">Análisis detallado del proceso de captación.</p>
+        <p class="text-gray-500 text-sm mt-0.5">Análisis detallado del proceso de captación y seguimiento por carreras.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
@@ -697,9 +705,49 @@
         </div>
     </div>
 
-    <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-        <h4 class="font-bold text-gray-700 text-sm mb-4">Rendimiento por Carrera</h4>
-        <div class="space-y-3" id="reporte-carreras"></div>
+    <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm mb-5">
+        <h4 class="font-bold text-gray-700 text-sm mb-4">Postulantes por Carrera (15 Programas)</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50 text-gray-500 font-semibold text-[11px] uppercase tracking-wider border-b">
+                    <tr>
+                        <th class="px-4 py-3 text-left">Carrera</th>
+                        <th class="px-4 py-3 text-center">Total</th>
+                        <th class="px-4 py-3 text-center">Inscritos</th>
+                        <th class="px-4 py-3 text-center">Conv. %</th>
+                        <th class="px-4 py-3">Top Canal</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-carreras-reporte" class="divide-y divide-gray-50"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border border-green-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white"><i class="fa-solid fa-check-circle"></i></div>
+                <h4 class="font-bold text-gray-700 text-sm">Conversión General</h4>
+            </div>
+            <p class="text-3xl font-black text-green-600" id="reporte-conversion">60%</p>
+            <p class="text-xs text-gray-500 mt-2">12 de 20 postulantes inscritos</p>
+        </div>
+        <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-5 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white"><i class="fa-solid fa-trending-up"></i></div>
+                <h4 class="font-bold text-gray-700 text-sm">Top Carrera</h4>
+            </div>
+            <p class="text-lg font-black text-blue-600" id="reporte-top-carrera">Medicina</p>
+            <p class="text-xs text-gray-500 mt-2" id="reporte-top-carrera-info">3 postulantes</p>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl border border-purple-100 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white"><i class="fa-solid fa-chart-pie"></i></div>
+                <h4 class="font-bold text-gray-700 text-sm">Mejor Canal</h4>
+            </div>
+            <p class="text-lg font-black text-purple-600" id="reporte-best-canal">Facebook</p>
+            <p class="text-xs text-gray-500 mt-2" id="reporte-best-canal-info">8 conversiones</p>
+        </div>
     </div>
 </div>
 
@@ -1232,37 +1280,68 @@
 <script>
 // ==================== DATOS ====================
 let postulantes = JSON.parse(localStorage.getItem('crm_uns_postulantes')) || [
-    {id:1, nombre:"María Gonzales Pérez", dni:"76543210", celular:"987654321", correo:"maria@email.com", colegio:"I.E. Santa Rosa", carrera:"Medicina Humana", estado:"Interesado", canal:"Facebook Ads", fecha:"2026-06-01", distrito:"Chimbote", genero:"Femenino", notas:[{texto:"Primera llamada realizada, muy interesada", fecha:"2026-06-01"}]},
-    {id:2, nombre:"Juan Cárdenas López", dni:"71234567", celular:"912345678", correo:"juan@email.com", colegio:"Trilce", carrera:"Ingeniería de Sistemas e Informática", estado:"Alta Probabilidad", canal:"Feria Vocacional", fecha:"2026-06-03", distrito:"Nuevo Chimbote", genero:"Masculino", notas:[]},
-    {id:3, nombre:"Lucía Mendoza Torres", dni:"72345678", celular:"934567890", correo:"lucia@email.com", colegio:"Cesar Vallejo", carrera:"Derecho y Ciencias Políticas", estado:"Nuevo Lead", canal:"Instagram", fecha:"2026-06-05", distrito:"Chimbote", genero:"Femenino", notas:[]},
-    {id:4, nombre:"Carlos Ramírez Silva", dni:"73456789", celular:"945678901", correo:"carlos@email.com", colegio:"San Pedro", carrera:"Ingeniería Civil", estado:"Inscrito / Pagó", canal:"Referido", fecha:"2026-05-20", distrito:"Santa", genero:"Masculino", notas:[]},
-    {id:5, nombre:"Ana Flores Quispe", dni:"74567890", celular:"956789012", correo:"ana@email.com", colegio:"Inmaculada", carrera:"Enfermería", estado:"Interesado", canal:"Web UNS", fecha:"2026-05-28", distrito:"Chimbote", genero:"Femenino", notas:[]},
-    {id:6, nombre:"Pedro Vásquez Díaz", dni:"75678901", celular:"967890123", correo:"pedro@email.com", colegio:"Trilce", carrera:"Ingeniería de Sistemas e Informática", estado:"Descartado", canal:"TikTok", fecha:"2026-05-15", distrito:"Chimbote", genero:"Masculino", notas:[]}
+    {id:1, nombre:"María Gonzales Pérez", dni:"76543210", celular:"987654321", correo:"maria@email.com", colegio:"I.E. Santa Rosa", carrera:"Medicina Humana", estado:"Inscrito / Pagó", canal:"Facebook Ads", fecha:"2026-06-01", distrito:"Chimbote", genero:"Femenino", notas:[{texto:"Inscrita exitosamente, inicia estudios", fecha:"2026-06-10"}]},
+    {id:2, nombre:"Juan Cárdenas López", dni:"71234567", celular:"912345678", correo:"juan@email.com", colegio:"Trilce", carrera:"Ingeniería de Sistemas e Informática", estado:"Inscrito / Pagó", canal:"Feria Vocacional", fecha:"2026-06-03", distrito:"Nuevo Chimbote", genero:"Masculino", notas:[{texto:"Confirmó pago de matrícula", fecha:"2026-06-08"}]},
+    {id:3, nombre:"Lucía Mendoza Torres", dni:"72345678", celular:"934567890", correo:"lucia@email.com", colegio:"Cesar Vallejo", carrera:"Derecho y Ciencias Políticas", estado:"Alta Probabilidad", canal:"Instagram", fecha:"2026-06-05", distrito:"Chimbote", genero:"Femenino", notas:[{texto:"Interesada, próxima evaluación", fecha:"2026-06-11"}]},
+    {id:4, nombre:"Carlos Ramírez Silva", dni:"73456789", celular:"945678901", correo:"carlos@email.com", colegio:"San Pedro", carrera:"Ingeniería Civil", estado:"Inscrito / Pagó", canal:"Referido", fecha:"2026-05-20", distrito:"Santa", genero:"Masculino", notas:[{texto:"Evaluación aprobada", fecha:"2026-06-07"}]},
+    {id:5, nombre:"Ana Flores Quispe", dni:"74567890", celular:"956789012", correo:"ana@email.com", colegio:"Inmaculada", carrera:"Enfermería", estado:"Alta Probabilidad", canal:"Web UNS", fecha:"2026-05-28", distrito:"Chimbote", genero:"Femenino", notas:[{texto:"Pendiente de evaluación", fecha:"2026-06-09"}]},
+    {id:6, nombre:"Pedro Vásquez Díaz", dni:"75678901", celular:"967890123", correo:"pedro@email.com", colegio:"Trilce", carrera:"Ingeniería de Sistemas e Informática", estado:"Interesado", canal:"TikTok", fecha:"2026-05-15", distrito:"Chimbote", genero:"Masculino", notas:[{texto:"Primer contacto realizado", fecha:"2026-06-11"}]},
+    {id:7, nombre:"Patricia Salazar Rojas", dni:"72112233", celular:"978901234", correo:"patricia@email.com", colegio:"Mariscal Castilla", carrera:"Biotecnología", estado:"Interesado", canal:"Facebook Ads", fecha:"2026-06-02", distrito:"Nuevo Chimbote", genero:"Femenino", notas:[]},
+    {id:8, nombre:"Andrés López Gutierrez", dni:"71223344", celular:"989012345", correo:"andres@email.com", colegio:"La Salle", carrera:"Ingeniería en Energía", estado:"Inscrito / Pagó", canal:"Referido", fecha:"2026-05-25", distrito:"Chimbote", genero:"Masculino", notas:[{texto:"Ya está matriculado", fecha:"2026-06-08"}]},
+    {id:9, nombre:"Roxana Cortés Mendoza", dni:"73334455", celular:"990123456", correo:"roxana@email.com", colegio:"Mariano Melgar", carrera:"Enfermería", estado:"Alta Probabilidad", canal:"Web UNS", fecha:"2026-06-06", distrito:"Santa", genero:"Femenino", notas:[{texto:"En evaluación médica", fecha:"2026-06-11"}]},
+    {id:10, nombre:"Miguel Torres Aguilar", dni:"74445566", celular:"991234567", correo:"miguel@email.com", colegio:"Ramón Castilla", carrera:"Ingeniería Agroindustrial", estado:"Nuevo Lead", canal:"Instagram", fecha:"2026-06-08", distrito:"Chimbote", genero:"Masculino", notas:[]},
+    {id:11, nombre:"Sandra Domínguez Roca", dni:"75556677", celular:"992345678", correo:"sandra@email.com", colegio:"28 de Julio", carrera:"Educación Primaria", estado:"Interesado", canal:"Feria Vocacional", fecha:"2026-06-09", distrito:"Nuevo Chimbote", genero:"Femenino", notas:[]},
+    {id:12, nombre:"Cristian Vega Mendoza", dni:"76667788", celular:"993456789", correo:"cristian@email.com", colegio:"Virgen del Carmen", carrera:"Ingeniería Civil", estado:"Inscrito / Pagó", canal:"Referido", fecha:"2026-05-22", distrito:"Chimbote", genero:"Masculino", notas:[{texto:"Confirmado para inicio", fecha:"2026-06-10"}]},
+    {id:13, nombre:"Valeria Quispe Rojas", dni:"77778899", celular:"994567890", correo:"valeria@email.com", colegio:"Santa Rosa", carrera:"Comunicación Social", estado:"Alta Probabilidad", canal:"TikTok", fecha:"2026-06-04", distrito:"Santa", genero:"Femenino", notas:[{texto:"Muy motivada", fecha:"2026-06-11"}]},
+    {id:14, nombre:"Francisco Montoya Pérez", dni:"78889900", celular:"995678901", correo:"francisco@email.com", colegio:"Inmaculada Concepción", carrera:"Medicina Humana", estado:"Nuevo Lead", canal:"Instagram", fecha:"2026-06-07", distrito:"Chimbote", genero:"Masculino", notas:[]},
+    {id:15, nombre:"Elena Rodríguez López", dni:"79990011", celular:"996789012", correo:"elena@email.com", colegio:"María Reina", carrera:"Biología en Acuicultura", estado:"Interesado", canal:"Web UNS", fecha:"2026-06-06", distrito:"Nuevo Chimbote", genero:"Femenino", notas:[{texto:"Consulta sobre beca", fecha:"2026-06-11"}]},
+    {id:16, nombre:"Javier Herrera Díaz", dni:"70001122", celular:"997890123", correo:"javier@email.com", colegio:"Colegios Católicos", carrera:"Ingeniería Agrónoma", estado:"Inscrito / Pagó", canal:"Feria Vocacional", fecha:"2026-05-30", distrito:"Chimbote", genero:"Masculino", notas:[{texto:"Becario", fecha:"2026-06-09"}]},
+    {id:17, nombre:"Isabela Cruz García", dni:"70112233", celular:"998901234", correo:"isabela@email.com", colegio:"Virgen de Fátima", carrera:"Educación Secundaria", estado:"Alta Probabilidad", canal:"Facebook Ads", fecha:"2026-06-08", distrito:"Santa", genero:"Femenino", notas:[{texto:"Pendiente confirmación", fecha:"2026-06-11"}]},
+    {id:18, nombre:"Raúl Fernández Santos", dni:"70223344", celular:"999012345", correo:"raul@email.com", colegio:"José de la Riva Agüero", carrera:"Derecho y Ciencias Políticas", estado:"Nuevo Lead", canal:"Instagram", fecha:"2026-06-05", distrito:"Nuevo Chimbote", genero:"Masculino", notas:[]},
+    {id:19, nombre:"Daniela Soto Vásquez", dni:"70334455", celular:"900123456", correo:"daniela@email.com", colegio:"Santa María", carrera:"Biotecnología", estado:"Interesado", canal:"Referido", fecha:"2026-06-03", distrito:"Chimbote", genero:"Femenino", notas:[{texto:"Segunda llamada programada", fecha:"2026-06-12"}]},
+    {id:20, nombre:"Gustavo Espinoza Morales", dni:"70445566", celular:"901234567", correo:"gustavo@email.com", colegio:"Nazareno", carrera:"Ingeniería en Energía", estado:"Inscrito / Pagó", canal:"Web UNS", fecha:"2026-05-28", distrito:"Chimbote", genero:"Masculino", notas:[{texto:"Alumno destacado potencial", fecha:"2026-06-10"}]}
 ];
 
 let tareas = JSON.parse(localStorage.getItem('crm_uns_tareas')) || [
-    {id:1, titulo:"Llamar a María Gonzales", prioridad:"alta", estado:"pendiente", fecha:"2026-06-08", descripcion:"Confirmar interés y agendar visita", postulanteId:1},
-    {id:2, titulo:"Enviar brochure de carreras", prioridad:"media", estado:"proceso", fecha:"2026-06-09", descripcion:"", postulanteId:2},
-    {id:3, titulo:"Registrar asistentes feria", prioridad:"baja", estado:"completada", fecha:"2026-06-05", descripcion:"", postulanteId:null}
+    {id:1, titulo:"Confirmación de asistencia de María Gonzales", prioridad:"alta", estado:"completada", fecha:"2026-06-10", descripcion:"Confirmar inscripción definitiva", postulanteId:1},
+    {id:2, titulo:"Seguimiento a Lucía Mendoza", prioridad:"alta", estado:"proceso", fecha:"2026-06-12", descripcion:"Realizar evaluación de admisión", postulanteId:3},
+    {id:3, titulo:"Preparar materiales Feria Vocacional", prioridad:"media", estado:"proceso", fecha:"2026-06-15", descripcion:"Imprimir brochures y trípticos de 15 carreras", postulanteId:null},
+    {id:4, titulo:"Enviar información a Roxana Cortés", prioridad:"media", estado:"pendiente", fecha:"2026-06-13", descripcion:"Detalles de Enfermería y cronograma", postulanteId:9},
+    {id:5, titulo:"Revisar pagos pendientes", prioridad:"alta", estado:"pendiente", fecha:"2026-06-11", descripcion:"Verificar estado de 5 inscritos", postulanteId:null},
+    {id:6, titulo:"Coordinación con tutores", prioridad:"media", estado:"completada", fecha:"2026-06-09", descripcion:"Asignación de tutores a 10 nuevos estudiantes", postulanteId:null},
+    {id:7, titulo:"Llamada a Valeria Quispe", prioridad:"alta", estado:"pendiente", fecha:"2026-06-12", descripcion:"Aclarar dudas sobre Comunicación Social", postulanteId:13},
+    {id:8, titulo:"Generar reporte mensual", prioridad:"media", estado:"pendiente", fecha:"2026-06-14", descripcion:"Estadísticas de captación junio", postulanteId:null}
 ];
 let eventos = JSON.parse(localStorage.getItem('crm_uns_eventos')) || [
-    {id:1, titulo:"Feria Vocacional UNS", fecha:"2026-06-10", hora:"09:00", tipo:"feria", postulanteId:null, notas:"Preparar materiales"},
-    {id:2, titulo:"Llamada con Juan Cárdenas", fecha:"2026-06-08", hora:"11:00", tipo:"llamada", postulanteId:2, notas:""},
-    {id:3, titulo:"Reunión equipo admisión", fecha:"2026-06-12", hora:"15:00", tipo:"reunion", postulanteId:null, notas:""}
+    {id:1, titulo:"Feria Vocacional UNS 2026", fecha:"2026-06-15", hora:"09:00", tipo:"feria", postulanteId:null, notas:"Presentación de 15 carreras, stands interactivos"},
+    {id:2, titulo:"Llamada con Lucía Mendoza", fecha:"2026-06-12", hora:"11:00", tipo:"llamada", postulanteId:3, notas:"Evaluación de admisión"},
+    {id:3, titulo:"Reunión equipo admisión", fecha:"2026-06-13", hora:"15:00", tipo:"reunion", postulanteId:null, notas:"Análisis de candidatos periodo junio"},
+    {id:4, titulo:"Seguimiento Roxana Cortés", fecha:"2026-06-12", hora:"14:30", tipo:"seguimiento", postulanteId:9, notas:"Verificar estado de evaluación médica"},
+    {id:5, titulo:"Sesión informativa Derecho", fecha:"2026-06-14", hora:"10:00", tipo:"reunion", postulanteId:null, notas:"Coordinación con director de carrera"},
+    {id:6, titulo:"Evaluación final Valeria Quispe", fecha:"2026-06-15", hora:"16:00", tipo:"llamada", postulanteId:13, notas:"Comunicación Social - última evaluación"}
 ];
 let tickets = JSON.parse(localStorage.getItem('crm_uns_tickets')) || [
-    {id:1, postulanteId:1, asunto:"No puedo acceder al portal de admisión", prioridad:"Alta", categoria:"Soporte Técnico", estado:"Abierto", fecha:"2026-06-06", descripcion:"El postulante indica error 500"},
-    {id:2, postulanteId:3, asunto:"¿Cuándo son los exámenes de admisión?", prioridad:"Media", categoria:"Consulta", estado:"Resuelto", fecha:"2026-06-04", descripcion:"Consulta sobre calendario"}
+    {id:1, postulanteId:1, asunto:"Confirmación de inscripción en Medicina", prioridad:"Alta", categoria:"Consulta", estado:"Resuelto", fecha:"2026-06-10", descripcion:"Postulante solicita confirmación de inscripción"},
+    {id:2, postulanteId:3, asunto:"Cronograma de evaluaciones", prioridad:"Media", categoria:"Consulta", estado:"En Proceso", fecha:"2026-06-11", descripcion:"Pregunta sobre fechas de exámenes de admisión"},
+    {id:3, postulanteId:9, asunto:"Requisitos adicionales Enfermería", prioridad:"Media", categoria:"Soporte Técnico", estado:"Abierto", fecha:"2026-06-11", descripcion:"Dudas sobre documentos requeridos"},
+    {id:4, postulanteId:13, asunto:"Disponibilidad de becas", prioridad:"Alta", categoria:"Consulta", estado:"En Proceso", fecha:"2026-06-11", descripcion:"Interés en programa de becas disponibles"},
+    {id:5, postulanteId:6, asunto:"Error en acceso al portal", prioridad:"Alta", categoria:"Soporte Técnico", estado:"Resuelto", fecha:"2026-06-09", descripcion:"No podía acceder con sus credenciales"}
 ];
 let documentos = JSON.parse(localStorage.getItem('crm_uns_documentos')) || [
-    {id:1, nombre:"Reglamento de Admisión 2026", tipo:"reglamento", descripcion:"Normas y procedimientos", fecha:"2026-05-01"},
-    {id:2, nombre:"Formato de Inscripción", tipo:"formato", descripcion:"Formulario oficial", fecha:"2026-05-10"},
-    {id:3, nombre:"Informe de Captación Mayo", tipo:"informe", descripcion:"Reporte mensual", fecha:"2026-06-01"}
+    {id:1, nombre:"Reglamento de Admisión 2026", tipo:"reglamento", descripcion:"Normas y procedimientos de admisión completos", fecha:"2026-05-01"},
+    {id:2, nombre:"Formato de Inscripción Online", tipo:"formato", descripcion:"Formulario oficial para postulantes", fecha:"2026-05-10"},
+    {id:3, nombre:"Informe de Captación Mayo 2026", tipo:"informe", descripcion:"Análisis de postulantes y canales de ingreso", fecha:"2026-06-01"},
+    {id:4, nombre:"Brochure Carreras 2026", tipo:"formato", descripcion:"Descripción de 15 carreras disponibles", fecha:"2026-04-15"},
+    {id:5, nombre:"Calendario Académico 2026-II", tipo:"reglamento", descripcion:"Fechas importantes del periodo", fecha:"2026-05-20"},
+    {id:6, nombre:"Información de Becas y Financiamiento", tipo:"formato", descripcion:"Programas de apoyo para estudiantes", fecha:"2026-05-15"},
+    {id:7, nombre:"Requisitos por Carrera", tipo:"informe", descripcion:"Documentación específica para cada programa", fecha:"2026-05-25"}
 ];
 let campanias = JSON.parse(localStorage.getItem('crm_uns_campanias')) || [
     {id:1, nombre:"Convocatoria Admisión 2026-I", tipo:"Email", segmento:"Todos", enviados:245, apertura:62, clicks:28, estado:"Enviado", fecha:"2026-05-20"},
-    {id:2, nombre:"Recordatorio Inscripción", tipo:"SMS", segmento:"Interesado", enviados:80, apertura:74, clicks:45, estado:"Enviado", fecha:"2026-06-01"},
-    {id:3, nombre:"Campaña Medicina Humana", tipo:"WhatsApp", segmento:"Alta Probabilidad", enviados:32, apertura:88, clicks:71, estado:"Enviado", fecha:"2026-06-05"}
+    {id:2, nombre:"Recordatorio Inscripción Mayo", tipo:"SMS", segmento:"Interesado", enviados:80, apertura:74, clicks:45, estado:"Enviado", fecha:"2026-06-01"},
+    {id:3, nombre:"Campaña Medicina Humana", tipo:"WhatsApp", segmento:"Alta Probabilidad", enviados:32, apertura:88, clicks:71, estado:"Enviado", fecha:"2026-06-05"},
+    {id:4, nombre:"Becas y Financiamiento", tipo:"Email", segmento:"Nuevo Lead", enviados:120, apertura:55, clicks:32, estado:"Enviado", fecha:"2026-06-08"},
+    {id:5, nombre:"Promoción Ingeniería", tipo:"WhatsApp", segmento:"Alta Probabilidad", enviados:45, apertura:91, clicks:38, estado:"En Proceso", fecha:"2026-06-10"}
 ];
 
 const guardar = {
@@ -2203,23 +2282,54 @@ function renderReportes() {
             });
         }
 
-        // Carreras
+        // Tabla de Carreras
         const carrerasCount = {};
         postulantes.forEach(p => { carrerasCount[p.carrera] = (carrerasCount[p.carrera]||0)+1; });
         const sorted = Object.entries(carrerasCount).sort((a,b)=>b[1]-a[1]);
-        const maxVal = sorted[0]?.[1] || 1;
-        const repCarr = document.getElementById('reporte-carreras');
-        if (repCarr) {
-            repCarr.innerHTML = sorted.map(([c, v]) => `
-                <div>
-                    <div class="flex justify-between text-xs font-medium text-gray-700 mb-1.5">
-                        <span class="truncate max-w-[75%]">${c}</span>
-                        <span class="font-black text-gray-900">${v}</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill bg-uns" style="width:${Math.round((v/maxVal)*100)}%"></div></div>
-                </div>
-            `).join('');
+        
+        const tablaCarreras = document.getElementById('tabla-carreras-reporte');
+        if (tablaCarreras) {
+            tablaCarreras.innerHTML = sorted.map(([carrera, total]) => {
+                const inscritos = postulantes.filter(p => p.carrera === carrera && p.estado === 'Inscrito / Pagó').length;
+                const conv = total > 0 ? Math.round((inscritos/total)*100) : 0;
+                const canalesCarrera = {};
+                postulantes.filter(p => p.carrera === carrera).forEach(p => {
+                    canalesCarrera[p.canal||'Otro'] = (canalesCarrera[p.canal||'Otro']||0)+1;
+                });
+                const topCanal = Object.entries(canalesCarrera).sort((a,b)=>b[1]-a[1])[0]?.[0] || '-';
+                return `
+                    <tr>
+                        <td class="px-4 py-3 font-medium text-gray-700 text-left">${carrera}</td>
+                        <td class="px-4 py-3 text-center"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-lg font-bold text-xs">${total}</span></td>
+                        <td class="px-4 py-3 text-center"><span class="bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg font-bold text-xs">${inscritos}</span></td>
+                        <td class="px-4 py-3 text-center"><span class="font-bold text-gray-700">${conv}%</span></td>
+                        <td class="px-4 py-3 text-sm text-gray-600">${topCanal}</td>
+                    </tr>
+                `;
+            }).join('');
         }
+
+        // KPIs
+        const total = postulantes.length;
+        const inscritos = postulantes.filter(p => p.estado === 'Inscrito / Pagó').length;
+        const conv = total > 0 ? Math.round((inscritos/total)*100) : 0;
+        
+        const convEl = document.getElementById('reporte-conversion');
+        if (convEl) convEl.textContent = conv + '%';
+        
+        const topCarrera = sorted[0]?.[0] || 'N/A';
+        const topCarreraCount = sorted[0]?.[1] || 0;
+        const topCarreraEl = document.getElementById('reporte-top-carrera');
+        if (topCarreraEl) topCarreraEl.textContent = topCarrera.substring(0, 20);
+        const topCarreraInfoEl = document.getElementById('reporte-top-carrera-info');
+        if (topCarreraInfoEl) topCarreraInfoEl.textContent = `${topCarreraCount} postulante${topCarreraCount !== 1 ? 's' : ''}`;
+        
+        const topCanal = Object.entries(canalesCount).sort((a,b)=>b[1]-a[1])[0]?.[0] || 'N/A';
+        const topCanalCount = Object.entries(canalesCount).sort((a,b)=>b[1]-a[1])[0]?.[1] || 0;
+        const topCanalEl = document.getElementById('reporte-best-canal');
+        if (topCanalEl) topCanalEl.textContent = topCanal;
+        const topCanalInfoEl = document.getElementById('reporte-best-canal-info');
+        if (topCanalInfoEl) topCanalInfoEl.textContent = `${topCanalCount} postulante${topCanalCount !== 1 ? 's' : ''}`;
     }, 50);
 }
 
