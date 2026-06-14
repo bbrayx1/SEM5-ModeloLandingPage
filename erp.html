@@ -144,7 +144,7 @@
     </div>
     <div class="p-4 bg-gray-50 border-t border-gray-200">
         <a href="login.html" class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-bold text-gray-600 bg-white border border-gray-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition">
-            <i class="fa-solid fa-power-off"></i> Cerrar Módulos
+            <i class="fa-solid fa-power-off"></i> Cerrar Sesión
         </a>
     </div>
 </aside>
@@ -330,45 +330,125 @@
     </div>
 
     <div id="mod-bienestar" class="modulo-contenido seccion-oculta p-8 animate-fade-in">
-        <div class="mb-6">
-            <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bienestar Universitario - Comedor Central</h2>
-            <p class="text-gray-500 text-sm mt-1">Planificación alimentaria, control de raciones y asignación de becas asistenciales.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                <p class="text-xs font-bold text-gray-400 uppercase">Menú Universitario del Día</p>
-                <p class="text-base font-bold text-gray-800 mt-2"><i class="fa-solid fa-utensils text-uns mr-2"></i>Sopa Criolla + Seco de Pollo</p>
-                <p class="text-xs text-gray-400 mt-1">Lunes a Viernes de 12:00 a 14:00 hrs</p>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bienestar Universitario - Comedor Central</h2>
+                <p class="text-gray-500 text-sm mt-1">Planificación integral de raciones alimentarias, desayuno, almuerzo y control de comensales.</p>
             </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                <p class="text-xs font-bold text-gray-400 uppercase">Raciones Asignadas Hoy</p>
-                <p class="text-2xl font-black text-uns mt-1">1,200 / 1,200</p>
-                <p class="text-xs text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
-            </div>
-            <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                <p class="text-xs font-bold text-gray-400 uppercase">Becas de Alimentación Libres</p>
-                <p class="text-2xl font-black text-gray-700 mt-1">350 Estudiantes</p>
-                <p class="text-xs text-gray-400 mt-1">Evaluados por Asistencia Social</p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="exportarComedorAptosPDF()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md hover:bg-black transition">
+                    <i class="fa-solid fa-file-pdf text-red-200"></i> Alumnos Aptos Comedor
+                </button>
+                <button onclick="exportarMenusSemanaPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
+                    <i class="fa-solid fa-calendar-days"></i> Rol de Menús Semanal
+                </button>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
-                Registro de Comensales del Turno Actual
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+            <div class="lg:col-span-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-200 h-fit">
+                <h3 class="font-black text-xs uppercase text-gray-700 tracking-wider mb-4 border-l-4 border-uns pl-2">Programación de Menú Diario</h3>
+                <form id="form-comedor-menu" class="space-y-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Fecha de Servicio *</label>
+                        <input type="date" id="menu-fecha" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns" required>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Día de la Semana *</label>
+                        <select id="menu-dia" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
+                            <option>Lunes</option>
+                            <option>Martes</option>
+                            <option>Miércoles</option>
+                            <option>Jueves</option>
+                            <option>Viernes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Detalle del Desayuno *</label>
+                        <textarea id="menu-desayuno" rows="2" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns" placeholder="Ej. Avena con quinua + Sándwich de queso" required></textarea>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Detalle del Almuerzo *</label>
+                        <textarea id="menu-almuerzo" rows="2" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns" placeholder="Ej. Sopa Criolla + Seco de Pollo" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-uns text-white font-bold py-2 rounded-xl hover:bg-uns-dark transition text-xs shadow-md mt-2">
+                        <i class="fa-solid fa-calendar-plus mr-1"></i> Publicar Menú
+                    </button>
+                </form>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-uns text-white font-bold text-[11px] uppercase border-b border-uns-dark">
-                        <tr>
-                            <th class="px-6 py-4">Código / DNI</th>
-                            <th class="px-6 py-4">Tipo Comensal</th>
-                            <th class="px-6 py-4 text-center">Estado del Ticket</th>
-                            <th class="px-6 py-4 text-center">Hora Marcaje</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-bienestar" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
-                </table>
+
+            <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
+                    Rol Rotativo de Servicios Programados
+                </div>
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
+                            <tr>
+                                <th class="px-4 py-3">Fecha / Día</th>
+                                <th class="px-4 py-3">Servicio Desayuno (07:00 - 08:35)</th>
+                                <th class="px-4 py-3">Servicio Almuerzo (12:00 - 14:00)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-comedor-menus" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-4 bg-white p-5 rounded-2xl shadow-sm border border-gray-200 h-fit">
+                <h3 class="font-black text-xs uppercase text-gray-700 tracking-wider mb-4 border-l-4 border-uns pl-2">Marcaje de Ticket en Ventanilla</h3>
+                <form id="form-comedor-comensal" class="space-y-3">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Código Universitario *</label>
+                        <input type="text" id="com-codigo" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns font-mono font-bold" placeholder="Ej. 0202411001" required>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Tipo de Beneficio *</label>
+                        <select id="com-tipo" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
+                            <option>Regular (Ticket Canjeado)</option>
+                            <option>Beca Alimentaria Completa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Tipo de Servicio *</label>
+                        <select id="com-servicio" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
+                            <option>Desayuno</option>
+                            <option>Almuerzo</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase">Estado Inicial *</label>
+                        <select id="com-estado" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
+                            <option>Confirmado</option>
+                            <option>En Cola</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl hover:bg-black transition text-xs shadow-md mt-2">
+                        <i class="fa-solid fa-fingerprint mr-1"></i> Registrar Ingreso
+                    </button>
+                </form>
+            </div>
+
+            <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
+                    Control de Comensales en Turno Actual
+                </div>
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
+                            <tr>
+                                <th class="px-6 py-3">Código Estudiante</th>
+                                <th class="px-6 py-3">Tipo de Comensal</th>
+                                <th class="px-6 py-3 text-center">Servicio</th>
+                                <th class="px-6 py-3 text-center">Estado del Ticket</th>
+                                <th class="px-6 py-3 text-center">Hora Marcaje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-bienestar" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -387,7 +467,7 @@
                             <th class="px-6 py-4 text-center">Documento Marco</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-bolsa" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                    <tbody id="tabla-bolsa" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
                 </table>
             </div>
         </div>
@@ -407,7 +487,7 @@
                             <th class="px-6 py-4 text-center">Resolución Oficial</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-proyeccion" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
+                    <tbody id="tabla-proyeccion" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
                 </table>
             </div>
         </div>
@@ -672,10 +752,29 @@ const DB_PROYECCION = [
     { proy: "Monitoreo y Conservación Bio-Ecológica", esc: "Biotecnología", benef: "Bahía El Ferrol - Chimbote", fase: "Finalizado" }
 ];
 
-const DB_BIENESTAR = [
-    { cod: "0202411001", tipo: "Regular (Ticket Canjeado)", estado: "Confirmado", hora: "12:15:32" },
-    { cod: "0202424043", tipo: "Beca Alimentaria Completa", estado: "Confirmado", hora: "12:22:11" },
-    { cod: "0202314055", tipo: "Regular (Ticket Reservado)", estado: "En Cola", hora: "12:35:00" }
+// DATA AVANZADA DE BIENESTAR UNIVERSITARIO SIMULADA
+let DB_MENUS_SEMANA = [
+    { fecha: "2026-06-15", dia: "Lunes", desayuno: "Maca caliente + Pan con tortilla de espinaca", almuerzo: "Sopa Criolla + Seco de Pollo con frijoles" },
+    { fecha: "2026-06-16", dia: "Martes", desayuno: "Avena con manzana + Pan con palta", almuerzo: "Sopa de Verduras + Pescado frito con arroz" },
+    { fecha: "2026-06-17", dia: "Miércoles", desayuno: "Quinua con piña + Sándwich de pollo", almuerzo: "Caldo de Gallina + Ají de Gallina con papa" },
+    { fecha: "2026-06-18", dia: "Jueves", desayuno: "Siete semillas + Pan con huevo revuelto", almuerzo: "Menestrón + Estofado de Carne" },
+    { fecha: "2026-06-19", dia: "Viernes", desayuno: "Leche con avena + Pan con mermelada", almuerzo: "Chupe de Pescado + Lentejitas con tocino" }
+];
+
+let DB_BIENESTAR = [
+    { cod: "0202411001", tipo: "Regular (Ticket Canjeado)", servicio: "Almuerzo", estado: "Confirmado", hora: "12:15:32" },
+    { cod: "0202424043", tipo: "Beca Alimentaria Completa", servicio: "Almuerzo", estado: "Confirmado", hora: "12:22:11" },
+    { cod: "0202314055", tipo: "Regular (Ticket Reservado)", servicio: "Almuerzo", estado: "En Cola", hora: "12:35:00" },
+    { cod: "0202511002", tipo: "Beca Alimentaria Completa", servicio: "Desayuno", estado: "Confirmado", hora: "07:45:12" }
+];
+
+const DB_COMEDOR_APTOS = [
+    { cod: "0202411001", nombre: "AGUILAR ANTICONA JUAN MARTIN JULIO", esc: "INGENIERIA EN ENERGIA", tipo: "Regular" },
+    { cod: "0202411002", nombre: "ALAMAS CRUZ ALEXIS JESUS", esc: "INGENIERIA EN ENERGIA", tipo: "Beca Completa" },
+    { cod: "0202411003", nombre: "ALVA PULIDO ZAHID MIZRAIM", esc: "INGENIERIA EN ENERGIA", tipo: "Regular" },
+    { cod: "0202424043", nombre: "ROSALES LUJERIO ANTHONY ALEXANDER", esc: "MEDICINA HUMANA", tipo: "Beca Completa" },
+    { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", tipo: "Regular" },
+    { cod: "0202535043", nombre: "RAMOS TORRES MASSIEL SARUMI", esc: "DERECHO Y CIENCIAS POLITICAS", tipo: "Beca Completa" }
 ];
 
 // ==================== RENDERS DE INTERFAZ E INTERACTIVIDAD ====================
@@ -740,16 +839,26 @@ function renderizarTablas() {
         </tr>
     `).join('');
 
-    // Bienestar Universitario
+    // Bienestar Universitario - Menús Semanales
+    document.getElementById('tabla-comedor-menus').innerHTML = DB_MENUS_SEMANA.map(m => `
+        <tr class="table-row-hover">
+            <td class="px-4 py-3 font-bold text-gray-900 border-r bg-gray-50/50">${m.fecha}<br><span class="text-[10px] text-uns uppercase tracking-wide">${m.dia}</span></td>
+            <td class="px-4 py-3 text-gray-600 font-medium">${m.desayuno}</td>
+            <td class="px-4 py-3 text-gray-800 font-semibold">${m.almuerzo}</td>
+        </tr>
+    `).join('');
+
+    // Bienestar Universitario - Comensales (Sin DNI)
     document.getElementById('tabla-bienestar').innerHTML = DB_BIENESTAR.map(b => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-700">${b.cod}</td>
             <td class="px-6 py-3.5 text-xs font-bold text-slate-600">${b.tipo}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-emerald-50 text-emerald-700':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center text-xs font-bold text-gray-600">${b.servicio}</td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-emerald-50 text-emerald-700':'bg-amber-50 text-amber-700'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center text-xs font-mono text-gray-400">${b.hora}</td>
         </tr>
     `).join('');
-    document.getElementById('dash-comedor').textContent = "1,200 Atenciones";
+    document.getElementById('dash-comedor').textContent = DB_BIENESTAR.length + " Tickets";
 
     // Bolsa de Empleo
     document.getElementById('tabla-bolsa').innerHTML = DB_BOLSA.map(b => `
@@ -829,6 +938,37 @@ document.getElementById('form-tesoreria').addEventListener('submit', function(e)
     mostrarToast('Asiento financiero procesado y guardado en el Libro Diario.');
 });
 
+// Formulario: Publicar Nuevo Menú Diario
+document.getElementById('form-comedor-menu').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_MENUS_SEMANA.unshift({
+        fecha: document.getElementById('menu-fecha').value,
+        dia: document.getElementById('menu-dia').value,
+        desayuno: document.getElementById('menu-desayuno').value.trim(),
+        almuerzo: document.getElementById('menu-almuerzo').value.trim()
+    });
+    renderizarTablas();
+    this.reset();
+    mostrarToast('Menú diario programado y publicado en el portal de Bienestar.');
+});
+
+// Formulario: Registrar Ingreso Comensal Turno Actual
+document.getElementById('form-comedor-comensal').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const ahora = new Date();
+    const horaStr = ahora.toTimeString().split(' ')[0];
+    DB_BIENESTAR.unshift({
+        cod: document.getElementById('com-codigo').value.trim(),
+        tipo: document.getElementById('com-tipo').value,
+        servicio: document.getElementById('com-servicio').value,
+        estado: document.getElementById('com-estado').value,
+        hora: horaStr
+    });
+    renderizarTablas();
+    this.reset();
+    mostrarToast('Acceso marcación de ticket procesado correctamente.');
+});
+
 // Alta de RRHH Interactiva
 function abrirModalDocente() { document.getElementById('modal-docente').classList.remove('hidden'); }
 function cerrarModalDocente() { document.getElementById('modal-docente').classList.add('hidden'); }
@@ -884,6 +1024,49 @@ function mostrarToast(mensaje) {
 
 // ==================== COMPILADOR COMPLETO DE ARCHIVOS PDF (jsPDF) ====================
 
+function exportarComedorAptosPDF() {
+    mostrarToast('Compilando padrón de alumnos aptos para el Comedor UNS...');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text("Dirección de Bienestar Universitario - Padrón General de Aptos Comedor", 105, 18, null, null, "center");
+
+        const columnas = [['Código Universitario', 'Apellidos y Nombres', 'Escuela Académico-Profesional', 'Condición / Beca']];
+        const filas = DB_COMEDOR_APTOS.map(a => [a.cod, a.nombre, a.esc, a.tipo]);
+
+        doc.autoTable({ startY: 32, head: columnas, body: filas, headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8 } });
+        
+        doc.setFontSize(10); doc.setFont("helvetica", "bold");
+        doc.line(75, 155, 135, 155); doc.text("DIRECCIÓN DE BIENESTAR UNIVERSITARIO\nFirma y Rúbrica Centralizada", 105, 160, null, null, "center");
+        
+        doc.save("Alumnos_Aptos_Comedor_UNS.pdf");
+    }, 450);
+}
+
+function exportarMenusSemanaPDF() {
+    mostrarToast('Compilando rol oficial de menús de la semana...');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text("Servicio de Nutrición y Alimentación - Programación Semanal de Raciones", 105, 18, null, null, "center");
+
+        const columnas = [['Fecha / Día', 'Servicio Desayuno', 'Servicio Almuerzo']];
+        const filas = DB_MENUS_SEMANA.map(m => [`${m.fecha} (${m.dia})`, m.desayuno, m.almuerzo]);
+
+        doc.autoTable({ startY: 32, head: columnas, body: filas, headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8.5 } });
+        
+        doc.save("Programacion_Semanal_Menus_Comedor_UNS.pdf");
+    }, 450);
+}
+
 function exportarEscalafonDocentePDF() {
     mostrarToast('Generando reporte PDF del Escalafón Docente...');
     setTimeout(() => {
@@ -895,7 +1078,7 @@ function exportarEscalafonDocentePDF() {
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
         doc.setFontSize(9); doc.text("Oficina Central de Recursos Humanos - Escalafón Unificado de Remuneraciones", 105, 18, null, null, "center");
 
-        const columnas = [['Docente Universitario', 'Categoría', 'Régimen Laboral', 'Carga Curricular', 'Sueldo Mensual']];
+        const columnas = [['Docente Universitario', 'Categoría', 'Régimen Laboral', 'Carga Curricular', 'Sueldo']];
         const filas = DB_RRHH.map(r => [r.nombre, r.cat, r.reg, r.carga, `S/ ${r.sueldo.toFixed(2)}`]);
 
         doc.autoTable({ startY: 32, head: columnas, body: filas, headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8 } });
@@ -912,7 +1095,7 @@ function descargarPadronPDF(anio) {
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
-        doc.setFontSize(9); doc.text(`Dirección de Registro Técnico y Admisión - Padrón Oficial ${anio}`, 105, 18, null, null, "center");
+        doc.setFontSize(9); doc.text("Dirección de Registro Técnico y Admisión - Padrón Oficial " + anio, 105, 18, null, null, "center");
 
         let data = [];
         if(anio === '2024') {
