@@ -166,7 +166,7 @@
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-uns hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Inventario de Bienes SGI</p>
                 <h3 class="text-2xl font-black text-gray-800 mt-1" id="dash-sgi">0 Activos</h3>
-                <p class="text-[10px] text-gray-500 mt-2" id="dash-sgi-status">Carga de hardware controlada</p>
+                <p class="text-[10px] text-gray-500 mt-2" id="dash-sgi-status"><i class="fa-solid fa-boxes-stacked mr-1"></i>Carga de hardware controlada</p>
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-amber-500 hover:shadow-md transition">
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Abastecimiento / Compras</p>
@@ -267,12 +267,17 @@
                 <h2 class="text-3xl font-black text-gray-900 tracking-tight">Control Patrimonial SGI</h2>
                 <p class="text-gray-500 text-sm mt-1">Vistas operativas del equipamiento tecnológico y hardware de servidores del campus.</p>
             </div>
-            <button onclick="exportarSgiCompletoPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
-                <i class="fa-solid fa-file-pdf"></i> Descargar Inventario Completo (100 Activos)
-            </button>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="abrirModalLogistica()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-black transition">
+                    <i class="fa-solid fa-plus"></i> Registrar Activo
+                </button>
+                <button onclick="exportarSgiCompletoPDF()" class="bg-uns text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-uns-dark transition">
+                    <i class="fa-solid fa-file-pdf"></i> Descargar Inventario
+                </button>
+            </div>
         </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-            <div class="p-4 bg-red-50 text-xs font-bold text-uns-dark uppercase tracking-wider">
+            <div class="p-4 bg-gray-50 text-xs font-bold text-gray-600 uppercase tracking-wider">
                 Vistazo General de Equipos en Control de Mantenimiento
             </div>
             <div class="overflow-x-auto">
@@ -397,9 +402,7 @@
                 </form>
             </div>
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
-                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
-                    Rol Rotativo de Servicios Programados
-                </div>
+                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">Rol Rotativo de Servicios Programados</div>
                 <div class="overflow-x-auto flex-1">
                     <table class="w-full text-left text-xs">
                         <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
@@ -440,8 +443,8 @@
                     <div>
                         <label class="text-[10px] font-bold text-gray-500 uppercase">Estado Inicial *</label>
                         <select id="com-estado" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
-                            <option>Confirmado</option>
-                            <option>En Cola</option>
+                            <option value="Confirmado">Confirmado</option>
+                            <option value="En Cola">En Cola</option>
                         </select>
                     </div>
                     <button type="submit" class="w-full bg-slate-900 text-white font-bold py-2 rounded-xl hover:bg-black transition text-xs shadow-md mt-2">
@@ -450,9 +453,7 @@
                 </form>
             </div>
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
-                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
-                    Control de Comensales en Turno Actual
-                </div>
+                <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">Control de Comensales en Turno Actual</div>
                 <div class="overflow-x-auto flex-1">
                     <table class="w-full text-left text-xs">
                         <thead class="bg-uns text-white font-bold uppercase border-b border-uns-dark">
@@ -559,6 +560,37 @@
 
             <button onclick="cerrarModalHorario()" class="w-full bg-slate-950 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
         </div>
+    </div>
+</div>
+
+<div id="modal-logistica" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-box-open"></i> Registrar Nuevo Activo (SGI)</h3>
+            <button onclick="cerrarModalLogistica()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-logistica" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Descripción Física del Activo *</label>
+                <input type="text" id="log-desc" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Servidor Blade Dell" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Ubicación Asignada *</label>
+                <input type="text" id="log-ubi" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Pabellón Sistemas - Aula 102" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Condición de Ciclo *</label>
+                <select id="log-estado" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white" required>
+                    <option value="Operativo">Operativo</option>
+                    <option value="Próximo Mantenimiento">Próximo Mantenimiento</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                </select>
+            </div>
+            <div class="flex gap-3 pt-4 border-t mt-2">
+                <button type="button" onclick="cerrarModalLogistica()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Registrar Activo</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -687,8 +719,8 @@
                 <div>
                     <label class="text-xs font-bold text-gray-500 uppercase">Estado *</label>
                     <select id="bol-estado" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
-                        <option>Vigente</option>
-                        <option>Cerrado</option>
+                        <option value="Vigente">Vigente</option>
+                        <option value="Cerrado">Cerrado</option>
                     </select>
                 </div>
             </div>
@@ -722,9 +754,9 @@
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Fase de Avance *</label>
                 <select id="proy-fase" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
-                    <option>En Ejecución</option>
-                    <option>Aprobado</option>
-                    <option>Finalizado</option>
+                    <option value="En Ejecución">En Ejecución</option>
+                    <option value="Aprobado">Aprobado</option>
+                    <option value="Finalizado">Finalizado</option>
                 </select>
             </div>
             <div class="flex gap-3 pt-4 border-t mt-2">
@@ -761,7 +793,7 @@ const DB_FINANZAS = [
     { op: "OP-4429", desc: "Recaudación Clínica Odontológica UNS", tipo: "Ingreso", monto: 8900.00 },
     { op: "OP-4430", desc: "Renovación de Licencias Microsoft Campus", tipo: "Egreso", monto: 32000.00 },
     { op: "OP-4431", desc: "Adquisición de Combustible y Lubricantes", tipo: "Egreso", monto: 14500.00 },
-    { op: "OP-4432", desc: "Tasas por Trámites de Mesa de Partes", tipo: "Ingreso", font: "bold", monto: 5400.00 },
+    { op: "OP-4432", desc: "Tasas por Trámites de Mesa de Partes", tipo: "Ingreso", monto: 5400.00 },
     { op: "OP-4433", desc: "Compra de Mobiliario para Aulas (Carpetas)", tipo: "Egreso", monto: 28000.00 },
     { op: "OP-4434", desc: "Fondos para Proyectos de Inv. (Subvenciones)", tipo: "Egreso", monto: 150000.00 }
 ];
@@ -782,7 +814,7 @@ let DB_COMPRAS = [
     { req: "REQ-26-113", desc: "Baterías de Respaldo UPS 3000VA DataCenter", area: "Oficina de Informática OTI", monto: 11500.00, estado: "Aprobado" }
 ];
 
-const DB_LOGISTICA = [
+let DB_LOGISTICA = [
     { cod: "PAT-26-001", desc: "Servidor Rackeable Blade Cisco UCS C220", ubi: "DataCenter OTI Central", estado: "Operativo" },
     { cod: "PAT-26-002", desc: "Estación de Trabajo HP Z2 Tower 32GB RAM", ubi: "Lab. INGENIERIA DE SISTEMAS 01", estado: "Operativo" },
     { cod: "PAT-26-003", desc: "Proyector Multimedia Epson PowerLite 4800L", ubi: "Lab. INGENIERIA DE SISTEMAS 01", estado: "Mantenimiento" },
@@ -838,7 +870,7 @@ const DB_ACADEMICO = [
     { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", email: "202424044@uns.edu.pe" },
     { cod: "0202424045", nombre: "SAAVEDRA PASCUAL ALEXIS GABRIEL", esc: "MEDICINA HUMANA", email: "202424045@uns.edu.pe" },
     { cod: "0202424046", nombre: "SALDAÑA HORNA JUAN ALBERTO", esc: "MEDICINA HUMANA", email: "202424046@uns.edu.pe" },
-    { cod: "0202424047", font: "medium", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" }
+    { cod: "0202424047", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" }
 ];
 
 let DB_BOLSA = [
@@ -920,7 +952,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-emerald-50 text-emerald-700':l.estado==='Mantenimiento'?'bg-red-50 text-uns':'bg-amber-100 text-amber-700'}">${l.estado}</span></td>
         </tr>
     `).join('');
-    document.getElementById('dash-sgi').textContent = DB_LOGISTICA.length + " Activos";
+    document.getElementById('dash-sgi').textContent = DB_LOGISTICA.length + " Equipos";
 
     // Escalafón Docente
     document.getElementById('tabla-rrhh').innerHTML = DB_RRHH.map(r => `
@@ -934,7 +966,7 @@ function renderizarTablas() {
             </td>
         </tr>
     `).join('');
-    document.getElementById('dash-docentes').textContent = DB_RRHH.length + " Profesores";
+    document.getElementById('dash-docentes').textContent = DB_RRHH.length + " Activos";
 
     // Control Estudiantil
     document.getElementById('tabla-academico').innerHTML = DB_ACADEMICO.map(a => `
@@ -972,7 +1004,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
             <td class="px-6 py-3.5 text-center font-black text-gray-800">${b.post}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Vigente'?'bg-emerald-50 text-emerald-700':'bg-slate-100 text-slate-700'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
         </tr>
     `).join('');
@@ -984,7 +1016,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${p.proy}</td>
             <td class="px-6 py-3.5 text-xs text-gray-700 font-bold">${p.esc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-medium">${p.benef}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${p.fase}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${p.fase==='Finalizado'?'bg-emerald-50 text-emerald-700':p.fase==='Aprobado'?'bg-blue-50 text-blue-700':'bg-amber-100 text-amber-700'}">${p.fase}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
         </tr>
     `).join('');
@@ -1007,6 +1039,22 @@ function cambiarModulo(moduloId, btnElement) {
     if(btnElement) btnElement.classList.add('active');
     if(moduloId === 'dashboard') inicializarGraficos();
 }
+
+function abrirModalLogistica() { document.getElementById('modal-logistica').classList.remove('hidden'); }
+function cerrarModalLogistica() { document.getElementById('modal-logistica').classList.add('hidden'); }
+document.getElementById('form-logistica').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_LOGISTICA.unshift({
+        cod: `PAT-26-${String(DB_LOGISTICA.length + 1).padStart(3, '0')}`,
+        desc: document.getElementById('log-desc').value.trim(),
+        ubi: document.getElementById('log-ubi').value.trim(),
+        estado: document.getElementById('log-estado').value
+    });
+    renderizarTablas();
+    cerrarModalLogistica();
+    this.reset();
+    mostrarToast('Activo patrimonial registrado correctamente en el SGI.');
+});
 
 function abrirModalCompras() { document.getElementById('modal-compras').classList.remove('hidden'); }
 function cerrarModalCompras() { document.getElementById('modal-compras').classList.add('hidden'); }
@@ -1317,26 +1365,94 @@ function exportarProyectoSocialPDF(proyecto, escuela) {
 }
 
 function generarReporteGeneral() {
-    mostrarToast('Compilando Reporte Institucional PDF...', 'success');
+    mostrarToast('Compilando Reporte Institucional PDF Avanzado...', 'success');
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
-        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(16);
-        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
-        doc.setFontSize(10); doc.setFont("helvetica", "normal");
-        doc.text("Reporte Estadístico del ERP Central", 105, 18, null, null, "center");
+        
+        // Cabecera Principal Institucional
+        doc.setFillColor(179, 0, 0); // Rojo UNS
+        doc.rect(0, 0, 210, 30, 'F');
+        doc.setTextColor(255, 255, 255); 
+        doc.setFont("helvetica", "bold"); 
+        doc.setFontSize(18);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 14, null, null, "center");
+        doc.setFontSize(11); 
+        doc.setFont("helvetica", "normal");
+        doc.text("REPORTE EJECUTIVO INSTITUCIONAL - CORE ERP", 105, 22, null, null, "center");
 
-        doc.setTextColor(50, 50, 50); doc.setFontSize(12); doc.setFont("helvetica", "bold");
-        doc.text("1. Resumen de Escalafón Docente (Muestra)", 14, 40);
-        doc.autoTable({ startY: 43, head: [['Docente', 'Categoría', 'Régimen']], body: DB_RRHH.slice(0,5).map(r => [r.nombre, r.cat, r.reg]), styles: { fontSize: 8 }});
+        // Metadatos de Auditoría
+        doc.setTextColor(50, 50, 50); 
+        doc.setFontSize(10); 
+        doc.setFont("helvetica", "bold");
+        const fecha = new Date().toLocaleString('es-PE');
+        doc.text(`Fecha de Emisión: ${fecha}`, 14, 40);
+        doc.text("Generado por: Administrador General OTI", 14, 46);
 
-        let finalY = doc.lastAutoTable.finalY + 10;
-        doc.setFont("helvetica", "bold"); doc.text("2. Estado de Activos Patrimoniales (SGI)", 14, finalY);
-        doc.autoTable({ startY: finalY + 3, head: [['Activo', 'Ubicación', 'Estado']], body: DB_LOGISTICA.slice(0,6).map(l => [l.desc, l.ubi, l.estado]), headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8 }});
+        // Sección I: Resumen Financiero y Patrimonial
+        doc.setDrawColor(179,0,0);
+        doc.setLineWidth(0.5);
+        doc.line(14, 52, 196, 52);
+        doc.setFontSize(12);
+        doc.text("I. RESUMEN FINANCIERO Y PATRIMONIAL", 14, 60);
 
-        doc.save(`Reporte_Gerencial_UNS.pdf`);
-    }, 600);
+        // Cálculos dinámicos en vivo para KPIs de cabecera PDF
+        let tIngresos = 0, tEgresos = 0;
+        DB_FINANZAS.forEach(f => f.tipo==='Ingreso'? tIngresos+=f.monto : tEgresos+=f.monto);
+        
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Total Ingresos: S/ ${tIngresos.toLocaleString('es-PE', {minimumFractionDigits:2})}`, 20, 68);
+        doc.text(`Total Egresos: S/ ${tEgresos.toLocaleString('es-PE', {minimumFractionDigits:2})}`, 20, 74);
+        doc.text(`Balance Neto de Caja: S/ ${(tIngresos-tEgresos).toLocaleString('es-PE', {minimumFractionDigits:2})}`, 20, 80);
+        doc.text(`Activos Inventariados (SGI): ${DB_LOGISTICA.length} Equipos registrados`, 110, 68);
+        doc.text(`Plana Docente Activa: ${DB_RRHH.length} Profesores en Escalafón`, 110, 74);
+
+        // Sección II: Últimos Movimientos
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("II. ÚLTIMOS MOVIMIENTOS EN CAJA (TESORERÍA)", 14, 92);
+
+        const filasFinanzas = DB_FINANZAS.slice(0,5).map(f => [f.op, f.desc, f.tipo, `S/ ${f.monto.toLocaleString('es-PE')}`]);
+        doc.autoTable({ 
+            startY: 96, 
+            head: [['Código', 'Descripción', 'Tipo', 'Monto']], 
+            body: filasFinanzas, 
+            styles: { fontSize: 8 }, 
+            headStyles: { fillColor: [40, 40, 40] } 
+        });
+
+        // Sección III: Estado del SGI
+        let finalY = doc.lastAutoTable.finalY + 15;
+        if (finalY > 250) { doc.addPage(); finalY = 20; }
+        
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.text("III. ESTADO DE EQUIPAMIENTO CLAVE (SGI)", 14, finalY);
+
+        const filasSGI = DB_LOGISTICA.slice(0,5).map(l => [l.cod, l.desc, l.ubi, l.estado]);
+        doc.autoTable({ 
+            startY: finalY + 4, 
+            head: [['Patrimonial', 'Descripción', 'Ubicación', 'Estado']], 
+            body: filasSGI, 
+            styles: { fontSize: 8 }, 
+            headStyles: { fillColor: [179, 0, 0] } 
+        });
+
+        // Footer y Visto Bueno
+        finalY = doc.lastAutoTable.finalY + 30;
+        if (finalY > 260) { doc.addPage(); finalY = 40; }
+        doc.setDrawColor(0,0,0);
+        doc.line(75, finalY, 135, finalY);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        doc.text("Vº Bº ADMINISTRACIÓN GENERAL", 105, finalY + 5, null, null, "center");
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8);
+        doc.text("Universidad Nacional del Santa - Sistema Integrado ERP", 105, finalY + 10, null, null, "center");
+
+        doc.save(`Reporte_Gerencial_Avanzado_UNS.pdf`);
+    }, 800);
 }
 
 // ==================== CONFIGURACIÓN DE DASHBOARD CHARTS ====================
@@ -1347,57 +1463,27 @@ function inicializarGraficos() {
     const ctx = canvas.getContext('2d');
     if(chartGerencialInstancia) chartGerencialInstancia.destroy();
 
-    // Obtener los montos totales reales calculados de la data actual para las finanzas corporativas del dashboard
-    let totalIngresos = 0;
-    let totalEgresos = 0;
-    DB_FINANZAS.forEach(f => {
-        if(f.tipo === 'Ingreso') totalIngresos += f.monto;
-        else totalEgresos += f.monto;
-    });
-
-    let totalComprasAprobadas = 0;
-    let totalComprasPendientes = 0;
-    DB_COMPRAS.forEach(c => {
-        if(c.estado === 'Aprobado') totalComprasAprobadas += c.monto;
-        else totalComprasPendientes += c.monto;
-    });
+    let totalIngresos = 0, totalEgresos = 0, totalComprasAprobadas = 0, totalComprasPendientes = 0;
+    DB_FINANZAS.forEach(f => f.tipo === 'Ingreso' ? totalIngresos += f.monto : totalEgresos += f.monto);
+    DB_COMPRAS.forEach(c => c.estado === 'Aprobado' ? totalComprasAprobadas += c.monto : totalComprasPendientes += c.monto);
 
     chartGerencialInstancia = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Recaudación Total (Libro Diario)', 'Egresos Ordinarios Ejecutados', 'Adquisiciones Liquidadas', 'Requerimientos en Evaluación', 'Planificación Comedor Semanal'],
-            datasets: [
-                { 
-                    label: 'Flujos Financieros e Inversiones ERP (S/)', 
-                    data: [totalIngresos, totalEgresos, totalComprasAprobadas, totalComprasPendientes, 32000], 
-                    backgroundColor: [
-                        '#10b981', // Verde Esmeralda para ingresos
-                        '#b30000', // Rojo UNS para egresos
-                        '#475569', // Gris para compras aprobadas
-                        '#f59e0b', // Ámbar para pendientes
-                        '#b30000'  // Rojo para comedor
-                    ], 
-                    borderRadius: 6,
-                    borderWidth: 0
-                }
-            ]
+            labels: ['Recaudación Total', 'Egresos Ordinarios', 'Adquisiciones Liquidadas', 'Compras Pendientes', 'Presupuesto Comedor'],
+            datasets: [{ 
+                label: 'Flujos Financieros e Inversiones (S/)', 
+                data: [totalIngresos, totalEgresos, totalComprasAprobadas, totalComprasPendientes, 32000], 
+                backgroundColor: ['#10b981', '#b30000', '#475569', '#f59e0b', '#b30000'], 
+                borderRadius: 6, borderWidth: 0
+            }]
         },
         options: { 
-            responsive: true, 
-            maintainAspectRatio: false, 
-            plugins: { 
-                legend: { display: false } 
-            },
+            responsive: true, maintainAspectRatio: false, 
+            plugins: { legend: { display: false } },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: { color: '#f1f5f9' },
-                    ticks: { font: { family: 'Inter', size: 10 } }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: { font: { family: 'Inter', size: 10, weight: 'bold' } }
-                }
+                y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter', size: 10 } } },
+                x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' } } }
             }
         }
     });
