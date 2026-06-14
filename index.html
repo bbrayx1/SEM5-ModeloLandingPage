@@ -346,10 +346,12 @@
                     <div class="p-8 md:p-12">
                         <h4 class="text-xl font-bold text-gray-800 mb-8 border-l-4 border-uns pl-4">Escuelas Profesionales</h4>
                         <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                            <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
-                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-laptop-code"></i></div>
-                                <span class="font-semibold text-gray-700">Ingeniería de Sistemas e Informática</span>
-                            </li>
+                            <button type="button" id="btn-sistemas" class="w-full text-left flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group focus:outline-none">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns shrink-0">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <span class="font-semibold text-gray-700 group-hover:text-uns transition-colors">Ingeniería de Sistemas e Informática</span>
+                            </button>
                             <li class="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-uns hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-default">
                                 <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:bg-uns group-hover:text-white transition-colors text-uns"><i class="fa-solid fa-bolt"></i></div>
                                 <span class="font-semibold text-gray-700">Ingeniería en Energía</span>
@@ -1150,6 +1152,107 @@
                         <tbody id="cuerpo-tabla-conversiones" class="divide-y divide-gray-100">
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ventana-sistemas" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4 py-6">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-6xl h-full max-h-[90vh] flex flex-col relative transform scale-95 transition-transform duration-300" id="contenido-sistemas">
+            
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50 rounded-t-3xl shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-uns/10 rounded-xl flex items-center justify-center text-uns text-2xl shadow-inner">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 tracking-tight">Ingeniería de Sistemas e Informática</h3>
+                        <p class="text-xs md:text-sm text-gray-500 font-medium">Facultad de Ingeniería - UNS</p>
+                    </div>
+                </div>
+                <button type="button" id="btn-cerrar-sistemas" class="text-gray-400 hover:text-uns bg-white hover:bg-red-50 w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-sm border border-gray-100 focus:outline-none">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 md:p-8 overflow-y-auto flex-1 custom-scrollbar bg-white">
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <span class="bg-red-50 text-uns px-4 py-2 rounded-xl text-sm font-bold border border-red-100"><i class="fa-solid fa-clock mr-2"></i> 5 Años (10 ciclos)</span>
+                    <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200"><i class="fa-solid fa-graduation-cap mr-2"></i> Bachiller en Ing. de Sistemas e Informática</span>
+                    <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold border border-gray-200"><i class="fa-solid fa-medal mr-2"></i> Título: Ingeniero de Sistemas e Informática</span>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2 space-y-8">
+                        
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Perfil Profesional</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Formamos líderes tecnológicos capaces de modelar, construir y desplegar arquitecturas complejas de software. El egresado santeño destaca por su capacidad analítica para resolver problemas del entorno empresarial e institucional.
+                            </p>
+                            <div class="grid sm:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm mb-1"><i class="fa-solid fa-code text-uns mr-1"></i> Desarrollo de Software</h5>
+                                    <p class="text-xs text-gray-500">Construcción de sistemas robustos, escalables y seguros bajo estándares de calidad internacional.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <h5 class="font-bold text-gray-800 text-sm mb-1"><i class="fa-solid fa-chart-network text-uns mr-1"></i> Ciencia de Datos e IA</h5>
+                                    <p class="text-xs text-gray-500">Procesamiento analítico de datos y entrenamiento de modelos predictivos y sistemas inteligentes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-uns pl-3">Ejes de la Malla Curricular</h4>
+                            <div class="space-y-4 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                                <div class="relative pl-6 border-l-2 border-uns">
+                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-uns rounded-full shadow-[0_0_0_4px_rgba(179,0,0,0.1)]"></span>
+                                    <h5 class="font-bold text-gray-800 text-sm">Ciencias de la Computación e Infraestructura</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Arquitectura de Computadoras, Sistemas Operativos, Redes y Conectividad, Inteligencia Artificial.</p>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-gray-200">
+                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-gray-300 rounded-full"></span>
+                                    <h5 class="font-bold text-gray-800 text-sm">Ingeniería de Software</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Algoritmos, Estructuras de Datos, Base de Datos, Programación Web y Móvil, Arquitectura de Software.</p>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-gray-200">
+                                    <span class="absolute -left-[7px] top-1.5 w-3 h-3 bg-gray-300 rounded-full"></span>
+                                    <h5 class="font-bold text-gray-800 text-sm">Gestión Organizacional</h5>
+                                    <p class="text-xs text-gray-500 mt-1">Sistemas de Información, Auditoría de TI, Formulación de Proyectos de Inversión, Gestión Ágil.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="bg-gradient-to-br from-gray-900 to-uns-dark rounded-3xl p-6 text-white shadow-xl sticky top-0">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-briefcase text-red-400"></i> Campo Laboral
+                            </h4>
+                            <ul class="space-y-3 text-sm text-gray-200">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
+                                    <span>Empresas de desarrollo y consultoría de software.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
+                                    <span>Áreas de TI en entidades públicas, bancos y retail.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
+                                    <span>Gestión de bases de datos y análisis de Big Data.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
+                                    <span>Seguridad informática y auditoría de sistemas.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-circle-check text-red-400 mt-1"></i>
+                                    <span>Emprendimiento de startups tecnológicas.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

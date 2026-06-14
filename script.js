@@ -572,3 +572,35 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = htmlFilas;
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSistemas = document.getElementById('btn-sistemas');
+    const ventanaSistemas = document.getElementById('ventana-sistemas');
+    const btnCerrarSistemas = document.getElementById('btn-cerrar-sistemas');
+    const contenidoSistemas = document.getElementById('contenido-sistemas');
+
+    if (btnSistemas && ventanaSistemas) {
+        // Al abrir
+        btnSistemas.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            // Solo mostramos la ventana, sin congelar nada
+            ventanaSistemas.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoSistemas.classList.remove('scale-95');
+            contenidoSistemas.classList.add('scale-100');
+        });
+
+        // Al cerrar (botón X)
+        btnCerrarSistemas.addEventListener('click', () => {
+            // Solo ocultamos la ventana
+            ventanaSistemas.classList.add('opacity-0', 'pointer-events-none');
+            contenidoSistemas.classList.remove('scale-100');
+            contenidoSistemas.classList.add('scale-95');
+        });
+
+        // Al cerrar (clic fuera del cuadro)
+        ventanaSistemas.addEventListener('click', (e) => {
+            if (e.target === ventanaSistemas) {
+                btnCerrarSistemas.click();
+            }
+        });
+    }
+});
