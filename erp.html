@@ -144,7 +144,7 @@
     </div>
     <div class="p-4 bg-gray-50 border-t border-gray-200">
         <a href="login.html" class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-bold text-gray-600 bg-white border border-gray-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition">
-            <i class="fa-solid fa-power-off"></i> Cerrar Sesión
+            <i class="fa-solid fa-power-off"></i> Cerrar Módulos
         </a>
     </div>
 </aside>
@@ -356,11 +356,7 @@
                     <div>
                         <label class="text-[10px] font-bold text-gray-500 uppercase">Día de la Semana *</label>
                         <select id="menu-dia" class="w-full border rounded-xl px-3 py-1.5 mt-1 text-xs outline-none focus:border-uns bg-white">
-                            <option>Lunes</option>
-                            <option>Martes</option>
-                            <option>Miércoles</option>
-                            <option>Jueves</option>
-                            <option>Viernes</option>
+                            <option>Lunes</option><option>Martes</option><option>Miércoles</option><option>Jueves</option><option>Viernes</option>
                         </select>
                     </div>
                     <div>
@@ -376,7 +372,6 @@
                     </button>
                 </form>
             </div>
-
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
                 <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
                     Rol Rotativo de Servicios Programados
@@ -430,7 +425,6 @@
                     </button>
                 </form>
             </div>
-
             <div class="lg:col-span-8 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
                 <div class="p-4 bg-gray-50 border-b font-bold text-xs text-gray-700 uppercase tracking-wide">
                     Control de Comensales en Turno Actual
@@ -454,7 +448,15 @@
     </div>
 
     <div id="mod-bolsa" class="modulo-contenido seccion-oculta p-8">
-        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Bolsa de Empleo y Convenios</h2>
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Bolsa de Empleo y Convenios</h2>
+                <p class="text-gray-500 text-sm mt-1">Plataforma de vinculación laboral entre alumnos de últimos ciclos y empresas empleadoras.</p>
+            </div>
+            <button onclick="abrirModalBolsa()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Registrar Oferta
+            </button>
+        </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
@@ -474,7 +476,15 @@
     </div>
 
     <div id="mod-proyeccion" class="modulo-contenido seccion-oculta p-8">
-        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Proyección Social Universitaria</h2>
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Proyección Social Universitaria</h2>
+                <p class="text-gray-500 text-sm mt-1">Registro de horas prácticas en la comunidad e intervenciones de responsabilidad social.</p>
+            </div>
+            <button onclick="abrirModalProyeccion()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Añadir Proyecto
+            </button>
+        </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
@@ -603,18 +613,13 @@
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Categoría Ordinaria *</label>
                 <select id="doc-cat" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
-                    <option>Principal</option>
-                    <option>Asociado</option>
-                    <option>Auxiliar</option>
-                    <option>Jefe de Práctica</option>
+                    <option>Principal</option><option>Asociado</option><option>Auxiliar</option><option>Jefe de Práctica</option>
                 </select>
             </div>
             <div>
                 <label class="text-xs font-bold text-gray-500 uppercase">Régimen Laboral *</label>
                 <select id="doc-reg" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
-                    <option>Dedicación Exclusiva</option>
-                    <option>Tiempo Completo</option>
-                    <option>Tiempo Parcial</option>
+                    <option>Dedicación Exclusiva</option><option>Tiempo Completo</option><option>Tiempo Parcial</option>
                 </select>
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -630,6 +635,77 @@
             <div class="flex gap-3 pt-4 border-t mt-2">
                 <button type="button" onclick="cerrarModalDocente()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
                 <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Dar de Alta Docente</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-bolsa" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-briefcase"></i> Registrar Nueva Oferta / Convenio</h3>
+            <button onclick="cerrarModalBolsa()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-bolsa" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Puesto / Oferta de Trabajo *</label>
+                <input type="text" id="bol-oferta" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Ingeniero Civil Trainee" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Empresa o Entidad Aliada *</label>
+                <input type="text" id="bol-empresa" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Constructora JJC S.A." required>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-500 uppercase">Postulantes *</label>
+                    <input type="number" id="bol-post" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" value="0" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-500 uppercase">Estado *</label>
+                    <select id="bol-estado" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
+                        <option>Vigente</option>
+                        <option>Cerrado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex gap-3 pt-4 border-t mt-2">
+                <button type="button" onclick="cerrarModalBolsa()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Publicar Oferta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-proyeccion" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-people-roof"></i> Añadir Proyecto Comunitario</h3>
+            <button onclick="cerrarModalProyeccion()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-proyeccion" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Título del Proyecto *</label>
+                <input type="text" id="proy-titulo" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Charla de Nutrición Infantil" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Escuela Responsable *</label>
+                <input type="text" id="proy-escuela" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Enfermería" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Público / Asentamiento Beneficiario *</label>
+                <input type="text" id="proy-benef" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. A.H. San Pedro" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Fase de Avance *</label>
+                <select id="proy-fase" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
+                    <option>En Ejecución</option>
+                    <option>Aprobado</option>
+                    <option>Finalizado</option>
+                </select>
+            </div>
+            <div class="flex gap-3 pt-4 border-t mt-2">
+                <button type="button" onclick="cerrarModalProyeccion()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Registrar Proyecto</button>
             </div>
         </form>
     </div>
@@ -741,18 +817,24 @@ const DB_ACADEMICO = [
     { cod: "0202424047", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" }
 ];
 
-const DB_BOLSA = [
+let DB_BOLSA = [
     { oferta: "Ingeniero de Software Trainee", empresa: "SIDERPERÚ S.A.", post: 14, estado: "Vigente" },
     { oferta: "Practicante Profesional de Control Ambiental", empresa: "APROFERROL Chimbote", post: 6, estado: "Vigente" },
-    { oferta: "Asistente Legal de Asuntos Públicos", empresa: "SIDERPERÚ S.A.", post: 19, estado: "Vigente" }
+    { oferta: "Asistente Legal de Asuntos Públicos", empresa: "SIDERPERÚ S.A.", post: 19, estado: "Vigente" },
+    { oferta: "Enfermero(a) Ocupacional Junior", empresa: "EsSalud (Red Pacífico Sur)", post: 12, estado: "Vigente" },
+    { oferta: "Analista de Datos y BI", empresa: "Caja del Santa", post: 8, estado: "Cerrado" },
+    { oferta: "Ingeniero Civil (Asistente de Residente)", empresa: "Consorcio Constructor El Ferrol", post: 22, estado: "Vigente" },
+    { oferta: "Especialista en Energías Renovables", empresa: "Termoselva S.R.L.", post: 5, estado: "Vigente" }
 ];
 
-const DB_PROYECCION = [
+let DB_PROYECCION = [
     { proy: "Alfabetización Digital para Pymes Locales", esc: "Ing. de Sistemas e Informática", benef: "Comerciantes Mercado Ferrocarril", fase: "En Ejecución" },
-    { proy: "Monitoreo y Conservación Bio-Ecológica", esc: "Biotecnología", benef: "Bahía El Ferrol - Chimbote", fase: "Finalizado" }
+    { proy: "Monitoreo y Conservación Bio-Ecológica", esc: "Biotecnología", benef: "Bahía El Ferrol - Chimbote", fase: "Finalizado" },
+    { proy: "Campaña de Salud Bucal Integral", esc: "Medicina Humana", benef: "Asentamiento San Pedro", fase: "En Ejecución" },
+    { proy: "Asesoría Legal Gratuita en AA.HH.", esc: "Derecho y C. Políticas", benef: "Pobladores Nuevo Chimbote", fase: "En Ejecución" },
+    { proy: "Diseño de Planos Pro-bono Comedores Populares", esc: "Ingeniería Civil", benef: "Comité de Madres Las Delicias", fase: "Aprobado" }
 ];
 
-// DATA AVANZADA DE BIENESTAR UNIVERSITARIO SIMULADA
 let DB_MENUS_SEMANA = [
     { fecha: "2026-06-15", dia: "Lunes", desayuno: "Maca caliente + Pan con tortilla de espinaca", almuerzo: "Sopa Criolla + Seco de Pollo con frijoles" },
     { fecha: "2026-06-16", dia: "Martes", desayuno: "Avena con manzana + Pan con palta", almuerzo: "Sopa de Verduras + Pescado frito con arroz" },
@@ -804,7 +886,7 @@ function renderizarTablas() {
         </tr>
     `).join('');
 
-    // Logística SGI Vistazo
+    // Logística SGI
     document.getElementById('tabla-logistica').innerHTML = DB_LOGISTICA.map(l => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-500">${l.cod}</td>
@@ -839,7 +921,7 @@ function renderizarTablas() {
         </tr>
     `).join('');
 
-    // Bienestar Universitario - Menús Semanales
+    // Bienestar Universitario
     document.getElementById('tabla-comedor-menus').innerHTML = DB_MENUS_SEMANA.map(m => `
         <tr class="table-row-hover">
             <td class="px-4 py-3 font-bold text-gray-900 border-r bg-gray-50/50">${m.fecha}<br><span class="text-[10px] text-uns uppercase tracking-wide">${m.dia}</span></td>
@@ -848,7 +930,6 @@ function renderizarTablas() {
         </tr>
     `).join('');
 
-    // Bienestar Universitario - Comensales (Sin DNI)
     document.getElementById('tabla-bienestar').innerHTML = DB_BIENESTAR.map(b => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-700">${b.cod}</td>
@@ -866,7 +947,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
             <td class="px-6 py-3.5 text-center font-black text-gray-800">${b.post}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Vigente'?'bg-emerald-50 text-emerald-700':'bg-gray-100 text-gray-600'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
         </tr>
     `).join('');
@@ -877,7 +958,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${p.proy}</td>
             <td class="px-6 py-3.5 text-xs text-gray-700 font-bold">${p.esc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-medium">${p.benef}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${p.fase}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${p.fase==='Finalizado'?'bg-emerald-50 text-emerald-700':p.fase==='Aprobado'?'bg-blue-50 text-blue-700':'bg-amber-100 text-amber-700'}">${p.fase}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
         </tr>
     `).join('');
@@ -902,7 +983,6 @@ function cambiarModulo(moduloId, btnElement) {
 
 function abrirModalCompras() { document.getElementById('modal-compras').classList.remove('hidden'); }
 function cerrarModalCompras() { document.getElementById('modal-compras').classList.add('hidden'); }
-
 document.getElementById('form-compras').addEventListener('submit', function(e) {
     e.preventDefault();
     DB_COMPRAS.unshift({
@@ -923,7 +1003,6 @@ function abrirModalTesoreria() {
     document.getElementById('tx-asiento').value = `OP-${DB_FINANZAS.length + 4410}`;
 }
 function cerrarModalTesoreria() { document.getElementById('modal-tesoreria').classList.add('hidden'); }
-
 document.getElementById('form-tesoreria').addEventListener('submit', function(e) {
     e.preventDefault();
     DB_FINANZAS.unshift({
@@ -938,7 +1017,6 @@ document.getElementById('form-tesoreria').addEventListener('submit', function(e)
     mostrarToast('Asiento financiero procesado y guardado en el Libro Diario.');
 });
 
-// Formulario: Publicar Nuevo Menú Diario
 document.getElementById('form-comedor-menu').addEventListener('submit', function(e) {
     e.preventDefault();
     DB_MENUS_SEMANA.unshift({
@@ -952,7 +1030,6 @@ document.getElementById('form-comedor-menu').addEventListener('submit', function
     mostrarToast('Menú diario programado y publicado en el portal de Bienestar.');
 });
 
-// Formulario: Registrar Ingreso Comensal Turno Actual
 document.getElementById('form-comedor-comensal').addEventListener('submit', function(e) {
     e.preventDefault();
     const ahora = new Date();
@@ -969,10 +1046,8 @@ document.getElementById('form-comedor-comensal').addEventListener('submit', func
     mostrarToast('Acceso marcación de ticket procesado correctamente.');
 });
 
-// Alta de RRHH Interactiva
 function abrirModalDocente() { document.getElementById('modal-docente').classList.remove('hidden'); }
 function cerrarModalDocente() { document.getElementById('modal-docente').classList.add('hidden'); }
-
 document.getElementById('form-docente').addEventListener('submit', function(e) {
     e.preventDefault();
     const nom = document.getElementById('doc-nombre').value.trim();
@@ -1012,6 +1087,40 @@ function abrirHorarioDocente(id) {
     }
 }
 function cerrarModalHorario() { document.getElementById('modal-horario').classList.add('hidden'); }
+
+// ALTA BOLSA Y PROYECCION
+function abrirModalBolsa() { document.getElementById('modal-bolsa').classList.remove('hidden'); }
+function cerrarModalBolsa() { document.getElementById('modal-bolsa').classList.add('hidden'); }
+document.getElementById('form-bolsa').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_BOLSA.unshift({
+        oferta: document.getElementById('bol-oferta').value.trim(),
+        empresa: document.getElementById('bol-empresa').value.trim(),
+        post: parseInt(document.getElementById('bol-post').value) || 0,
+        estado: document.getElementById('bol-estado').value
+    });
+    renderizarTablas();
+    cerrarModalBolsa();
+    this.reset();
+    mostrarToast('Oferta laboral publicada y notificada a los estudiantes.');
+});
+
+function abrirModalProyeccion() { document.getElementById('modal-proyeccion').classList.remove('hidden'); }
+function cerrarModalProyeccion() { document.getElementById('modal-proyeccion').classList.add('hidden'); }
+document.getElementById('form-proyeccion').addEventListener('submit', function(e) {
+    e.preventDefault();
+    DB_PROYECCION.unshift({
+        proy: document.getElementById('proy-titulo').value.trim(),
+        esc: document.getElementById('proy-escuela').value.trim(),
+        benef: document.getElementById('proy-benef').value.trim(),
+        fase: document.getElementById('proy-fase').value
+    });
+    renderizarTablas();
+    cerrarModalProyeccion();
+    this.reset();
+    mostrarToast('Proyecto de Proyección Social añadido al registro formal.');
+});
+
 
 function mostrarToast(mensaje) {
     const container = document.getElementById('toast-container');
@@ -1095,7 +1204,7 @@ function descargarPadronPDF(anio) {
         doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
         doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
         doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
-        doc.setFontSize(9); doc.text("Dirección de Registro Técnico y Admisión - Padrón Oficial " + anio, 105, 18, null, null, "center");
+        doc.setFontSize(9); doc.text(`Dirección de Registro Técnico y Admisión - Padrón Oficial ${anio}`, 105, 18, null, null, "center");
 
         let data = [];
         if(anio === '2024') {
