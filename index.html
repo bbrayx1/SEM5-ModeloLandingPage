@@ -142,16 +142,29 @@
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-6">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t py-6 shadow-inner absolute w-full left-0 top-full">
             <div class="px-6 flex flex-col gap-6 text-lg font-medium text-gray-700">
                 <a href="login.html" class="text-gray-900 font-bold flex items-center gap-2"><i class="fa-solid fa-right-to-bracket text-uns"></i> Acceder ERP/CRM</a>
-                <a href="#inicio" class="hover:text-uns">Admisión</a>
+                
+                <div class="flex flex-col gap-3 w-full">
+                    <button id="btn-admision-mobile" class="flex justify-between items-center w-full text-left hover:text-uns font-medium focus:outline-none">
+                        <span>Admisión</span> 
+                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" id="icon-admision-mobile"></i>
+                    </button>
+                    <div id="submenu-admision-mobile" class="hidden flex-col gap-4 pl-4 border-l-2 border-red-100 mt-2 text-base text-gray-600">
+                        <a href="images/modalidades_20022ok.jpeg" target="_blank" class="hover:text-uns"><i class="fa-solid fa-image text-uns/50 mr-2"></i> Modalidades</a>
+                        <a href="documentos/Cronograma_Admision_UNS_2026.pdf" target="_blank" class="hover:text-uns"><i class="fa-solid fa-file-pdf text-uns/50 mr-2"></i> Cronograma</a>
+                        <button id="btn-proceso-bizagi-mobile" class="text-left hover:text-uns focus:outline-none"><i class="fa-solid fa-diagram-project text-uns/50 mr-2"></i> Proceso Bizagi</button>
+                        <button id="btn-temario-mobile" class="text-left hover:text-uns focus:outline-none"><i class="fa-solid fa-book-open text-uns/50 mr-2"></i> Temario</button>
+                    </div>
+                </div>
+
                 <a href="#facultades" class="hover:text-uns">Facultades</a>
                 <a href="#posgrado" class="hover:text-uns">Posgrado</a>
                 <a href="#centros" class="hover:text-uns">Centros Universitarios</a>
                 <a href="#noticias" class="hover:text-uns">Noticias</a>
                 
-                <button id="btn-intranet-mobile" class="mt-4 bg-uns text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 text-lg">
+                <button id="btn-intranet-mobile" class="mt-4 bg-uns text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 text-lg shadow-md">
                     <i class="fa-solid fa-user-graduate"></i> Acceder a Intranet
                 </button>
             </div>

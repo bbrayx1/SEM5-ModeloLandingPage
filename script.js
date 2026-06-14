@@ -449,3 +449,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Lógica para abrir/cerrar el submenú de Admisión en el celular
+    const btnAdmisionMobile = document.getElementById('btn-admision-mobile');
+    const submenuAdmisionMobile = document.getElementById('submenu-admision-mobile');
+    const iconAdmisionMobile = document.getElementById('icon-admision-mobile');
+
+    if(btnAdmisionMobile && submenuAdmisionMobile) {
+        btnAdmisionMobile.addEventListener('click', () => {
+            submenuAdmisionMobile.classList.toggle('hidden');
+            submenuAdmisionMobile.classList.toggle('flex');
+            iconAdmisionMobile.classList.toggle('rotate-180');
+        });
+    }
+
+    // 2. Lógica para abrir el Temario desde el celular
+    const btnTemarioMobile = document.getElementById('btn-temario-mobile');
+    const ventanaTemario = document.getElementById('ventana-temario');
+    const contenidoTemario = document.getElementById('contenido-temario');
+    const mobileMenu = document.getElementById('mobile-menu'); // Para cerrar el menú principal
+
+    if (btnTemarioMobile && ventanaTemario) {
+        btnTemarioMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Abrir el modal
+            ventanaTemario.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoTemario.classList.remove('scale-95');
+            contenidoTemario.classList.add('scale-100');
+            // Cerrar el menú del celular para que no estorbe
+            if(mobileMenu) mobileMenu.classList.add('hidden');
+        });
+    }
+
+    // 3. Lógica para abrir Bizagi desde el celular
+    const btnBizagiMobile = document.getElementById('btn-proceso-bizagi-mobile');
+    const ventanaBizagi = document.getElementById('ventana-bizagi');
+    const contenidoBizagi = document.getElementById('contenido-bizagi');
+
+    if (btnBizagiMobile && ventanaBizagi) {
+        btnBizagiMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Abrir el modal
+            ventanaBizagi.classList.remove('opacity-0', 'pointer-events-none');
+            contenidoBizagi.classList.remove('scale-95');
+            contenidoBizagi.classList.add('scale-100');
+            // Cerrar el menú del celular
+            if(mobileMenu) mobileMenu.classList.add('hidden');
+        });
+    }
+});
