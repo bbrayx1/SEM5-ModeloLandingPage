@@ -144,7 +144,7 @@
     </div>
     <div class="p-4 bg-gray-50 border-t border-gray-200">
         <a href="login.html" class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-bold text-gray-600 bg-white border border-gray-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition">
-            <i class="fa-solid fa-power-off"></i> Cerrar Sesión
+            <i class="fa-solid fa-power-off"></i> Cerrar Módulos
         </a>
     </div>
 </aside>
@@ -268,7 +268,20 @@
     </div>
 
     <div id="mod-rrhh" class="modulo-contenido seccion-oculta p-8">
-        <h2 class="text-3xl font-black text-gray-900 tracking-tight mb-6">Escalafón y Carga Docente</h2>
+        <div class="flex justify-between items-end mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-gray-900 tracking-tight">Escalafón y Carga Docente</h2>
+                <p class="text-gray-500 text-sm mt-1">Registro formal, contratos, remuneraciones y distribución lectiva semanal.</p>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="exportarEscalafonDocentePDF()" class="bg-slate-800 text-white px-4 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-md hover:bg-black transition">
+                    <i class="fa-solid fa-file-pdf"></i> Descargar Planilla
+                </button>
+                <button onclick="abrirModalDocente()" class="bg-uns text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:bg-uns-dark transition text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Añadir Docente
+                </button>
+            </div>
+        </div>
         <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
@@ -331,7 +344,7 @@
             <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
                 <p class="text-xs font-bold text-gray-400 uppercase">Raciones Asignadas Hoy</p>
                 <p class="text-2xl font-black text-uns mt-1">1,200 / 1,200</p>
-                <p class="text-xs text-red-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
+                <p class="text-xs text-emerald-600 font-bold mt-1"><i class="fa-solid fa-circle-check"></i> Capacidad al 100% distribuida</p>
             </div>
             <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
                 <p class="text-xs font-bold text-gray-400 uppercase">Becas de Alimentación Libres</p>
@@ -374,7 +387,7 @@
                             <th class="px-6 py-4 text-center">Documento Marco</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-bolsa" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
+                    <tbody id="tabla-bolsa" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
                 </table>
             </div>
         </div>
@@ -394,7 +407,7 @@
                             <th class="px-6 py-4 text-center">Resolución Oficial</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-proyeccion" class="divide-y divide-gray-100 text-gray-700 font-medium"></tbody>
+                    <tbody id="tabla-proyeccion" class="divide-y divide-gray-100 font-medium text-gray-700"></tbody>
                 </table>
             </div>
         </div>
@@ -404,22 +417,33 @@
 </div>
 
 <div id="modal-horario" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-slide-up">
         <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS</h3>
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Distribución Horaria UNS (3 Bloques)</h3>
             <button onclick="cerrarModalHorario()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="p-6 space-y-4">
             <div>
                 <p class="text-xs font-bold text-gray-400 uppercase">Docente Asignado</p>
                 <p id="h-docente" class="text-base font-bold text-gray-800 mt-0.5"></p>
+                <p class="text-xs text-gray-500">Distribución de carga según plan curricular oficial.</p>
             </div>
-            <div class="bg-slate-50 p-4 rounded-xl border border-gray-200 font-medium text-sm text-gray-700 space-y-2">
-                <p><strong>Carga Lectiva:</strong> <span id="h-carga"></span></p>
-                <p><strong>Horario de Dictado:</strong> <span id="h-horario" class="text-uns font-semibold"></span></p>
-                <p><strong>Pabellón / Aula Física:</strong> <span id="h-salon" class="text-gray-900 font-bold"></span></p>
+            
+            <div class="overflow-x-auto border rounded-xl shadow-sm bg-white">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-gray-50 font-bold text-gray-700 border-b">
+                        <tr>
+                            <th class="p-3">Bloque</th>
+                            <th class="p-3">Día y Hora</th>
+                            <th class="p-3">Asignatura / Función</th>
+                            <th class="p-3">Aula / Laboratorio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="h-tabla-cuerpo" class="divide-y font-medium text-gray-600"></tbody>
+                </table>
             </div>
-            <button onclick="cerrarModalHorario()" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
+
+            <button onclick="cerrarModalHorario()" class="w-full bg-slate-950 text-white font-bold py-2.5 rounded-xl hover:bg-black transition text-sm shadow-sm">Cerrar Visor</button>
         </div>
     </div>
 </div>
@@ -485,6 +509,52 @@
     </div>
 </div>
 
+<div id="modal-docente" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[100] backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden animate-slide-up">
+        <div class="bg-uns px-6 py-4 flex justify-between items-center text-white">
+            <h3 class="font-black flex items-center gap-2"><i class="fa-solid fa-user-plus"></i> Registrar Docente en Escalafón</h3>
+            <button onclick="cerrarModalDocente()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form id="form-docente" class="p-6 space-y-4">
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Apellidos y Nombres Completos *</label>
+                <input type="text" id="doc-nombre" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. Dr. Vasquez Perez Juan" required>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Categoría Ordinaria *</label>
+                <select id="doc-cat" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
+                    <option>Principal</option>
+                    <option>Asociado</option>
+                    <option>Auxiliar</option>
+                    <option>Jefe de Práctica</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-xs font-bold text-gray-500 uppercase">Régimen Laboral *</label>
+                <select id="doc-reg" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns bg-white">
+                    <option>Dedicación Exclusiva</option>
+                    <option>Tiempo Completo</option>
+                    <option>Tiempo Parcial</option>
+                </select>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-500 uppercase">Carga Horaria *</label>
+                    <input type="text" id="doc-carga" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns" placeholder="Ej. 16 Lectivas" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-500 uppercase">Remuneración Base (S/) *</label>
+                    <input type="number" step="0.01" id="doc-sueldo" class="w-full border rounded-xl px-4 py-2 mt-1 text-sm outline-none focus:border-uns font-mono" placeholder="2500.00" required>
+                </div>
+            </div>
+            <div class="flex gap-3 pt-4 border-t mt-2">
+                <button type="button" onclick="cerrarModalDocente()" class="flex-1 bg-gray-100 text-gray-600 font-bold py-2.5 rounded-xl hover:bg-gray-200 transition text-sm">Cancelar</button>
+                <button type="submit" class="flex-1 bg-uns text-white font-bold py-2.5 rounded-xl hover:bg-uns-dark transition text-sm shadow-md">Dar de Alta Docente</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 // ==================== RESTRUCTURACIÓN DE DATA ARRAYS ====================
 
@@ -543,15 +613,37 @@ const DB_LOGISTICA = [
     { cod: "PAT-26-008", desc: "Impresora Conectada Plotter HP DesignJet", ubi: "Oficina de Planeamiento", estado: "Mantenimiento" }
 ];
 
-const DB_RRHH = [
-    { id: 1, nombre: "Dr. León César Augusto", cat: "Principal", reg: "Dedicación Exclusiva", carga: "12 Lectivas / 28 Inv.", sueldo: 4200.00, horario: "Lunes y Miércoles 08:00 - 11:00", salon: "Pabellón Sistemas - Aula 201" },
-    { id: 2, nombre: "Dra. Aguilar Saldaña Ana", cat: "Asociado", reg: "Tiempo Completo", carga: "20 Lectivas / 20 Inv.", sueldo: 3500.00, horario: "Martes y Jueves 14:00 - 17:00", salon: "Pabellón Medicina - Laboratorio A" },
-    { id: 3, nombre: "Mag. Rojas Luis Alberto", cat: "Auxiliar", reg: "Tiempo Completo", carga: "32 Lectivas / 8 Inv.", sueldo: 2100.00, horario: "Viernes 08:00 - 14:00", salon: "Pabellón Civil - Aula 104" },
-    { id: 4, nombre: "Ing. Flores Quispe Pedro", cat: "Jefe de Práctica", reg: "Tiempo Parcial", carga: "18 Lectivas", sueldo: 1400.00, horario: "Lunes 18:00 - 21:00", salon: "Pabellón Sistemas - Lab Cómputo 02" },
-    { id: 5, nombre: "Dr. Mendoza Ramírez Carlos", cat: "Principal", reg: "Dedicación Exclusiva", carga: "10 Lectivas / 30 Inv.", sueldo: 4500.00, horario: "Miércoles y Viernes 10:00 - 13:00", salon: "Pabellón Sistemas - Aula 202" },
-    { id: 6, nombre: "Dra. Villalobos Carmen Rosa", cat: "Asociado", reg: "Tiempo Completo", carga: "16 Lectivas / 24 Inv.", sueldo: 3500.00, horario: "Lunes y Jueves 15:00 - 18:00", salon: "Pabellón Ciencias - Aula 305" },
-    { id: 7, nombre: "Mag. Salinas Rodríguez Diana", cat: "Auxiliar", reg: "Tiempo Completo", carga: "28 Lectivas / 12 Inv.", sueldo: 2100.00, horario: "Martes 09:00 - 13:00", salon: "Pabellón Enfermería - Aula 101" },
-    { id: 8, nombre: "Ing. Campos Bocanegra Juan", cat: "Jefe de Práctica", reg: "Tiempo Completo", carga: "30 Lectivas", sueldo: 1900.00, horario: "Jueves y Viernes 08:00 - 11:00", salon: "Pabellón Civil - Gabinete A" }
+let DB_RRHH = [
+    { id: 1, nombre: "Dr. León César Augusto", cat: "Principal", reg: "Dedicación Exclusiva", carga: "12 L / 28 I", sueldo: 4200.00, bloques: [
+        { b: "Bloque 01", dh: "Lunes 08:00 - 11:00", asig: "Sistemas de Información II", au: "Pabellón Sistemas - Aula 201" },
+        { b: "Bloque 02", dh: "Miércoles 08:00 - 11:00", asig: "Sistemas de Información II", au: "Pabellón Sistemas - Aula 201" },
+        { b: "Bloque 03", dh: "Viernes 10:00 - 12:00", asig: "Asesoría Contable Computarizada", au: "Laboratorio OTI Central" }
+    ]},
+    { id: 2, nombre: "Dra. Aguilar Saldaña Ana", cat: "Asociado", reg: "Tiempo Completo", carga: "20 L / 20 I", sueldo: 3500.00, bloques: [
+        { b: "Bloque 01", dh: "Martes 14:00 - 17:00", asig: "Fisiología Médica General", au: "Pabellón Medicina - Aula Magna" },
+        { b: "Bloque 02", dh: "Jueves 14:00 - 17:00", asig: "Prácticas Clínicas Avanzadas", au: "Laboratorio Anfiteatro A" },
+        { b: "Bloque 03", dh: "Viernes 15:00 - 17:00", asig: "Investigación en Salud Pública", au: "Gabinete Institucional" }
+    ]},
+    { id: 3, nombre: "Mag. Rojas Luis Alberto", cat: "Auxiliar", reg: "Tiempo Completo", carga: "32 L / 8 I", sueldo: 2100.00, bloques: [
+        { b: "Bloque 01", dh: "Viernes 08:00 - 11:00", asig: "Diseño Estructural I", au: "Pabellón Civil - Aula 104" },
+        { b: "Bloque 02", dh: "Viernes 11:00 - 14:00", asig: "Análisis Sísmico y Cargas", au: "Pabellón Civil - Aula 104" },
+        { b: "Bloque 03", dh: "Sábado 08:00 - 11:00", asig: "Topografía Aplicada Computarizada", au: "Gabinete Estación Total" }
+    ]},
+    { id: 4, nombre: "Ing. Flores Quispe Pedro", cat: "Jefe de Práctica", reg: "Tiempo Parcial", carga: "18 L", sueldo: 1400.00, bloques: [
+        { b: "Bloque 01", dh: "Lunes 18:00 - 21:00", asig: "Taller de Programación Web", au: "Pabellón Sistemas - Lab 02" },
+        { b: "Bloque 02", dh: "Martes 18:00 - 21:00", asig: "Estructuras de Datos Avanzadas", au: "Pabellón Sistemas - Lab 01" },
+        { b: "Bloque 03", dh: "Jueves 19:00 - 21:00", asig: "Redes y Conectividad Local", au: "Laboratorio Cisco OTI" }
+    ]},
+    { id: 5, nombre: "Dr. Mendoza Ramírez Carlos", cat: "Principal", reg: "Dedicación Exclusiva", carga: "10 L / 30 I", sueldo: 4500.00, bloques: [
+        { b: "Bloque 01", dh: "Miércoles 10:00 - 13:00", asig: "Inteligencia Artificial", au: "Pabellón Sistemas - Aula 202" },
+        { b: "Bloque 02", dh: "Viernes 10:00 - 13:00", asig: "Criptografía y Seguridad", au: "Pabellón Sistemas - Aula 202" },
+        { b: "Bloque 03", dh: "Jueves 09:00 - 12:00", asig: "Tesis de Grado e Innovación", au: "Oficina Vicerrectorado" }
+    ]},
+    { id: 6, nombre: "Dra. Villalobos Carmen Rosa", cat: "Asociado", reg: "Tiempo Completo", carga: "16 L / 24 I", sueldo: 3500.00, bloques: [
+        { b: "Bloque 01", dh: "Lunes 15:00 - 18:00", asig: "Química Orgánica Aplicada", au: "Pabellón Ciencias - Aula 305" },
+        { b: "Bloque 02", dh: "Jueves 15:00 - 18:00", asig: "Bioquímica y Enzimas", au: "Laboratorio Químico Central" },
+        { b: "Bloque 03", dh: "Miércoles 14:00 - 16:00", asig: "Asesoría Científica Estudiantil", au: "Módulo Docente Ciencias" }
+    ]}
 ];
 
 const DB_ACADEMICO = [
@@ -566,11 +658,7 @@ const DB_ACADEMICO = [
     { cod: "0202424044", nombre: "RUIZ CALDERON GREISSY ANNY", esc: "MEDICINA HUMANA", email: "202424044@uns.edu.pe" },
     { cod: "0202424045", nombre: "SAAVEDRA PASCUAL ALEXIS GABRIEL", esc: "MEDICINA HUMANA", email: "202424045@uns.edu.pe" },
     { cod: "0202424046", nombre: "SALDAÑA HORNA JUAN ALBERTO", esc: "MEDICINA HUMANA", email: "202424046@uns.edu.pe" },
-    { cod: "0202424047", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" },
-    { cod: "0202424048", nombre: "SANCHEZ DE LA CRUZ ALLEN MARSHALL", esc: "MEDICINA HUMANA", email: "202424048@uns.edu.pe" },
-    { cod: "0202424049", nombre: "SILVA CARRANZA ARIANA VALERIA", esc: "MEDICINA HUMANA", email: "202424049@uns.edu.pe" },
-    { cod: "0202424050", nombre: "SILVA MURGA KEVIN ABEL", esc: "MEDICINA HUMANA", email: "202424050@uns.edu.pe" },
-    { cod: "0202424051", nombre: "SORIANO CORONEL IBETH PRISCILA", esc: "MEDICINA HUMANA", email: "202424051@uns.edu.pe" }
+    { cod: "0202424047", nombre: "SALINAS RODRIGUEZ CÉSAR DANIEL", esc: "MEDICINA HUMANA", email: "202424047@uns.edu.pe" }
 ];
 
 const DB_BOLSA = [
@@ -600,7 +688,7 @@ function renderizarTablas() {
         return `<tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono text-xs font-bold text-gray-500">${f.op}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-800">${f.desc}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${f.tipo==='Ingreso'?'bg-red-100 text-uns':'bg-gray-100 text-gray-700'}">${f.tipo}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${f.tipo==='Ingreso'?'bg-emerald-50 text-emerald-700':'bg-red-50 text-uns'}">${f.tipo}</span></td>
             <td class="px-6 py-3.5 text-right font-mono font-bold ${f.tipo==='Ingreso'?'text-gray-900':'text-uns'}">S/ ${f.monto.toLocaleString('es-PE', {minimumFractionDigits:2})}</td>
         </tr>`;
     }).join('');
@@ -610,10 +698,10 @@ function renderizarTablas() {
     document.getElementById('tabla-compras').innerHTML = DB_COMPRAS.map(c => `
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-slate-500">${c.req}</td>
-            <td class="px-6 py-3.5 font-semibold text-gray-800">${c.desc}</td>
+            <td class="px-6 py-3.5 font-bold text-gray-800">${c.desc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-bold">${c.area}</td>
             <td class="px-6 py-3.5 text-right font-mono font-bold text-gray-900">S/ ${c.monto.toLocaleString('es-PE')}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-1 rounded text-[10px] font-black uppercase ${c.estado==='Aprobado'?'bg-red-100 text-uns':c.estado==='Rechazado'?'bg-gray-200 text-gray-700':'bg-amber-100 text-amber-800'}">${c.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-1 rounded text-[10px] font-black uppercase ${c.estado==='Aprobado'?'bg-emerald-50 text-emerald-700':c.estado==='Rechazado'?'bg-red-50 text-uns':'bg-amber-100 text-amber-700'}">${c.estado}</span></td>
         </tr>
     `).join('');
 
@@ -623,7 +711,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-mono font-bold text-gray-500">${l.cod}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-800">${l.desc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-600 font-medium"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>${l.ubi}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-red-50 text-uns':l.estado==='Mantenimiento'?'bg-gray-200 text-gray-800':'bg-amber-100 text-amber-800'}">${l.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${l.estado==='Operativo'?'bg-emerald-50 text-emerald-700':l.estado==='Mantenimiento'?'bg-red-50 text-uns':'bg-amber-100 text-amber-700'}">${l.estado}</span></td>
         </tr>
     `).join('');
     document.getElementById('dash-sgi').textContent = DB_LOGISTICA.length + " Equipos";
@@ -657,7 +745,7 @@ function renderizarTablas() {
         <tr class="table-row-hover">
             <td class="px-6 py-3.5 font-mono font-bold text-gray-700">${b.cod}</td>
             <td class="px-6 py-3.5 text-xs font-bold text-slate-600">${b.tipo}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-red-50 text-uns':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase ${b.estado==='Confirmado'?'bg-emerald-50 text-emerald-700':'bg-amber-100 text-amber-700'}">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center text-xs font-mono text-gray-400">${b.hora}</td>
         </tr>
     `).join('');
@@ -669,7 +757,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${b.oferta}</td>
             <td class="px-6 py-3.5 font-semibold text-gray-600">${b.empresa}</td>
             <td class="px-6 py-3.5 text-center font-black text-gray-800">${b.post}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-50 text-uns">${b.estado}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${b.estado}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarConvenioPDF('${b.empresa}', '${b.oferta}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-pdf mr-1"></i> Convenio Marco</button></td>
         </tr>
     `).join('');
@@ -680,7 +768,7 @@ function renderizarTablas() {
             <td class="px-6 py-3.5 font-bold text-gray-800">${p.proy}</td>
             <td class="px-6 py-3.5 text-xs text-gray-700 font-bold">${p.esc}</td>
             <td class="px-6 py-3.5 text-xs text-gray-500 font-medium">${p.benef}</td>
-            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-red-50 text-uns">${p.fase}</span></td>
+            <td class="px-6 py-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-50 text-emerald-700">${p.fase}</span></td>
             <td class="px-6 py-3.5 text-center"><button onclick="exportarProyectoSocialPDF('${p.proy}', '${p.esc}')" class="text-[10px] border border-red-200 text-uns px-3 py-1 rounded bg-red-50 hover:bg-uns hover:text-white font-bold transition"><i class="fa-solid fa-file-contract mr-1"></i> Resolución</button></td>
         </tr>
     `).join('');
@@ -741,13 +829,45 @@ document.getElementById('form-tesoreria').addEventListener('submit', function(e)
     mostrarToast('Asiento financiero procesado y guardado en el Libro Diario.');
 });
 
+// Alta de RRHH Interactiva
+function abrirModalDocente() { document.getElementById('modal-docente').classList.remove('hidden'); }
+function cerrarModalDocente() { document.getElementById('modal-docente').classList.add('hidden'); }
+
+document.getElementById('form-docente').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nom = document.getElementById('doc-nombre').value.trim();
+    DB_RRHH.unshift({
+        id: DB_RRHH.length + 1,
+        nombre: nom,
+        cat: document.getElementById('doc-cat').value,
+        reg: document.getElementById('doc-reg').value,
+        carga: document.getElementById('doc-carga').value.trim(),
+        sueldo: parseFloat(document.getElementById('doc-sueldo').value),
+        bloques: [
+            { b: "Bloque 01", dh: "Lunes 08:00 - 11:00", asig: "Clase Magistral Introductoria", au: "Pabellón Sistemas - Aula 102" },
+            { b: "Bloque 02", dh: "Miércoles 09:00 - 12:00", asig: "Sesión Práctica de Campo", au: "Laboratorio Central UNS" },
+            { b: "Bloque 03", dh: "Viernes 14:00 - 16:00", asig: "Asesorías Curriculares", au: "Módulo Docente" }
+        ]
+    });
+    renderizarTablas();
+    cerrarModalDocente();
+    this.reset();
+    mostrarToast(`Docente registrado con éxito en la planilla unificada.`);
+});
+
 function abrirHorarioDocente(id) {
     const d = DB_RRHH.find(x => x.id === id);
     if(d) {
         document.getElementById('h-docente').textContent = d.nombre;
-        document.getElementById('h-carga').textContent = d.carga;
-        document.getElementById('h-horario').textContent = d.horario;
-        document.getElementById('h-salon').textContent = d.salon;
+        const cuerpo = document.getElementById('h-tabla-cuerpo');
+        cuerpo.innerHTML = d.bloques.map(bl => `
+            <tr>
+                <td class="p-3 font-bold text-gray-900">${bl.b}</td>
+                <td class="p-3 text-uns font-semibold">${bl.dh}</td>
+                <td class="p-3">${bl.asig}</td>
+                <td class="p-3 font-bold text-gray-800">${bl.au}</td>
+            </tr>
+        `).join('');
         document.getElementById('modal-horario').classList.remove('hidden');
     }
 }
@@ -763,6 +883,25 @@ function mostrarToast(mensaje) {
 }
 
 // ==================== COMPILADOR COMPLETO DE ARCHIVOS PDF (jsPDF) ====================
+
+function exportarEscalafonDocentePDF() {
+    mostrarToast('Generando reporte PDF del Escalafón Docente...');
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFillColor(179, 0, 0); doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255); doc.setFont("helvetica", "bold"); doc.setFontSize(14);
+        doc.text("UNIVERSIDAD NACIONAL DEL SANTA", 105, 12, null, null, "center");
+        doc.setFontSize(9); doc.text("Oficina Central de Recursos Humanos - Escalafón Unificado de Remuneraciones", 105, 18, null, null, "center");
+
+        const columnas = [['Docente Universitario', 'Categoría', 'Régimen Laboral', 'Carga Curricular', 'Sueldo Mensual']];
+        const filas = DB_RRHH.map(r => [r.nombre, r.cat, r.reg, r.carga, `S/ ${r.sueldo.toFixed(2)}`]);
+
+        doc.autoTable({ startY: 32, head: columnas, body: filas, headStyles: { fillColor: [40, 40, 40] }, styles: { fontSize: 8 } });
+        doc.save("Planilla_Escalafon_Docente_UNS.pdf");
+    }, 450);
+}
 
 function descargarPadronPDF(anio) {
     mostrarToast(`Compilando padrón de estudiantes ingresantes ciclo ${anio}...`);
