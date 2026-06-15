@@ -235,7 +235,7 @@
             </button>
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-md flex-shrink-0 overflow-hidden" id="logo-container">
-                    <img src="images/logo_rojo_UNS.png" alt="Logo UNS" class="w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('logo-container').innerHTML='<span class=\"text-uns font-black text-base leading-none\">U</span>'">
+                    <img src="images/logo_rojo_UNS.png" alt="Logo UNS" class="w-full h-full object-cover object-center" onerror="this.style.display='none'; var c=document.getElementById('logo-container'); c.textContent='U'; c.classList.add('text-uns','font-black','text-base','leading-none');">
                 </div>
                 <div>
                     <h1 class="font-black text-lg leading-none tracking-tight">CRM <span class="opacity-80 font-light">UNS</span></h1>
