@@ -1878,9 +1878,9 @@ document.getElementById('form-postulante').addEventListener('submit', async func
     try {
         showToast('Guardando en el servidor...', 'info');
         
-        // 2. Enviamos los datos a nuestro propio backend (Node.js)
-        const response = await fetch('http://localhost:3000/api/postulantes', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyZU9oq85ctvWRq3RMQt-zljP5q750h10f3QAJFUudghUSy9OIM466YusDAX7CQFiTz8w/exec', {
             method: 'POST',
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
