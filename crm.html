@@ -1857,8 +1857,10 @@ function activarTabModal(tabId) {
     }
 }
 
-document.getElementById('form-postulante').addEventListener('submit', function(e) {
+document.getElementById('form-postulante').addEventListener('submit', async function(e) {
     e.preventDefault();
+    
+    // 1. Recopilamos los datos del formulario
     const data = {
         nombre: document.getElementById('p-nombre').value,
         dni: document.getElementById('p-dni').value,
@@ -1872,17 +1874,40 @@ document.getElementById('form-postulante').addEventListener('submit', function(e
         genero: document.getElementById('p-genero').value,
         notas: []
     };
-    if (editandoId) {
-        const idx = postulantes.findIndex(x => x.id === editandoId);
-        if (idx !== -1) { postulantes[idx] = {...postulantes[idx], ...data}; showToast('Postulante actualizado', 'success'); }
-    } else {
-        data.id = Date.now(); data.fecha = new Date().toISOString().split('T')[0]; data.notas = [];
-        postulantes.unshift(data);
-        showToast('Postulante registrado exitosamente', 'success');
+
+    try {
+        showToast('Guardando en el servidor...', 'info');
+        
+        // 2. Enviamos los datos a nuestro propio backend (Node.js)
+        const response = await fetch('http://localhost:3000/api/postulantes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            // 3. Lógica original para actualizar la UI
+            if (editandoId) {
+                const idx = postulantes.findIndex(x => x.id === editandoId);
+                if (idx !== -1) { postulantes[idx] = {...postulantes[idx], ...data}; }
+                showToast('Postulante actualizado en BD local y Sheets', 'success');
+            } else {
+                data.id = Date.now(); 
+                data.fecha = new Date().toISOString().split('T')[0]; 
+                postulantes.unshift(data);
+                showToast('Postulante guardado en Google Sheets con éxito', 'success');
+            }
+            
+            guardar.postulantes();
+            renderPostulantes();
+            cerrarModalPostulante();
+        } else {
+            showToast('Error de comunicación con el servidor', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showToast('Asegúrate de que el servidor Node.js esté corriendo', 'error');
     }
-    guardar.postulantes();
-    renderPostulantes();
-    cerrarModalPostulante();
 });
 
 // Modal perfil
